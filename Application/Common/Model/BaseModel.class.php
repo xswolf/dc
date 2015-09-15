@@ -71,7 +71,13 @@ class BaseModel extends Model
     {
         $m = M($this->_table);
 
-        return $m->where(array("id" => $id))->find();
+        return $m->where(["id" => $id])->find();
+    }
+
+    public function findByProperties($fieldName = 'id' , $fieldValue = ''){
+        $m = M($this->_table);
+        $where[$fieldName] = $fieldValue;
+        return $m->where($where)->select();
     }
 
 }

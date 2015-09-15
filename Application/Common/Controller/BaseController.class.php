@@ -9,7 +9,6 @@ namespace Common\Controller;
 
 class BaseController extends \Think\Controller{
 
-    public static $instance  = null;
 
     public static function instance($args){
 

@@ -1,5 +1,7 @@
 <?php
 namespace Common\Controller;
+use Common\Model\UserModel;
+
 /**
  * Created by PhpStorm.
  * User: Administrator
@@ -9,7 +11,23 @@ namespace Common\Controller;
 
 class VerifyController extends BaseController{
 
-    public static $instance  = null;
+    /**
+     * @var UserModel
+     */
+    protected $user = null;
+
+    public function _initialize(){
+
+        if (!UserModel::instance()->isLogin()){  // 判断用户是否登录
+
+            $this->redirect("user/login");
+        }else{
+
+            $this->user = UserModel::instance();
+            $this->user->setUser(session(C("LOGIN_SESSION")));
+        }
+    }
+
 
     public static function instance($args){
 

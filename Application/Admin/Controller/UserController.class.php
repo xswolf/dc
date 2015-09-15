@@ -1,6 +1,6 @@
 <?php
 namespace Admin\Controller;
-use Admin\Model\UserModel;
+use Common\Model\UserModel;
 use Common\Controller\BaseController;
 
 class UserController extends BaseController {
