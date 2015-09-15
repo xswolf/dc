@@ -7,5 +7,6 @@ return array(
     'LOAD_EXT_CONFIG'    => 'db',      //加载扩展配置文件
     'MODULE_DENY_LIST'   => ['Common', 'Runtime'],
     'MODULE_ALLOW_LIST'  => ['Home', 'Admin'],
+    'SHOW_PAGE_TRACE'=>1,
     'DEFAULT_MODULE'     => 'Home',
 );

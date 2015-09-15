@@ -1,5 +1,6 @@
 <?php
 namespace Home\Controller;
+use Home\Model\UserModel;
 use Think\Controller;
 
 class IndexController extends Controller {
@@ -19,6 +20,15 @@ class IndexController extends Controller {
 
             }
         }
+        $this->display();
+    }
+
+    public function register(){
+        $data = [
+            "name"=>"123",
+            "password"=>"456"
+        ];
+        UserModel::instance()->register($data);
         $this->display();
     }
 }
