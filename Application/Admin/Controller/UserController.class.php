@@ -47,6 +47,6 @@ class UserController extends BaseController {
     }
 
     public function register(){
-
+        $this->display();
     }
 }
