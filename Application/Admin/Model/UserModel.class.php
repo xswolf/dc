@@ -1,7 +1,8 @@
 <?php
 namespace Admin\Model;
-use Think\Model;
-class UserModel extends Model {
+use Common\Model\BaseModel;
+
+class UserModel extends BaseModel {
 
     protected $_table = "user";
 
@@ -11,6 +12,16 @@ class UserModel extends Model {
 
     public function resetPassword(){
 
+    }
+
+    public function findByName($name){
+
+        $m = M($this->_table);
+        return $m->where(["name"=>$name])->find();
+    }
+
+    public function isLogin(){
+        return C("LOGIN_SESSION");
     }
 
 }

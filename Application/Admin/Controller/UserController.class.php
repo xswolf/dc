@@ -1,21 +1,28 @@
 <?php
 namespace Admin\Controller;
-use Think\Controller;
-class UserController extends Controller {
+use Admin\Model\UserModel;
+use Common\Controller\BaseController;
+
+class UserController extends BaseController {
 
     public function index(){
 
     }
 
-    public function login($username='',$password='',$verify='',$ajax=false){
+    public function login($name='',$password='',$verify='',$ajax=false){
         if (IS_POST) {
             if (C('VERIFY') && $verify != session(C('VERIFY_CODE'))) {
                 // 验证码不对
                 if($ajax) $this->ajaxReturn(['status'=>-1 , 'msg'=>'验证码错误']);
                 $this->error('验证码错误');
             }
-            $userInfo = UsermemberModel::instance()->findByName($username);
-            if ($userInfo && $userInfo['password'] == processPass($password)) {
+            $userInfo = UserModel::instance()->findByName($name);
+
+            if (!$userInfo) {
+                $this->ajaxReturn(['status'=>-1 , 'msg'=>'账号不存在']);
+            }
+
+            if ($userInfo && $userInfo['password'] == processPwd($password)) {
                 // 登陆成功
                 session(C('LOGIN_SESSION'), $userInfo);
                 if($ajax) $this->ajaxReturn(['status'=>1 , 'msg'=>'登陆成功']);
