@@ -13,4 +13,5 @@ class PlatformShopController extends VerifyController
     public function add(){
 
     }
+
 }
