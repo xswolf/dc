@@ -7,7 +7,7 @@ class UserController extends Controller {
 
     }
 
-    public function login($username,$password,$verify='',$ajax=false){
+    public function login($username='',$password='',$verify='',$ajax=false){
         if (IS_POST) {
             if (C('VERIFY') && $verify != session(C('VERIFY_CODE'))) {
                 // 验证码不对
