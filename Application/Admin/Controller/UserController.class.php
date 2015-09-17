@@ -9,7 +9,7 @@ class UserController extends BaseController {
 
     }
 
-    public function login($name='',$password='',$verify='',$ajax=false){
+    public function login($username='',$password='',$verify='',$ajax=true){
         layout(false);
         if (IS_POST) {
             if (C('VERIFY') && $verify != session(C('VERIFY_CODE'))) {
@@ -17,7 +17,7 @@ class UserController extends BaseController {
                 if($ajax) $this->ajaxReturn(['status'=>-1 , 'msg'=>'验证码错误']);
                 $this->error('验证码错误');
             }
-            $userInfo = UserModel::instance()->findByName($name);
+            $userInfo = UserModel::instance()->findByName($username);
 
             if (!$userInfo) {
                 $this->ajaxReturn(['status'=>-1 , 'msg'=>'账号不存在']);
