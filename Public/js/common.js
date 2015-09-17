@@ -40,5 +40,43 @@
             });
 
         }
+
+
+        /**
+         *  toast
+         *  window.app.toast({
+                message: '请选择正确的文件类型！[.jpg, .png, .gif]',
+                type: 'info'
+            });
+         */
+        if(window.toastr){
+            window.app.toast = function (opts) {
+                var _defaults = {
+                    "closeButton": true,
+                    "debug": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "showDuration": "400",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut",
+                    "preventDuplicates": true, // 防止重复
+                    // "newestOnTop": false,    // 默认显示新信息在上
+                    "type": "success", //默认success, info, warning, error
+                    "title": "提示",
+                    "message": ""
+                };
+
+                _opts = $.extend({}, _defaults, opts);
+
+                toastr.options = _opts;
+
+                toastr[toastr.options.type](toastr.options.message, toastr.options.title);
+            };
+        }
     }
 })(jQuery);

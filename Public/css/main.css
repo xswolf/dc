@@ -1,3 +1,6 @@
+#toast-container > div {
+  opacity: 1 !important;
+}
 .loginBox {
   position: absolute;
   top: 400px;
@@ -22,4 +25,25 @@
 }
 .registerBox form {
   padding: 40px;
+}
+.orderListHd {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #000;
+}
+.orderDetail {
+  padding: 20px;
+  margin-bottom: 30px;
+}
+.orderDetail .well {
+  background-color: #fcf8e3;
+}
+.orderDetail table {
+  background-color: transparent !important;
+}
+.orderDetail table th {
+  border-bottom: 1px solid #000 !important;
+}
+.orderDetail table td {
+  border-top: none !important;
 }
