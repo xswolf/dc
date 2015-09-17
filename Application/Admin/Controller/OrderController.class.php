@@ -1,8 +1,8 @@
 <?php
 namespace Admin\Controller;
-use Common\Controller\VerifyController;
+use Common\Controller\BaseController;
 
-class OrderController extends VerifyController {
+class OrderController extends BaseController {
 
     public function index(){
 
