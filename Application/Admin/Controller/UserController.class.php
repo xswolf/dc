@@ -10,6 +10,7 @@ class UserController extends BaseController {
     }
 
     public function login($name='',$password='',$verify='',$ajax=false){
+        layout(false);
         if (IS_POST) {
             if (C('VERIFY') && $verify != session(C('VERIFY_CODE'))) {
                 // 验证码不对
@@ -47,6 +48,7 @@ class UserController extends BaseController {
     }
 
     public function register(){
+        layout(false);
         $this->display();
     }
 }
