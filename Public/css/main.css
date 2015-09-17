@@ -1,0 +1,25 @@
+.loginBox {
+  position: absolute;
+  top: 400px;
+  left: 50%;
+  width: 350px;
+  padding: 30px;
+  background-color: #fff;
+  -webkit-transform: translate(-50%, -50%);
+}
+.registerBox {
+  width: 400px;
+  background-color: #fff;
+  margin: 200px auto 0;
+}
+.registerBox .hd {
+  padding: 10px 40px 10px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.registerBox .hd h1 {
+  margin: 0;
+  font-size: 30px;
+}
+.registerBox form {
+  padding: 40px;
+}
