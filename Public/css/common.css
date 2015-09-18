@@ -1,3 +1,12 @@
 #toast-container > div {
   opacity: 1 !important;
 }
+.table.bd {
+  border: 1px solid #ddd;
+}
+.modal-body {
+  padding: 30px;
+}
+.wpBox .hd {
+  padding-bottom: 20px;
+}
