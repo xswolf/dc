@@ -1,0 +1,123 @@
+[ 2015-09-17T08:39:02+08:00 ] 127.0.0.1 /admin/user/LodopFuncs.js
+ERR: 非法操作:LodopFuncs.js
+
+[ 2015-09-17T08:39:21+08:00 ] 127.0.0.1 /admin/user/LodopFuncs.js
+ERR: 非法操作:LodopFuncs.js
+
+[ 2015-09-17T08:39:25+08:00 ] 127.0.0.1 /admin/user/LodopFuncs.js
+ERR: 非法操作:LodopFuncs.js
+
+[ 2015-09-17T08:39:25+08:00 ] 127.0.0.1 /admin/user/LodopFuncs.js
+ERR: 非法操作:LodopFuncs.js
+
+[ 2015-09-17T08:46:24+08:00 ] 127.0.0.1 /admin/user/install_lodop32.exe
+ERR: 非法操作:install_lodop32.exe
+
+[ 2015-09-17T08:59:32+08:00 ] 127.0.0.1 /admin/user/CheckActivX.js
+ERR: 非法操作:CheckActivX.js
+
+[ 2015-09-17T08:59:32+08:00 ] 127.0.0.1 /admin/user/CheckActivX.js
+ERR: 非法操作:CheckActivX.js
+
+[ 2015-09-17T08:59:46+08:00 ] 127.0.0.1 /admin/user/CheckActivX.js
+ERR: 非法操作:CheckActivX.js
+
+[ 2015-09-17T08:59:59+08:00 ] 127.0.0.1 /admin/user/CheckActivX.js
+ERR: 非法操作:CheckActivX.js
+
+[ 2015-09-17T08:59:59+08:00 ] 127.0.0.1 /admin/user/CheckActivX.js
+ERR: 非法操作:CheckActivX.js
+
+[ 2015-09-17T09:35:04+08:00 ] 127.0.0.1 /admin/js/LodopFuncs.js
+ERR: 无法加载控制器:Js
+
+[ 2015-09-17T09:35:04+08:00 ] 127.0.0.1 /admin/js/LodopFuncs.js
+ERR: 无法加载控制器:Js
+
+[ 2015-09-17T09:35:07+08:00 ] 127.0.0.1 /admin/js/LodopFuncs.js
+ERR: 无法加载控制器:Js
+
+[ 2015-09-17T09:35:12+08:00 ] 127.0.0.1 /admin/js/LodopFuncs.js
+ERR: 无法加载控制器:Js
+
+[ 2015-09-17T09:35:12+08:00 ] 127.0.0.1 /admin/js/LodopFuncs.js
+ERR: 无法加载控制器:Js
+
+[ 2015-09-17T13:35:27+08:00 ] 127.0.0.1 /admin/user/login
+ERR: Think\Controller:assgin方法不存在！
+
+[ 2015-09-17T14:00:51+08:00 ] 127.0.0.1 /Admin/index/add
+ERR: 模板不存在:./Application/Admin/View/Index/add.html
+
+[ 2015-09-17T14:03:56+08:00 ] 127.0.0.1 /Admin/index/add
+ERR: 模板不存在:./Application/Admin/View/Index/add.html
+
+[ 2015-09-17T14:04:10+08:00 ] 127.0.0.1 /Admin/index/add
+ERR: 模板不存在:./Application/Admin/View/Index/add.html
+
+[ 2015-09-17T15:14:54+08:00 ] 127.0.0.1 /Admin/index/component
+ERR: 非法操作:component
+
+[ 2015-09-17T15:14:58+08:00 ] 127.0.0.1 /Admin/index/common
+ERR: 非法操作:common
+
+[ 2015-09-17T15:15:05+08:00 ] 127.0.0.1 /Admin/index/common
+ERR: 非法操作:common
+
+[ 2015-09-17T15:15:48+08:00 ] 127.0.0.1 /Admin/User/co
+ERR: 非法操作:co
+
+[ 2015-09-17T15:20:01+08:00 ] 127.0.0.1 /admin/add
+ERR: 无法加载控制器:Add
+
+[ 2015-09-17T15:20:12+08:00 ] 127.0.0.1 /admin/add
+ERR: 无法加载控制器:Add
+
+[ 2015-09-17T15:20:14+08:00 ] 127.0.0.1 /admin/add
+ERR: 无法加载控制器:Add
+
+[ 2015-09-17T15:20:14+08:00 ] 127.0.0.1 /admin/add
+ERR: 无法加载控制器:Add
+
+[ 2015-09-17T15:33:05+08:00 ] 127.0.0.1 /admin/index/add
+ERR: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '123' for key 'name'
+
+[ 2015-09-17T15:38:16+08:00 ] 127.0.0.1 /admin/index/add
+ERR: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '123' for key 'name'
+
+[ 2015-09-17T15:40:57+08:00 ] 127.0.0.1 /admin/index/add
+ERR: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '123' for key 'name'
+
+[ 2015-09-17T15:55:35+08:00 ] 127.0.0.1 /admin/index/
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.status' in 'field list'
+
+[ 2015-09-17T15:57:23+08:00 ] 127.0.0.1 /admin/index/edit
+ERR: 非法操作:edit
+
+[ 2015-09-17T16:02:25+08:00 ] 127.0.0.1 /admin/index/edit
+ERR: 参数错误或者未定义:id
+
+[ 2015-09-17T16:02:26+08:00 ] 127.0.0.1 /admin/index/edit
+ERR: 参数错误或者未定义:id
+
+[ 2015-09-17T16:24:48+08:00 ] 127.0.0.1 /admin/index/admin/index/index
+ERR: 非法操作:admin
+
+[ 2015-09-17T16:24:55+08:00 ] 127.0.0.1 /admin/index/admin/index/index
+ERR: 非法操作:admin
+
+[ 2015-09-17T16:26:59+08:00 ] 127.0.0.1 /admin/index/edit
+ERR: 参数错误或者未定义:id
+
+[ 2015-09-17T16:42:25+08:00 ] 127.0.0.1 /Admin/order/index.html
+ERR: 模板不存在:./Application/Admin/View/Order/index.html
+
+[ 2015-09-17T16:42:56+08:00 ] 127.0.0.1 /Admin/order/common
+ERR: 非法操作:common
+
+[ 2015-09-17T16:44:01+08:00 ] 127.0.0.1 /Admin/order/common
+ERR: 非法操作:common
+
+[ 2015-09-17T16:44:06+08:00 ] 127.0.0.1 /Admin/order/component
+ERR: 非法操作:component
+

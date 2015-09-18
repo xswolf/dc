@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html lang="zh-cn">
 <head>
     <meta charset="utf-8">
@@ -26,16 +26,16 @@
     <h2></h2>
     <div class="alert alert-warning alert-dismissible fade in" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-        <strong>{$error}</strong>
+        <strong><?php echo ($error); ?></strong>
     </div>
 </div>
 <form class="loginBox j-validator" method="post">
 
     <div class="form-group">
-        <input type="text" name="username" class="form-control"  value="{$username}" placeholder="用户名" data-bv-notempty data-bv-notempty-message="用户名不能为空!">
+        <input type="text" name="username" class="form-control"  value="<?php echo ($username); ?>" placeholder="用户名" data-bv-notempty data-bv-notempty-message="用户名不能为空!">
     </div>
     <div class="form-group">
-        <input type="password" name="password" class="form-control" value="{$password}" placeholder="密码" data-bv-notempty data-bv-notempty-message="密码不能为空!">
+        <input type="password" name="password" class="form-control" value="<?php echo ($password); ?>" placeholder="密码" data-bv-notempty data-bv-notempty-message="密码不能为空!">
     </div>
     <div class="form-group">
         <button type="submit" class="btn btn-success btn-block">立即登录</button>
@@ -56,7 +56,7 @@
 <script src="/Public/js/common.js"></script>
 
 <script>
-    var error = '{$error}';
+    var error = '<?php echo ($error); ?>';
     if (error){
         $(".message").show();
     }
@@ -64,4 +64,3 @@
 
 </body>
 </html>
-
