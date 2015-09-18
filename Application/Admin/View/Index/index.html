@@ -1,1 +1,20 @@
-sadfsdf
+<a href="/admin/index/add">添加</a>
+<table>
+    <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    <volist name="list" id="vo">
+        <tr>
+            <td>{$vo.id}</td>
+            <td>{$vo.name}</td>
+            <td>{$vo.shopName}</td>
+            <td>{$vo.status}</td>
+            <td><a href="/admin/index/edit?id={$vo.id}">编辑</a></td>
+        </tr>
+    </volist>
+</table>

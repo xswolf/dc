@@ -1,6 +1,7 @@
 <?php
 namespace Common\Controller;
 use Common\Model\UserModel;
+use Admin\Model\PlatformShopModel;
 
 /**
  * Created by PhpStorm.
@@ -25,6 +26,15 @@ class VerifyController extends BaseController{
 
             $this->user = UserModel::instance();
             $this->user->setUser(session(C("LOGIN_SESSION")));
+
+            if ($this->user->getId() == 1){  // 管理员
+                layout(false);
+                $list = PlatformShopModel::instance()->getList();
+                $this->assign("list" , $list);
+
+            }else{  // 店铺用户
+
+            }
         }
     }
 
@@ -49,5 +59,45 @@ class VerifyController extends BaseController{
 
     public function ajaxError($data){
         parent::ajaxReturn(['status'=>-1 , 'message'=>'失败' , 'data' => $data]);
+    }
+
+    /**
+     * 成功提示
+     * @param string $msg
+     * @param string $url
+     * @param string $title
+     */
+    protected function _success($msg = '操作成功', $url = '', $title = '恭喜!') {
+        if ($url) {
+            $this->_alert('success', $msg, $title);
+            redirect($url);
+        } else {
+            $this->_alert('success', $msg, $title);
+        }
+    }
+
+    /**
+     * 错误提示
+     * @param string $msg
+     * @param string $url
+     * @param string $title
+     */
+    protected function _error($msg = '操作失败', $url = '', $title = '糟糕!') {
+        if ($url) {
+            $this->_alert('error', $msg, $title);
+            redirect($url);
+        } else {
+            $this->_alert('error', $msg, $title);
+        }
+    }
+
+    /**
+     * 赋值消息提示
+     * @param $type
+     * @param $msg
+     */
+    protected function _alert($type, $msg) {
+
+        cookie($type,$msg);  //设置cookie
     }
 }

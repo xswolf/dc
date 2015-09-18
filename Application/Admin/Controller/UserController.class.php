@@ -11,7 +11,9 @@ class UserController extends BaseController {
 
     public function login($username='',$password='',$verify='',$ajax=true){
         layout(false);
+
         if (IS_POST) {
+
             if (C('VERIFY') && $verify != session(C('VERIFY_CODE'))) {
                 // 验证码不对
                 if($ajax) $this->ajaxReturn(['status'=>-1 , 'msg'=>'验证码错误']);
@@ -20,19 +22,18 @@ class UserController extends BaseController {
             $userInfo = UserModel::instance()->findByName($username);
 
             if (!$userInfo) {
-                $this->ajaxReturn(['status'=>-1 , 'msg'=>'账号不存在']);
+                $this->assign("error" , "用户不存在");
+            }else{
+                if ($userInfo && $userInfo['password'] == processPwd($password)) {
+                    // 登陆成功
+                    session(C('LOGIN_SESSION'), $userInfo);
+                    $this->redirect('index/index');
+                } else {
+                    $this->assign("error" , "密码错误");
+                }
             }
-
-            if ($userInfo && $userInfo['password'] == processPwd($password)) {
-                // 登陆成功
-                session(C('LOGIN_SESSION'), $userInfo);
-                if($ajax) $this->ajaxReturn(['status'=>1 , 'msg'=>'登陆成功']);
-                $this->success('登陆成功');
-            } else {
-                // 登陆失败
-                if($ajax) $this->ajaxReturn(['status'=>-2 , 'msg'=>'账号或密码错误']);
-                $this->error('登录失败');
-            }
+            $this->assign("username" , $username);
+            $this->assign("password" , $password);
         }
         $this->display();
     }
