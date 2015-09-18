@@ -1,5 +1,7 @@
 (function($) {
 
+    // j-validator  表单验证
+    // j-datetime j-date j-time 日期选择
     window.app = window.app || {};
 
     window.app.form = [];
@@ -7,7 +9,6 @@
     // 初始化组件
     window.app.init = function() {
         bootstrapInit();
-        pluginsInit();
     };
 
     window.app.init();
@@ -116,11 +117,11 @@
             this.tpl.modal();
         };
 
-    }
 
 
-    // plugins init
-    function pluginsInit() {
+
+
+
         // bootstrapValidator
         if($.fn.bootstrapValidator){
             $('.j-validator').each(function() {
@@ -177,8 +178,55 @@
                 toastr[toastr.options.type](toastr.options.message, toastr.options.title);
             };
         }
+
+
+
+
+
+
+
+        // datetimepicker
+        $('.j-datetime').datetimepicker({
+            language: 'zh-CN',
+            format: 'yyyy-mm-dd HH:ii',
+            todayBtn: true,
+            weekStart: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            forceParse: 0,
+            showMeridian: 1
+        });
+
+
+        $('.j-date').datetimepicker({
+            language: 'zh-CN',
+            format: 'yyyy-mm-dd',
+            todayBtn: true,
+            weekStart: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
+
+
+        $('.j-time').datetimepicker({
+            language: 'zh-CN',
+            format: 'hh:ii',
+            todayBtn: true,
+            weekStart: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 1,
+            minView: 0,
+            maxView: 1,
+            forceParse: 0
+        });
     }
 })(jQuery);
+
 
 
 
