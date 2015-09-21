@@ -10,9 +10,10 @@ $(function() {
     // 删除确认提示
     $('.j-delTable').click(function() {
         var $this = $(this);
-        var _id = $this.attr('id');
-
-        delConfirm($this, _id);
+        var _id = $this.attr('data-id');
+        var _table = $this.attr('data-table');
+        alert(_table);
+        delConfirm($this, _id , _table);
     });
 
 
@@ -39,21 +40,29 @@ $(function() {
         }
     }
     // 删除确认提示
-    function delConfirm($this, tableId) {
+    function delConfirm($this, tableId , table) {
         // ajax
         window.app.confirm({
             content: '是否删除？',
             handler4ConfirmBtn: function() {
-                // ajax
-                if(true){
-                    // 删除订单成功
-                    $this.parents('tr').remove();
-                    window.app.toast({
-                        message: '删除桌号成功！'
-                    });
-                }else{
+                $.ajax({
+                    "type":'post',
+                    "url":"/admin/settings/del",
+                    "data":{"id":tableId , "table":table},
+                    "success":function(msg){
+                        if(msg.status == 1){
+                            // 删除订单成功
+                            $this.parents('tr').remove();
+                            window.app.toast({
+                                message: '删除桌号成功！'
+                            });
+                        }else{
 
-                }
+                        }
+                    }
+
+                })
+
             }
         });
     }

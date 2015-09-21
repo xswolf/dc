@@ -1,8 +1,90 @@
 <?php
 namespace Admin\Controller;
-use Think\Controller;
-class SettingsController extends Controller {
-    public function index(){
-        $this->show('<style type="text/css">*{ padding: 0; margin: 0; } div{ padding: 4px 48px;} body{ background: #fff; font-family: "微软雅黑"; color: #333;font-size:24px} h1{ font-size: 100px; font-weight: normal; margin-bottom: 12px; } p{ line-height: 1.8em; font-size: 36px } a,a:hover,{color:blue;}</style><div style="padding: 24px 48px;"> <h1>:)</h1><p>欢迎使用 <b>ThinkPHP</b>！</p><br/>版本 V{$Think.version}</div><script type="text/javascript" src="http://ad.topthink.com/Public/static/client.js"></script><thinkad id="ad_55e75dfae343f5a1"></thinkad><script type="text/javascript" src="http://tajs.qq.com/stats?sId=9347272" charset="UTF-8"></script>','utf-8');
+use Admin\Model\GoodsCategoryModel;
+use Admin\Model\GoodsTypeModel;
+use Admin\Model\ShopTableModel;
+use Common\Controller\VerifyController;
+class SettingsController extends VerifyController {
+
+    public function save(){
+        if($_POST){
+
+            if (I("post.id")){ // 编辑
+
+                GoodsCategoryModel::instance()->edit($_POST);
+            }else{ // 添加
+
+                GoodsCategoryModel::instance()->insert($_POST);
+            }
+        }
+
+        $this->display();
+    }
+
+    // 菜品分类管理
+    public function goodsType(){
+
+        $list = GoodsTypeModel::instance()->lists($this->user->getShopId());
+        $this->assign('list' , $list);
+        $this->display();
+    }
+
+    // 添加修改菜品分类
+    public function saveGoodsType(){
+        if (I('id')){
+            $data = GoodsTypeModel::instance()->findById(I('id'));
+            $this->assign('data' , $data);
+        }
+        if($_POST){
+            if (I("post.id")){ // 编辑
+
+                GoodsTypeModel::instance()->edit($_POST);
+            }else{ // 添加
+                $_POST['shop_id'] = $this->user->getShopId();
+                GoodsTypeModel::instance()->insert($_POST);
+            }
+            $this->_success('添加成功' , U('goodsType'));
+
+        }
+
+        $this->display();
+    }
+
+    // 桌号管理
+    public function table(){
+        $list = ShopTableModel::instance()->lists($this->user->getShopId());
+        $this->assign('list' , $list);
+        $this->display();
+    }
+
+    // 添加修改桌号
+    public function saveTable(){
+        if (I('id')){
+            $data = ShopTableModel::instance()->findById(I('id'));
+            $this->assign('data' , $data);
+        }
+        if($_POST){
+            if (I("post.id")){ // 编辑
+
+                ShopTableModel::instance()->edit($_POST);
+            }else{ // 添加
+                $_POST['shop_id'] = $this->user->getShopId();
+                ShopTableModel::instance()->insert($_POST);
+            }
+            $this->_success('添加成功' , U('table'));
+
+        }
+
+        $this->display();
+    }
+
+    public function del(){
+        $id = I('id');
+        $table = I('table');
+        if (M($table)->where(['id'=>$id])->delete()){
+            $this->ajaxSuccess('删除成功');
+        }else{
+            $this->ajaxError('删除失败');
+        }
     }
 }
