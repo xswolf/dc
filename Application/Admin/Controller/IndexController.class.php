@@ -56,5 +56,10 @@ class IndexController extends VerifyController {
         $this->display();
     }
 
+    public function setShopStatus(){
+        $status = I('status');
+        PlatformShopModel::instance()->where(['uid'=>I('id')])->setField('status' , $status);
+        $this->ajaxSuccess('设置成功');
+    }
 
 }

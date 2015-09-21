@@ -15,7 +15,7 @@ class PlatformShopModel extends BaseModel
 
         return $m->alias("s")
             ->join('__USER__ u on s.uid=u.id')
-            ->field('s.name as shopName , u.id,u.name , s.status')
+            ->field('s.name as shop_name , u.id,u.name , s.status')
             ->select();
     }
 
@@ -57,5 +57,6 @@ class PlatformShopModel extends BaseModel
         }
 
     }
+
 
 }
