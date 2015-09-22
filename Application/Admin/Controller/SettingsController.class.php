@@ -1,6 +1,7 @@
 <?php
 namespace Admin\Controller;
 use Admin\Model\GoodsCategoryModel;
+use Admin\Model\GoodsModel;
 use Admin\Model\GoodsTypeModel;
 use Admin\Model\ShopTableModel;
 use Common\Controller\VerifyController;
@@ -78,6 +79,39 @@ class SettingsController extends VerifyController {
         $this->display();
     }
 
+    // 菜品管理
+    public function goods(){
+        $list = GoodsModel::instance()->lists($this->user->getShopId());
+        $typeList = GoodsTypeModel::instance()->lists($this->user->getShopId());
+        $this->assign('list' , $list);
+
+        $this->assign('typeList' , $typeList); //菜品分类
+        $this->display();
+    }
+
+    // 设置菜品
+    public function saveGoods(){
+        if (I('id')){
+            $data = GoodsModel::instance()->findById(I('id'));
+            $this->assign('data' , $data);
+        }
+        if($_POST){
+            if (I("post.id")){ // 编辑
+
+                GoodsModel::instance()->edit($_POST);
+            }else{ // 添加
+                $_POST['shop_id'] = $this->user->getShopId();
+                GoodsModel::instance()->insert($_POST);
+            }
+            $this->_success('添加成功' , U('goods'));
+
+        }
+
+        $list = GoodsTypeModel::instance()->lists($this->user->getShopId());
+        $this->assign('list' , $list); //菜品分类
+        $this->display();
+    }
+
     public function del(){
         $id = I('id');
         $table = I('table');
@@ -87,4 +121,6 @@ class SettingsController extends VerifyController {
             $this->ajaxError('删除失败');
         }
     }
+
+
 }
