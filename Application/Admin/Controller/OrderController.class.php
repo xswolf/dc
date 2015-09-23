@@ -27,6 +27,11 @@ class OrderController extends VerifyController {
      */
     public function order() {
         $data = OrderModel::instance()->orderList($this->shop_id);
+        if(is_array($data)) {
+            foreach($data as &$list) {
+                $list['orderGoodsList'] = OrderModel::instance()->orderGoodsList($list['id']);
+            }
+        }
         $this->assign('data',$data);
         $this->display();
     }
