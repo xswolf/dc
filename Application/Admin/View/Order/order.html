@@ -25,62 +25,51 @@
                     </tr>
                     </thead>
                     <tbody>
-
-                    <tr>
-                        <td>001</td>
-                        <td>A01</td>
-                        <td>20.00</td>
-                        <td>1分钟前</td>
-                        <td>
-                            <button class="btn btn-info" type="button" data-toggle="collapse"
-                                    data-target="#collapseExample2"
-                                    aria-expanded="false" aria-controls="collapseExample">
-                                详细 <span class="caret"></span></button>
-                            <button class="btn btn-success j-confirmBtn" data-id="1">确认订单</button>
-                        </td>
-                    </tr>
-                    <tr class="collapse" id="collapseExample2" style="background-color: transparent">
-                        <td colspan="5">
-                            <div class="orderDetail">
-                                <div class="well">
-                                    <table class="table table-condensed">
-                                        <thead>
-                                        <tr>
-                                            <th>菜品</th>
-                                            <th>单价</th>
-                                            <th>数量</th>
-                                            <th>小计</th>
-                                            <th>备注</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>双球冰激凌菜品名字最多显示14</td>
-                                            <td>32.00</td>
-                                            <td>x2</td>
-                                            <td>64.00</td>
-                                            <td>菜品备注信息最多只能显示20个字省略省略省</td>
-                                        </tr>
-                                        <tr>
-                                            <td>双球冰激凌菜品名字最多显示14</td>
-                                            <td>32.00</td>
-                                            <td>x2</td>
-                                            <td>64.00</td>
-                                            <td>菜品备注信息最多只能显示20个字省略省略省</td>
-                                        </tr>
-                                        <tr>
-                                            <td>双球冰激凌菜品名字最多显示14</td>
-                                            <td>32.00</td>
-                                            <td>x2</td>
-                                            <td>64.00</td>
-                                            <td>菜品备注信息最多只能显示20个字省略省略省</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                    <volist name="data" id="list">
+                        <tr>
+                            <td>{$list.sn}</td>
+                            <td>{$list.table_id}</td>
+                            <td>{$list.price}</td>
+                            <td>1分钟前</td>
+                            <td>
+                                <button class="btn btn-info" type="button" data-toggle="collapse"
+                                        data-target="#collapseExample2"
+                                        aria-expanded="false" aria-controls="collapseExample">
+                                    详细 <span class="caret"></span></button>
+                                <button class="btn btn-success j-confirmBtn" data-id="1">确认订单</button>
+                            </td>
+                        </tr>
+                        <tr class="collapse" id="collapseExample2" style="background-color: transparent">
+                            <td colspan="5">
+                                <div class="orderDetail">
+                                    <div class="well">
+                                        <table class="table table-condensed">
+                                            <thead>
+                                            <tr>
+                                                <th>菜品</th>
+                                                <th>单价</th>
+                                                <th>数量</th>
+                                                <th>小计</th>
+                                                <th>备注</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                                <volist name="list.orderGoodsList" id="goods">
+                                                    <tr>
+                                                        <td>{$goods.name}</td>
+                                                        <td>{$goods.order_goods_price}</td>
+                                                        <td>{$goods.number}</td>
+                                                        <td>{$goods['order_goods_price']*$goods['number']}</td>
+                                                        <td>{$goods.mark}</td>
+                                                    </tr>
+                                                </volist>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
+                     </volist>
                     </tbody>
                 </table>
             </div>
