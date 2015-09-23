@@ -7,4 +7,9 @@ class OrderController extends BaseController {
     public function index(){
         $this->display();
     }
+
+    public function historyOrder(){
+
+        $this->display();
+    }
 }

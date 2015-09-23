@@ -12,7 +12,6 @@ $(function() {
         var $this = $(this);
         var _id = $this.attr('data-id');
         var _table = $this.attr('data-table');
-        alert(_table);
         delConfirm($this, _id , _table);
     });
 
