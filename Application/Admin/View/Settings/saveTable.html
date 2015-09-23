@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="wpBox">
+        <div class="bd">
+
+
+            <form class="form-horizontal j-validator" method="post">
+                <fieldset>
+                    <input type="hidden" name="id" value="{$data['id']}">
+                    <!-- Form Name -->
+                    <legend>设置桌号</legend>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="">桌号名称</label>
+                        <div class="col-md-4">
+                            <input name="name" value="{$data['name']}" type="text" placeholder="桌号名称" class="form-control input-md" data-bv-notempty data-bv-notempty-message="">
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"></label>
+                        <div class="col-md-4">
+                            <button class="btn btn-success " type="submit">提　交</button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+
+
+
+        </div>
+    </div>
+</div>

@@ -36,6 +36,7 @@ class BaseModel extends Model
 
     public function insert($data)
     {
+        $data['created_at'] = time();
         $m = D($this->_table);
         if ($r = $m->create($data)) {
             return $m->add();
