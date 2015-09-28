@@ -6,28 +6,41 @@
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta content="black" name="apple-mobile-web-app-status-bar-style">
     <meta content="telephone=no" name="format-detection">
-    <title>登录</title>
+    <title>商家列表</title>
     <!-- Loading Bootstrap -->
     <link href="/Public/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Loading Flat UI -->
 
     <!-- customer -->
     <link href="/Public/css/main.css" rel="stylesheet">
 
     <link rel="shortcut icon" href="img/favicon.ico">
-    <style>
-        body {
-            background-color: #f0f0f0;
-        }
 
-        .form-horizontal .form-group {
-            margin-left: 0;
-            margin-right: 0;
-        }
-    </style>
+    <link href="/Public/libs/bootstrap/css/bootstrap-switch.min.css" rel="stylesheet">
+
 </head>
 <body>
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">商家管理平台</a>
+        </div>
 
+        <!-- Collect the nav links, forms, and other content for toggling -->
+
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
 
 
 <div class="registerBox">

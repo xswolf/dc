@@ -1,4 +1,5 @@
-<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?>
+<!DOCTYPE html>
 <html lang="zh-cn">
 <head>
     <meta charset="utf-8">
@@ -46,41 +47,48 @@
     </div>
     <!-- /.container-fluid -->
 </nav>
-<div class="panel panel-primary">
-    <div class="panel-heading">商家列表</div>
-    <div class="panel-body">
-        <a href="<?php echo U('add');?>" class="btn btn-success" data-id="1">添加</a>
+
+<div class="container-fluid">
+    <h2>提现列表</h2>
+
+    <div class="wpBox">
+        <div class="hd">
+            <div class="text-right"><a class="btn btn-primary" href="<?php echo U('Index/cashList1');?>">已打款列表</a></div>
+        </div>
+        <div class="bd">
+            <table class="table table-hover table-bordered j-dataTables">
+                <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>商家ID</th>
+                    <th>店铺名称</th>
+                    <th>申请金额</th>
+                    <th>申请日期</th>
+                    <th class="col-md-3">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
+                        <td><?php echo ($vo["id"]); ?></td>
+                        <td><?php echo ($vo["shop_id"]); ?></td>
+                        <td><?php echo ($vo["name"]); ?></td>
+
+                        <td><?php echo ($vo["cash_money"]); ?></td>
+                        <td>
+                            <?php echo (date("Y-m-d" , $vo["created_at"])); ?>
+                        </td>
+                        <td>
+                            <a class="btn btn-info" href="<?php echo U('saveGoods');?>?id=<?php echo ($vo["id"]); ?>">确认付款</a>
+
+                        </td>
+                    </tr><?php endforeach; endif; else: echo "" ;endif; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <table class="table table-hover ">
-        <thead>
-        <tr>
-            <th>商家ID</th>
-            <th>店铺名称</th>
-            <th>状态</th>
-            <th>操作</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
-                <td><?php echo ($vo["id"]); ?></td>
-                <td><?php echo ($vo["shop_name"]); ?></td>
-                <td>
-
-                    <div class="switch" data-id="<?php echo ($vo["id"]); ?>">
-                        <input id="switch-<?php echo ($vo["id"]); ?>" type="checkbox" <?php if($vo["status"] == 1): ?>checked<?php endif; ?> />
-                    </div>
-                </td>
-                <td>
-                    <a href="<?php echo U('edit');?>?id=<?php echo ($vo["id"]); ?>" class="btn btn-success" data-id="1">编辑</a>
-                    <a class="btn btn-danger" data-id="1">删除</a>
-                </td>
-            </tr><?php endforeach; endif; else: echo "" ;endif; ?>
-
-        </tbody>
-    </table>
-
 </div>
-<div class=""></div>
+
+
 
 <script src="/Public/libs/jquery/jquery.1.11.3.min.js"></script>
 <script src="/Public/libs/bootstrap/js/bootstrap.min.js"></script>

@@ -1,0 +1,2446 @@
+Index: Application/Runtime/Cache/Admin/99b7957f812bd941fa1b6309e9d8655c.php
+===================================================================
+--- Application/Runtime/Cache/Admin/99b7957f812bd941fa1b6309e9d8655c.php	(revision 3775aa0e84156341c657a5f7403a3f0d30acb713)
++++ Application/Runtime/Cache/Admin/99b7957f812bd941fa1b6309e9d8655c.php	(revision 3775aa0e84156341c657a5f7403a3f0d30acb713)
+@@ -1,113 +0,0 @@
+-<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+-<html lang="zh-cn">
+-<head>
+-    <meta charset="utf-8">
+-    <meta name="viewport"
+-          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+-    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+-    <meta content="telephone=no" name="format-detection">
+-    <title>登录</title>
+-    <!-- Loading Bootstrap -->
+-    <link href="/Public/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+-
+-
+-    <!-- customer -->
+-    <link href="/Public/css/main.css" rel="stylesheet">
+-
+-    <link rel="shortcut icon" href="img/favicon.ico">
+-    <style>
+-        body {
+-            background-color: #f0f0f0;
+-        }
+-
+-        .form-horizontal .form-group {
+-            margin-left: 0;
+-            margin-right: 0;
+-        }
+-    </style>
+-</head>
+-<body>
+-
+-
+-
+-<div class="registerBox">
+-    <div class="hd">
+-        <h1>有餐</h1>
+-    </div>
+-    <form class="form-horizontal j-validator" action="edit" method="post">
+-        <input type="hidden" name="id" value="<?php echo ($data['id']); ?>">
+-        <div class="form-group">
+-           账户名： <input type="text" name="name" value="<?php echo ($data['name']); ?>" placeholder="账户名" class="form-control" data-bv-notempty data-bv-notempty-message="帐号名不能为空!">
+-        </div>
+-        <div class="form-group">
+-            店铺名：
+-            <input type="text" name="shopName" value="<?php echo ($data['shopName']); ?>" placeholder="店铺名" class="form-control" data-bv-notempty data-bv-notempty-message="店铺名不能为空!">
+-        </div>
+-        <div class="form-group">
+-            手机号：
+-            <input type="text" name="tel" value="<?php echo ($data['tel']); ?>" placeholder="手机号" class="form-control" data-bv-notempty data-bv-notempty-message="手机号不能为空!">
+-        </div>
+-
+-        <div class="form-group">
+-            <input type="password" name="password" value="" placeholder="密码" class="form-control" data-bv-notempty data-bv-notempty-message="密码不能为空!" data-bv-identical="true" data-bv-identical-field="rePassword" data-bv-identical-message="两次密码不一致!">
+-        </div>
+-        <div class="form-group">
+-            <input type="password" name="rePassword" value="" placeholder="重复密码" class="form-control" data-bv-notempty data-bv-notempty-message="密码不能为空!" data-bv-identical="true" data-bv-identical-field="password" data-bv-identical-message="两次密码不一致!">
+-        </div>
+-
+-        <button type="submit" class="btn btn-success btn-block">保存</button>
+-    </form>
+-</div>
+-
+-
+-<!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+-<script src="/Public/libs/jquery/jquery.1.11.3.min.js"></script>
+-<script src="/Public/libs/bootstrap/js/bootstrap.min.js"></script>
+-
+-<!-- plugins -->
+-<link rel="stylesheet" href="/Public/libs/plugins/bootstrapvalidator-master/dist/css/bootstrapValidator.min.css"/>
+-<script src="/Public/libs/plugins/bootstrapvalidator-master/dist/js/bootstrapValidator.min.js"></script>
+-
+-
+-<!-- 公共组件 -->
+-<script src="/Public/js/common.js"></script>
+-
+-<script>
+-    $(function() {
+-
+-        // 添加验证字段的规则
+-        window.app.form[0].addField('accountName', {
+-            validators: {
+-                notEmpty: {
+-                    message: '账户名不能为空!'
+-                },
+-                stringLength: {
+-                    min: 4,
+-                    max: 12,
+-                    message: '账户名为4~12位'
+-                },
+-                regexp: {
+-                    regexp: /^[a-zA-Z0-9_\.]+$/,
+-                    message: '账户名只能包含字母，数字，下划线'
+-                }
+-//                remote: {
+-//                    url: 'remote.php',
+-//                    message: '账户名已经存在!'
+-//                }
+-            }
+-        });
+-        window.app.form[0].addField('telNum', {
+-            validators: {
+-                regexp: {
+-                    regexp: /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/,
+-                    message: '请输入正确的手机号'
+-                }
+-            }
+-        });
+-
+-    })
+-</script>
+-
+-
+-</body>
+-</html>
+\ No newline at end of file
+Index: Application/Runtime/Cache/Admin/8e77facfde4ab21e9e439b189330d1ab.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Application/Runtime/Cache/Admin/8e77facfde4ab21e9e439b189330d1ab.php	(revision 3775aa0e84156341c657a5f7403a3f0d30acb713)
++++ Application/Runtime/Cache/Admin/8e77facfde4ab21e9e439b189330d1ab.php	(revision 3775aa0e84156341c657a5f7403a3f0d30acb713)
+@@ -1,343 +0,0 @@
+-<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+-<html lang="zh-cn">
+-<head>
+-    <meta charset="utf-8">
+-    <meta name="viewport"
+-          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+-    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+-    <meta content="telephone=no" name="format-detection">
+-    <title>登录</title>
+-    <!-- Loading Bootstrap -->
+-    <link href="/Public/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+-
+-    <!-- Loading Flat UI -->
+-
+-    <!-- customer -->
+-    <link href="/Public/css/main.css" rel="stylesheet">
+-
+-    <link rel="shortcut icon" href="img/favicon.ico">
+-
+-</head>
+-<body>
+-<nav class="navbar navbar-inverse navbar-static-top">
+-    <div class="container-fluid">
+-        <!-- Brand and toggle get grouped for better mobile display -->
+-        <div class="navbar-header">
+-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+-                <span class="sr-only">Toggle navigation</span>
+-                <span class="icon-bar"></span>
+-                <span class="icon-bar"></span>
+-                <span class="icon-bar"></span>
+-            </button>
+-            <a class="navbar-brand" href="#">商家管理平台</a>
+-        </div>
+-
+-        <!-- Collect the nav links, forms, and other content for toggling -->
+-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+-            <ul class="nav navbar-nav">
+-                <li><a href="/admin/order/order">当前订单<span class="sr-only">(current)</span></a></li>
+-                <li><a href="/admin/order/historyOrder">历史订单</a></li>
+-                <li id="fat-menu" class="dropdown active">
+-                    <a id="drop3" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+-                        系统设置
+-                        <span class="caret"></span>
+-                    </a>
+-                    <ul class="dropdown-menu" aria-labelledby="drop3">
+-                        <li><a href="#">桌号管理</a></li>
+-                        <li><a href="#">菜单管理</a></li>
+-                        <li><a href="#">菜品管理</a></li>
+-                        <li role="separator" class="divider"></li>
+-                        <li><a href="#">流水明细</a></li>
+-                        <li><a href="#">营业数据</a></li>
+-                    </ul>
+-                </li>
+-                <li><a href="/admin/user/component">component</a></li>
+-                <li><a href="/admin/user/common">common</a></li>
+-            </ul>
+-
+-            <!--<ul class="nav navbar-nav navbar-right">-->
+-                <!--<li class="dropdown">-->
+-                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">系统设置 <span class="caret"></span></a>-->
+-                    <!--<ul class="dropdown-menu">-->
+-                        <!--<li><a href="#">Action</a></li>-->
+-                        <!--<li><a href="#">Another action</a></li>-->
+-                        <!--<li><a href="#">Something else here</a></li>-->
+-                        <!--<li role="separator" class="divider"></li>-->
+-                        <!--<li><a href="#">Separated link</a></li>-->
+-                    <!--</ul>-->
+-                <!--</li>-->
+-            <!--</ul>-->
+-        </div><!-- /.navbar-collapse -->
+-    </div><!-- /.container-fluid -->
+-</nav>
+-<div class="orderList">
+-<div class="container-fluid">
+-    <div class="orderListHd">
+-        <div class="row">
+-            <div class="col-md-3">
+-                <div class="input-group">
+-                    <input type="text" class="form-control" placeholder="输入订单号查询">
+-                  <span class="input-group-btn">
+-                    <button class="btn btn-default" type="button">查询</button>
+-                  </span>
+-                </div>
+-            </div>
+-        </div>
+-    </div>
+-
+-<table class="table table-hover ">
+-<thead>
+-<tr>
+-    <th>单号</th>
+-    <th>桌号</th>
+-    <th>消费金额</th>
+-    <th>下单时间</th>
+-    <th>操作</th>
+-</tr>
+-</thead>
+-<tbody>
+-<tr>
+-    <td>001</td>
+-    <td>A01</td>
+-    <td>20.00</td>
+-    <td>1分钟前</td>
+-    <td>
+-        <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample2"
+-                aria-expanded="false" aria-controls="collapseExample">
+-            详细 <span class="caret"></span></button>
+-    </td>
+-</tr>
+-<tr class="collapse" id="collapseExample2" style="background-color: transparent">
+-    <td colspan="5">
+-        <div class="orderDetail">
+-            <div class="well">
+-                <table class="table table-condensed">
+-                    <thead>
+-                    <tr>
+-                        <th>菜品</th>
+-                        <th>单价</th>
+-                        <th>数量</th>
+-                        <th>小计</th>
+-                        <th>备注</th>
+-                    </tr>
+-                    </thead>
+-                    <tbody>
+-                    <tr>
+-                        <td>双球冰激凌菜品名字最多显示14</td>
+-                        <td>32.00</td>
+-                        <td>x2</td>
+-                        <td>64.00</td>
+-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
+-                    </tr>
+-                    <tr>
+-                        <td>双球冰激凌菜品名字最多显示14</td>
+-                        <td>32.00</td>
+-                        <td>x2</td>
+-                        <td>64.00</td>
+-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
+-                    </tr>
+-                    <tr>
+-                        <td>双球冰激凌菜品名字最多显示14</td>
+-                        <td>32.00</td>
+-                        <td>x2</td>
+-                        <td>64.00</td>
+-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
+-                    </tr>
+-                    </tbody>
+-                </table>
+-            </div>
+-        </div>
+-    </td>
+-</tr>
+-<tr>
+-    <td>001</td>
+-    <td>A01</td>
+-    <td>20.00</td>
+-    <td>1分钟前</td>
+-    <td>
+-        <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample3"
+-                aria-expanded="false" aria-controls="collapseExample">
+-            详细 <span class="caret"></span></button>
+-
+-    </td>
+-</tr>
+-<tr class="collapse" id="collapseExample3" style="background-color: transparent">
+-    <td colspan="5">
+-        <div class="orderDetail">
+-            <div class="well">
+-                <table class="table table-condensed">
+-                    <thead>
+-                    <tr>
+-                        <th>菜品</th>
+-                        <th>单价</th>
+-                        <th>数量</th>
+-                        <th>小计</th>
+-                        <th>备注</th>
+-                    </tr>
+-                    </thead>
+-                    <tbody>
+-                    <tr>
+-                        <td>双球冰激凌菜品名字最多显示14</td>
+-                        <td>32.00</td>
+-                        <td>x2</td>
+-                        <td>64.00</td>
+-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
+-                    </tr>
+-                    <tr>
+-                        <td>双球冰激凌菜品名字最多显示14</td>
+-                        <td>32.00</td>
+-                        <td>x2</td>
+-                        <td>64.00</td>
+-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
+-                    </tr>
+-                    <tr>
+-                        <td>双球冰激凌菜品名字最多显示14</td>
+-                        <td>32.00</td>
+-                        <td>x2</td>
+-                        <td>64.00</td>
+-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
+-                    </tr>
+-                    </tbody>
+-                </table>
+-            </div>
+-        </div>
+-    </td>
+-</tr>
+-<tr>
+-    <td>001</td>
+-    <td>A01</td>
+-    <td>20.00</td>
+-    <td>1分钟前</td>
+-    <td>
+-        <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample4"
+-                aria-expanded="false" aria-controls="collapseExample">
+-            详细 <span class="caret"></span></button>
+-
+-    </td>
+-</tr>
+-<tr class="collapse" id="collapseExample4" style="background-color: transparent">
+-    <td colspan="5">
+-        <div class="orderDetail">
+-            <div class="well">
+-                <table class="table table-condensed">
+-                    <thead>
+-                    <tr>
+-                        <th>菜品</th>
+-                        <th>单价</th>
+-                        <th>数量</th>
+-                        <th>小计</th>
+-                        <th>备注</th>
+-                    </tr>
+-                    </thead>
+-                    <tbody>
+-                    <tr>
+-                        <td>双球冰激凌菜品名字最多显示14</td>
+-                        <td>32.00</td>
+-                        <td>x2</td>
+-                        <td>64.00</td>
+-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
+-                    </tr>
+-                    <tr>
+-                        <td>双球冰激凌菜品名字最多显示14</td>
+-                        <td>32.00</td>
+-                        <td>x2</td>
+-                        <td>64.00</td>
+-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
+-                    </tr>
+-                    <tr>
+-                        <td>双球冰激凌菜品名字最多显示14</td>
+-                        <td>32.00</td>
+-                        <td>x2</td>
+-                        <td>64.00</td>
+-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
+-                    </tr>
+-                    </tbody>
+-                </table>
+-            </div>
+-        </div>
+-    </td>
+-</tr>
+-<tr>
+-    <td>001</td>
+-    <td>A01</td>
+-    <td>20.00</td>
+-    <td>1分钟前</td>
+-    <td>
+-        <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample5"
+-                aria-expanded="false" aria-controls="collapseExample">
+-            详细 <span class="caret"></span></button>
+-
+-    </td>
+-</tr>
+-<tr class="collapse" id="collapseExample5" style="background-color: transparent">
+-    <td colspan="5">
+-        <div class="orderDetail">
+-            <div class="well">
+-                <table class="table table-condensed">
+-                    <thead>
+-                    <tr>
+-                        <th>菜品</th>
+-                        <th>单价</th>
+-                        <th>数量</th>
+-                        <th>小计</th>
+-                        <th>备注</th>
+-                    </tr>
+-                    </thead>
+-                    <tbody>
+-                    <tr>
+-                        <td>双球冰激凌菜品名字最多显示14</td>
+-                        <td>32.00</td>
+-                        <td>x2</td>
+-                        <td>64.00</td>
+-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
+-                    </tr>
+-                    <tr>
+-                        <td>双球冰激凌菜品名字最多显示14</td>
+-                        <td>32.00</td>
+-                        <td>x2</td>
+-                        <td>64.00</td>
+-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
+-                    </tr>
+-                    <tr>
+-                        <td>双球冰激凌菜品名字最多显示14</td>
+-                        <td>32.00</td>
+-                        <td>x2</td>
+-                        <td>64.00</td>
+-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
+-                    </tr>
+-                    </tbody>
+-                </table>
+-            </div>
+-        </div>
+-    </td>
+-</tr>
+-
+-</tbody>
+-</table>
+-
+-</div>
+-</div>
+-<div class=""></div>
+-
+-<script src="/Public/libs/jquery/jquery.1.11.3.min.js"></script>
+-<script src="/Public/libs/bootstrap/js/bootstrap.min.js"></script>
+-
+-<!-- plugins -->
+-<link rel="stylesheet" href="/Public/libs/plugins/bootstrapvalidator-master/dist/css/bootstrapValidator.min.css"/>
+-<script src="/Public/libs/plugins/bootstrapvalidator-master/dist/js/bootstrapValidator.min.js"></script>
+-
+-<link rel="stylesheet" href="/Public/libs/plugins/toastr/toastr.min.css"/>
+-<script src="/Public/libs/plugins/toastr/toastr.min.js"></script>
+-
+-<!-- 公共组件 -->
+-<script src="/Public/js/common.js"></script>
+-
+-<!-- 公共组件测试 -->
+-<script src="/Public/js/test.js"></script>
+-
+-
+-
+-<!--  -->
+-<script src="/Public/js/app.js"></script>
+-</body>
+-</html>
+\ No newline at end of file
+Index: Application/Runtime/Data/_fields/ad_dc.w_platform_shop.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Application/Runtime/Data/_fields/ad_dc.w_platform_shop.php	(revision 3775aa0e84156341c657a5f7403a3f0d30acb713)
++++ Application/Runtime/Data/_fields/ad_dc.w_platform_shop.php	(revision 3775aa0e84156341c657a5f7403a3f0d30acb713)
+@@ -1,1 +0,0 @@
+-a:9:{i:0;s:2:"id";i:1;s:4:"name";i:2;s:4:"logo";i:3;s:6:"status";i:4;s:11:"platform_id";i:5;s:3:"uid";i:6;s:10:"created_at";s:3:"_pk";s:2:"id";s:5:"_type";a:7:{s:2:"id";s:7:"int(11)";s:4:"name";s:11:"varchar(20)";s:4:"logo";s:11:"varchar(40)";s:6:"status";s:7:"int(11)";s:11:"platform_id";s:7:"int(11)";s:3:"uid";s:7:"int(11)";s:10:"created_at";s:7:"int(11)";}}
+\ No newline at end of file
+Index: Application/Runtime/Cache/Admin/dd023d97164b5a749e2edb2ef1228c9f.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Application/Runtime/Cache/Admin/dd023d97164b5a749e2edb2ef1228c9f.php	(revision 3775aa0e84156341c657a5f7403a3f0d30acb713)
++++ Application/Runtime/Cache/Admin/dd023d97164b5a749e2edb2ef1228c9f.php	(revision 3775aa0e84156341c657a5f7403a3f0d30acb713)
+@@ -1,66 +0,0 @@
+-<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+-<html lang="zh-cn">
+-<head>
+-    <meta charset="utf-8">
+-    <meta name="viewport"
+-          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+-    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+-    <meta content="telephone=no" name="format-detection">
+-    <title>登录</title>
+-    <!-- Loading Bootstrap -->
+-    <link href="/Public/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+-
+-
+-    <!-- customer -->
+-    <link href="/Public/css/main.css" rel="stylesheet">
+-
+-    <link rel="shortcut icon" href="img/favicon.ico">
+-    <style>
+-        body {
+-            background-color: #f0f0f0;
+-        }
+-    </style>
+-</head>
+-<body>
+-<div class="message center-block" style="display: none">
+-    <h2></h2>
+-    <div class="alert alert-warning alert-dismissible fade in" role="alert">
+-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+-        <strong><?php echo ($error); ?></strong>
+-    </div>
+-</div>
+-<form class="loginBox j-validator" method="post">
+-
+-    <div class="form-group">
+-        <input type="text" name="username" class="form-control"  value="<?php echo ($username); ?>" placeholder="用户名" data-bv-notempty data-bv-notempty-message="用户名不能为空!">
+-    </div>
+-    <div class="form-group">
+-        <input type="password" name="password" class="form-control" value="<?php echo ($password); ?>" placeholder="密码" data-bv-notempty data-bv-notempty-message="密码不能为空!">
+-    </div>
+-    <div class="form-group">
+-        <button type="submit" class="btn btn-success btn-block">立即登录</button>
+-    </div>
+-    <div class="text-right"><a href="register" >立即注册</a></div>
+-</form>
+-
+-
+-<!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+-<script src="/Public/libs/jquery/jquery.1.11.3.min.js"></script>
+-<script src="/Public/libs/bootstrap/js/bootstrap.min.js"></script>
+-
+-<!-- plugins -->
+-<link rel="stylesheet" href="/Public/libs/plugins/bootstrapvalidator-master/dist/css/bootstrapValidator.min.css"/>
+-<script src="/Public/libs/plugins/bootstrapvalidator-master/dist/js/bootstrapValidator.min.js"></script>
+-
+-<!-- 公共组件 -->
+-<script src="/Public/js/common.js"></script>
+-
+-<script>
+-    var error = '<?php echo ($error); ?>';
+-    if (error){
+-        $(".message").show();
+-    }
+-</script>
+-
+-</body>
+-</html>
+\ No newline at end of file
+Index: Application/Runtime/Cache/Admin/d2a2e44c7df21869a94b19380ddeab13.php
+===================================================================
+--- Application/Runtime/Cache/Admin/d2a2e44c7df21869a94b19380ddeab13.php	(revision 3775aa0e84156341c657a5f7403a3f0d30acb713)
++++ Application/Runtime/Cache/Admin/d2a2e44c7df21869a94b19380ddeab13.php	(revision 3775aa0e84156341c657a5f7403a3f0d30acb713)
+@@ -1,190 +0,0 @@
+-<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+-<html lang="zh-cn">
+-<head>
+-    <meta charset="utf-8">
+-    <meta name="viewport"
+-          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+-    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+-    <meta content="telephone=no" name="format-detection">
+-    <title>登录</title>
+-    <!-- Loading Bootstrap -->
+-    <link href="/Public/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+-
+-    <!-- Loading Flat UI -->
+-
+-    <!-- customer -->
+-    <link href="/Public/css/main.css" rel="stylesheet">
+-
+-    <link rel="shortcut icon" href="img/favicon.ico">
+-
+-</head>
+-<!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+-<script src="/Public/libs/jquery/jquery.1.11.3.min.js"></script>
+-<body>
+-<nav class="navbar navbar-inverse navbar-static-top">
+-    <div class="container-fluid">
+-        <!-- Brand and toggle get grouped for better mobile display -->
+-        <div class="navbar-header">
+-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+-                <span class="sr-only">Toggle navigation</span>
+-                <span class="icon-bar"></span>
+-                <span class="icon-bar"></span>
+-                <span class="icon-bar"></span>
+-            </button>
+-            <a class="navbar-brand" href="#">商家管理平台</a>
+-        </div>
+-
+-        <!-- Collect the nav links, forms, and other content for toggling -->
+-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+-            <ul class="nav navbar-nav">
+-                <li><a href="#">当前订单<span class="sr-only">(current)</span></a></li>
+-                <li><a href="common">历史订单</a></li>
+-                <li id="fat-menu" class="dropdown active">
+-                    <a id="drop3" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+-                        系统设置
+-                        <span class="caret"></span>
+-                    </a>
+-                    <ul class="dropdown-menu" aria-labelledby="drop3">
+-                        <li class="active"><a href="#">Action</a></li>
+-                        <li><a href="#">Another action</a></li>
+-                        <li><a href="#">Something else here</a></li>
+-                        <li role="separator" class="divider"></li>
+-                        <li><a href="#">Separated link</a></li>
+-                    </ul>
+-                </li>
+-                <li><a href="common">common</a></li>
+-            </ul>
+-
+-            <!--<ul class="nav navbar-nav navbar-right">-->
+-                <!--<li class="dropdown">-->
+-                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">系统设置 <span class="caret"></span></a>-->
+-                    <!--<ul class="dropdown-menu">-->
+-                        <!--<li><a href="#">Action</a></li>-->
+-                        <!--<li><a href="#">Another action</a></li>-->
+-                        <!--<li><a href="#">Something else here</a></li>-->
+-                        <!--<li role="separator" class="divider"></li>-->
+-                        <!--<li><a href="#">Separated link</a></li>-->
+-                    <!--</ul>-->
+-                <!--</li>-->
+-            <!--</ul>-->
+-        </div><!-- /.navbar-collapse -->
+-    </div><!-- /.container-fluid -->
+-</nav>
+-<!DOCTYPE html>
+-<html lang="zh-cn">
+-<head>
+-    <meta charset="utf-8">
+-    <meta name="viewport"
+-          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+-    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+-    <meta content="telephone=no" name="format-detection">
+-    <title>登录</title>
+-    <!-- Loading Bootstrap -->
+-    <link href="/Public/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+-
+-
+-    <!-- customer -->
+-    <link href="/Public/css/main.css" rel="stylesheet">
+-
+-    <link rel="shortcut icon" href="img/favicon.ico">
+-    <style>
+-        body {
+-            background-color: #f0f0f0;
+-        }
+-
+-        .form-horizontal .form-group {
+-            margin-left: 0;
+-            margin-right: 0;
+-        }
+-    </style>
+-</head>
+-<body>
+-
+-
+-
+-<div class="registerBox">
+-    <div class="hd">
+-        <h1>有餐</h1>
+-    </div>
+-    <form class="form-horizontal j-validator" method="post">
+-        <div class="form-group">
+-            <input type="text" name="accountName" placeholder="账户名" class="form-control" data-bv-notempty data-bv-notempty-message="帐号名不能为空!">
+-        </div>
+-        <div class="form-group">
+-            <input type="text" name="shopName" placeholder="店铺名" class="form-control" data-bv-notempty data-bv-notempty-message="店铺名不能为空!">
+-        </div>
+-        <div class="form-group">
+-            <input type="text" name="telNum" placeholder="手机号" class="form-control" data-bv-notempty data-bv-notempty-message="手机号不能为空!">
+-        </div>
+-        <div class="form-group">
+-            <input type="password" name="pass1" placeholder="密码" class="form-control" data-bv-notempty data-bv-notempty-message="密码不能为空!" data-bv-identical="true" data-bv-identical-field="pass2" data-bv-identical-message="两次密码不一致!">
+-        </div>
+-        <div class="form-group">
+-            <input type="password" name="pass2" placeholder="重复密码" class="form-control" data-bv-notempty data-bv-notempty-message="密码不能为空!" data-bv-identical="true" data-bv-identical-field="pass1" data-bv-identical-message="两次密码不一致!">
+-        </div>
+-        <button type="submit" class="btn btn-success btn-block">立即注册</button>
+-    </form>
+-</div>
+-
+-
+-<!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+-<script src="/Public/libs/jquery/jquery.1.11.3.min.js"></script>
+-<script src="/Public/libs/bootstrap/js/bootstrap.min.js"></script>
+-
+-<!-- plugins -->
+-<link rel="stylesheet" href="/Public/libs/plugins/bootstrapvalidator-master/dist/css/bootstrapValidator.min.css"/>
+-<script src="/Public/libs/plugins/bootstrapvalidator-master/dist/js/bootstrapValidator.min.js"></script>
+-
+-
+-<!-- 公共组件 -->
+-<script src="/Public/js/common.js"></script>
+-
+-<script>
+-    $(function() {
+-
+-        // 添加验证字段的规则
+-        window.app.form[0].addField('accountName', {
+-            validators: {
+-                notEmpty: {
+-                    message: '账户名不能为空!'
+-                },
+-                stringLength: {
+-                    min: 4,
+-                    max: 12,
+-                    message: '账户名为4~12位'
+-                },
+-                regexp: {
+-                    regexp: /^[a-zA-Z0-9_\.]+$/,
+-                    message: '账户名只能包含字母，数字，下划线'
+-                }
+-//                remote: {
+-//                    url: 'remote.php',
+-//                    message: '账户名已经存在!'
+-//                }
+-            }
+-        });
+-        window.app.form[0].addField('telNum', {
+-            validators: {
+-                regexp: {
+-                    regexp: /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/,
+-                    message: '请输入正确的手机号'
+-                }
+-            }
+-        });
+-
+-    })
+-</script>
+-
+-
+-</body>
+-</html>
+-<div class=""></div>
+-
+-
+-<script src="/Public/libs/bootstrap/js/bootstrap.min.js"></script>
+-
+-
+-<!-- 公共组件 -->
+-<script src="/Public/js/common.js"></script>
+-</body>
+-</html>
+\ No newline at end of file
+Index: Application/Runtime/Logs/Admin/15_09_18.log
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Application/Runtime/Logs/Admin/15_09_18.log	(revision )
++++ Application/Runtime/Logs/Admin/15_09_18.log	(revision )
+@@ -0,0 +1,576 @@
++[ 2015-09-18T08:45:17+08:00 ] 127.0.0.1 /Admin/Index/edit.html
++ERR: 参数错误或者未定义:id
++
++[ 2015-09-18T08:45:26+08:00 ] 127.0.0.1 /Admin/Index/edit.html
++ERR: 参数错误或者未定义:id
++
++[ 2015-09-18T15:11:47+08:00 ] 127.0.0.1 /admin/index/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0000s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0010s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0000s ]
++INFO: [ view_parse ] --START--
++INFO: [ template_filter ] --START--
++INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
++INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
++INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014000s ]
++INFO: [ view_parse ] --END-- [ RunTime:0.014000s ]
++INFO: [ view_filter ] --START--
++INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
++INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
++INFO: [ app_end ] --START--
++INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
++INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
++
++[ 2015-09-18T15:11:51+08:00 ] 127.0.0.1 /admin/index/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.004000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0000s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0010s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0000s ]
++INFO: [ view_parse ] --START--
++INFO: [ template_filter ] --START--
++INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
++INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
++INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.016001s ]
++INFO: [ view_parse ] --END-- [ RunTime:0.017001s ]
++INFO: [ view_filter ] --START--
++INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
++INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
++INFO: [ app_end ] --START--
++INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
++INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
++
++[ 2015-09-18T15:12:05+08:00 ] 127.0.0.1 /admin/index/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0010s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0000s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0010s ]
++INFO: [ view_parse ] --START--
++INFO: [ template_filter ] --START--
++INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
++INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
++INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.015001s ]
++INFO: [ view_parse ] --END-- [ RunTime:0.015001s ]
++INFO: [ view_filter ] --START--
++INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
++INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
++INFO: [ app_end ] --START--
++INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
++INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
++
++[ 2015-09-18T15:12:08+08:00 ] 127.0.0.1 /admin/index/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0010s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0030s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0000s ]
++INFO: [ view_parse ] --START--
++INFO: [ template_filter ] --START--
++INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
++INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
++INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.015001s ]
++INFO: [ view_parse ] --END-- [ RunTime:0.015001s ]
++INFO: [ view_filter ] --START--
++INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
++INFO: [ app_end ] --START--
++INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
++INFO: [ app_end ] --END-- [ RunTime:0.002000s ]
++
++[ 2015-09-18T15:12:09+08:00 ] 127.0.0.1 /admin/index/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0020s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0000s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0000s ]
++INFO: [ view_parse ] --START--
++INFO: [ template_filter ] --START--
++INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
++INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
++INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.015001s ]
++INFO: [ view_parse ] --END-- [ RunTime:0.016001s ]
++INFO: [ view_filter ] --START--
++INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
++INFO: [ app_end ] --START--
++INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
++INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
++
++[ 2015-09-18T15:12:10+08:00 ] 127.0.0.1 /admin/index/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0010s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0020s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0000s ]
++INFO: [ view_parse ] --START--
++INFO: [ template_filter ] --START--
++INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
++INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
++INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.030001s ]
++INFO: [ view_parse ] --END-- [ RunTime:0.030001s ]
++INFO: [ view_filter ] --START--
++INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
++INFO: [ app_end ] --START--
++INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
++INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
++
++[ 2015-09-18T15:13:30+08:00 ] 127.0.0.1 /admin/index/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001001s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001001s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0000s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0030s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0000s ]
++INFO: [ view_parse ] --START--
++INFO: [ template_filter ] --START--
++INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
++INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
++INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.015001s ]
++INFO: [ view_parse ] --END-- [ RunTime:0.016001s ]
++INFO: [ view_filter ] --START--
++INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
++INFO: [ app_end ] --START--
++INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
++INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
++
++[ 2015-09-18T15:17:00+08:00 ] 127.0.0.1 /admin/index/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001001s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001001s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0010s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0010s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0010s ]
++INFO: [ view_parse ] --START--
++INFO: [ template_filter ] --START--
++INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
++INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
++INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.016001s ]
++INFO: [ view_parse ] --END-- [ RunTime:0.017001s ]
++INFO: [ view_filter ] --START--
++INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
++INFO: [ app_end ] --START--
++INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
++INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
++
++[ 2015-09-18T15:17:01+08:00 ] 127.0.0.1 /admin/index/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0020s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0010s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0010s ]
++INFO: [ view_parse ] --START--
++INFO: [ template_filter ] --START--
++INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
++INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
++INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.017001s ]
++INFO: [ view_parse ] --END-- [ RunTime:0.017001s ]
++INFO: [ view_filter ] --START--
++INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
++INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
++INFO: [ app_end ] --START--
++INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
++INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
++
++[ 2015-09-18T15:20:46+08:00 ] 127.0.0.1 /admin/index/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0010s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0000s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0010s ]
++INFO: [ view_parse ] --START--
++INFO: [ template_filter ] --START--
++INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
++INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
++INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.023001s ]
++INFO: [ view_parse ] --END-- [ RunTime:0.023001s ]
++INFO: [ view_filter ] --START--
++INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
++INFO: [ app_end ] --START--
++INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
++INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
++
++[ 2015-09-18T15:21:18+08:00 ] 127.0.0.1 /admin/index/index/admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0010s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0010s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0010s ]
++INFO: [ view_parse ] --START--
++INFO: [ template_filter ] --START--
++INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
++INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
++INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.018001s ]
++INFO: [ view_parse ] --END-- [ RunTime:0.018001s ]
++INFO: [ view_filter ] --START--
++INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
++INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
++INFO: [ app_end ] --START--
++INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
++INFO: [ app_end ] --END-- [ RunTime:0.002000s ]
++
++[ 2015-09-18T15:24:36+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0000s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0010s ]
++SQL: UPDATE `w_platform_shop` SET `status`='0' WHERE `uid` = 19 [ RunTime:0.0770s ]
++
++[ 2015-09-18T15:24:38+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001001s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.002001s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0010s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0000s ]
++SQL: UPDATE `w_platform_shop` SET `status`='0' WHERE `uid` = 19 [ RunTime:0.0660s ]
++
++[ 2015-09-18T15:24:55+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0010s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0010s ]
++SQL: UPDATE `w_platform_shop` SET `status`='0' WHERE `uid` = 19 [ RunTime:0.0590s ]
++
++[ 2015-09-18T15:24:57+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0020s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0000s ]
++SQL: UPDATE `w_platform_shop` SET `status`='0' WHERE `uid` = 23 [ RunTime:0.0270s ]
++
++[ 2015-09-18T15:25:04+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.003000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0020s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0010s ]
++SQL: UPDATE `w_platform_shop` SET `status`='0' WHERE `uid` = 19 [ RunTime:0.0500s ]
++
++[ 2015-09-18T15:25:08+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0000s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0010s ]
++SQL: UPDATE `w_platform_shop` SET `status`='0' WHERE `uid` = 19 [ RunTime:0.0400s ]
++
++[ 2015-09-18T15:25:11+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0000s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0010s ]
++SQL: UPDATE `w_platform_shop` SET `status`='0' WHERE `uid` = 23 [ RunTime:0.0420s ]
++
++[ 2015-09-18T15:25:14+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0020s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0050s ]
++SQL: UPDATE `w_platform_shop` SET `status`='0' WHERE `uid` = 24 [ RunTime:0.0370s ]
++
++[ 2015-09-18T15:25:26+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.003000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0010s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0000s ]
++SQL: UPDATE `w_platform_shop` SET `status`='0' WHERE `uid` = 25 [ RunTime:0.0490s ]
++
++[ 2015-09-18T15:25:32+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0000s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0010s ]
++SQL: UPDATE `w_platform_shop` SET `status`='0' WHERE `uid` = 25 [ RunTime:0.0470s ]
++
++[ 2015-09-18T15:26:30+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001001s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.003001s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0000s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0020s ]
++SQL: UPDATE `w_platform_shop` SET `status`='0' WHERE `uid` = 26 [ RunTime:0.0500s ]
++
++[ 2015-09-18T15:26:32+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0010s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0020s ]
++SQL: UPDATE `w_platform_shop` SET `status`='0' WHERE `uid` = 26 [ RunTime:0.0560s ]
++
++[ 2015-09-18T15:27:18+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0000s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0060s ]
++
++[ 2015-09-18T15:27:30+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0010s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0020s ]
++SQL: UPDATE `w_platform_shop` SET `status`='0' WHERE `uid` = 26 [ RunTime:0.0450s ]
++
++[ 2015-09-18T15:27:40+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0000s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0010s ]
++SQL: UPDATE `w_platform_shop` SET `status`='0' WHERE `uid` = 26 [ RunTime:0.0380s ]
++
++[ 2015-09-18T15:28:13+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0010s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0010s ]
++SQL: UPDATE `w_platform_shop` SET `status`='1' WHERE `uid` = 25 [ RunTime:0.0420s ]
++
++[ 2015-09-18T15:28:16+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0000s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0010s ]
++SQL: UPDATE `w_platform_shop` SET `status`='1' WHERE `uid` = 25 [ RunTime:0.0460s ]
++
++[ 2015-09-18T15:28:20+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0010s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0000s ]
++SQL: UPDATE `w_platform_shop` SET `status`='1' WHERE `uid` = 25 [ RunTime:0.0510s ]
++
++[ 2015-09-18T15:28:23+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.003000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0010s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0010s ]
++SQL: UPDATE `w_platform_shop` SET `status`='1' WHERE `uid` = 25 [ RunTime:0.1440s ]
++
++[ 2015-09-18T15:28:26+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0000s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0000s ]
++SQL: UPDATE `w_platform_shop` SET `status`='1' WHERE `uid` = 24 [ RunTime:0.0420s ]
++
++[ 2015-09-18T15:28:30+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0010s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0010s ]
++SQL: UPDATE `w_platform_shop` SET `status`='1' WHERE `uid` = 25 [ RunTime:0.0600s ]
++
++[ 2015-09-18T15:28:35+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0010s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0020s ]
++SQL: UPDATE `w_platform_shop` SET `status`='1' WHERE `uid` = 23 [ RunTime:0.0370s ]
++
++[ 2015-09-18T15:28:38+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0000s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0010s ]
++SQL: UPDATE `w_platform_shop` SET `status`='1' WHERE `uid` = 24 [ RunTime:0.0570s ]
++
++[ 2015-09-18T15:28:41+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0000s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0020s ]
++SQL: UPDATE `w_platform_shop` SET `status`='1' WHERE `uid` = 24 [ RunTime:0.0300s ]
++
++[ 2015-09-18T15:28:44+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0000s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0010s ]
++SQL: UPDATE `w_platform_shop` SET `status`='1' WHERE `uid` = 24 [ RunTime:0.0370s ]
++
++[ 2015-09-18T15:29:10+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0010s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0000s ]
++
++[ 2015-09-18T15:29:17+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.003000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0000s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0010s ]
++SQL: UPDATE `w_platform_shop` SET `status`='1' WHERE `uid` = 24 [ RunTime:0.0530s ]
++
++[ 2015-09-18T15:29:29+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0010s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0020s ]
++
++[ 2015-09-18T15:30:02+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0010s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0010s ]
++SQL: UPDATE `w_platform_shop` SET `status`='0' WHERE `uid` = 24 [ RunTime:0.0600s ]
++
++[ 2015-09-18T15:30:05+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0000s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0010s ]
++SQL: UPDATE `w_platform_shop` SET `status`='1' WHERE `uid` = 24 [ RunTime:0.0240s ]
++
++[ 2015-09-18T15:30:08+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.003000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0000s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0030s ]
++SQL: UPDATE `w_platform_shop` SET `status`='0' WHERE `uid` = 24 [ RunTime:0.0220s ]
++
++[ 2015-09-18T15:30:11+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001001s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.002001s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0010s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0010s ]
++SQL: UPDATE `w_platform_shop` SET `status`='0' WHERE `uid` = 22 [ RunTime:0.0200s ]
++
++[ 2015-09-18T15:30:15+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0010s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0000s ]
++SQL: UPDATE `w_platform_shop` SET `status`='1' WHERE `uid` = 26 [ RunTime:0.0160s ]
++
++[ 2015-09-18T15:30:20+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0020s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0000s ]
++SQL: UPDATE `w_platform_shop` SET `status`='1' WHERE `uid` = 24 [ RunTime:0.0240s ]
++
++[ 2015-09-18T15:30:23+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.003000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0010s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0010s ]
++SQL: UPDATE `w_platform_shop` SET `status`='1' WHERE `uid` = 19 [ RunTime:0.0190s ]
++
++[ 2015-09-18T15:30:26+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0010s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0010s ]
++SQL: UPDATE `w_platform_shop` SET `status`='1' WHERE `uid` = 22 [ RunTime:0.0250s ]
++
++[ 2015-09-18T15:30:28+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0000s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0010s ]
++SQL: UPDATE `w_platform_shop` SET `status`='0' WHERE `uid` = 25 [ RunTime:0.0220s ]
++
++[ 2015-09-18T15:30:29+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001001s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001001s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0000s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0000s ]
++SQL: UPDATE `w_platform_shop` SET `status`='0' WHERE `uid` = 26 [ RunTime:0.0220s ]
++
+Index: Application/Runtime/Cache/Admin/18bc66a7b6334412ab8e61a2539ecfbd.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Application/Runtime/Cache/Admin/18bc66a7b6334412ab8e61a2539ecfbd.php	(revision 3775aa0e84156341c657a5f7403a3f0d30acb713)
++++ Application/Runtime/Cache/Admin/18bc66a7b6334412ab8e61a2539ecfbd.php	(revision 3775aa0e84156341c657a5f7403a3f0d30acb713)
+@@ -1,106 +0,0 @@
+-<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+-<html lang="zh-cn">
+-<head>
+-    <meta charset="utf-8">
+-    <meta name="viewport"
+-          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+-    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+-    <meta content="telephone=no" name="format-detection">
+-    <title>登录</title>
+-    <!-- Loading Bootstrap -->
+-    <link href="/Public/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+-
+-    <!-- Loading Flat UI -->
+-
+-    <!-- customer -->
+-    <link href="/Public/css/main.css" rel="stylesheet">
+-
+-    <link rel="shortcut icon" href="img/favicon.ico">
+-
+-</head>
+-<body>
+-<nav class="navbar navbar-inverse navbar-static-top">
+-    <div class="container-fluid">
+-        <!-- Brand and toggle get grouped for better mobile display -->
+-        <div class="navbar-header">
+-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+-                <span class="sr-only">Toggle navigation</span>
+-                <span class="icon-bar"></span>
+-                <span class="icon-bar"></span>
+-                <span class="icon-bar"></span>
+-            </button>
+-            <a class="navbar-brand" href="#">商家管理平台</a>
+-        </div>
+-
+-        <!-- Collect the nav links, forms, and other content for toggling -->
+-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+-            <ul class="nav navbar-nav">
+-                <li><a href="/admin/order/order">当前订单<span class="sr-only">(current)</span></a></li>
+-                <li><a href="/admin/order/historyOrder">历史订单</a></li>
+-                <li id="fat-menu" class="dropdown active">
+-                    <a id="drop3" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+-                        系统设置
+-                        <span class="caret"></span>
+-                    </a>
+-                    <ul class="dropdown-menu" aria-labelledby="drop3">
+-                        <li><a href="#">桌号管理</a></li>
+-                        <li><a href="#">菜单管理</a></li>
+-                        <li><a href="#">菜品管理</a></li>
+-                        <li role="separator" class="divider"></li>
+-                        <li><a href="#">流水明细</a></li>
+-                        <li><a href="#">营业数据</a></li>
+-                    </ul>
+-                </li>
+-                <li><a href="/admin/user/component">component</a></li>
+-                <li><a href="/admin/user/common">common</a></li>
+-            </ul>
+-
+-            <!--<ul class="nav navbar-nav navbar-right">-->
+-                <!--<li class="dropdown">-->
+-                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">系统设置 <span class="caret"></span></a>-->
+-                    <!--<ul class="dropdown-menu">-->
+-                        <!--<li><a href="#">Action</a></li>-->
+-                        <!--<li><a href="#">Another action</a></li>-->
+-                        <!--<li><a href="#">Something else here</a></li>-->
+-                        <!--<li role="separator" class="divider"></li>-->
+-                        <!--<li><a href="#">Separated link</a></li>-->
+-                    <!--</ul>-->
+-                <!--</li>-->
+-            <!--</ul>-->
+-        </div><!-- /.navbar-collapse -->
+-    </div><!-- /.container-fluid -->
+-</nav>
+-<!DOCTYPE html>
+-<html>
+-<head lang="en">
+-    <meta charset="UTF-8">
+-    <title></title>
+-</head>
+-<body>
+-
+-</body>
+-</html>
+-<div class=""></div>
+-
+-<script src="/Public/libs/jquery/jquery.1.11.3.min.js"></script>
+-<script src="/Public/libs/bootstrap/js/bootstrap.min.js"></script>
+-
+-<!-- plugins -->
+-<link rel="stylesheet" href="/Public/libs/plugins/bootstrapvalidator-master/dist/css/bootstrapValidator.min.css"/>
+-<script src="/Public/libs/plugins/bootstrapvalidator-master/dist/js/bootstrapValidator.min.js"></script>
+-
+-<link rel="stylesheet" href="/Public/libs/plugins/toastr/toastr.min.css"/>
+-<script src="/Public/libs/plugins/toastr/toastr.min.js"></script>
+-
+-<!-- 公共组件 -->
+-<script src="/Public/js/common.js"></script>
+-
+-<!-- 公共组件测试 -->
+-<script src="/Public/js/test.js"></script>
+-
+-
+-
+-<!--  -->
+-<script src="/Public/js/app.js"></script>
+-</body>
+-</html>
+\ No newline at end of file
+Index: Application/Runtime/Cache/Admin/042cb6004cd4ecd54f88445c47d28ece.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Application/Runtime/Cache/Admin/042cb6004cd4ecd54f88445c47d28ece.php	(revision 3775aa0e84156341c657a5f7403a3f0d30acb713)
++++ Application/Runtime/Cache/Admin/042cb6004cd4ecd54f88445c47d28ece.php	(revision 3775aa0e84156341c657a5f7403a3f0d30acb713)
+@@ -1,175 +0,0 @@
+-<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+-<html lang="zh-cn">
+-<head>
+-    <meta charset="utf-8">
+-    <meta name="viewport"
+-          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+-    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+-    <meta content="telephone=no" name="format-detection">
+-    <title>登录</title>
+-    <!-- Loading Bootstrap -->
+-    <link href="/Public/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+-
+-    <!-- Loading Flat UI -->
+-
+-    <!-- customer -->
+-    <link href="/Public/css/main.css" rel="stylesheet">
+-
+-    <link rel="shortcut icon" href="img/favicon.ico">
+-
+-</head>
+-<body>
+-<nav class="navbar navbar-inverse navbar-static-top">
+-    <div class="container-fluid">
+-        <!-- Brand and toggle get grouped for better mobile display -->
+-        <div class="navbar-header">
+-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+-                <span class="sr-only">Toggle navigation</span>
+-                <span class="icon-bar"></span>
+-                <span class="icon-bar"></span>
+-                <span class="icon-bar"></span>
+-            </button>
+-            <a class="navbar-brand" href="#">商家管理平台</a>
+-        </div>
+-
+-        <!-- Collect the nav links, forms, and other content for toggling -->
+-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+-            <ul class="nav navbar-nav">
+-                <li><a href="#">当前订单<span class="sr-only">(current)</span></a></li>
+-                <li><a href="common">历史订单</a></li>
+-                <li id="fat-menu" class="dropdown active">
+-                    <a id="drop3" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+-                        系统设置
+-                        <span class="caret"></span>
+-                    </a>
+-                    <ul class="dropdown-menu" aria-labelledby="drop3">
+-                        <li class="active"><a href="#">Action</a></li>
+-                        <li><a href="#">Another action</a></li>
+-                        <li><a href="#">Something else here</a></li>
+-                        <li role="separator" class="divider"></li>
+-                        <li><a href="#">Separated link</a></li>
+-                    </ul>
+-                </li>
+-                <li><a href="component">component</a></li>
+-                <li><a href="common">common</a></li>
+-            </ul>
+-
+-            <!--<ul class="nav navbar-nav navbar-right">-->
+-                <!--<li class="dropdown">-->
+-                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">系统设置 <span class="caret"></span></a>-->
+-                    <!--<ul class="dropdown-menu">-->
+-                        <!--<li><a href="#">Action</a></li>-->
+-                        <!--<li><a href="#">Another action</a></li>-->
+-                        <!--<li><a href="#">Something else here</a></li>-->
+-                        <!--<li role="separator" class="divider"></li>-->
+-                        <!--<li><a href="#">Separated link</a></li>-->
+-                    <!--</ul>-->
+-                <!--</li>-->
+-            <!--</ul>-->
+-        </div><!-- /.navbar-collapse -->
+-    </div><!-- /.container-fluid -->
+-</nav>
+-<div class="container-fluid">
+-    <div class="row">
+-        <div class="col-md-3">
+-            <h2>popover</h2>
+-            <a tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">可消失的弹出框</a>
+-        </div>
+-        <div class="col-md-3">
+-            <h2>modal</h2>
+-            <!-- Button trigger modal -->
+-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+-                Launch demo modal
+-            </button>
+-
+-            <!-- Modal -->
+-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+-                <div class="modal-dialog" role="document">
+-                    <div class="modal-content">
+-                        <div class="modal-header">
+-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+-                            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+-                        </div>
+-                        <div class="modal-body">
+-                            ...
+-                        </div>
+-                        <div class="modal-footer">
+-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+-                            <button type="button" class="btn btn-primary">Save changes</button>
+-                        </div>
+-                    </div>
+-                </div>
+-            </div>
+-        </div>
+-        <div class="col-md-3">
+-            <h2>tooltips</h2>
+-            <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Tooltip on left</button>
+-
+-            <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Tooltip on top</button>
+-
+-            <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</button>
+-
+-            <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Tooltip on right">Tooltip on right</button>
+-        </div>
+-        <div class="col-md-3">
+-            <h2>alert</h2>
+-            <div class="alert alert-warning alert-dismissible fade in" role="alert">
+-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+-                <strong>Holy guacamole!</strong> Best check yo self, you're not looking too good.
+-            </div>
+-        </div>
+-    </div>
+-    <div class="row">
+-        <div class="col-md-3">
+-            <h2>Collapse</h2>
+-            <div class="panel-group" role="tablist">
+-                <div class="panel panel-default">
+-                    <div class="panel-heading" role="tab" id="collapseListGroupHeading1">
+-                        <h4 class="panel-title">
+-                            <a class="collapsed" role="button" data-toggle="collapse" href="#collapseListGroup1" aria-expanded="false" aria-controls="collapseListGroup1">
+-                                Collapsible list group
+-                            </a>
+-                        </h4>
+-                    </div>
+-                    <div id="collapseListGroup1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseListGroupHeading1" aria-expanded="false" style="height: 0px;">
+-                        <ul class="list-group">
+-                            <li class="list-group-item">Bootply</li>
+-                            <li class="list-group-item">One itmus ac facilin</li>
+-                            <li class="list-group-item">Second eros</li>
+-                        </ul>
+-                        <div class="panel-footer">Footer</div>
+-                    </div>
+-                </div>
+-            </div>
+-        </div>
+-
+-
+-        <div class="col-md-3">
+-
+-
+-        </div>
+-
+-        <div class="col-md-3">
+-
+-        </div>
+-
+-
+-        <div class="col-md-3">
+-
+-        </div>
+-    </div>
+-</div>
+-<div class=""></div>
+-
+-<script src="/Public/libs/jquery/jquery.1.11.3.min.js"></script>
+-<script src="/Public/libs/bootstrap/js/bootstrap.min.js"></script>
+-
+-<!-- plugins -->
+-<link rel="stylesheet" href="/Public/libs/plugins/bootstrapvalidator-master/dist/css/bootstrapValidator.min.css"/>
+-<script src="/Public/libs/plugins/bootstrapvalidator-master/dist/js/bootstrapValidator.min.js"></script>
+-
+-
+-<!-- 公共组件 -->
+-<script src="/Public/js/common.js"></script>
+-</body>
+-</html>
+\ No newline at end of file
+Index: Application/Runtime/Cache/Admin/b8c0556e904e1d0641126f3ef183ecde.php
+===================================================================
+--- Application/Runtime/Cache/Admin/b8c0556e904e1d0641126f3ef183ecde.php	(revision 3775aa0e84156341c657a5f7403a3f0d30acb713)
++++ Application/Runtime/Cache/Admin/b8c0556e904e1d0641126f3ef183ecde.php	(revision 3775aa0e84156341c657a5f7403a3f0d30acb713)
+@@ -1,108 +0,0 @@
+-<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+-<html lang="zh-cn">
+-<head>
+-    <meta charset="utf-8">
+-    <meta name="viewport"
+-          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+-    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+-    <meta content="telephone=no" name="format-detection">
+-    <title>登录</title>
+-    <!-- Loading Bootstrap -->
+-    <link href="/Public/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+-
+-
+-    <!-- customer -->
+-    <link href="/Public/css/main.css" rel="stylesheet">
+-
+-    <link rel="shortcut icon" href="img/favicon.ico">
+-    <style>
+-        body {
+-            background-color: #f0f0f0;
+-        }
+-
+-        .form-horizontal .form-group {
+-            margin-left: 0;
+-            margin-right: 0;
+-        }
+-    </style>
+-</head>
+-<body>
+-
+-
+-
+-<div class="registerBox">
+-    <div class="hd">
+-        <h1>有餐</h1>
+-    </div>
+-    <form class="form-horizontal j-validator" action="add" method="post">
+-        <div class="form-group">
+-            <input type="text" name="name" value="<?php echo ($data['name']); ?>" placeholder="账户名" class="form-control" data-bv-notempty data-bv-notempty-message="帐号名不能为空!">
+-        </div>
+-        <div class="form-group">
+-            <input type="text" name="shopName" value="<?php echo ($data['shopName']); ?>" placeholder="店铺名" class="form-control" data-bv-notempty data-bv-notempty-message="店铺名不能为空!">
+-        </div>
+-        <div class="form-group">
+-            <input type="text" name="tel" value="<?php echo ($data['tel']); ?>" placeholder="手机号" class="form-control" data-bv-notempty data-bv-notempty-message="手机号不能为空!">
+-        </div>
+-        <div class="form-group">
+-            <input type="password" name="password" value="<?php echo ($data['password']); ?>" placeholder="密码" class="form-control" data-bv-notempty data-bv-notempty-message="密码不能为空!" data-bv-identical="true" data-bv-identical-field="rePassword" data-bv-identical-message="两次密码不一致!">
+-        </div>
+-        <div class="form-group">
+-            <input type="password" name="rePassword" value="<?php echo ($data['rePassword']); ?>" placeholder="重复密码" class="form-control" data-bv-notempty data-bv-notempty-message="密码不能为空!" data-bv-identical="true" data-bv-identical-field="password" data-bv-identical-message="两次密码不一致!">
+-        </div>
+-        <button type="submit" class="btn btn-success btn-block">立即注册</button>
+-    </form>
+-</div>
+-
+-
+-<!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+-<script src="/Public/libs/jquery/jquery.1.11.3.min.js"></script>
+-<script src="/Public/libs/bootstrap/js/bootstrap.min.js"></script>
+-
+-<!-- plugins -->
+-<link rel="stylesheet" href="/Public/libs/plugins/bootstrapvalidator-master/dist/css/bootstrapValidator.min.css"/>
+-<script src="/Public/libs/plugins/bootstrapvalidator-master/dist/js/bootstrapValidator.min.js"></script>
+-
+-
+-<!-- 公共组件 -->
+-<script src="/Public/js/common.js"></script>
+-
+-<script>
+-    $(function() {
+-
+-        // 添加验证字段的规则
+-        window.app.form[0].addField('accountName', {
+-            validators: {
+-                notEmpty: {
+-                    message: '账户名不能为空!'
+-                },
+-                stringLength: {
+-                    min: 4,
+-                    max: 12,
+-                    message: '账户名为4~12位'
+-                },
+-                regexp: {
+-                    regexp: /^[a-zA-Z0-9_\.]+$/,
+-                    message: '账户名只能包含字母，数字，下划线'
+-                }
+-//                remote: {
+-//                    url: 'remote.php',
+-//                    message: '账户名已经存在!'
+-//                }
+-            }
+-        });
+-        window.app.form[0].addField('telNum', {
+-            validators: {
+-                regexp: {
+-                    regexp: /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/,
+-                    message: '请输入正确的手机号'
+-                }
+-            }
+-        });
+-
+-    })
+-</script>
+-
+-
+-</body>
+-</html>
+\ No newline at end of file
+Index: Application/Runtime/Cache/Admin/7fad4b3d4b9516ddef800abe1c09ead5.php
+===================================================================
+--- Application/Runtime/Cache/Admin/7fad4b3d4b9516ddef800abe1c09ead5.php	(revision 3775aa0e84156341c657a5f7403a3f0d30acb713)
++++ Application/Runtime/Cache/Admin/7fad4b3d4b9516ddef800abe1c09ead5.php	(revision 3775aa0e84156341c657a5f7403a3f0d30acb713)
+@@ -1,45 +0,0 @@
+-<?php if (!defined('THINK_PATH')) exit(); if(C('LAYOUT_ON')) { echo ''; } ?>
+-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-<html xmlns="http://www.w3.org/1999/xhtml">
+-<head>
+-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+-<title>跳转提示</title>
+-<style type="text/css">
+-*{ padding: 0; margin: 0; }
+-body{ background: #fff; font-family: '微软雅黑'; color: #333; font-size: 16px; }
+-.system-message{ padding: 24px 48px; }
+-.system-message h1{ font-size: 100px; font-weight: normal; line-height: 120px; margin-bottom: 12px; }
+-.system-message .jump{ padding-top: 10px}
+-.system-message .jump a{ color: #333;}
+-.system-message .success,.system-message .error{ line-height: 1.8em; font-size: 36px }
+-.system-message .detail{ font-size: 12px; line-height: 20px; margin-top: 12px; display:none}
+-</style>
+-</head>
+-<body>
+-<div class="system-message">
+-<?php if(isset($message)) {?>
+-<h1>:)</h1>
+-<p class="success"><?php echo($message); ?></p>
+-<?php }else{?>
+-<h1>:(</h1>
+-<p class="error"><?php echo($error); ?></p>
+-<?php }?>
+-<p class="detail"></p>
+-<p class="jump">
+-页面自动 <a id="href" href="<?php echo($jumpUrl); ?>">跳转</a> 等待时间： <b id="wait"><?php echo($waitSecond); ?></b>
+-</p>
+-</div>
+-<script type="text/javascript">
+-(function(){
+-var wait = document.getElementById('wait'),href = document.getElementById('href').href;
+-var interval = setInterval(function(){
+-	var time = --wait.innerHTML;
+-	if(time <= 0) {
+-		location.href = href;
+-		clearInterval(interval);
+-	};
+-}, 1000);
+-})();
+-</script>
+-</body>
+-</html>
+\ No newline at end of file
+Index: Application/Runtime/Cache/Admin/a64e937f36419d4a7777cf289b4f6414.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Application/Runtime/Cache/Admin/a64e937f36419d4a7777cf289b4f6414.php	(revision 3775aa0e84156341c657a5f7403a3f0d30acb713)
++++ Application/Runtime/Cache/Admin/a64e937f36419d4a7777cf289b4f6414.php	(revision 3775aa0e84156341c657a5f7403a3f0d30acb713)
+@@ -1,344 +0,0 @@
+-<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+-<html lang="zh-cn">
+-<head>
+-    <meta charset="utf-8">
+-    <meta name="viewport"
+-          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+-    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+-    <meta content="telephone=no" name="format-detection">
+-    <title>登录</title>
+-    <!-- Loading Bootstrap -->
+-    <link href="/Public/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+-
+-    <!-- Loading Flat UI -->
+-
+-    <!-- customer -->
+-    <link href="/Public/css/main.css" rel="stylesheet">
+-
+-    <link rel="shortcut icon" href="img/favicon.ico">
+-
+-</head>
+-<body>
+-<nav class="navbar navbar-inverse navbar-static-top">
+-    <div class="container-fluid">
+-        <!-- Brand and toggle get grouped for better mobile display -->
+-        <div class="navbar-header">
+-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+-                <span class="sr-only">Toggle navigation</span>
+-                <span class="icon-bar"></span>
+-                <span class="icon-bar"></span>
+-                <span class="icon-bar"></span>
+-            </button>
+-            <a class="navbar-brand" href="#">商家管理平台</a>
+-        </div>
+-
+-        <!-- Collect the nav links, forms, and other content for toggling -->
+-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+-            <ul class="nav navbar-nav">
+-                <li><a href="/admin/order/order">当前订单<span class="sr-only">(current)</span></a></li>
+-                <li><a href="/admin/order/historyOrder">历史订单</a></li>
+-                <li id="fat-menu" class="dropdown active">
+-                    <a id="drop3" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+-                        系统设置
+-                        <span class="caret"></span>
+-                    </a>
+-                    <ul class="dropdown-menu" aria-labelledby="drop3">
+-                        <li><a href="#">桌号管理</a></li>
+-                        <li><a href="#">菜单管理</a></li>
+-                        <li><a href="#">菜品管理</a></li>
+-                        <li role="separator" class="divider"></li>
+-                        <li><a href="#">流水明细</a></li>
+-                        <li><a href="#">营业数据</a></li>
+-                    </ul>
+-                </li>
+-                <li><a href="/admin/user/component">component</a></li>
+-                <li><a href="/admin/user/common">common</a></li>
+-            </ul>
+-
+-            <!--<ul class="nav navbar-nav navbar-right">-->
+-                <!--<li class="dropdown">-->
+-                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">系统设置 <span class="caret"></span></a>-->
+-                    <!--<ul class="dropdown-menu">-->
+-                        <!--<li><a href="#">Action</a></li>-->
+-                        <!--<li><a href="#">Another action</a></li>-->
+-                        <!--<li><a href="#">Something else here</a></li>-->
+-                        <!--<li role="separator" class="divider"></li>-->
+-                        <!--<li><a href="#">Separated link</a></li>-->
+-                    <!--</ul>-->
+-                <!--</li>-->
+-            <!--</ul>-->
+-        </div><!-- /.navbar-collapse -->
+-    </div><!-- /.container-fluid -->
+-</nav>
+-<div class="orderList">
+-<div class="container-fluid">
+-
+-<div class="orderListHd">
+-    <div class="row">
+-        <div class="col-md-3">
+-            <div class="input-group">
+-                <input type="text" class="form-control" placeholder="输入订单号查询">
+-              <span class="input-group-btn">
+-                <button class="btn btn-default" type="button">查询</button>
+-              </span>
+-            </div>
+-        </div>
+-    </div>
+-</div>
+-<table class="table table-hover ">
+-<thead>
+-<tr>
+-    <th>单号</th>
+-    <th>桌号</th>
+-    <th>消费金额</th>
+-    <th>下单时间</th>
+-    <th>操作</th>
+-</tr>
+-</thead>
+-<tbody>
+-<tr>
+-    <td>001</td>
+-    <td>A01</td>
+-    <td>20.00</td>
+-    <td>1分钟前</td>
+-    <td>
+-        <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample2"
+-                aria-expanded="false" aria-controls="collapseExample">
+-            详细 <span class="caret"></span></button>
+-        <button class="btn btn-success j-confirmBtn" data-id="1">确认订单</button>
+-    </td>
+-</tr>
+-<tr class="collapse" id="collapseExample2" style="background-color: transparent">
+-    <td colspan="5">
+-        <div class="orderDetail">
+-            <div class="well">
+-                <table class="table table-condensed">
+-                    <thead>
+-                    <tr>
+-                        <th>菜品</th>
+-                        <th>单价</th>
+-                        <th>数量</th>
+-                        <th>小计</th>
+-                        <th>备注</th>
+-                    </tr>
+-                    </thead>
+-                    <tbody>
+-                    <tr>
+-                        <td>双球冰激凌菜品名字最多显示14</td>
+-                        <td>32.00</td>
+-                        <td>x2</td>
+-                        <td>64.00</td>
+-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
+-                    </tr>
+-                    <tr>
+-                        <td>双球冰激凌菜品名字最多显示14</td>
+-                        <td>32.00</td>
+-                        <td>x2</td>
+-                        <td>64.00</td>
+-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
+-                    </tr>
+-                    <tr>
+-                        <td>双球冰激凌菜品名字最多显示14</td>
+-                        <td>32.00</td>
+-                        <td>x2</td>
+-                        <td>64.00</td>
+-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
+-                    </tr>
+-                    </tbody>
+-                </table>
+-            </div>
+-        </div>
+-    </td>
+-</tr>
+-<tr>
+-    <td>001</td>
+-    <td>A01</td>
+-    <td>20.00</td>
+-    <td>1分钟前</td>
+-    <td>
+-        <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample3"
+-                aria-expanded="false" aria-controls="collapseExample">
+-            详细 <span class="caret"></span></button>
+-        <button class="btn btn-success j-confirmBtn" data-id="2">确认订单</button>
+-    </td>
+-</tr>
+-<tr class="collapse" id="collapseExample3" style="background-color: transparent">
+-    <td colspan="5">
+-        <div class="orderDetail">
+-            <div class="well">
+-                <table class="table table-condensed">
+-                    <thead>
+-                    <tr>
+-                        <th>菜品</th>
+-                        <th>单价</th>
+-                        <th>数量</th>
+-                        <th>小计</th>
+-                        <th>备注</th>
+-                    </tr>
+-                    </thead>
+-                    <tbody>
+-                    <tr>
+-                        <td>双球冰激凌菜品名字最多显示14</td>
+-                        <td>32.00</td>
+-                        <td>x2</td>
+-                        <td>64.00</td>
+-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
+-                    </tr>
+-                    <tr>
+-                        <td>双球冰激凌菜品名字最多显示14</td>
+-                        <td>32.00</td>
+-                        <td>x2</td>
+-                        <td>64.00</td>
+-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
+-                    </tr>
+-                    <tr>
+-                        <td>双球冰激凌菜品名字最多显示14</td>
+-                        <td>32.00</td>
+-                        <td>x2</td>
+-                        <td>64.00</td>
+-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
+-                    </tr>
+-                    </tbody>
+-                </table>
+-            </div>
+-        </div>
+-    </td>
+-</tr>
+-<tr>
+-    <td>001</td>
+-    <td>A01</td>
+-    <td>20.00</td>
+-    <td>1分钟前</td>
+-    <td>
+-        <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample4"
+-                aria-expanded="false" aria-controls="collapseExample">
+-            详细 <span class="caret"></span></button>
+-        <button class="btn btn-success j-confirmBtn" data-id="3">确认订单</button>
+-    </td>
+-</tr>
+-<tr class="collapse" id="collapseExample4" style="background-color: transparent">
+-    <td colspan="5">
+-        <div class="orderDetail">
+-            <div class="well">
+-                <table class="table table-condensed">
+-                    <thead>
+-                    <tr>
+-                        <th>菜品</th>
+-                        <th>单价</th>
+-                        <th>数量</th>
+-                        <th>小计</th>
+-                        <th>备注</th>
+-                    </tr>
+-                    </thead>
+-                    <tbody>
+-                    <tr>
+-                        <td>双球冰激凌菜品名字最多显示14</td>
+-                        <td>32.00</td>
+-                        <td>x2</td>
+-                        <td>64.00</td>
+-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
+-                    </tr>
+-                    <tr>
+-                        <td>双球冰激凌菜品名字最多显示14</td>
+-                        <td>32.00</td>
+-                        <td>x2</td>
+-                        <td>64.00</td>
+-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
+-                    </tr>
+-                    <tr>
+-                        <td>双球冰激凌菜品名字最多显示14</td>
+-                        <td>32.00</td>
+-                        <td>x2</td>
+-                        <td>64.00</td>
+-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
+-                    </tr>
+-                    </tbody>
+-                </table>
+-            </div>
+-        </div>
+-    </td>
+-</tr>
+-<tr>
+-    <td>001</td>
+-    <td>A01</td>
+-    <td>20.00</td>
+-    <td>1分钟前</td>
+-    <td>
+-        <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample5"
+-                aria-expanded="false" aria-controls="collapseExample">
+-            详细 <span class="caret"></span></button>
+-        <button class="btn btn-success j-confirmBtn" data-id="4">确认订单</button>
+-    </td>
+-</tr>
+-<tr class="collapse" id="collapseExample5" style="background-color: transparent">
+-    <td colspan="5">
+-        <div class="orderDetail">
+-            <div class="well">
+-                <table class="table table-condensed">
+-                    <thead>
+-                    <tr>
+-                        <th>菜品</th>
+-                        <th>单价</th>
+-                        <th>数量</th>
+-                        <th>小计</th>
+-                        <th>备注</th>
+-                    </tr>
+-                    </thead>
+-                    <tbody>
+-                    <tr>
+-                        <td>双球冰激凌菜品名字最多显示14</td>
+-                        <td>32.00</td>
+-                        <td>x2</td>
+-                        <td>64.00</td>
+-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
+-                    </tr>
+-                    <tr>
+-                        <td>双球冰激凌菜品名字最多显示14</td>
+-                        <td>32.00</td>
+-                        <td>x2</td>
+-                        <td>64.00</td>
+-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
+-                    </tr>
+-                    <tr>
+-                        <td>双球冰激凌菜品名字最多显示14</td>
+-                        <td>32.00</td>
+-                        <td>x2</td>
+-                        <td>64.00</td>
+-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
+-                    </tr>
+-                    </tbody>
+-                </table>
+-            </div>
+-        </div>
+-    </td>
+-</tr>
+-
+-</tbody>
+-</table>
+-
+-</div>
+-</div>
+-<div class=""></div>
+-
+-<script src="/Public/libs/jquery/jquery.1.11.3.min.js"></script>
+-<script src="/Public/libs/bootstrap/js/bootstrap.min.js"></script>
+-
+-<!-- plugins -->
+-<link rel="stylesheet" href="/Public/libs/plugins/bootstrapvalidator-master/dist/css/bootstrapValidator.min.css"/>
+-<script src="/Public/libs/plugins/bootstrapvalidator-master/dist/js/bootstrapValidator.min.js"></script>
+-
+-<link rel="stylesheet" href="/Public/libs/plugins/toastr/toastr.min.css"/>
+-<script src="/Public/libs/plugins/toastr/toastr.min.js"></script>
+-
+-<!-- 公共组件 -->
+-<script src="/Public/js/common.js"></script>
+-
+-<!-- 公共组件测试 -->
+-<script src="/Public/js/test.js"></script>
+-
+-
+-
+-<!--  -->
+-<script src="/Public/js/app.js"></script>
+-</body>
+-</html>
+\ No newline at end of file
+Index: Application/Runtime/Data/_fields/ad_dc.w_platformshop.php
+===================================================================
+--- Application/Runtime/Data/_fields/ad_dc.w_platformshop.php	(revision 3775aa0e84156341c657a5f7403a3f0d30acb713)
++++ Application/Runtime/Data/_fields/ad_dc.w_platformshop.php	(revision 3775aa0e84156341c657a5f7403a3f0d30acb713)
+@@ -1,1 +0,0 @@
+-a:9:{i:0;s:2:"id";i:1;s:4:"name";i:2;s:4:"logo";i:3;s:6:"status";i:4;s:11:"platform_id";i:5;s:3:"uid";i:6;s:10:"created_at";s:3:"_pk";s:2:"id";s:5:"_type";a:7:{s:2:"id";s:7:"int(11)";s:4:"name";s:11:"varchar(20)";s:4:"logo";s:11:"varchar(40)";s:6:"status";s:7:"int(11)";s:11:"platform_id";s:7:"int(11)";s:3:"uid";s:7:"int(11)";s:10:"created_at";s:7:"int(11)";}}
+\ No newline at end of file
+Index: Application/Runtime/Logs/Admin/15_09_21.log
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Application/Runtime/Logs/Admin/15_09_21.log	(revision )
++++ Application/Runtime/Logs/Admin/15_09_21.log	(revision )
+@@ -0,0 +1,88 @@
++[ 2015-09-21T08:50:39+08:00 ] 127.0.0.1 /admin/index/setShopStatus
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.003000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0010s ]
++SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0000s ]
++SQL: UPDATE `w_platform_shop` SET `status`='1' WHERE `uid` = 25 [ RunTime:0.0240s ]
++
++[ 2015-09-21T13:24:47+08:00 ] 127.0.0.1 /Admin/Settings/saveTable.html
++ERR: 非法操作:saveTable
++
++[ 2015-09-21T15:01:18+08:00 ] 127.0.0.1 /Admin/Settings/goodsType.html
++ERR: 非法操作:goodsType
++
++[ 2015-09-21T15:01:33+08:00 ] 127.0.0.1 /Admin/Settings/goodsType.html
++ERR: 模板不存在:./Application/Admin/View/Settings/goodsType.html
++
++[ 2015-09-21T15:01:52+08:00 ] 127.0.0.1 /Admin/Settings/goodsType.html
++ERR: 模板不存在:./Application/Admin/View/Settings/goodsType.html
++
++[ 2015-09-21T15:07:03+08:00 ] 127.0.0.1 /Admin/Settings/saveGoodsType.html
++ERR: 模板不存在:./Application/Admin/View/Settings/saveGoodsType.html
++
++[ 2015-09-21T15:11:46+08:00 ] 127.0.0.1 /Admin/Order/edit.html
++ERR: 非法操作:edit
++
++[ 2015-09-21T15:12:01+08:00 ] 127.0.0.1 /Admin/Order/goodsType.html
++ERR: 非法操作:goodsType
++
++[ 2015-09-21T15:32:11+08:00 ] 127.0.0.1 /admin/setting/del
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++ERR: 无法加载控制器:Setting
++
++[ 2015-09-21T15:32:31+08:00 ] 127.0.0.1 /admin/settings/del
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 26 LIMIT 1   [ RunTime:0.0010s ]
++ERR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ad_dc.w_' doesn't exist
++
++[ 2015-09-21T15:34:23+08:00 ] 127.0.0.1 /admin/settings/del
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 26 LIMIT 1   [ RunTime:0.0010s ]
++ERR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ad_dc.w_' doesn't exist
++
++[ 2015-09-21T15:34:39+08:00 ] 127.0.0.1 /admin/settings/del
++ERR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ad_dc.w_' doesn't exist
++
++[ 2015-09-21T15:35:34+08:00 ] 127.0.0.1 /admin/settings/del
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001001s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001001s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 26 LIMIT 1   [ RunTime:0.0000s ]
++ERR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ad_dc.w_' doesn't exist
++
++[ 2015-09-21T15:35:50+08:00 ] 127.0.0.1 /admin/settings/del
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 26 LIMIT 1   [ RunTime:0.0010s ]
++ERR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ad_dc.w_' doesn't exist
++
++[ 2015-09-21T15:36:10+08:00 ] 127.0.0.1 /admin/settings/del
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 26 LIMIT 1   [ RunTime:0.0000s ]
++ERR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ad_dc.w_' doesn't exist
++
++[ 2015-09-21T15:36:53+08:00 ] 127.0.0.1 /admin/settings/del
++INFO: [ app_begin ] --START--
++INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
++INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
++NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
++SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 26 LIMIT 1   [ RunTime:0.0010s ]
++SQL: DELETE FROM `w_goods_type` WHERE `id` = 2 [ RunTime:0.0390s ]
++
+Index: Application/Runtime/Cache/Admin/70f5db0867225034d1effc0e068f6c95.php
+===================================================================
+--- Application/Runtime/Cache/Admin/70f5db0867225034d1effc0e068f6c95.php	(revision 3775aa0e84156341c657a5f7403a3f0d30acb713)
++++ Application/Runtime/Cache/Admin/70f5db0867225034d1effc0e068f6c95.php	(revision 3775aa0e84156341c657a5f7403a3f0d30acb713)
+@@ -1,143 +0,0 @@
+-<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+-<html lang="zh-cn">
+-<head>
+-    <meta charset="utf-8">
+-    <meta name="viewport"
+-          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+-    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+-    <meta content="telephone=no" name="format-detection">
+-    <title>登录</title>
+-    <!-- Loading Bootstrap -->
+-    <link href="/Public/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+-
+-    <!-- Loading Flat UI -->
+-
+-    <!-- customer -->
+-    <link href="/Public/css/main.css" rel="stylesheet">
+-
+-    <link rel="shortcut icon" href="img/favicon.ico">
+-
+-</head>
+-<!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+-<script src="/Public/libs/jquery/jquery.1.11.3.min.js"></script>
+-<body>
+-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+-<html>
+-<head>
+-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+-    <title>WEB打印小票样例</title>
+-    <!-- 控件跨浏览器调用类库-->
+-    <script language="javascript" src="/Public/Lodop6.198/LodopFuncs.js"></script>
+-    <!-- 调用LODOP控件代码-->
+-    <object id="LODOP_OB" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0>
+-        <embed id="LODOP_EM" type="application/x-print-lodop" width=0 height=0 pluginspage="install_lodop.exe"></embed>
+-    </object>
+-</head>
+-<body>
+-<input type="button" value="打印预览" onclick="printPreview()" />
+-<!-- 控制打印按钮,自动打印可以直接执行printOrder-->
+-<input type="button" value="直接打印" onclick="printOrder()" />
+-<script language="javascript" type="text/javascript">
+-    var LODOP; //声明为全局变量
+-    var hPos=10,//小票上边距
+-            pageWidth=580,//小票宽度
+-            rowHeight=15,//小票行距
+-    //获取控件对象
+-            LODOP=getLodop(document.getElementById('LODOP_OB'),document.getElementById('LODOP_EM'));
+-    function printPreview(){
+-        //创建小票打印页
+-        CreatePrintPage();
+-        //打印预览
+-        LODOP.PREVIEW();
+-    }
+-    /**
+-     * 样例函数,服务器确认订单后执行
+-     */
+-    function printOrder() {
+-
+-        //创建小票打印页
+-        CreatePrintPage();
+-        //开始打印
+-        LODOP.PRINT();
+-
+-    };
+-    function CreatePrintPage(json) {
+-        //json 创建模拟服务器响应的订单信息对象
+-        var json = {"title":"XXXXX订单信息", "name":"张三", "phone": "138123456789", "orderTime": "2012-10-11 15:30:15",
+-            "orderNo": "20122157481315", "shop":"XX连锁", "total":25.10,"totalCount":6,
+-            "goodsList":[
+-                {"name":"菜心(无公害食品)", "price":5.00, "count":2, "total":10.08},
+-                {"name":"菜心(无公害食品)", "price":5.00, "count":2, "total":10.02},
+-                {"name":"旺菜", "price":4.50, "count":1, "total":4.50},
+-                {"name":"黄心番薯(有机食品)", "price":4.50, "count":1, "total":4.50}
+-            ]
+-        }
+-
+-        //初始化
+-        LODOP.PRINT_INIT("打印控件功能演示_Lodop功能_名片");
+-        //添加小票标题文本
+-        LODOP.ADD_PRINT_TEXT(hPos,30,pageWidth,rowHeight,json.title);
+-        //上边距往下移
+-        hPos+=rowHeight;
+-
+-        LODOP.ADD_PRINT_TEXT(hPos,1,pageWidth,rowHeight,"姓名:");
+-        LODOP.ADD_PRINT_TEXT(hPos,30,pageWidth,rowHeight,json.name);
+-        //hPos+=rowHeight; //电话不换行
+-        LODOP.ADD_PRINT_TEXT(hPos,70,pageWidth,rowHeight,"电话:");
+-        LODOP.ADD_PRINT_TEXT(hPos,100,pageWidth,rowHeight,json.phone);
+-        hPos+=rowHeight;
+-        LODOP.ADD_PRINT_TEXT(hPos,1,pageWidth,rowHeight,"下单时间:");
+-        LODOP.ADD_PRINT_TEXT(hPos,60,pageWidth,rowHeight,json.orderTime);
+-        hPos+=rowHeight;
+-        LODOP.ADD_PRINT_TEXT(hPos,1,pageWidth,rowHeight,"订单编号:");
+-        LODOP.ADD_PRINT_TEXT(hPos,60,pageWidth,rowHeight,json.orderNo);
+-        hPos+=rowHeight;
+-        LODOP.ADD_PRINT_TEXT(hPos,1,pageWidth,rowHeight,"取货门店:");
+-        LODOP.ADD_PRINT_TEXT(hPos,60,pageWidth,rowHeight,json.shop);
+-        hPos+=rowHeight;
+-        LODOP.ADD_PRINT_LINE(hPos,2, hPos, pageWidth,2, 1);
+-        hPos+=5;
+-        LODOP.ADD_PRINT_TEXT(hPos,1,pageWidth,rowHeight,"商品名称");
+-        LODOP.ADD_PRINT_TEXT(hPos,70,pageWidth,rowHeight,"单价");
+-        LODOP.ADD_PRINT_TEXT(hPos,110,pageWidth,rowHeight,"数量");
+-        LODOP.ADD_PRINT_TEXT(hPos,140,pageWidth,rowHeight,"小计");
+-        hPos+=rowHeight;
+-        //遍历json的商品数组
+-        for(var i=0;i<json.goodsList.length;i++){
+-
+-            if(json.goodsList[i].name.length<4){
+-                LODOP.ADD_PRINT_TEXT(hPos,1,pageWidth,rowHeight,json.goodsList[i].name);
+-            }else {
+-                //商品名字过长,其他字段需要换行
+-                LODOP.ADD_PRINT_TEXT(hPos,1,pageWidth,rowHeight,json.goodsList[i].name);
+-                hPos+=rowHeight;
+-            }
+-            LODOP.ADD_PRINT_TEXT(hPos,70,pageWidth,rowHeight,json.goodsList[i].price);
+-            LODOP.ADD_PRINT_TEXT(hPos,115,pageWidth,rowHeight,json.goodsList[i].count);
+-            LODOP.ADD_PRINT_TEXT(hPos,140,pageWidth,rowHeight,json.goodsList[i].total);
+-            hPos+=rowHeight;
+-        }
+-        //商品遍历打印完毕,空一行
+-        hPos+=rowHeight;
+-        //合计
+-        LODOP.ADD_PRINT_TEXT(hPos,80,pageWidth,rowHeight,"合计:"+json.totalCount);
+-        LODOP.ADD_PRINT_TEXT(hPos,130,pageWidth,rowHeight,"￥"+json.total);
+-
+-        hPos+=rowHeight;
+-        LODOP.ADD_PRINT_TEXT(hPos,2,pageWidth,rowHeight,(new Date()).toLocaleDateString()+" "+(new Date()).toLocaleTimeString())
+-        hPos+=rowHeight;
+-        LODOP.ADD_PRINT_TEXT(hPos,25,pageWidth,rowHeight,"谢谢惠顾,欢迎下次光临!");
+-        //初始化打印页的规格
+-        LODOP.SET_PRINT_PAGESIZE(3,pageWidth,45,"XXXXX订单信息");
+-
+-    };
+-</script>
+-</body>
+-</html>
+-
+-
+-
+-<!-- 公共组件 -->
+-<script src="/Public/js/common.js"></script>
+-</body>
+-</html>
+\ No newline at end of file
+Index: Application/Runtime/Cache/Admin/b39761fdd01eadcd4b8a82f371520558.php
+===================================================================
+--- Application/Runtime/Cache/Admin/b39761fdd01eadcd4b8a82f371520558.php	(revision 3775aa0e84156341c657a5f7403a3f0d30acb713)
++++ Application/Runtime/Cache/Admin/b39761fdd01eadcd4b8a82f371520558.php	(revision 3775aa0e84156341c657a5f7403a3f0d30acb713)
+@@ -1,1 +0,0 @@
+-<?php if (!defined('THINK_PATH')) exit();?><style type="text/css">*{ padding: 0; margin: 0; } div{ padding: 4px 48px;} body{ background: #fff; font-family: "微软雅黑"; color: #333;font-size:24px} h1{ font-size: 100px; font-weight: normal; margin-bottom: 12px; } p{ line-height: 1.8em; font-size: 36px } a,a:hover,{color:blue;}</style><div style="padding: 24px 48px;"> <h1>:)</h1><p>欢迎使用 <b>ThinkPHP</b>！</p><br/>版本 V<?php echo (THINK_VERSION); ?></div><script type="text/javascript" src="http://ad.topthink.com/Public/static/client.js"></script><thinkad id="ad_55e75dfae343f5a1"></thinkad><script type="text/javascript" src="http://tajs.qq.com/stats?sId=9347272" charset="UTF-8"></script>
+\ No newline at end of file
+Index: Application/Runtime/Data/_fields/ad_dc.w_user.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Application/Runtime/Data/_fields/ad_dc.w_user.php	(revision 3775aa0e84156341c657a5f7403a3f0d30acb713)
++++ Application/Runtime/Data/_fields/ad_dc.w_user.php	(revision 3775aa0e84156341c657a5f7403a3f0d30acb713)
+@@ -1,1 +0,0 @@
+-a:7:{i:0;s:2:"id";i:1;s:4:"name";i:2;s:8:"password";i:3;s:3:"tel";i:4;s:10:"created_at";s:3:"_pk";s:2:"id";s:5:"_type";a:5:{s:2:"id";s:7:"int(11)";s:4:"name";s:11:"varchar(16)";s:8:"password";s:11:"varchar(32)";s:3:"tel";s:11:"varchar(16)";s:10:"created_at";s:7:"int(11)";}}
+\ No newline at end of file
+Index: Application/Runtime/Cache/Admin/b595b808c2ebeeeb0478ffc30bb4e87a.php
+===================================================================
+--- Application/Runtime/Cache/Admin/b595b808c2ebeeeb0478ffc30bb4e87a.php	(revision 3775aa0e84156341c657a5f7403a3f0d30acb713)
++++ Application/Runtime/Cache/Admin/b595b808c2ebeeeb0478ffc30bb4e87a.php	(revision 3775aa0e84156341c657a5f7403a3f0d30acb713)
+@@ -1,18 +0,0 @@
+-<?php if (!defined('THINK_PATH')) exit();?><a href="/admin/index/add">添加</a>
+-<table>
+-    <tr>
+-        <th></th>
+-        <th></th>
+-        <th></th>
+-        <th></th>
+-        <th></th>
+-        <th></th>
+-    </tr>
+-    <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
+-            <td><?php echo ($vo["id"]); ?></td>
+-            <td><?php echo ($vo["name"]); ?></td>
+-            <td><?php echo ($vo["shopName"]); ?></td>
+-            <td><?php echo ($vo["status"]); ?></td>
+-            <td><a href="/admin/index/edit?id=<?php echo ($vo["id"]); ?>">编辑</a></td>
+-        </tr><?php endforeach; endif; else: echo "" ;endif; ?>
+-</table>
+\ No newline at end of file

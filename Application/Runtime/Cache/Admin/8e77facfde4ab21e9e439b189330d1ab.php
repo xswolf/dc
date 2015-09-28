@@ -6,7 +6,7 @@
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta content="black" name="apple-mobile-web-app-status-bar-style">
     <meta content="telephone=no" name="format-detection">
-    <title>登录</title>
+    <title>商家管理平台</title>
     <!-- Loading Bootstrap -->
     <link href="/Public/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -43,14 +43,16 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="drop3">
-                        <li><a href="#">桌号管理</a></li>
-                        <li><a href="#">菜单管理</a></li>
-                        <li><a href="#">菜品管理</a></li>
+                        <li><a href="/admin/settings/table">桌号管理</a></li>
+                        <li><a href="<?php echo U('settings/goodsType');?>">菜单管理</a></li>
+                        <li><a href="<?php echo U('settings/goods');?>">菜品管理</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">流水明细</a></li>
+                        <li><a href="<?php echo U('Order/historyOrder');?>">流水明细</a></li>
                         <li><a href="#">营业数据</a></li>
                     </ul>
                 </li>
+                <li><a href="<?php echo U('cash/index');?>">提现申请</a></li>
+                <li><a href="<?php echo U('cash/cashList');?>">提现流水</a></li>
                 <li><a href="/admin/user/component">component</a></li>
                 <li><a href="/admin/user/common">common</a></li>
             </ul>
@@ -72,248 +74,261 @@
 </nav>
 <div class="orderList">
 <div class="container-fluid">
-    <div class="orderListHd">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="输入订单号查询">
-                  <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">查询</button>
-                  </span>
-                </div>
+    <div class="wpBox">
+        <div class="hd">
+            <div class="row">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="exampleInputName2">订单号：</label>
+                        <input type="text" class="form-control" id="exampleInputName2" placeholder="输入订单号查询">
+                    </div>
+                    <div class="input-group date j-date col-md-1">
+                        <input class="form-control" size="16" type="text" value="" readonly>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                    -<div class="input-group date j-date col-md-1">
+                        <input class="form-control" size="16" type="text" value="" readonly>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                    <button class="btn btn-primary" type="button">查询</button>
+
+                </form>
             </div>
+
+        </div>
+        <div class="bd">
+            <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th>单号</th>
+            <th>桌号</th>
+            <th>消费金额</th>
+            <th>下单时间</th>
+            <th class="col-md-3">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>001</td>
+            <td>A01</td>
+            <td>20.00</td>
+            <td>1分钟前</td>
+            <td>
+                <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample2"
+                        aria-expanded="false" aria-controls="collapseExample">
+                    详细 <span class="caret"></span></button>
+            </td>
+        </tr>
+        <tr class="collapse" id="collapseExample2" style="background-color: transparent">
+            <td colspan="5">
+                <div class="orderDetail">
+                    <div class="well">
+                        <table class="table table-condensed">
+                            <thead>
+                            <tr>
+                                <th>菜品</th>
+                                <th>单价</th>
+                                <th>数量</th>
+                                <th>小计</th>
+                                <th>备注</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>双球冰激凌菜品名字最多显示14</td>
+                                <td>32.00</td>
+                                <td>x2</td>
+                                <td>64.00</td>
+                                <td>菜品备注信息最多只能显示20个字省略省略省</td>
+                            </tr>
+                            <tr>
+                                <td>双球冰激凌菜品名字最多显示14</td>
+                                <td>32.00</td>
+                                <td>x2</td>
+                                <td>64.00</td>
+                                <td>菜品备注信息最多只能显示20个字省略省略省</td>
+                            </tr>
+                            <tr>
+                                <td>双球冰激凌菜品名字最多显示14</td>
+                                <td>32.00</td>
+                                <td>x2</td>
+                                <td>64.00</td>
+                                <td>菜品备注信息最多只能显示20个字省略省略省</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>001</td>
+            <td>A01</td>
+            <td>20.00</td>
+            <td>1分钟前</td>
+            <td>
+                <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample3"
+                        aria-expanded="false" aria-controls="collapseExample">
+                    详细 <span class="caret"></span></button>
+
+            </td>
+        </tr>
+        <tr class="collapse" id="collapseExample3" style="background-color: transparent">
+            <td colspan="5">
+                <div class="orderDetail">
+                    <div class="well">
+                        <table class="table table-condensed">
+                            <thead>
+                            <tr>
+                                <th>菜品</th>
+                                <th>单价</th>
+                                <th>数量</th>
+                                <th>小计</th>
+                                <th>备注</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>双球冰激凌菜品名字最多显示14</td>
+                                <td>32.00</td>
+                                <td>x2</td>
+                                <td>64.00</td>
+                                <td>菜品备注信息最多只能显示20个字省略省略省</td>
+                            </tr>
+                            <tr>
+                                <td>双球冰激凌菜品名字最多显示14</td>
+                                <td>32.00</td>
+                                <td>x2</td>
+                                <td>64.00</td>
+                                <td>菜品备注信息最多只能显示20个字省略省略省</td>
+                            </tr>
+                            <tr>
+                                <td>双球冰激凌菜品名字最多显示14</td>
+                                <td>32.00</td>
+                                <td>x2</td>
+                                <td>64.00</td>
+                                <td>菜品备注信息最多只能显示20个字省略省略省</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>001</td>
+            <td>A01</td>
+            <td>20.00</td>
+            <td>1分钟前</td>
+            <td>
+                <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample4"
+                        aria-expanded="false" aria-controls="collapseExample">
+                    详细 <span class="caret"></span></button>
+
+            </td>
+        </tr>
+        <tr class="collapse" id="collapseExample4" style="background-color: transparent">
+            <td colspan="5">
+                <div class="orderDetail">
+                    <div class="well">
+                        <table class="table table-condensed">
+                            <thead>
+                            <tr>
+                                <th>菜品</th>
+                                <th>单价</th>
+                                <th>数量</th>
+                                <th>小计</th>
+                                <th>备注</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>双球冰激凌菜品名字最多显示14</td>
+                                <td>32.00</td>
+                                <td>x2</td>
+                                <td>64.00</td>
+                                <td>菜品备注信息最多只能显示20个字省略省略省</td>
+                            </tr>
+                            <tr>
+                                <td>双球冰激凌菜品名字最多显示14</td>
+                                <td>32.00</td>
+                                <td>x2</td>
+                                <td>64.00</td>
+                                <td>菜品备注信息最多只能显示20个字省略省略省</td>
+                            </tr>
+                            <tr>
+                                <td>双球冰激凌菜品名字最多显示14</td>
+                                <td>32.00</td>
+                                <td>x2</td>
+                                <td>64.00</td>
+                                <td>菜品备注信息最多只能显示20个字省略省略省</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>001</td>
+            <td>A01</td>
+            <td>20.00</td>
+            <td>1分钟前</td>
+            <td>
+                <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample5"
+                        aria-expanded="false" aria-controls="collapseExample">
+                    详细 <span class="caret"></span></button>
+
+            </td>
+        </tr>
+        <tr class="collapse" id="collapseExample5" style="background-color: transparent">
+            <td colspan="5">
+                <div class="orderDetail">
+                    <div class="well">
+                        <table class="table table-condensed">
+                            <thead>
+                            <tr>
+                                <th>菜品</th>
+                                <th>单价</th>
+                                <th>数量</th>
+                                <th>小计</th>
+                                <th>备注</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>双球冰激凌菜品名字最多显示14</td>
+                                <td>32.00</td>
+                                <td>x2</td>
+                                <td>64.00</td>
+                                <td>菜品备注信息最多只能显示20个字省略省略省</td>
+                            </tr>
+                            <tr>
+                                <td>双球冰激凌菜品名字最多显示14</td>
+                                <td>32.00</td>
+                                <td>x2</td>
+                                <td>64.00</td>
+                                <td>菜品备注信息最多只能显示20个字省略省略省</td>
+                            </tr>
+                            <tr>
+                                <td>双球冰激凌菜品名字最多显示14</td>
+                                <td>32.00</td>
+                                <td>x2</td>
+                                <td>64.00</td>
+                                <td>菜品备注信息最多只能显示20个字省略省略省</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </td>
+        </tr>
+
+        </tbody>
+        </table>
         </div>
     </div>
 
-<table class="table table-hover ">
-<thead>
-<tr>
-    <th>单号</th>
-    <th>桌号</th>
-    <th>消费金额</th>
-    <th>下单时间</th>
-    <th>操作</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-    <td>001</td>
-    <td>A01</td>
-    <td>20.00</td>
-    <td>1分钟前</td>
-    <td>
-        <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample2"
-                aria-expanded="false" aria-controls="collapseExample">
-            详细 <span class="caret"></span></button>
-    </td>
-</tr>
-<tr class="collapse" id="collapseExample2" style="background-color: transparent">
-    <td colspan="5">
-        <div class="orderDetail">
-            <div class="well">
-                <table class="table table-condensed">
-                    <thead>
-                    <tr>
-                        <th>菜品</th>
-                        <th>单价</th>
-                        <th>数量</th>
-                        <th>小计</th>
-                        <th>备注</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>双球冰激凌菜品名字最多显示14</td>
-                        <td>32.00</td>
-                        <td>x2</td>
-                        <td>64.00</td>
-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
-                    </tr>
-                    <tr>
-                        <td>双球冰激凌菜品名字最多显示14</td>
-                        <td>32.00</td>
-                        <td>x2</td>
-                        <td>64.00</td>
-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
-                    </tr>
-                    <tr>
-                        <td>双球冰激凌菜品名字最多显示14</td>
-                        <td>32.00</td>
-                        <td>x2</td>
-                        <td>64.00</td>
-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>001</td>
-    <td>A01</td>
-    <td>20.00</td>
-    <td>1分钟前</td>
-    <td>
-        <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample3"
-                aria-expanded="false" aria-controls="collapseExample">
-            详细 <span class="caret"></span></button>
-
-    </td>
-</tr>
-<tr class="collapse" id="collapseExample3" style="background-color: transparent">
-    <td colspan="5">
-        <div class="orderDetail">
-            <div class="well">
-                <table class="table table-condensed">
-                    <thead>
-                    <tr>
-                        <th>菜品</th>
-                        <th>单价</th>
-                        <th>数量</th>
-                        <th>小计</th>
-                        <th>备注</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>双球冰激凌菜品名字最多显示14</td>
-                        <td>32.00</td>
-                        <td>x2</td>
-                        <td>64.00</td>
-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
-                    </tr>
-                    <tr>
-                        <td>双球冰激凌菜品名字最多显示14</td>
-                        <td>32.00</td>
-                        <td>x2</td>
-                        <td>64.00</td>
-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
-                    </tr>
-                    <tr>
-                        <td>双球冰激凌菜品名字最多显示14</td>
-                        <td>32.00</td>
-                        <td>x2</td>
-                        <td>64.00</td>
-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>001</td>
-    <td>A01</td>
-    <td>20.00</td>
-    <td>1分钟前</td>
-    <td>
-        <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample4"
-                aria-expanded="false" aria-controls="collapseExample">
-            详细 <span class="caret"></span></button>
-
-    </td>
-</tr>
-<tr class="collapse" id="collapseExample4" style="background-color: transparent">
-    <td colspan="5">
-        <div class="orderDetail">
-            <div class="well">
-                <table class="table table-condensed">
-                    <thead>
-                    <tr>
-                        <th>菜品</th>
-                        <th>单价</th>
-                        <th>数量</th>
-                        <th>小计</th>
-                        <th>备注</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>双球冰激凌菜品名字最多显示14</td>
-                        <td>32.00</td>
-                        <td>x2</td>
-                        <td>64.00</td>
-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
-                    </tr>
-                    <tr>
-                        <td>双球冰激凌菜品名字最多显示14</td>
-                        <td>32.00</td>
-                        <td>x2</td>
-                        <td>64.00</td>
-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
-                    </tr>
-                    <tr>
-                        <td>双球冰激凌菜品名字最多显示14</td>
-                        <td>32.00</td>
-                        <td>x2</td>
-                        <td>64.00</td>
-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>001</td>
-    <td>A01</td>
-    <td>20.00</td>
-    <td>1分钟前</td>
-    <td>
-        <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample5"
-                aria-expanded="false" aria-controls="collapseExample">
-            详细 <span class="caret"></span></button>
-
-    </td>
-</tr>
-<tr class="collapse" id="collapseExample5" style="background-color: transparent">
-    <td colspan="5">
-        <div class="orderDetail">
-            <div class="well">
-                <table class="table table-condensed">
-                    <thead>
-                    <tr>
-                        <th>菜品</th>
-                        <th>单价</th>
-                        <th>数量</th>
-                        <th>小计</th>
-                        <th>备注</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>双球冰激凌菜品名字最多显示14</td>
-                        <td>32.00</td>
-                        <td>x2</td>
-                        <td>64.00</td>
-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
-                    </tr>
-                    <tr>
-                        <td>双球冰激凌菜品名字最多显示14</td>
-                        <td>32.00</td>
-                        <td>x2</td>
-                        <td>64.00</td>
-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
-                    </tr>
-                    <tr>
-                        <td>双球冰激凌菜品名字最多显示14</td>
-                        <td>32.00</td>
-                        <td>x2</td>
-                        <td>64.00</td>
-                        <td>菜品备注信息最多只能显示20个字省略省略省</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </td>
-</tr>
-
-</tbody>
-</table>
 
 </div>
 </div>
@@ -329,6 +344,17 @@
 <link rel="stylesheet" href="/Public/libs/plugins/toastr/toastr.min.css"/>
 <script src="/Public/libs/plugins/toastr/toastr.min.js"></script>
 
+
+<link rel="stylesheet" href="/Public/libs/plugins/datatables/css/dataTables.bootstrap.css"/>
+<script src="/Public/libs/plugins/datatables/js/jquery.dataTables.min.js"></script>
+<script src="/Public/libs/plugins/datatables/js/dataTables.bootstrap.js"></script>
+
+
+<link rel="stylesheet" href="/Public/libs/plugins/bootstrap-datatimepicker/css/bootstrap-datetimepicker.min.css"/>
+<script src="/Public/libs/plugins/bootstrap-datatimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script charset="UTF-8" src="/Public/libs/plugins/bootstrap-datatimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+
 <!-- 公共组件 -->
 <script src="/Public/js/common.js"></script>
 
@@ -339,5 +365,7 @@
 
 <!--  -->
 <script src="/Public/js/app.js"></script>
+
+<script src="/Public/js/dataTables.js"></script>
 </body>
 </html>

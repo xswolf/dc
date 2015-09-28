@@ -1,5 +1,6 @@
 <?php
 namespace Admin\Controller;
+use Admin\Model\CashModel;
 use Admin\Model\PlatformShopModel;
 use Common\Controller\VerifyController;
 use Common\Model\UserModel;
@@ -62,4 +63,19 @@ class IndexController extends VerifyController {
         $this->ajaxSuccess('设置成功');
     }
 
+    // 申请提现列表
+    public function cashList(){
+        $list = CashModel::instance()->cashList();
+
+        $this->assign('list' , $list);
+        $this->display();
+    }
+
+    // 申请提现列表
+    public function cashList1(){
+        $list = CashModel::instance()->cashList('' , 1);
+
+        $this->assign('list' , $list);
+        $this->display();
+    }
 }

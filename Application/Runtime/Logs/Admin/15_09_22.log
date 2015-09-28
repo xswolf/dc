@@ -1,0 +1,45 @@
+[ 2015-09-22T08:39:59+08:00 ] 127.0.0.1 /Admin/Settings/saveGoods.html
+ERR: 非法操作:saveGoods
+
+[ 2015-09-22T09:19:10+08:00 ] 127.0.0.1 /Admin/Settings/admin/upload/up
+ERR: 非法操作:admin
+
+[ 2015-09-22T09:19:41+08:00 ] 127.0.0.1 /Admin/Settings/admin/upload/up
+ERR: 非法操作:admin
+
+[ 2015-09-22T09:20:48+08:00 ] 127.0.0.1 /Admin/Settings/admin/upload/up
+ERR: 非法操作:admin
+
+[ 2015-09-22T09:22:21+08:00 ] 127.0.0.1 /Admin/Settings/admin/upload/up
+ERR: 非法操作:admin
+
+[ 2015-09-22T09:23:54+08:00 ] 127.0.0.1 /Admin/Settings/admin/upload/up
+ERR: 非法操作:admin
+
+[ 2015-09-22T09:25:21+08:00 ] 127.0.0.1 /Admin/Settings/admin/upload/up
+ERR: 非法操作:admin
+
+[ 2015-09-22T13:31:59+08:00 ] 127.0.0.1 /admin/settings/del
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
+SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 26 LIMIT 1   [ RunTime:0.0000s ]
+SQL: DELETE FROM `w_goods_type` WHERE `id` = 2 [ RunTime:0.0624s ]
+
+[ 2015-09-22T13:32:21+08:00 ] 127.0.0.1 /admin/settings/del
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
+SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 26 LIMIT 1   [ RunTime:0.0010s ]
+SQL: DELETE FROM `w_goods` WHERE `id` = 2 [ RunTime:0.0570s ]
+
+[ 2015-09-22T13:32:40+08:00 ] 127.0.0.1 /admin/settings/del
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
+SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 26 LIMIT 1   [ RunTime:0.0000s ]
+SQL: DELETE FROM `w_goods` WHERE `id` = 1 [ RunTime:0.0780s ]
+

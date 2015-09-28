@@ -72,16 +72,45 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+<div class="container-fluid">
+    <h2>菜品分类管理</h2>
+    <div class="wpBox">
+        <div class="bd">
+            <table class="table table-hover table-bordered j-dataTables">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>时间</th>
+                    <th>金额</th>
+                    <th>状态</th>
+                </tr>
+                </thead>
+                <tbody>
 
-</body>
-</html>
+                <?php $sumMoney = '0'; ?>
+                <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
+                        <td><?php echo ($vo["id"]); ?></td>
+                        <td><?php echo (date('Y-m-d' , $vo["created_at"])); ?></td>
+                        <td>
+                           <?php echo ($vo["cash_money"]); ?>
+                        </td>
+                        <td>
+                            <?php if(($vo["status"]) == "0"): ?>申请中
+                                <?php else: ?>
+                                已提现<?php endif; ?>
+                        </td>
+                        <?php $sumMoney+=$vo['cash_money'] ?>
+                    </tr><?php endforeach; endif; else: echo "" ;endif; ?>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4">总计:<?php echo ($sumMoney); ?></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
 <div class=""></div>
 
 <script src="/Public/libs/jquery/jquery.1.11.3.min.js"></script>

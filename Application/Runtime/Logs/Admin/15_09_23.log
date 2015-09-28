@@ -1,0 +1,24 @@
+[ 2015-09-23T09:27:16+08:00 ] 127.0.0.1 /admin/settings/del
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
+SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 26 LIMIT 1   [ RunTime:0.0010s ]
+SQL: DELETE FROM `w_goods` WHERE `id` = 5 [ RunTime:0.0400s ]
+
+[ 2015-09-23T09:28:43+08:00 ] 127.0.0.1 /admin/settings/del
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
+SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 26 LIMIT 1   [ RunTime:0.0000s ]
+SQL: DELETE FROM `w_goods` WHERE `id` = 7 [ RunTime:0.1190s ]
+
+[ 2015-09-23T09:29:18+08:00 ] 127.0.0.1 /admin/settings/del
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
+SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 26 LIMIT 1   [ RunTime:0.0000s ]
+SQL: DELETE FROM `w_goods` WHERE `id` = 8 [ RunTime:0.0290s ]
+

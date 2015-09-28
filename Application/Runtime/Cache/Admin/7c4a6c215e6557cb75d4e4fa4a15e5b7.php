@@ -72,16 +72,41 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+<div class="container-fluid">
+    <h2>菜品管理</h2>
 
-</body>
-</html>
+    <div class="wpBox">
+        <div class="hd">
+            <div class="text-right"><a class="btn btn-primary" href="<?php echo U('saveGoods');?>">添加菜品</a></div>
+        </div>
+        <div class="bd">
+            <table class="table table-hover table-bordered j-dataTables">
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>名称</th>
+                        <th>所属分类</th>
+                        <th class="col-md-3">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
+                        <td><?php echo ($vo["id"]); ?></td>
+                        <td><?php echo ($vo["name"]); ?></td>
+                        <td>
+                            <?php if(is_array($typeList)): $i = 0; $__LIST__ = $typeList;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$sub): $mod = ($i % 2 );++$i; if(($sub["id"]) == $vo["goods_type_id"]): echo ($sub["name"]); endif; endforeach; endif; else: echo "" ;endif; ?>
+                        </td>
+                        <td>
+                            <a class="btn btn-info" href="<?php echo U('saveGoods');?>?id=<?php echo ($vo["id"]); ?>">编辑</a>
+                            <a class="btn btn-danger  j-delTable" data-table="goods" data-id="<?php echo ($vo["id"]); ?>" href="javascript:;">删除</a>
+                        </td>
+                    </tr><?php endforeach; endif; else: echo "" ;endif; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 <div class=""></div>
 
 <script src="/Public/libs/jquery/jquery.1.11.3.min.js"></script>

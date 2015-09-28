@@ -72,16 +72,89 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+<div class="container">
+    <div class="wpBox">
+        <div class="bd">
 
-</body>
-</html>
+
+            <form class="form-horizontal" action="<?php echo U('cash/cash');?>" method="post">
+                <fieldset>
+                    <input type="hidden" name="id" value="<?php echo ($data['id']); ?>">
+                    <!-- Form Name -->
+                    <legend>申请提现</legend>
+
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="">可提现金额</label>
+                        <div class="col-md-4">
+                            <div class="center-block"><?php echo ($sumMoney); ?></div>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"></label>
+                        <div class="col-md-4">
+                            <?php if(($sumMoney) == "0"): else: ?>
+                                <button class="btn btn-success " type="submit">申请提现</button><?php endif; ?>
+
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+
+        </div>
+
+        <div class="hd">
+            <div class="text-right">
+                <div class="page-header">
+                    <h1><small></small></h1>
+                </div>
+                <div class="page-header">
+                    <h1><small>销售明细</small></h1>
+                </div>
+            </div>
+        </div>
+        <div class="bd">
+            <table class="table table-hover table-bordered j-dataTables">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>时间</th>
+                    <th>金额</th>
+                    <th>状态</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <?php $sumMoney = '0'; ?>
+                <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
+                        <td><?php echo ($vo["id"]); ?></td>
+                        <td><?php echo ($vo["create_date"]); ?></td>
+                        <td>
+                           <?php echo ($vo["cash_money"]); ?>
+                        </td>
+                        <td>
+                            <?php if(($vo["status"]) == "0"): ?>未提现
+                                <?php else: ?>
+                                已提现<?php endif; ?>
+                        </td>
+                        <?php $sumMoney+=$vo['cash_money'] ?>
+                    </tr><?php endforeach; endif; else: echo "" ;endif; ?>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4">总计:<?php echo ($sumMoney); ?></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
 <div class=""></div>
 
 <script src="/Public/libs/jquery/jquery.1.11.3.min.js"></script>
