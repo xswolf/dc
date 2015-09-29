@@ -78,4 +78,16 @@ class IndexController extends VerifyController {
         $this->assign('list' , $list);
         $this->display();
     }
+
+    public function cashConfirm($id){
+        $data = [
+            'id'=>$id,
+            'status'=>1
+        ];
+        if (CashModel::instance()->edit($data , '' , 'cash_log')){
+            $this->_success('操作成功' , U('cashList'));
+        }else{
+            $this->error('操作失败');
+        }
+    }
 }
