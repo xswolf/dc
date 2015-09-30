@@ -47,4 +47,14 @@ class OrderModel extends BaseModel {
         return $data;
     }
 
+    /**
+     * 确认订单
+     * @param int $shop_id
+     * @param int $order_id
+     * @return bool
+     */
+    public function sureOrder($shop_id, $order_id) {
+        return $this->edit(['status' => 2],['shop_id' => $shop_id, 'id' => $order_id]);
+    }
+
 }

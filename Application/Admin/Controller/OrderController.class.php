@@ -44,6 +44,20 @@ class OrderController extends VerifyController {
         flush();
     }
 
+    /**
+     * 确认订单
+     */
+    public function sureOrder() {
+        $id = intval(I('post.id'));
+        if(!empty($id) && is_numeric($id)) {
+            $flag = OrderModel::instance()->sureOrder($this->user->getShopId(),$id);
+            if($flag) {
+                $this->ajaxSuccess([]);
+            }
+        }
+        $this->ajaxError([]);
+    }
+
     private function time_tran($the_time) {
         $t = time()-$the_time;
         $f = [

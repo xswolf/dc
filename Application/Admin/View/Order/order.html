@@ -34,7 +34,7 @@
                                 <button class="btn btn-info" type="button" aria-expanded="false" aria-controls="collapseExample" ng-click="subOrderShow(d.id)">
                                     详细 <span class="caret"></span>
                                 </button>
-                                <button class="btn btn-success j-confirmBtn">确认订单</button>
+                                <button class="btn btn-success j-confirmBtn" ng-click="sureOrder(d.id)">确认订单</button>
                             </td>
                         </tr>
                         <tr style="background-color:transparent;" ng-show="data.showId == d.id">
@@ -75,7 +75,8 @@
 <js href="/Public/verdor/layer.m/layer.m.js" />
 <script type="text/javascript">
     if(typeof(EventSource) !== 'undefined') {
-        angular.module('app',[]).controller('order.controller',['$scope', function($scope) {
+        var index;
+        angular.module('app',[]).controller('order.controller',['$scope', '$http', function($scope, $http) {
             $scope.data = {
                 list: [],
                 showId: 0,
@@ -91,7 +92,7 @@
                     param = '';
                 }
 
-                layer.open({
+                index = layer.open({
                     type: 2,
                     content: ''
                 });
@@ -103,8 +104,8 @@
             $scope.addData = function(event) {
                 $scope.$apply(function() {
                     $scope.data.list = JSON.parse(event.data);
-                    layer.closeAll();
                 });
+                layer.close(index);
             };
 
             $scope.loadOder();
@@ -127,6 +128,38 @@
                 }
                 $scope.source.removeEventListener("message", $scope.addData, false);
                 $scope.loadOder('?sn='+$scope.data.orderSn.trim());
+            };
+
+            /**
+             * 确认订单
+             */
+            $scope.sureOrder = function(id) {
+                var sureIndex = layer.open({
+                    content: '是否需要确认当前订单吗？',
+                    btn: ['确认', '取消'],
+                    shadeClose: false,
+                    yes: function(){
+                        layer.close(sureIndex);
+                        layer.open({
+                            type: 2,
+                            content: ''
+                        });
+                        $http.post("{:U('Order/SureOrder','',false)}",{'id':id}).then(function(res) {
+                            if(res.data.status) {
+
+                            }
+                        },function(err) {
+                            layer.open({
+                                content: err,
+                                style: 'background-color:#e9e2da; color:green; border:none;'
+                            });
+                        }).finally(function(){
+                            layer.closeAll();
+                        });
+                    }, no: function(){
+                        layer.closeAll();
+                    }
+                });
             };
 
             $scope.$watch('data.orderSn',function() {
