@@ -26,20 +26,35 @@ class OrderController extends VerifyController {
      * 商家管理平台 -> 当前订单
      */
     public function order() {
-        $data = OrderModel::instance()->orderList($this->shop_id);
+        /*$data = OrderModel::instance()->orderList($this->shop_id);
         if(is_array($data)) {
             foreach($data as &$list) {
                 $list['orderTime'] = $this->time_tran($list['created_at']);
                 $list['orderGoodsList'] = OrderModel::instance()->orderGoodsList($list['id']);
             }
         }
-        $this->assign('data',$data);
+        $this->assign('data',$data);*/
         $this->display();
     }
 
-    private function time_tran($the_time){
-        $t=time()-$the_time;
-        $f=[
+    public function getOrder() {
+        header('Content-Type: text/event-stream');
+        header('Cache-Control: no-cache');
+        $request = I('get.sn');
+        $data = OrderModel::instance()->orderList($this->user->getShopId());
+        if(is_array($data)) {
+            foreach($data as &$list) {
+                $list['orderTime'] = $this->time_tran($list['created_at']);
+                $list['orderGoodsList'] = OrderModel::instance()->orderGoodsList($list['id']);
+            }
+        }
+        echo "data: ".json_encode($data)."\n\n";
+        flush();
+    }
+
+    private function time_tran($the_time) {
+        $t = time()-$the_time;
+        $f = [
             '31536000'=>'年',
             '2592000'=>'个月',
             '604800'=>'星期',
@@ -48,7 +63,7 @@ class OrderController extends VerifyController {
             '60'=>'分钟',
             '1'=>'秒'
         ];
-        foreach ($f as $k=>$v)    {
+        foreach ($f as $k=>$v) {
             if (0 !=$c=floor($t/(int)$k)) {
                 return $c.$v.'前';
             }

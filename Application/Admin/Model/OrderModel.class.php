@@ -4,27 +4,27 @@ use Common\Model\BaseModel;
 
 class OrderModel extends BaseModel {
     /**
-     * @var string ¶©µ¥±í
+     * @var string è®¢å•è¡¨
      */
     protected $_table = 'order';
 
     /**
-     * @var string ¶©µ¥ÉÌÆ·±í
+     * @var string è®¢å•é£Ÿç‰©è¡¨
      */
     protected $_table_order_goods = 'order_goods';
 
     /**
-     * ¶©µ¥ÁĞ±í
+     * è®¢å•åˆ—è¡¨
      * @param int $shop_id
      * @return array
      */
     public function orderList($shop_id) {
         $M = M($this->_table);
-        return $M->where(['shop_id' => $shop_id])->select();
+        return $M->where(['shop_id' => $shop_id, 'status' => 1])->select();
     }
 
     /**
-     * ¶©µ¥ÏêÇé
+     * è®¢å•é£Ÿç‰©åˆ—è¡¨
      * @param int $order_id
      * @return array
      */

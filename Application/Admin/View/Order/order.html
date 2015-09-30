@@ -1,20 +1,20 @@
-<div class="orderList">
+<div class="orderList" ng-app="app">
     <div class="container-fluid">
         <div class="wpBox">
             <div class="hd">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-3" ng-controller="order.searchController">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="输入订单号查询">
-                      <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button">查询</button>
-                      </span>
+                            <input type="text" class="form-control" ng-model="orderSn" placeholder="输入订单号查询">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button" ng-click="searchOrder()">查询</button>
+                            </span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="bd">
-                <table class="table table-hover table-bordered">
+            <div class="bd" ng-controller="order.controller">
+                <table class="table table-hover table-bordered" ng-show="data.orderListShow">
                     <thead>
                     <tr>
                         <th>单号</th>
@@ -24,22 +24,20 @@
                         <th class="col-md-3">操作</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <volist name="data" id="list">
+                    <tbody ng-repeat="d in data.list">
                         <tr>
-                            <td>{$list.sn}</td>
-                            <td>{$list.table_id}</td>
-                            <td>{$list.price}</td>
-                            <td>{$list.orderTime}</td>
+                            <td data-ng-bind="d.sn"></td>
+                            <td data-ng-bind="d.table_id"></td>
+                            <td data-ng-bind="d.price"></td>
+                            <td data-ng-bind="d.orderTime"></td>
                             <td>
-                                <button class="btn btn-info" type="button" data-toggle="collapse"
-                                        data-target="#collapseExample2"
-                                        aria-expanded="false" aria-controls="collapseExample">
-                                    详细 <span class="caret"></span></button>
-                                <button class="btn btn-success j-confirmBtn" data-id="1">确认订单</button>
+                                <button class="btn btn-info" type="button" aria-expanded="false" aria-controls="collapseExample" ng-click="subOrderShow(d.id)">
+                                    详细 <span class="caret"></span>
+                                </button>
+                                <button class="btn btn-success j-confirmBtn">确认订单</button>
                             </td>
                         </tr>
-                        <tr class="collapse" id="collapseExample2" style="background-color: transparent">
+                        <tr style="background-color: transparent;" ng-show="data.showId == d.id">
                             <td colspan="5">
                                 <div class="orderDetail">
                                     <div class="well">
@@ -54,25 +52,92 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                                <volist name="list.orderGoodsList" id="goods">
-                                                    <tr>
-                                                        <td>{$goods.name}</td>
-                                                        <td>{$goods.order_goods_price}</td>
-                                                        <td>{$goods.number}</td>
-                                                        <td>{$goods['order_goods_price']*$goods['number']}</td>
-                                                        <td>{$goods.mark}</td>
-                                                    </tr>
-                                                </volist>
+                                                <tr ng-repeat="o in d.orderGoodsList">
+                                                    <td ng-bind="o.name"></td>
+                                                    <td ng-bind="o.order_goods_price"></td>
+                                                    <td ng-bind="o.number"></td>
+                                                    <td ng-bind="o.order_goods_price * o.number"></td>
+                                                    <td ng-bind="o.mark"></td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </td>
                         </tr>
-                     </volist>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
+<js href="/Public/verdor/angular-1.4.6/angular.js" />
+<js href="/Public/verdor/layer.m/layer.m.js" />
+<script type="text/javascript">
+    if(typeof(EventSource) !== 'undefined') {
+        angular.module('app',[]).controller('order.controller',['$scope', function($scope) {
+            $scope.data = {
+                list: [],
+                orderListShow: true,
+                showId: 0
+            };
+
+            /**
+             * 加载订单列表
+             */
+            $scope.loadOder = function() {
+                var source = new EventSource("{:U('Order/GetOrder','',false)}");
+                source.addEventListener("message", $scope.addData, false);
+            };
+
+            $scope.addData = function(event) {
+                console.log(event.data);
+                $scope.$apply(function() {
+                    $scope.data.list = JSON.parse(event.data);
+                    $scope.data.show = true;
+                });
+            };
+
+            $scope.loadOder();
+
+            $scope.subOrderShow = function(id) {
+                if($scope.data.showId == id) {
+                    $scope.data.showId = 0;
+                } else {
+                    $scope.data.showId = id;
+                }
+            };
+        }]).controller('order.searchController',['$scope', '$http',function($scope, $http){
+            $scope.orderSn = '';
+            $scope.searchOrder = function() {
+                if($scope.orderSn.trim().length <= 0) {
+                    layer.open({
+                        content: '请输入订单号查询 ...',
+                        time: 2
+                    });
+                    return false;
+                }
+
+                layer.open({
+                    type: 2,
+                    content: ''
+                });
+                $scope.removeEvent();
+                $http.post("{:U('Order/GetOrder','',false)}",{'sn':$scope.orderSn.trim()}).then(function(res) {
+                    if(res.data.status) {
+
+                    }
+                },function(err) {
+                    layer.open({
+                        content: err,
+                        style: 'background-color:#e9e2da; color:green; border:none;'
+                    });
+                }).finally(function(){
+                    layer.closeAll();
+                });
+            };
+        }]);
+    } else {
+        console.log('Sorry! No server-sent events support..');
+    }
+</script>
