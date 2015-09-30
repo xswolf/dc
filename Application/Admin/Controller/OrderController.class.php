@@ -26,14 +26,6 @@ class OrderController extends VerifyController {
      * 商家管理平台 -> 当前订单
      */
     public function order() {
-        /*$data = OrderModel::instance()->orderList($this->shop_id);
-        if(is_array($data)) {
-            foreach($data as &$list) {
-                $list['orderTime'] = $this->time_tran($list['created_at']);
-                $list['orderGoodsList'] = OrderModel::instance()->orderGoodsList($list['id']);
-            }
-        }
-        $this->assign('data',$data);*/
         $this->display();
     }
 
