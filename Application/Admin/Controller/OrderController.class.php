@@ -41,7 +41,7 @@ class OrderController extends VerifyController {
         header('Content-Type: text/event-stream');
         header('Cache-Control: no-cache');
         $request = I('get.sn');
-        $data = OrderModel::instance()->orderList($this->user->getShopId());
+        $data = OrderModel::instance()->orderList($this->user->getShopId(),$request);
         if(is_array($data)) {
             foreach($data as &$list) {
                 $list['orderTime'] = $this->time_tran($list['created_at']);

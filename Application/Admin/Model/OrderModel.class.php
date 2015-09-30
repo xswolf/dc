@@ -16,11 +16,16 @@ class OrderModel extends BaseModel {
     /**
      * 订单列表
      * @param int $shop_id
+     * @param string $sn
      * @return array
      */
-    public function orderList($shop_id) {
+    public function orderList($shop_id, $sn) {
         $M = M($this->_table);
-        return $M->where(['shop_id' => $shop_id, 'status' => 1])->select();
+        $w = ['shop_id' => $shop_id, 'status' => 1];
+        if(!empty($sn)) {
+            $w['sn'] = $sn;
+        }
+        return $M->where($w)->select();
     }
 
     /**
