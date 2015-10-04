@@ -33,7 +33,7 @@ class OrderController extends VerifyController {
         header('Content-Type: text/event-stream');
         header('Cache-Control: no-cache');
         $request = I('get.sn');
-        $data = OrderModel::instance()->orderList($this->user->getShopId(),$request);
+        $data = OrderModel::instance()->orderList($this->user->getShopId(), ['status' => 1], $request);
         if(is_array($data)) {
             foreach($data as &$list) {
                 $list['orderTime'] = $this->time_tran($list['created_at']);
@@ -56,6 +56,39 @@ class OrderController extends VerifyController {
             }
         }
         $this->ajaxError([]);
+    }
+
+    /**
+     * 历史订单
+     */
+    public function historyOrder() {
+        $request = I('post.sn');
+        $start = I('post.start');
+        $end = I('post.end');
+        $s_time = !empty($start) ? strtotime($start) : NULL;
+        $e_time = !empty($end) ? strtotime($end) : NULL;
+        $w['status'] = ['eq',2];
+        if(!is_null($s_time) && !is_null($e_time)) {
+            $e_time = $e_time + 24*3600;
+            $w['created_at'] = ['between', "{$s_time}, {$e_time}"];
+        } else if(!is_null($s_time)) {
+            $w['created_at'] = ['egt',$s_time];
+        } else if(!is_null($e_time)) {
+            $w['created_at'] = ['elt',$e_time + 24*3600];
+        }
+        $data = OrderModel::instance()->orderList($this->user->getShopId(), $w, $request);
+        if(is_array($data)) {
+            foreach($data as &$list) {
+                $list['orderTime'] = $this->time_tran($list['created_at']);
+                $list['orderGoodsList'] = OrderModel::instance()->orderGoodsList($list['id']);
+            }
+        }
+
+        $this->assign('sn', $request);
+        $this->assign('start', $start);
+        $this->assign('end', $end);
+        $this->assign('data', $data);
+        $this->display();
     }
 
     private function time_tran($the_time) {
