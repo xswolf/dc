@@ -28,7 +28,7 @@
                         <tr>
                             <td data-ng-bind="d.sn"></td>
                             <td data-ng-bind="d.table_id"></td>
-                            <td data-ng-bind="d.price"></td>
+                            <td data-ng-bind="d.price | currency:'￥'"></td>
                             <td data-ng-bind="d.orderTime"></td>
                             <td>
                                 <button class="btn btn-info" type="button" aria-expanded="false" aria-controls="collapseExample" ng-click="subOrderShow(d.id)">
@@ -54,9 +54,9 @@
                                             <tbody>
                                                 <tr ng-repeat="o in d.orderGoodsList">
                                                     <td ng-bind="o.name"></td>
-                                                    <td ng-bind="o.order_goods_price"></td>
+                                                    <td ng-bind="o.order_goods_price | currency:'￥'"></td>
                                                     <td ng-bind="o.number"></td>
-                                                    <td ng-bind="o.order_goods_price * o.number"></td>
+                                                    <td ng-bind="o.order_goods_price * o.number | currency:'￥'"></td>
                                                     <td ng-bind="o.mark"></td>
                                                 </tr>
                                             </tbody>
