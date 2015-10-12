@@ -3,12 +3,15 @@
  */
 define([
     'angular',
-    './module.js',
+    './Module.js',
     'ngTouch',
     /* Directives */
     /* Filters */
     /* Services */
-
+    './services/ApiService.js',
+    './services/StorageService.js',
+    './services/CartService.js',
+    './services/GoodsService.js'
     /* classes */
 ], function(angular, module) {
     module.config(['$httpProvider', function($httpProvider){

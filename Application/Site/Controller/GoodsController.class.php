@@ -16,4 +16,14 @@ class GoodsController extends BaseController {
 	public function index() {
 		$this->display();
 	}
+
+	/**
+	 * 商品列表
+	 */
+	public function goods_list() {
+		$id = I('get.id');
+		if(!empty($id) && ctype_digit($id)) {
+
+		}
+	}
 }

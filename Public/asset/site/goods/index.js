@@ -1,8 +1,23 @@
 /**
  * Created by hgh on 2015/10/10.
  */
-var app = angular.module('goods', []);
-app.controller('goods.Controller', ['$scope', function($scope) {
-    $scope.numbers = 600;
-    $scope.price = 899;
-}]);
+define([
+    'angular',
+    './module.js',
+    'ui.router',
+    'ngAnimate',
+    './Controller.js',
+    './ListController.js'
+], function(angular, module) {
+    module.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+        $urlRouterProvider.otherwise("/");
+        $stateProvider
+            .state('list', {
+                url: "/",
+                controller: 'goods.ListController',
+                templateUrl: 'tpl-list.html'
+            });
+    }]);
+
+    return module;
+});
