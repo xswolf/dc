@@ -47,7 +47,9 @@ $(function () {
             }
         }
     });
-    var table = $(".j-dataTables").DataTable();
+    var table = $(".j-dataTables").DataTable(
+
+    );
 
     function Filter(dom, type , table) {
         this.dom    = dom;
@@ -135,12 +137,12 @@ $(function () {
         filter.push(f);
     });
 
-    //$.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-    //    // 执行过滤操作
-    //    for (var i in filter) {
-    //        var result = filter[i].search(settings, data, dataIndex);
-    //        return result;
-    //    }
-    //})
+    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+        // 执行过滤操作
+        for (var i in filter) {
+            var result = filter[i].search(settings, data, dataIndex);
+            return result;
+        }
+    })
 
 });

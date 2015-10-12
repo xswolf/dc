@@ -1,0 +1,261 @@
+<div ng-controller="goods.Controller">
+    <div ui-view autoscroll="true"></div>
+</div>
+
+<script type="text/ng-template" id="tpl-menu.html">
+    <div class="scroll-content has-footer sideBar">
+        <ul>
+            <li class="active"><a ng-click="changeMenu('menu1')" href="javascript:;">推荐</a></li>
+            <li><a ng-click="changeMenu('menu2')" href="javascript:;">三明治三明</a></li>
+            <li><a ng-click="changeMenu('menu3')" href="javascript:;">咖啡</a></li>
+            <li><a ng-click="changeMenu('menu4')" href="javascript:;">轻食</a></li>
+            <li><a ng-click="changeMenu('menu5')" href="javascript:;">主食</a></li>
+            <li><a ng-click="changeMenu('menu6')" href="javascript:;">饮料</a></li>
+            <li><a ng-click="changeMenu('menu7')" href="javascript:;">三明治</a></li>
+            <li><a ng-click="changeMenu('menu8')" href="javascript:;">咖啡</a></li>
+            <li><a ng-click="changeMenu('menu9')" href="javascript:;">轻食</a></li>
+            <li><a href="javascript:location.reload();">刷新</a></li>
+        </ul>
+    </div>
+</script>
+
+<script type="text/ng-template" id="tpl-list.html">
+    <div class="scroll-content has-footer mainCnt">
+
+        <div class="mod-goodsItem" ng-repeat="g in goods">
+            <div class="row">
+                <div class="col col-33" ng-if="g.imgUrl">
+                    <img class="pic" ng-src="{{g.imgUrl}}"/>
+                </div>
+                <div class="col">
+
+                    <div class="info">
+                        <div class="title"><h2>{{g.title}}</h2></div>
+                        <div class="ft">
+                            <span class="price">{{g.price | currency:'￥'}}</span> <span ng-if="g.originPrice" class="price2">{{g.originPrice | currency: '￥'}}</span>
+
+                            <goods-count gid="{{g.gid}}" num="{{g.num}}" goods="g"></goods-count>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!---start---->
+        <div class="mod-goodsItem">
+            <div class="row">
+                <div class="col">
+                    <div class="info">
+                        <div class="title"><h2>双球冰淇淋（香草、抹茶、巧克力）</h2></div>
+                        <div class="ft">
+                            <span class="price">￥{{numbers}}</span> <span class="price2">￥58</span>
+                            <div class="mod-goodsCount show">
+                                <span class="minus"><a href="javascript:;">-</a></span>
+                                <span class="num">5</span>
+                                <span class="plus"><a href="javascript:;">+</a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mod-goodsItem">
+            <div class="row">
+                <div class="col">
+                    <div class="info">
+                        <div class="title"><h2>双球冰淇淋（香草、抹茶、巧克力）</h2></div>
+                        <div class="ft">
+                            <span class="price">￥58</span> <span class="price2">￥58</span>
+                            <div class="mod-goodsCount">
+                                <span class="minus"><a href="javascript:;">-</a></span>
+                                <span class="num">10</span>
+                                <span class="plus"><a href="javascript:;">+</a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mod-goodsItem">
+            <div class="row">
+                <div class="col">
+                    <div class="info">
+                        <div class="title"><h2>双球冰淇淋（香草、抹茶、巧克力）</h2></div>
+                        <div class="ft">
+                            <span class="price">￥58</span> <span class="price2">￥58</span>
+                            <div class="mod-goodsCount show">
+                                <span class="minus"><a href="javascript:;">-</a></span>
+                                <span class="num">10</span>
+                                <span class="plus"><a href="javascript:;">+</a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mod-goodsItem">
+            <div class="row">
+                <!--<div class="col col-33">-->
+                <!--<img class="pic" src="img/coffe2.jpg" alt=""/>-->
+                <!--</div>-->
+                <div class="col">
+                    <div class="info">
+                        <div class="title"><h2>双球冰淇淋（香草、抹茶、巧克力）</h2></div>
+                        <div class="ft">
+                            <span class="price">￥58</span> <span class="price2">￥58</span>
+                            <div class="mod-goodsCount">
+                                <span class="minus"><a href="javascript:;">-</a></span>
+                                <span class="num">10</span>
+                                <span class="plus"><a href="javascript:;">+</a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mod-goodsItem">
+            <div class="row">
+                <div class="col col-33">
+                    <img class="pic" src="/Public/asset/site/img/coffe2.jpg" alt=""/>
+                </div>
+                <div class="col">
+                    <div class="info">
+                        <div class="title"><h2>双球冰淇淋（香草、抹茶、巧克力）</h2></div>
+                        <div class="ft"><span class="price">￥58</span> <span class="price2">￥58</span>
+                            <div class="mod-goodsCount show">
+                                <span class="minus"><a href="javascript:;">-</a></span>
+                                <span class="num">10</span>
+                                <span class="plus"><a href="javascript:;">+</a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mod-goodsItem">
+            <div class="row">
+                <div class="col col-33">
+                    <img class="pic" src="/Public/asset/site/img/coffe1.jpg" alt=""/>
+                </div>
+                <div class="col">
+                    <div class="info">
+                        <div class="title"><h2>双球冰淇淋（香草、抹茶、巧克力）</h2></div>
+                        <div class="ft"><span class="price">￥58</span> <span class="price2">￥58</span>
+                            <div class="mod-goodsCount">
+                                <span class="minus"><a href="javascript:;">-</a></span>
+                                <span class="num">10</span>
+                                <span class="plus"><a href="javascript:;">+</a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mod-goodsItem">
+            <div class="row">
+                <div class="col col-33">
+                    <img class="pic" src="/Public/asset/site/img/coffe2.jpg" alt=""/>
+                </div>
+                <div class="col">
+                    <div class="info">
+                        <div class="title"><h2>双球冰淇淋（香草、抹茶、巧克力）</h2></div>
+                        <div class="ft"><span class="price">￥58</span> <span class="price2">￥58</span>
+                            <div class="mod-goodsCount">
+                                <span class="minus"><a href="javascript:;">-</a></span>
+                                <span class="num">10</span>
+                                <span class="plus"><a href="javascript:;">+</a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mod-goodsItem">
+            <div class="row">
+                <div class="col col-33">
+                    <img class="pic" src="/Public/asset/site/img/coffe2.jpg" alt=""/>
+                </div>
+                <div class="col">
+                    <div class="info">
+                        <div class="title"><h2>双球冰淇淋（香草、抹茶、巧克力）</h2></div>
+                        <div class="ft"><span class="price">￥58</span> <span class="price2">￥58</span>
+                            <div class="mod-goodsCount">
+                                <span class="minus"><a href="javascript:;">-</a></span>
+                                <span class="num">10</span>
+                                <span class="plus"><a href="javascript:;">+</a></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mod-goodsItem">
+            <div class="row">
+                <div class="col col-33">
+                    <img class="pic" src="/Public/asset/site/img/coffe1.jpg" alt=""/>
+                </div>
+                <div class="col">
+                    <div class="info">
+                        <div class="title"><h2>双球冰淇淋（香草、抹茶、巧克力）</h2></div>
+                        <div class="ft"><span class="price">￥58</span> <span class="price2">￥58</span>
+                            <div class="mod-goodsCount">
+                                <span class="minus"><a href="javascript:;">-</a></span>
+                                <span class="num">10</span>
+                                <span class="plus"><a href="javascript:;">+</a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mod-goodsItem">
+            <div class="row">
+                <div class="col col-33">
+                    <img class="pic" src="/Public/asset/site/img/coffe2.jpg" alt=""/>
+                </div>
+                <div class="col">
+                    <div class="info">
+                        <div class="title"><h2>双球冰淇淋（香草、抹茶、巧克力）</h2></div>
+                        <div class="ft"><span class="price">￥58</span> <span class="price2">￥58</span>
+                            <div class="mod-goodsCount">
+                                <span class="minus"><a href="javascript:;">-</a></span>
+                                <span class="num">10</span>
+                                <span class="plus"><a href="javascript:;">+</a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!----end---->
+    </div>
+</script>
+
+<script type="text/ng-template" id="tpl-footer.html">
+    <div class="mod-footer fixed">
+        <span class="total">总计：￥<i>368</i></span>
+        <a class="btn-cart button button-danger" ui-sref="order">选 好 了</a>
+    </div>
+</script>
+
+<script type="text/javascript">
+    require([
+        'angular',
+        '{:asset_path("Public/asset/site/goods/index.js!")}'
+    ], function (angular) {
+        angular.bootstrap(document, ['goods'], { strictDi: true });
+    });
+</script>
