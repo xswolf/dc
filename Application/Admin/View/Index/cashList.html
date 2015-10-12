@@ -1,0 +1,46 @@
+
+<include file="header"/>
+
+<div class="container-fluid">
+    <h2>提现列表</h2>
+
+    <div class="wpBox">
+        <div class="hd">
+            <div class="text-right"><a class="btn btn-primary" href="{:U('Index/cashList1')}">已打款列表</a></div>
+        </div>
+        <div class="bd">
+            <table class="table table-hover table-bordered j-dataTables">
+                <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>商家ID</th>
+                    <th>店铺名称</th>
+                    <th>申请金额</th>
+                    <th>申请日期</th>
+                    <th class="col-md-3">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <volist name="list" id="vo">
+                    <tr>
+                        <td>{$vo.id}</td>
+                        <td>{$vo.shop_id}</td>
+                        <td>{$vo.name}</td>
+
+                        <td>{$vo.cash_money}</td>
+                        <td>
+                            {$vo.created_at|date="Y-m-d" , ###}
+                        </td>
+                        <td>
+                            <a class="btn btn-info" href="{:U('cashConfirm')}?id={$vo.id}">确认付款</a>
+                        </td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<include file="footer"/>

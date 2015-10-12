@@ -1,6 +1,33 @@
 <div class=""></div>
 
-<script src="/Public/libs/jquery/jquery.1.11.3.min.js"></script>
+<script src="/Public/libs/jquery/jquery-2.1.1.min.js"></script>
+
+<script>
+
+    $(function(){
+        var pathName = location.pathname;
+//        var s1  = pathName.indexOf(".html");
+//        pathName = pathName.substr(0,s1);
+        var flag = false;
+        $(".navbar-nav > li").each(function(){
+            console.log($(this).children().attr("href"))
+
+            $(this).removeClass("active");
+            var hrefVar = $(this).children().attr("href");
+            if (pathName == hrefVar){
+                $(this).addClass("active");
+                flag = true;
+            }
+        })
+        if (!flag){
+            $("#fat-menu").addClass("active");
+        }
+    });
+
+
+</script>
+
+<!--<script src="/Public/libs/jquery/jquery.cookie.js"></script>-->
 <script src="/Public/libs/bootstrap/js/bootstrap.min.js"></script>
 
 <!-- plugins -->
@@ -33,5 +60,6 @@
 <script src="/Public/js/app.js"></script>
 
 <script src="/Public/js/dataTables.js"></script>
+
 </body>
 </html>

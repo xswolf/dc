@@ -6,7 +6,7 @@
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta content="black" name="apple-mobile-web-app-status-bar-style">
     <meta content="telephone=no" name="format-detection">
-    <title>登录</title>
+    <title>商家管理平台</title>
     <!-- Loading Bootstrap -->
     <link href="/Public/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -43,14 +43,16 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="drop3">
-                        <li><a href="#">桌号管理</a></li>
-                        <li><a href="#">菜单管理</a></li>
-                        <li><a href="#">菜品管理</a></li>
+                        <li><a href="/admin/settings/table">桌号管理</a></li>
+                        <li><a href="<?php echo U('settings/goodsType');?>">菜单管理</a></li>
+                        <li><a href="<?php echo U('settings/goods');?>">菜品管理</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">流水明细</a></li>
+                        <li><a href="<?php echo U('Order/historyOrder');?>">流水明细</a></li>
                         <li><a href="#">营业数据</a></li>
                     </ul>
                 </li>
+                <li><a href="<?php echo U('cash/index');?>">提现申请</a></li>
+                <li><a href="<?php echo U('cash/cashList');?>">提现流水</a></li>
                 <li><a href="/admin/user/component">component</a></li>
                 <li><a href="/admin/user/common">common</a></li>
             </ul>
@@ -92,6 +94,17 @@
 <link rel="stylesheet" href="/Public/libs/plugins/toastr/toastr.min.css"/>
 <script src="/Public/libs/plugins/toastr/toastr.min.js"></script>
 
+
+<link rel="stylesheet" href="/Public/libs/plugins/datatables/css/dataTables.bootstrap.css"/>
+<script src="/Public/libs/plugins/datatables/js/jquery.dataTables.min.js"></script>
+<script src="/Public/libs/plugins/datatables/js/dataTables.bootstrap.js"></script>
+
+
+<link rel="stylesheet" href="/Public/libs/plugins/bootstrap-datatimepicker/css/bootstrap-datetimepicker.min.css"/>
+<script src="/Public/libs/plugins/bootstrap-datatimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script charset="UTF-8" src="/Public/libs/plugins/bootstrap-datatimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+
 <!-- 公共组件 -->
 <script src="/Public/js/common.js"></script>
 
@@ -102,5 +115,7 @@
 
 <!--  -->
 <script src="/Public/js/app.js"></script>
+
+<script src="/Public/js/dataTables.js"></script>
 </body>
 </html>

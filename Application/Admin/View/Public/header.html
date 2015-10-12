@@ -37,7 +37,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="/admin/order/order">当前订单<span class="sr-only">(current)</span></a></li>
                 <li><a href="/admin/order/historyOrder">历史订单</a></li>
-                <li id="fat-menu" class="dropdown active">
+                <li id="fat-menu" class="dropdown">
                     <a id="drop3" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         系统设置
                         <span class="caret"></span>
@@ -51,6 +51,8 @@
                         <li><a href="#">营业数据</a></li>
                     </ul>
                 </li>
+                <li><a href="{:U('cash/index')}">提现申请</a></li>
+                <li><a href="{:U('cash/cashList')}">提现流水</a></li>
                 <li><a href="/admin/user/component">component</a></li>
                 <li><a href="/admin/user/common">common</a></li>
             </ul>

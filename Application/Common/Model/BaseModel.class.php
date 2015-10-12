@@ -34,10 +34,11 @@ class BaseModel extends Model
     }
 
 
-    public function insert($data)
+    public function insert($data , $table = '')
     {
         $data['created_at'] = time();
-        $m = D($this->_table);
+        $table = $table == '' ? $this->_table : $table;
+        $m = D($table);
         if ($r = $m->create($data)) {
             return $m->add();
         } else {
@@ -54,9 +55,12 @@ class BaseModel extends Model
         return $m->where("id=" . $id)->delete();
     }
 
-    public function edit($data, $where = [])
+    public function edit($data, $where = [] , $table = '')
     {
-        $m = D($this->_table);
+
+        $table = $table == '' ? $this->_table : $table;
+
+        $m = D($table);
 
         if ($dataProcess = $m->create($data)) {
             $where = empty($where) ? array('id' => $data['id']) : $where;
@@ -81,5 +85,6 @@ class BaseModel extends Model
         $where[$fieldName] = $fieldValue;
         return $m->where($where)->select();
     }
+
 
 }

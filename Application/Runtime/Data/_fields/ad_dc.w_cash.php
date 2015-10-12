@@ -1,0 +1,1 @@
+a:8:{i:0;s:2:"id";i:1;s:7:"shop_id";i:2;s:11:"create_date";i:3;s:10:"cash_money";i:4;s:6:"status";i:5;s:9:"cash_time";s:3:"_pk";s:2:"id";s:5:"_type";a:6:{s:2:"id";s:7:"int(11)";s:7:"shop_id";s:7:"int(11)";s:11:"create_date";s:7:"int(11)";s:10:"cash_money";s:5:"float";s:6:"status";s:7:"int(11)";s:9:"cash_time";s:7:"int(11)";}}

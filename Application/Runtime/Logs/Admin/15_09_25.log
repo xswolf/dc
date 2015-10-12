@@ -1,0 +1,21 @@
+[ 2015-09-25T08:34:46+08:00 ] 127.0.0.1 /admin/user/install_lodop32.exe
+ERR: 非法操作:install_lodop32.exe
+
+[ 2015-09-25T08:35:01+08:00 ] 127.0.0.1 /admin/user/install_lodop32.exe
+ERR: 非法操作:install_lodop32.exe
+
+[ 2015-09-25T10:51:19+08:00 ] 127.0.0.1 /Admin/cash/index.html
+ERR: 模板不存在:./Application/Admin/View/Cash/index.html
+
+[ 2015-09-25T11:07:09+08:00 ] 127.0.0.1 /Admin/cash/index.html
+ERR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ad_dc.w_' doesn't exist
+
+[ 2015-09-25T17:18:39+08:00 ] 127.0.0.1 /admin/index/setShopStatus
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() D:\xampp\htdocs\dc\ThinkPHP\Common\functions.php 第 1263 行.
+SQL: SELECT * FROM `w_platform_shop` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0000s ]
+SQL: SELECT s.name as shop_name,u.id,u.name,s.status FROM w_platform_shop s INNER JOIN w_user u on s.uid=u.id   [ RunTime:0.0000s ]
+SQL: UPDATE `w_platform_shop` SET `status`='0' WHERE `uid` = 25 [ RunTime:0.0468s ]
+
