@@ -19,7 +19,8 @@ function printf_info($data)
 
 //①、获取用户openid
 $tools = new JsApiPay();
-$openId = 'oo1dNwVtnqPTofrvUooHQHKqRhps';//
+// $openId = 'oo1dNwVtnqPTofrvUooHQHKqRhps';
+$openId = 'o1z3-tjj1Ls_MiTts0COU_sx0ve4';
 // $openId = $tools->GetOpenid();
 
 //②、统一下单
