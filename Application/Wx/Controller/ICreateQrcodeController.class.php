@@ -10,6 +10,13 @@ use Wx\Model\QrcodeModel;
 class ICreateQrcodeController extends InitiativeController{
     
     
+	/**
+	 * 创建二维码
+	 * @param number $type      1临时|2永久
+	 * @param number $expire    临时过期时间最大604800
+	 * @param string $sene_str  场景值 永久二维码才有
+	 * @return array|boolean
+	 */
     public function create( $type = 1 , $expire=604800 , $sene_str=''){
        $sene_id = QrcodeModel::instance()->getSceneId($type);
        $data = Popularize::createTicket($type, 604800, $sene_id);
@@ -33,7 +40,7 @@ class ICreateQrcodeController extends InitiativeController{
            ];
            $qrcode_id = QrcodeModel::instance()->addQrcode($arr);
            if($qrcode_id)
-               return $qrcode_id;
+               return [ 'qrcode_id'=>$qrcode_id , 'url'=>$arr['url'] ];
        }
        return false;
     }
