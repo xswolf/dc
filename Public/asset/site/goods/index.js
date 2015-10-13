@@ -15,6 +15,10 @@ define([
         $urlRouterProvider.otherwise("/");
         $stateProvider.state('list', {
             url: "/",
+            controller: 'goods.Controller',
+            templateUrl: 'tpl-list.html'
+        }).state('list-id', {
+            url: "/list/{mid:int}",
             controller: 'goods.ListController',
             templateUrl: 'tpl-list.html'
         });

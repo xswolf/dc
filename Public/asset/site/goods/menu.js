@@ -13,42 +13,18 @@ define(['./module.js'], function(module) {
             },
             replace: true,
             templateUrl: 'tpl-menu.html',
-            controller: ['$scope', '$timeout', 'app.MenuService',
-                function ($scope, $timeout, MenuService) {
-                    $scope.menu = [
-                        {
-                            id: 1,
-                            name: '推荐'
-                        },
-                        {
-                            id: 2,
-                            name: '三明治'
-                        },
-                        {
-                            id: 3,
-                            name: '咖啡'
-                        },
+            controller: ['$scope', '$stateParams', '$location', 'app.MenuService',
+                function ($scope, $stateParams, $location, MenuService) {
+                    $scope.category = null;
+                    $scope.category_id = $stateParams.mid;
+                    MenuService.loadGoodsCategory().then(function(data) {
+                        $scope.category = data;
+                    },function(msg) {
 
-                        {
-                            id: 4,
-                            name: '轻食'
-                        },
-                        {
-                            id: 5,
-                            name: '主食'
-                        },
-                        {
-                            id: 6,
-                            name: '饮料'
-                        },
-                        {
-                            id: 0,
-                            name: '刷新'
-                        }
-                    ];
+                    });
 
-                    $scope.loadGoods = function() {
-                        console.log('12344');
+                    $scope.loadGoods = function(id) {
+                        $location.path('list/' + id);
                     }
                 }
             ]

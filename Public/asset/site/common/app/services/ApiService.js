@@ -17,6 +17,20 @@ define(['angular', '../module.js'], function(angular, module) {
         };
 
 
+        /**
+         * 加载商品分类
+         */
+        api.getGoodsCategory = function() {
+            return $http.get('/site/goods/get_goods_category');
+        };
+
+        /**
+         * 获取分类下的商品
+         */
+        api.getCategoryGoods = function(id) {
+            return $http.get('/site/goods/get_category_goods?id='+id);
+        };
+
         return api;
     }]);
 });
