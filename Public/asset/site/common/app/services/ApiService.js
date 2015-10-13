@@ -16,6 +16,7 @@ define(['angular', '../module.js'], function(angular, module) {
             return $http.get('/site/goods/goods_list?id='+id);
         };
 
+
         return api;
     }]);
 });
