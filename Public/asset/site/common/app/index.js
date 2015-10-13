@@ -3,7 +3,7 @@
  */
 define([
     'angular',
-    './Module.js',
+    './module.js',
     'ngTouch',
     /* Directives */
     /* Filters */

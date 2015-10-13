@@ -6,7 +6,7 @@ define([
     './module.js',
     'ui.router',
     'ngAnimate',
-    './Controller.js',
+    './controller.js',
     './ListController.js',
     './menu.js',
     './footer.js'
