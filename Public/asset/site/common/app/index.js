@@ -11,7 +11,8 @@ define([
     './services/ApiService.js',
     './services/StorageService.js',
     './services/CartService.js',
-    './services/GoodsService.js'
+    './services/GoodsService.js',
+    './services/MenuService.js'
     /* classes */
 ], function(angular, module) {
     module.config(['$httpProvider', function($httpProvider){

@@ -1556,6 +1556,7 @@ function asset_path($path, $module = null) {
     $flush = false;
     if (substr($path, -1) === '!') {
         $path = substr($path, 0, -1);
+        $flush = true;
     }
 
     if ($flush) {

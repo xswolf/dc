@@ -22,6 +22,7 @@ define(['angular', '../module.js'], function(angular, module) {
                 return defer.promise;
             }
         };
+
         return service;
     }]);
 });

@@ -4,24 +4,18 @@
 
 <script type="text/ng-template" id="tpl-menu.html">
     <div class="scroll-content has-footer sideBar">
-        <ul>
-            <li class="active"><a ng-click="changeMenu('menu1')" href="javascript:;">推荐</a></li>
-            <li><a ng-click="changeMenu('menu2')" href="javascript:;">三明治三明</a></li>
-            <li><a ng-click="changeMenu('menu3')" href="javascript:;">咖啡</a></li>
-            <li><a ng-click="changeMenu('menu4')" href="javascript:;">轻食</a></li>
-            <li><a ng-click="changeMenu('menu5')" href="javascript:;">主食</a></li>
-            <li><a ng-click="changeMenu('menu6')" href="javascript:;">饮料</a></li>
-            <li><a ng-click="changeMenu('menu7')" href="javascript:;">三明治</a></li>
-            <li><a ng-click="changeMenu('menu8')" href="javascript:;">咖啡</a></li>
-            <li><a ng-click="changeMenu('menu9')" href="javascript:;">轻食</a></li>
-            <li><a href="javascript:location.reload();">刷新</a></li>
+        <ul ng-repeat="m in menu">
+            <li ng-class="{'active':$first}">
+                <a ng-if="!$last" ng-click="loadGoods()" ng-bind="m.name"></a>
+                <a ng-if="$last" href="javascript:location.reload();" ng-bind="m.name"></a>
+            </li>
         </ul>
     </div>
 </script>
 
 <script type="text/ng-template" id="tpl-list.html">
+    <div menu-directive="" current="good"></div>
     <div class="scroll-content has-footer mainCnt">
-
         <div class="mod-goodsItem" ng-repeat="g in goods">
             <div class="row">
                 <div class="col col-33" ng-if="g.imgUrl">
@@ -242,6 +236,7 @@
         </div>
         <!----end---->
     </div>
+    <div footer-directive="" id="footer"></div>
 </script>
 
 <script type="text/ng-template" id="tpl-footer.html">
