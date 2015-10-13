@@ -1548,3 +1548,19 @@ function think_filter(&$value){
 function in_array_case($value,$array){
     return in_array(strtolower($value),array_map('strtolower',$array));
 }
+
+function asset_path($path, $module = null) {
+    $host = 'http://'.$_SERVER['HTTP_HOST'];
+    $host = rtrim($host,'/').'/';
+    $path = $path[0] === '/' ? $path : "{$host}{$path}";
+    $flush = false;
+    if (substr($path, -1) === '!') {
+        $path = substr($path, 0, -1);
+        $flush = true;
+    }
+
+    if ($flush) {
+        $path .= '?' . NOW_TIME;
+    }
+    return $path;
+}

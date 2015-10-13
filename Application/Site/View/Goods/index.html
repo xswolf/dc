@@ -1,0 +1,60 @@
+<div ng-controller="goods.Controller">
+    <div ui-view autoscroll="true"></div>
+</div>
+
+<script type="text/ng-template" id="tpl-menu.html">
+    <div class="scroll-content has-footer sideBar">
+        <ul>
+            <li ng-repeat="m in category" ng-class="{'active':$first && !category_id || m.id == category_id}">
+                <a ng-click="loadGoods(m.id)" ng-bind="m.name"></a>
+            </li>
+            <li>
+                <a href="javascript:location.reload();">刷新</a>
+            </li>
+        </ul>
+    </div>
+</script>
+
+<script type="text/ng-template" id="tpl-list.html">
+    <div menu-directive="" current="good"></div>
+    <div class="scroll-content has-footer mainCnt">
+        <div class="mod-goodsItem" ng-repeat="g in data.goods">
+            <div class="row">
+                <div class="col col-33" ng-if="g.pic1">
+                    <img class="pic" ng-src="{{g.pic1}}"/>
+                </div>
+                <div class="col">
+                    <div class="info">
+                        <div class="title"><h2>{{g.name}}</h2></div>
+                        <div class="ft">
+                            <span class="price">{{g.price | currency:'￥'}}</span>
+                            <span ng-if="g.price != g.native_price" class="price2">{{g.native_price | currency: '￥'}}</span>
+                            <div class="mod-goodsCount show">
+                                <span class="minus"><a href="javascript:;">-</a></span>
+                                <span class="num">5</span>
+                                <span class="plus"><a href="javascript:;">+</a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div footer-directive="" id="footer"></div>
+</script>
+
+<script type="text/ng-template" id="tpl-footer.html">
+    <div class="mod-footer fixed">
+        <span class="total">总计：￥<i>368</i></span>
+        <a class="btn-cart button button-danger" ui-sref="order">选 好 了</a>
+    </div>
+</script>
+
+<script type="text/javascript">
+    require([
+        'angular',
+        '{:asset_path("Public/asset/site/goods/index.js!")}'
+    ], function (angular) {
+        angular.bootstrap(document, ['goods'], { strictDi: true });
+    });
+</script>

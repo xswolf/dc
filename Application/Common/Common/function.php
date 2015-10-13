@@ -41,3 +41,40 @@ function dateAdd($currDate, $n, $type = 'd')
 
     return $val;
 }
+
+/**
+ * 获取微信上的用户信息
+ */
+function wx_get_user_info( $openId ){
+    return \LaneWeChat\Core\UserManage::getUserInfo($openId);
+}
+
+/**
+ * 获取微信上的用户用户列表
+ */
+function wx_get_user_list( $next_openId ){
+    return \LaneWeChat\Core\UserManage::getFansList($next_openId);
+}
+
+/*
+ * 上传
+ */
+function upload( $path='' , $type=[]){
+    $upload = new \Think\Upload();                                                          // 实例化上传类
+    $upload->maxSize   =     3145728 ;                                                      // 设置附件上传大小
+    $upload->exts      =     empty($type) ? ['jpg', 'gif', 'png', 'jpeg'] : $type;          // 设置附件上传类型
+    $upload->rootPath  =     './Public/';
+    $upload->savePath  =     empty($path) ? './Uploads/' : $path ;                          // 设置附件上传目录
+    if(!file_exists($upload->rootPath.$upload->savePath)){
+        mkdir($upload->rootPath.$upload->savePath , 0777 , true);
+    }
+    $info   =   $upload->upload();
+    if(!$info) {// 上传错误提示错误信息
+        return $upload->getError();
+    }else{// 上传成功
+        foreach($info as &$val){
+            $val['file_save_path'] = $upload->rootPath.ltrim($val['savepath'],'./').$val['savename'];
+        }
+        return $info;
+    }
+}
