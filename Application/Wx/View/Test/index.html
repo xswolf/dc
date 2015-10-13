@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>微信支付样例-支付</title>
+</head>
+<body>
+   <font color="#9ACD32"><b>该笔订单支付金额为<span style="color:#f00;font-size:50px">1分</span>钱</b></font><br/><br/>
+   <div>
+   	   <button style="width:300px;height:100px;" onclick="callpay()">确认支付</button>
+   </div>
+</body>
+</html>
+<script type="text/javascript">
+	//调用微信JS api 支付
+	function jsApiCall()
+	{
+		WeixinJSBridge.invoke(
+			'getBrandWCPayRequest',
+			{$json},
+			function(res){
+				WeixinJSBridge.log(res.err_msg);
+				alert(res.err_code+res.err_desc+res.err_msg);
+			}
+		);
+	}
+
+	function callpay()
+	{
+		if (typeof WeixinJSBridge == "undefined"){
+		    if( document.addEventListener ){
+		        document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+		    }else if (document.attachEvent){
+		        document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
+		        document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+		    }
+		}else{
+		    jsApiCall();
+		}
+	}
+</script>
