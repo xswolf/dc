@@ -7,5 +7,6 @@
 define(['angular', './module.js'], function(angular, module) {
     module.controller('goods.ListController',['$scope', function($scope) {
 
+
     }]);
 });
