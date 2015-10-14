@@ -28,6 +28,7 @@ class WxPayNotify extends WxPayNotifyReply
 			$this->SetReturn_msg("OK");
 		}
 		$this->ReplyNotify($needSign);
+		return $result;
 	}
 	
 	/**

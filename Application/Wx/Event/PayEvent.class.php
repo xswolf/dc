@@ -59,9 +59,12 @@ class PayEvent extends BaseController{
             'body'      =>  $input->GetBody(),
             'total_fee' =>  $input->GetTotal_fee(),
             'attach'    =>  $input->GetAttach(),
+            'time_start'=>  strtotime( $input->GetTime_start() ),
+            'time_expire'=> strtotime( $input->GetTime_expire() ),
             'pay_time'  =>  0,
             'status'    =>  0,
             'wx_pay_sn' =>  '',
+            'is_send'   =>  0,
             'created_at'=>  time(),
         ];
         
