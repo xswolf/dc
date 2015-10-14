@@ -17,11 +17,12 @@ class ShopTableModel extends BaseModel {
 
 	/**
 	 * @param int $table_id
+	 * @param int $shop_id
 	 * @return bool
 	 */
-	public function get($table_id) {
+	public function get($table_id, $shop_id) {
 		$Model = M($this->_table);
-		return $Model->where(['id' => $table_id, 'status' => 1])->find();
+		return $Model->where(['id' => $table_id, 'shop_id' => $shop_id, 'status' => 1])->find();
 	}
 
 }

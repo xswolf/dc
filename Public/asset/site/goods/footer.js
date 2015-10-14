@@ -20,7 +20,7 @@ define(['./module.js'], function(module) {
                     };
 
                     $scope.orderList = function() {
-                        $window.location = '/site/order/list';
+                        $window.location = '/site/order/index';
                     }
                 }
             ]
