@@ -45,16 +45,16 @@ class PayEvent extends BaseController{
             return ['status'=>-10 , 'message'=>$order['return_msg']];
         }
         $jsApiParameters = $tools->GetJsApiParameters($order);
-        $this->addPayLog($order);
+        $this->addPayLog($openId , $order);
         return ['status'=>1 , 'message'=>$jsApiParameters];
     }
     
     /**
      * 记录支付日志
      */
-    private function addPayLog( \WxPayUnifiedOrder $order ){
+    private function addPayLog( $openid , \WxPayUnifiedOrder $order ){
         $data = [
-            'openid'    =>  $order->GetOpenid(),
+            'openid'    =>  $openid,
             'order_sn'  =>  $order->GetOut_trade_no(),
             'body'      =>  $order->GetBody(),
             'total_fee' =>  $order->GetTotal_fee(),
