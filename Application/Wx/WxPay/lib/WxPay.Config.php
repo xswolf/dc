@@ -27,7 +27,7 @@ class WxPayConfig
 	const KEY = 'huangguohuiguoyong88888888888888';
 	const APPSECRET = '9cf1d93207db46aa61bde9ef47535186';
 	
-	const NOTIFY_URL = 'http://qunian.weiwubao.com/wxPay/notify';
+	const NOTIFY_URL = 'http://qunian.weiwubao.com/wx/pay_notify';
 	
 // 	const APPID = 'wx77b466baa9f0307b';
 // 	const MCHID = '1226003102';
