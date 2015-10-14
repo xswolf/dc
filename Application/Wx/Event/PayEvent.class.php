@@ -45,6 +45,7 @@ class PayEvent extends BaseController{
             return ['status'=>-10 , 'message'=>$order['return_msg']];
         }
         $jsApiParameters = $tools->GetJsApiParameters($order);
+        $this->addPayLog($order);
         return ['status'=>1 , 'message'=>$jsApiParameters];
     }
     
