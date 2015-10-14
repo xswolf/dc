@@ -52,7 +52,9 @@ class OrderController extends VerifyController {
         if(!empty($id) && is_numeric($id)) {
             $flag = OrderModel::instance()->sureOrder($this->user->getShopId(),$id);
             if($flag) {
-                $this->ajaxSuccess([]);
+                $orderGoodsData = OrderModel::instance()->orderGoodsList($id);
+                $orderData = OrderModel::instance()->getOrderById($id);
+                $this->ajaxSuccess(['orderData'=>$orderData , 'orderGoodsData'=>$orderGoodsData]);
             }
         }
         $this->ajaxError([]);

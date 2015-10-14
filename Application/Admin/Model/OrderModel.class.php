@@ -59,4 +59,18 @@ class OrderModel extends BaseModel {
         return $this->edit(['status' => 2],['shop_id' => $shop_id, 'id' => $order_id]);
     }
 
+    /**
+     * 获取订单信息
+     * @param $id
+     */
+    public function getOrderById($id){
+        $data =  M($this->_table)->alias("o")
+            ->join("__SHOP_TABLE__ t on o.table_id = t.id" ,'LEFT')
+            ->field("o.id,o.sn,o.price,o.native_price,o.created_at, t.name")
+            ->where(['o.id'=>$id])
+            ->find();
+
+        return $data;
+    }
+
 }
