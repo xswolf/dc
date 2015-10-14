@@ -39,6 +39,5 @@ class PayNotifyController extends InitiativeController{
             }
         }
     }
- //return_code    transaction_id
 }
 
