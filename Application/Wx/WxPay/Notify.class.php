@@ -33,6 +33,7 @@ class Notify extends \WxPayNotify{
             $msg = "订单查询失败";
             return false;
         }
+        M("test")->add(['test'=>json_encode($data)]);
         return true;
     }
     
