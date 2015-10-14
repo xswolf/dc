@@ -1,0 +1,84 @@
+<div ng-controller="order.Controller">
+    <div autoscroll="true">
+        <!--#### 确认订单 ###-->
+        <div class="scroll-content has-footer bg-2 page-list" ng-if="ui.page.list">
+            <div class="mod-tipsBox">
+                <div class="inner">
+                    亲爱的 {$username} ，请核对您的菜品<br />
+                    <span class="text-muted">（如有特殊需求，请注意填写备注哦！）</span>
+                </div>
+            </div>
+            <div class="orderTables">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>菜品</th>
+                            <th class="c2">数量</th>
+                            <th class="c3">小计</th>
+                            <th class="c4">备注</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="cpName">双球冰淇淋（香草、抹茶、巧克力）</td>
+                            <td>
+                                <div class="mod-goodsCount show">
+                                    <span class="minus"><a href="javascript:;">-</a></span>
+                                    <span class="num">1</span>
+                                    <span class="plus"><a href="javascript:;">+</a></span>
+                                </div>
+                            </td>
+                            <td>￥3600</td>
+                            <td>
+                                <a href="javascript:;" ng-click="showPage('remark')" class="bz icon-bz active"></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="mod-footer fixed">
+                <div class="total"><span class="badge">10</span>￥<i>1000</i></div>
+                <a class="btn-cart button button-1" ui-sref="orderPay" ng-click="showPage('payment')">提交订单</a>
+            </div>
+        </div>
+
+        <!--#### 支付 ####-->
+        <div class="scroll-content bg-2 page-payment" ng-if="ui.page.payment">
+            <div class="orderPay">
+                <div class="mod-tipsBox">
+                    <div class="inner">
+                        <ul>
+                            <li class="item">订单总价：<span class="text-danger">￥40.00</span></li>
+                            <li class="item">还需支付：<span class="text-danger">￥30.00</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="f-p10">
+                    <a class="button button-success button-block f-mb15" href="javascript:;" ng-click="showPage('list')">微信支付</a>
+                    <p class="text-right text-muted">你也可以选择 <a class="text-info" href="javascript:;">线下支付</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!--### 备注 ###-->
+        <div class="scroll-content mod-bz page-remark" ng-if="ui.page.remark">
+            <div class="hd">
+                <a ng-click="showPage('list')" class="back" href="javascript:;"></a>添加备注
+                <a ng-click="showPage('list')" class="btn" href="javascript:;">保存</a>
+            </div>
+            <div class="bd">
+                <textarea class="iptText" placeholder="在这里填写特殊要求：加冰、少糖等"></textarea>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript">
+    require([
+        'angular',
+        '{:asset_path("Public/asset/site/order/index.js!")}'
+    ], function (angular) {
+        angular.bootstrap(document, ['order'], { strictDi: true });
+    });
+</script>

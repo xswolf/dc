@@ -9,7 +9,7 @@ define(['angular', '../module.js', './StorageService.js'], function(angular, mod
         var service = {
             data: null,
             key: '__ql_shopping_cart__',
-            key_updated: '__cart_timestamp__',
+            key_updated: '__ql_cart_timestamp__',
 
             /**
              * 加载数据
@@ -35,21 +35,21 @@ define(['angular', '../module.js', './StorageService.js'], function(angular, mod
                 Storage.set(this.key_updated, new Date().getTime());
             },
 
-            add: function(goods, spec, number, remark) {
-                var c = this.find(goods.id, spec.id);
+            add: function(goods, number, remark) {
+                var c = this.find(goods.id);
                 number = number || 1;
                 if (c) {
                     c.number+= number;
                     c.remark = remark;
                 } else {
-                    this.data.push({gid:goods.id, sid:spec.id, price:spec.price, goods:goods._data?goods._data:goods, spec:spec._data?spec._data:spec, number:number, remark:remark});
+                    this.data.push({gid:goods.id, price:goods.price, goods:goods._data?goods._data:goods, number:number, remark:remark});
                 }
 
                 this.save();
             },
 
-            plus: function(gid, sid, number) {
-                var c = this.find(gid, sid);
+            plus: function(gid, number) {
+                var c = this.find(gid);
                 number = number | 1;
                 if (c) {
                     c.number += number;
@@ -57,12 +57,12 @@ define(['angular', '../module.js', './StorageService.js'], function(angular, mod
                 }
             },
 
-            minus: function(gid, sid, number) {
-                var c = this.find(gid, sid);
+            minus: function(gid, number) {
+                var c = this.find(gid);
                 number = number | 1;
                 if (c) {
                     if (c.number - number <= 0) {
-                        this.remove(c.gid, c.sid);
+                        this.remove(c.gid);
                     } else {
                         c.number -= number;
                         this.save();
@@ -70,9 +70,9 @@ define(['angular', '../module.js', './StorageService.js'], function(angular, mod
                 }
             },
 
-            remove: function(gid, sid) {
+            remove: function(gid) {
                 this.each(function(c, i) {
-                    if (c.gid == gid && c.sid == sid) {
+                    if (c.gid == gid) {
                         this.data.splice(i, 1);
                         this.save();
                         return false;
@@ -85,10 +85,10 @@ define(['angular', '../module.js', './StorageService.js'], function(angular, mod
                 this.save();
             },
 
-            find: function(gid, sid) {
+            find: function(gid) {
                 var cart = null;
                 this.each(function(c) {
-                    if (c.gid == gid && c.sid == sid) {
+                    if (c.gid == gid) {
                         cart = c;
                         return false;
                     }

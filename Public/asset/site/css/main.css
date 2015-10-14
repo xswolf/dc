@@ -1457,4 +1457,69 @@ i {
   margin-bottom: 0;
   border-bottom: none;
 }
-/* 站点样式 */
+
+/*动画*/
+@-webkit-keyframes slideOutLeft {
+  to {
+    -webkit-transform: translateX(-100%);
+  }
+}
+@-webkit-keyframes slideOutRight {
+  to {
+    -webkit-transform: translateX(100%);
+  }
+}
+
+@-webkit-keyframes slideInRight {
+  from {
+    -webkit-transform:translateX(100%);
+  }
+  to {
+    -webkit-transform: translateX(0);
+  }
+}
+@-webkit-keyframes slideInLeft {
+  from {
+    -webkit-transform:translateX(-100%);
+  }
+  to {
+    -webkit-transform: translateX(0);
+  }
+}
+
+.page-list.ng-enter, .page-list.ng-leave,
+.page-remark.ng-enter, .page-remark.ng-leave,
+.page-payment.ng-enter, .page-payment.ng-leave  {
+  height:100%;
+  width:100%;
+  position:absolute;
+  top:0;
+  -webkit-animation: 0.5s both ease-in;
+}
+
+.page-list.ng-enter {
+  left:0;
+  -webkit-animation-name: slideInLeft;
+}
+.page-list.ng-leave {
+  left:0;
+  -webkit-animation-name: slideOutLeft;
+}
+
+.page-payment.ng-enter {
+  right:0;
+  -webkit-animation-name: slideInRight;
+}
+.page-payment.ng-leave {
+  right:0;
+  -webkit-animation-name: slideOutRight;
+}
+
+.page-remark.ng-enter {
+  right:0;
+  -webkit-animation-name: slideInRight;
+}
+.page-remark.ng-leave {
+  right:0;
+  -webkit-animation-name: slideOutRight;
+}

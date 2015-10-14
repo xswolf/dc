@@ -1,3 +1,15 @@
+<!-----------------小票打印设置---------------->
+<script language="javascript" src="/Public/Lodop6.198/LodopFuncs.js"></script>
+<script language="javascript" src="/Public/js/print.js" ></script>
+<!-- 调用LODOP控件代码-->
+<object id="LODOP_OB" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0>
+    <embed id="LODOP_EM" type="application/x-print-lodop" width=0 height=0 pluginspage="install_lodop.exe"></embed>
+    <param name="CompanyName" value="重庆中恒科技有限公司">
+</object>
+<!-----------------小票打印设置---------------->
+
+
+
 <div class="orderList" ng-app="app">
     <div class="container-fluid">
         <div class="wpBox" ng-controller="order.controller">
@@ -73,6 +85,7 @@
 </div>
 <js href="/Public/verdor/angular-1.4.6/angular.js" />
 <js href="/Public/verdor/layer.m/layer.m.js" />
+
 <script type="text/javascript">
     if(typeof(EventSource) !== 'undefined') {
         var index;
@@ -158,6 +171,14 @@
                         }).then(function(res) {
                             if(res.data.status) {
 
+                                var data = res.data.data;
+                                var json = {
+                                    "title":"订单信息",
+                                    "tableId":data.orderData.name,
+                                    "orderNo": data.orderData.sn, "orderTime":getLocalTime(data.orderData.created_at),
+                                    "goodsList":data.orderGoodsData
+                                };
+                                printOrder(json);
                             }
                         },function(err) {
                             layer.open({
