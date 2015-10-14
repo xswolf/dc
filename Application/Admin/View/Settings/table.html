@@ -20,7 +20,7 @@
                     <tr>
                         <td>{$vo.id}</td>
                         <td>{$vo.name}</td>
-                        <td><img src="{$vo.img}" alt=""/></td>
+                        <td><img src="{$vo.url}" width="100px" height="100px" alt=""/></td>
                         <td>
                             <a class="btn btn-info" href="{:U('saveTable')}?id={$vo.id}">编辑</a>
                             <a class="btn btn-danger j-delTable" data-table="shop_table" data-id="{$vo.id}" href="javascript:;">删除</a>

@@ -6,7 +6,10 @@ class ShopTableModel extends BaseModel {
 
     public function lists($shopId){
         return M($this->_table)
-            ->where(['shop_id'=>$shopId])
+            ->alias("t")
+            ->join("__WX_QRCODE__ q on t.qrcode_id = q.id")
+            ->field("t.id,t.name,q.url")
+            ->where(['t.shop_id'=>$shopId])
             ->select();
     }
 }
