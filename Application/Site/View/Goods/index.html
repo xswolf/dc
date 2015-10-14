@@ -29,10 +29,10 @@
                         <div class="ft">
                             <span class="price">{{g.price | currency:'￥'}}</span>
                             <span ng-if="g.price != g.native_price" class="price2">{{g.native_price | currency: '￥'}}</span>
-                            <div class="mod-goodsCount show">
-                                <span class="minus"><a href="javascript:;">-</a></span>
-                                <span class="num">5</span>
-                                <span class="plus"><a href="javascript:;">+</a></span>
+                            <div class="mod-goodsCount" ng-class="{'show':goodsSelectedNumber(g.id)}">
+                                <span class="minus"><a href="javascript:;" ng-click="minus(g)">-</a></span>
+                                <span class="num">{{getSpecNumber(g)|number}}</span>
+                                <span class="plus"><a href="javascript:;" ng-click="plus(g)">+</a></span>
                             </div>
                         </div>
                     </div>
@@ -45,8 +45,8 @@
 
 <script type="text/ng-template" id="tpl-footer.html">
     <div class="mod-footer fixed">
-        <span class="total">总计：￥<i>368</i></span>
-        <a class="btn-cart button button-danger" ui-sref="order">选 好 了</a>
+        <span class="total">总计：￥<i ng-bind="totalPrice()"></i></span>
+        <a class="btn-cart button button-danger" ui-sref="order" ng-click="orderList()">选 好 了</a>
     </div>
 </script>
 
