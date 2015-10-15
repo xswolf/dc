@@ -1,5 +1,17 @@
 <div ng-controller="order.Controller">
     <div autoscroll="true">
+
+        <!--### 备注 ###-->
+        <div class="scroll-content mod-bz page-remark" ng-if="ui.page.remark">
+            <div class="hd">
+                <a ng-click="showPage('list')" class="back" href="javascript:;"></a>添加备注
+                <a ng-click="saveRemark()" class="btn" href="javascript:;">保存</a>
+            </div>
+            <div class="bd">
+                <textarea class="iptText" placeholder="在这里填写特殊要求：加冰、少糖等" ng-model="ui.remark_value"></textarea>
+            </div>
+        </div>
+
         <!--#### 确认订单 ###-->
         <div class="scroll-content has-footer bg-2 page-list" ng-if="ui.page.list">
             <div class="mod-tipsBox">
@@ -42,17 +54,6 @@
                     <span style="margin-left: 15px;"><i ng-bind="totalPrice() | currency:'￥'"></i></span>
                 </div>
                 <a class="btn-cart button button-1" ng-click="submitWxOrder()">提交订单</a>
-            </div>
-        </div>
-
-        <!--### 备注 ###-->
-        <div class="scroll-content mod-bz page-remark" ng-if="ui.page.remark">
-            <div class="hd">
-                <a ng-click="showPage('list')" class="back" href="javascript:;"></a>添加备注
-                <a ng-click="saveRemark()" class="btn" href="javascript:;">保存</a>
-            </div>
-            <div class="bd">
-                <textarea class="iptText" placeholder="在这里填写特殊要求：加冰、少糖等" ng-model="ui.remark_value"></textarea>
             </div>
         </div>
 
