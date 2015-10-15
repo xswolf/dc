@@ -7,7 +7,9 @@ use LaneWeChat\Core\AdvancedBroadcast;
 
 class ArticlesEvent extends BaseController{
     
-    //上传图片
+    /**
+     * 上传图片
+     */
     public function uploadImg(){
         //'ybFlQ9kmPTgiCWZT8Mq_1YnKtBziwpbaVDaftpJckPtFzlwROlgXpKCd9Dbl_JRs'
         if(!empty($_FILES)){
@@ -25,7 +27,9 @@ class ArticlesEvent extends BaseController{
     }
     
     
-    //新增图文消息
+    /**
+     * 新增图文消息
+     */
     public function uploadNews(){
         //'pk7-ztaDrb1tKm6mPwKtxJO50386VvsJ6qgDw6isuUypA94v9xj3RdXYUMuqkI4b'
         $articles = [
