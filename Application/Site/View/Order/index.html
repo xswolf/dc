@@ -19,16 +19,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="cpName">双球冰淇淋（香草、抹茶、巧克力）</td>
+                        <tr ng-repeat="c in cart">
+                            <td class="cpName" ng-bind="c.goods.name"></td>
                             <td>
                                 <div class="mod-goodsCount show">
-                                    <span class="minus"><a href="javascript:;">-</a></span>
-                                    <span class="num">1</span>
-                                    <span class="plus"><a href="javascript:;">+</a></span>
+                                    <span class="minus"><a href="javascript:;" ng-click="minus(c)">-</a></span>
+                                    <span class="num" ng-bind="c.number"></span>
+                                    <span class="plus"><a href="javascript:;" ng-click="plus(c)">+</a></span>
                                 </div>
                             </td>
-                            <td>￥3600</td>
+                            <td>{{c.number * c.price | currency:'￥'}}</td>
                             <td>
                                 <a href="javascript:;" ng-click="showPage('remark')" class="bz icon-bz active"></a>
                             </td>
@@ -37,7 +37,10 @@
                 </table>
             </div>
             <div class="mod-footer fixed">
-                <div class="total"><span class="badge">10</span>￥<i>1000</i></div>
+                <div class="total">
+                    <span class="badge" ng-bind="selectedNumber()"></span>
+                    <span style="margin-left: 15px;">￥<i ng-bind="totalPrice()"></i></span>
+                </div>
                 <a class="btn-cart button button-1" ui-sref="orderPay" ng-click="showPage('payment')">提交订单</a>
             </div>
         </div>

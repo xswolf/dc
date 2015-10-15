@@ -1459,6 +1459,35 @@ i {
 }
 
 /*动画*/
+.anim {
+  -webkit-animation: .5s ease-out backwards;
+}
+.a-bouncein {
+  -webkit-animation-name: bouncein;
+}
+.a-bounceout {
+  -webkit-animation-name: bounceout;
+}
+
+@-webkit-keyframes rotateFall {
+  0% {
+    -webkit-transform: rotateZ(0deg);
+  }
+  20% {
+    -webkit-transform: rotateZ(10deg);
+    -webkit-animation-timing-function: ease-out;
+  }
+  40% {
+    -webkit-transform: rotateZ(17deg);
+  }
+  60% {
+    -webkit-transform: rotateZ(16deg);
+  }
+  100% {
+    -webkit-transform: translateY(100%) rotateZ(17deg);
+  }
+}
+
 @-webkit-keyframes slideOutLeft {
   to {
     -webkit-transform: translateX(-100%);
@@ -1470,6 +1499,18 @@ i {
   }
 }
 
+@-webkit-keyframes rotateOutNewspaper {
+  to {
+    -webkit-transform: translateZ(-3000px) rotateZ(360deg);
+    opacity: 0;
+  }
+}
+@-webkit-keyframes scaleUp {
+  from {
+    opacity: 0.3;
+    -webkit-transform: scale(0.8);
+  }
+}
 @-webkit-keyframes slideInRight {
   from {
     -webkit-transform:translateX(100%);
@@ -1484,6 +1525,37 @@ i {
   }
   to {
     -webkit-transform: translateX(0);
+  }
+}
+@-webkit-keyframes slideInUp {
+  from {
+    -webkit-transform:translateY(100%);
+  }
+  to {
+    -webkit-transform: translateY(0);
+  }
+}
+/* 弹入 */
+
+@-webkit-keyframes bouncein {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(0.3);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+  }
+}
+/* 弹出 */
+
+@-webkit-keyframes bounceout {
+  0% {
+    -webkit-transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(0.3);
   }
 }
 
@@ -1522,4 +1594,253 @@ i {
 .page-remark.ng-leave {
   right:0;
   -webkit-animation-name: slideOutRight;
+}
+
+
+.popup-ql.popupBox{
+  background-color: #fffcf7;
+  color: #585755;
+  border-radius: 3px;
+}
+.popup-ql .popup-hd{
+  border-bottom-color: #e9e2da;
+  color: #ff9138;
+}
+.popup-ql .popup-ft{
+  border-top-color: #e9e2da;
+}
+.popup-ql .popup-ft a{
+  color: #ff9138;
+}
+.popup-ql a.popup-cancelBtn{
+  color: #9b9b9b;
+}
+.popup-ql .popup-confirm-ft a:first-child, .popup-ql .popup-prompt-ft a:first-child{
+  border-right-color: #e9e2da;
+}
+
+.popup-ql .ui-toast-inner {
+  background:orange;
+}
+.popup-ql .message .ui-toast-inner {
+  background:orange;
+}
+.popup-ql .error .ui-toast-inner {
+  background:#000;
+}
+.popup-ql .success .ui-toast-inner {
+  background:#0a0;
+}
+
+.loading{ position: relative; z-index: 12; text-align: center;}
+.loading-txt{ font-size: 12px; color: #fff;}
+.spinner {
+  margin: 0 auto 20px;
+  width: 35px;
+  height: 35px;
+  position: relative;
+  z-index: 12;
+}
+
+.container1 > div, .container2 > div, .container3 > div {
+  width: 10px;
+  height: 10px;
+  background-color: #ff9138;
+
+  border-radius: 100%;
+  position: absolute;
+  -webkit-animation: bouncedelay 1.2s infinite ease-in-out;
+  animation: bouncedelay 1.2s infinite ease-in-out;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.spinner .spinner-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.container2 {
+  -webkit-transform: rotateZ(45deg);
+  transform: rotateZ(45deg);
+}
+
+.container3 {
+  -webkit-transform: rotateZ(90deg);
+  transform: rotateZ(90deg);
+}
+
+.circle1 { top: 0; left: 0; }
+.circle2 { top: 0; right: 0; }
+.circle3 { right: 0; bottom: 0; }
+.circle4 { left: 0; bottom: 0; }
+
+.container2 .circle1 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+
+
+
+.container1 .circle2 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+.container2 .circle2 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+
+
+
+.container1 .circle3 {
+  -webkit-animation-delay: -0.6s;
+  animation-delay: -0.6s;
+}
+
+.container2 .circle3 {
+  -webkit-animation-delay: -0.5s;
+  animation-delay: -0.5s;
+}
+
+
+
+.container1 .circle4 {
+  -webkit-animation-delay: -0.3s;
+  animation-delay: -0.3s;
+}
+
+.container2 .circle4 {
+  -webkit-animation-delay: -0.2s;
+  animation-delay: -0.2s;
+}
+
+@-webkit-keyframes bouncedelay {
+  0%, 80%, 100% { opacity: 0; }
+  40% { opacity: 1; }
+}
+
+@keyframes bouncedelay {
+  0%, 80%, 100% { opacity: 0;}
+  40% { opacity: 1; }
+}
+
+/* 遮罩 */
+.m-mask {
+  position:fixed;
+  z-index:10;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  background-color:rgba(0, 0, 0, .5);
+}
+
+.popupBox{
+  position: fixed;
+  z-index: 11;
+  left: 50%;
+  top: 50%;
+  font-size: 1.6rem;
+  background-color: #fff;
+  color: #000;
+}
+.popup-hd{
+  margin: 0 1rem;
+  padding: 0 1rem;
+  line-height: 44px;
+  border-bottom: 1px solid #ddd;
+  color: #52be2c;
+}
+.popup-bd{
+  margin: 0 1rem;
+  padding: 2rem 1rem;
+}
+.popup-ft{
+  border-top: 1px solid #eee;
+}
+
+.popup-okBtn{
+  display: block;
+  line-height: 44px;
+  text-align: center;
+}
+
+
+.popup-confirm-ft a, .popup-prompt-ft a{
+  display: inline-block;
+  line-height: 44px;
+  width: 50%;
+  text-align: center;
+  box-sizing: border-box;
+}
+.popup-confirm-ft a:first-child, .popup-prompt-ft a:first-child{
+  border-right: 1px solid #eee;
+}
+
+.popup-promptInput{
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px 10px;
+  border: 1px solid #eee;
+  font-size: 1.4rem;
+}
+
+
+.popup-common-bd{
+  padding: 0;
+  margin: 0;
+}
+
+
+/* loading */
+.popupLoading .popup-bd{
+  margin:0;
+  padding:1rem;
+}
+
+
+.popup-loading {
+  background: transparent !important;
+  width: 100%;
+  left: auto;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+}
+.popup-loading .popup-bd {margin:0; padding:0;}
+
+
+/* ui-toast */
+.ui-toast {
+  position: absolute;
+  z-index: 13;
+  left: 0;
+  right: 0;
+  top: 80%;
+  text-align: center;
+}
+.ui-toast-inner {
+  padding: 5px 15px;
+  color: #fff;
+  display: inline-block;
+  max-width: 80%;
+  margin: 0 auto;
+  text-align: left;
+  background:#000000;
+  border-radius:5px;
+}
+.ui-toast.default .ui-toast-inner {
+  background-color: #00abd7;
+}
+.ui-toast.success .ui-toast-inner {
+  background-color: #008972;
+}
+.ui-toast.info .ui-toast-inner {
+  background-color: #f5c563;
+}
+.ui-toast.error .ui-toast-inner {
+  background-color: #f3572e;
 }
