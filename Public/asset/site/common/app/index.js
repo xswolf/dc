@@ -25,7 +25,6 @@ define([
             return angular.isObject(data) && String(data) !== '[object File]' ? $.param(data) : data;//使用jQuery的param方法把JSON数据转换成字符串形式
         }];
 
-        // 配置Dialog皮肤
         DialogServiceProvider.options.skinClassName = 'popup-ql';
         DialogServiceProvider.options.cssIndex = 15;
     }]);

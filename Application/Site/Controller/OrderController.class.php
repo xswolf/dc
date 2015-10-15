@@ -31,4 +31,13 @@ class OrderController extends BaseController {
 		$this->display();
 	}
 
+	/**
+	 * 提交订单
+	 */
+	public function submit() {
+		if (IS_AJAX and IS_POST) {
+			$this->ajaxSuccess();
+		}
+	}
+
 }

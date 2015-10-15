@@ -5,17 +5,20 @@
  * Time: 15:26
  */
 define(['angular', './module.js'], function(angular, module) {
-    module.controller('goods.ListController',['$scope', '$stateParams', '$q', '$location','app.MenuService', 'app.CartService', function($scope, $stateParams, $q, $location, MenuService, CartService) {
+    module.controller('goods.ListController',['$scope', '$stateParams', '$q', '$location','app.MenuService', 'app.CartService', 'app.DialogService', function($scope, $stateParams, $q, $location, MenuService, CartService, Dialog) {
         $scope.data = {
             mid: $stateParams.mid,
             goods: []
         };
 
         if($scope.data.mid > 0) {
+            var dialog = Dialog.loading();
             MenuService.getCategoryGoods($scope.data.mid).then(function (data) {
                 $scope.data.goods = data;
             }, function (msg) {
-
+                Dialog.alert(msg);
+            }).finally(function() {
+                dialog.close();
             });
         }
 

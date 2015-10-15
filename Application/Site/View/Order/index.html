@@ -19,7 +19,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="c in cart">
+                        <tr ng-if="cart.length > 0" ng-repeat="c in cart">
                             <td class="cpName" ng-bind="c.goods.name"></td>
                             <td>
                                 <div class="mod-goodsCount show">
@@ -28,9 +28,9 @@
                                     <span class="plus"><a href="javascript:;" ng-click="plus(c)">+</a></span>
                                 </div>
                             </td>
-                            <td>{{c.number * c.price | currency:'￥'}}</td>
+                            <td ng-bind="c.number * c.price | currency:'￥'"></td>
                             <td>
-                                <a href="javascript:;" ng-click="showPage('remark')" class="bz icon-bz active"></a>
+                                <a href="javascript:;" ng-click="writeRemark(c)" class="bz icon-bz active"></a>
                             </td>
                         </tr>
                     </tbody>
@@ -39,28 +39,9 @@
             <div class="mod-footer fixed">
                 <div class="total">
                     <span class="badge" ng-bind="selectedNumber()"></span>
-                    <span style="margin-left: 15px;">￥<i ng-bind="totalPrice()"></i></span>
+                    <span style="margin-left: 15px;"><i ng-bind="totalPrice() | currency:'￥'"></i></span>
                 </div>
-                <a class="btn-cart button button-1" ui-sref="orderPay" ng-click="showPage('payment')">提交订单</a>
-            </div>
-        </div>
-
-        <!--#### 支付 ####-->
-        <div class="scroll-content bg-2 page-payment" ng-if="ui.page.payment">
-            <div class="orderPay">
-                <div class="mod-tipsBox">
-                    <div class="inner">
-                        <ul>
-                            <li class="item">订单总价：<span class="text-danger">￥40.00</span></li>
-                            <li class="item">还需支付：<span class="text-danger">￥30.00</span></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="f-p10">
-                    <a class="button button-success button-block f-mb15" href="javascript:;" ng-click="showPage('list')">微信支付</a>
-                    <p class="text-right text-muted">你也可以选择 <a class="text-info" href="javascript:;">线下支付</a></p>
-                </div>
+                <a class="btn-cart button button-1" ng-click="submitWxOrder()">提交订单</a>
             </div>
         </div>
 
@@ -68,10 +49,10 @@
         <div class="scroll-content mod-bz page-remark" ng-if="ui.page.remark">
             <div class="hd">
                 <a ng-click="showPage('list')" class="back" href="javascript:;"></a>添加备注
-                <a ng-click="showPage('list')" class="btn" href="javascript:;">保存</a>
+                <a ng-click="saveRemark()" class="btn" href="javascript:;">保存</a>
             </div>
             <div class="bd">
-                <textarea class="iptText" placeholder="在这里填写特殊要求：加冰、少糖等"></textarea>
+                <textarea class="iptText" placeholder="在这里填写特殊要求：加冰、少糖等" ng-model="ui.remark_value"></textarea>
             </div>
         </div>
 

@@ -8,9 +8,6 @@
             <li ng-repeat="m in category" ng-class="{'active':$first && !category_id || m.id == category_id}">
                 <a ng-click="loadGoods(m.id)" ng-bind="m.name"></a>
             </li>
-            <li>
-                <a href="javascript:location.reload();">刷新</a>
-            </li>
         </ul>
     </div>
 </script>

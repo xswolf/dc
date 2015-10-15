@@ -31,6 +31,14 @@ define(['angular', '../module.js'], function(angular, module) {
             return $http.get('/site/goods/get_category_goods?id='+id);
         };
 
+        /**
+         * 订单提交
+         * @param spec 购物车数据 [{gid:1, number:1, remark:'xxx'},]
+         */
+        api.submitOrder = function (spec) {
+            return $http.post('/site/order/submit', {spec: spec});
+        };
+
         return api;
     }]);
 });
