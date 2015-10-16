@@ -7,6 +7,6 @@ return array(
     'LOAD_EXT_CONFIG'    => 'db',      //加载扩展配置文件
     'MODULE_DENY_LIST'   => ['Common', 'Runtime'],
     'MODULE_ALLOW_LIST'  => ['Home', 'Admin', 'Site','Wx'],
-    'SHOW_PAGE_TRACE'=>1,
+    'SHOW_PAGE_TRACE'    => false,
     'DEFAULT_MODULE'     => 'Site',
 );
