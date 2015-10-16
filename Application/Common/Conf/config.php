@@ -1,6 +1,8 @@
 <?php
 return array(
     //'配置项'=>'配置值'
+    'URL_CASE_INSENSITIVE' =>true,
+
     'DEFAULT_MODULE'     => 'Site', //默认模块
     'URL_MODEL'          => '2',    //URL模式
     'SESSION_AUTO_START' => true,   //是否开启session
