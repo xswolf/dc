@@ -47,10 +47,12 @@
                         <li><a href="<?php echo U('settings/goodsType');?>">菜单管理</a></li>
                         <li><a href="<?php echo U('settings/goods');?>">菜品管理</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">流水明细</a></li>
+                        <li><a href="<?php echo U('Order/historyOrder');?>">流水明细</a></li>
                         <li><a href="#">营业数据</a></li>
                     </ul>
                 </li>
+                <li><a href="<?php echo U('cash/index');?>">提现申请</a></li>
+                <li><a href="<?php echo U('cash/index');?>">提现流水</a></li>
                 <li><a href="/admin/user/component">component</a></li>
                 <li><a href="/admin/user/common">common</a></li>
             </ul>
@@ -110,8 +112,8 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="selectbasic">所属菜单</label>
                         <div class="col-md-4">
-                            <select id="selectbasic" name="goods_type_id" class="form-control">
-                                <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i; if(($vo["id"]) == $data["goods_type_id"]): ?><option value="<?php echo ($vo["id"]); ?>" selected><?php echo ($vo["name"]); ?></option>
+                            <select id="selectbasic" name="category_id" class="form-control">
+                                <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i; if(($vo["id"]) == $data["category_id"]): ?><option value="<?php echo ($vo["id"]); ?>" selected><?php echo ($vo["name"]); ?></option>
                                         <?php else: ?>
                                         <option value="<?php echo ($vo["id"]); ?>"><?php echo ($vo["name"]); ?></option><?php endif; endforeach; endif; else: echo "" ;endif; ?>
                             </select>
@@ -214,6 +216,33 @@
 <div class=""></div>
 
 <script src="/Public/libs/jquery/jquery.1.11.3.min.js"></script>
+
+<script>
+
+    $(function(){
+        var pathName = location.pathname;
+//        var s1  = pathName.indexOf(".html");
+//        pathName = pathName.substr(0,s1);
+        var flag = false;
+        $(".navbar-nav > li").each(function(){
+            console.log($(this).children().attr("href"))
+
+            $(this).removeClass("active");
+            var hrefVar = $(this).children().attr("href");
+            if (pathName == hrefVar){
+                $(this).addClass("active");
+                flag = true;
+            }
+        })
+        if (!flag){
+            $("#fat-menu").addClass("active");
+        }
+    });
+
+
+</script>
+
+<!--<script src="/Public/libs/jquery/jquery.cookie.js"></script>-->
 <script src="/Public/libs/bootstrap/js/bootstrap.min.js"></script>
 
 <!-- plugins -->
@@ -224,9 +253,9 @@
 <script src="/Public/libs/plugins/toastr/toastr.min.js"></script>
 
 
-<link rel="stylesheet" href="/Public/libs/plugins/datatables/dataTables.css"/>
-<script src="/Public/libs/plugins/datatables/jquery.dataTables.js"></script>
-<script src="/Public/libs/plugins/datatables/dataTables.bootstrap.js"></script>
+<link rel="stylesheet" href="/Public/libs/plugins/datatables/css/dataTables.bootstrap.css"/>
+<script src="/Public/libs/plugins/datatables/js/jquery.dataTables.min.js"></script>
+<script src="/Public/libs/plugins/datatables/js/dataTables.bootstrap.js"></script>
 
 
 <link rel="stylesheet" href="/Public/libs/plugins/bootstrap-datatimepicker/css/bootstrap-datetimepicker.min.css"/>
@@ -244,5 +273,7 @@
 
 <!--  -->
 <script src="/Public/js/app.js"></script>
+
+<script src="/Public/js/dataTables.js"></script>
 </body>
 </html>

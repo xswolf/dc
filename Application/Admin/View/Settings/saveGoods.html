@@ -38,9 +38,9 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="selectbasic">所属菜单</label>
                         <div class="col-md-4">
-                            <select id="selectbasic" name="goods_type_id" class="form-control">
+                            <select id="selectbasic" name="category_id" class="form-control">
                                 <volist name="list" id="vo">
-                                    <eq name="vo.id" value="$data.goods_type_id">
+                                    <eq name="vo.id" value="$data.category_id">
                                         <option value="{$vo.id}" selected>{$vo.name}</option>
                                         <else/>
                                         <option value="{$vo.id}">{$vo.name}</option>

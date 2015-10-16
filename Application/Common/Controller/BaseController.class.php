@@ -13,7 +13,7 @@ class BaseController extends \Think\Controller{
     /**
      * @return self
      */
-    public static function instance($args=""){
+    public static function instance($args = ""){
 
         $class = get_called_class();
         static $instance;

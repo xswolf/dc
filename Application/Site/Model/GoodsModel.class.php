@@ -50,4 +50,27 @@ class GoodsModel extends BaseModel {
 		return $Model->field(['id','name'])->where(['shop_id' => $shop_id, 'status' => 1])->order('id ASC')->limit(1)->find();
 	}
 
+	/**
+	 *获得某个店铺商品的列表
+	 * @param int $shop_id
+	 * @param array $gid
+	 * @return array
+	 */
+	public function selectGoodsByIds($shop_id, $gid) {
+		$data = $Model = M($this->_table)->alias('a')
+			->join("__GOODS__ b on a.id = b.category_id")
+			->field([
+				'a.shop_id',
+				'a.name' => 'category_name',
+				'b.id',
+				'b.name' => 'goods_name',
+				'b.native_price',
+				'b.price',
+				'b.status'
+			])
+			->where(['a.shop_id' => $shop_id, 'b.id' => ['in',$gid]])
+			->select();
+		return $data;
+	}
+
 }

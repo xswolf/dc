@@ -30,12 +30,22 @@ class MemberController extends BaseController {
 		$hasHandled = false;
 		$mid = I('get.mid');
 		if(!empty($mid) && ctype_digit($mid)) {
-			$member = MemberModel::instance()->memberInfo($mid, $this->_shop_id);
-			if(!empty($member) and $member['shop_id'] == $this->_shop_id) {
+			$wx_user = MemberModel::instance()->getWxUsrInfo($mid);
+			if(!empty($wx_user)) {
+				$member = MemberModel::instance()->memberInfo($mid, $this->_shop_id);
+				if(!empty($member) and $member['shop_id'] == $this->_shop_id) {
+					$member_id = $member['id'];
+					$member_username = $member['username'];
+					$member_avatar = $member['avatar'];
+				} else {
+					$member_id = MemberModel::instance()->addMember($wx_user, $this->_shop_id);
+					$member_username = $wx_user['nickname'];
+					$member_avatar = $wx_user['headimgurl'];
+				}
 				$hasHandled = true;
-				cookie('mid', $mid, ['expire' => NOW_TIME + 31536000, 'prefix' => $this->_config['cookie_prefix']]);
-				cookie('username', $member['username'], ['expire' => NOW_TIME + 31536000, 'prefix' => $this->_config['cookie_prefix']]);
-				cookie('avatar', $member['avatar'], ['expire' => NOW_TIME + 31536000, 'prefix' => $this->_config['cookie_prefix']]);
+				cookie('mid', $member_id, ['expire' => NOW_TIME + 31536000, 'prefix' => $this->_config['cookie_prefix']]);
+				cookie('username', $member_username, ['expire' => NOW_TIME + 31536000, 'prefix' => $this->_config['cookie_prefix']]);
+				cookie('avatar', $member_avatar, ['expire' => NOW_TIME + 31536000, 'prefix' => $this->_config['cookie_prefix']]);
 			}
 		}
 

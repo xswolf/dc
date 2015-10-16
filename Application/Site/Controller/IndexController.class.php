@@ -11,6 +11,6 @@ use Site\Common\BasicController;
 class IndexController extends BasicController {
 
 	public function index() {
-		redirect(U('Goods/Index','',false));
+		redirect(U('goods/index','',false));
 	}
 }
