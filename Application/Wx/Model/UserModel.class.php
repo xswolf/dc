@@ -37,5 +37,13 @@ class UserModel extends BaseModel{
         $data = M($this->_table)->where(['id'=>$uid,'subscribe'=>1])->field('openid')->find();
         return $data['openid'];
     }
+    
+    /**
+     * 获取用户的id
+     */
+    public function getUserId( $openId ){
+        $data = M($this->_table)->where(['openid'=>$openId,'subscribe'=>1])->field('id')->find();
+        return $data['id'];
+    }
 }
 

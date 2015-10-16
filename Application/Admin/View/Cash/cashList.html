@@ -1,0 +1,43 @@
+<div class="container-fluid">
+    <h2>菜品分类管理</h2>
+    <div class="wpBox">
+        <div class="bd">
+            <table class="table table-hover table-bordered j-dataTables">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>时间</th>
+                    <th>金额</th>
+                    <th>状态</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <assign name="sumMoney" value="0" />
+                <volist name="list" id="vo">
+                    <tr>
+                        <td>{$vo.id}</td>
+                        <td>{$vo.created_at|date='Y-m-d' , ###}</td>
+                        <td>
+                           {$vo.cash_money}
+                        </td>
+                        <td>
+                            <eq name="vo.status" value="0">
+                                申请中
+                                <else/>
+                                已提现
+                            </eq>
+                        </td>
+                        <?php $sumMoney+=$vo['cash_money'] ?>
+                    </tr>
+                </volist>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4">总计:{$sumMoney}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

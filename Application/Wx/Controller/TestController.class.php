@@ -1,12 +1,10 @@
 <?php
 namespace Wx\Controller;
 
-use Wx\Controller\InitiativeController;
-use Wx\Controller\ISendMessageController;
-use Wx\WxPay\JsApiPay;
 use Wx\Event\PayEvent;
+use Common\Controller\BaseController;
 
-class TestController extends InitiativeController{
+class TestController extends BaseController{
     
     public function index(){
 //         ISendMessageController::instance(['tousername'=>"aaa"])->scanTableQrcode();

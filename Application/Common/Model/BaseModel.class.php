@@ -17,7 +17,7 @@ class BaseModel extends Model
     /**
      * 保证每个类只有一个实例
      * @param $args
-     * @return mixed|static
+     * @return mixed|static|self
      */
     public static function instance($args = null)
     {

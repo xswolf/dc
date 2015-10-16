@@ -63,7 +63,7 @@ class OrderController extends VerifyController {
     /**
      * 历史订单
      */
-    public function historyOrder() {
+    public function historyOrder(){
         $request = I('post.sn');
         $start = I('post.start');
         $end = I('post.end');
