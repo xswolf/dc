@@ -5,7 +5,7 @@ use Admin\Model\GoodsModel;
 use Admin\Model\GoodsTypeModel;
 use Admin\Model\ShopTableModel;
 use Common\Controller\VerifyController;
-use Wx\Event\Qrcode;
+use Wx\Event\QrcodeEvent;
 
 class SettingsController extends VerifyController {
 
@@ -72,7 +72,7 @@ class SettingsController extends VerifyController {
                 ShopTableModel::instance()->edit($_POST);
             }else{ // 添加
 
-                $qrCode = new Qrcode();
+                $qrCode = new QrcodeEvent();
                 $data = $qrCode->create($this->user->getShopId());
 
                 if ($data){
