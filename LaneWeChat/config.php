@@ -16,15 +16,15 @@ define('LANEWECHAT_VERSION_DATE', '2014-11-05');
 /*
  * 服务器配置，详情请参考@link http://mp.weixin.qq.com/wiki/index.php?title=接入指南
  */
-define("WECHAT_URL", 'http://gypc.nat123.net');
-define('WECHAT_TOKEN', 'youcan1');
-define('ENCODING_AES_KEY', "efXGUYOERPxPgWZU5zxJyPrwHORFXCEbLDYZjukrZ7n");
+define("WECHAT_URL", 'http://gypc2.nat123.net');
+define('WECHAT_TOKEN', 'qulian_wx');
+define('ENCODING_AES_KEY', "mj2noP6yqdWwPWLB902ELVl8MCGEuYsw6maGqnANAXV");
 
 /*
  * 开发者配置
  */
-define("WECHAT_APPID", 'wx77b466baa9f0307b');
-define("WECHAT_APPSECRET", 'fa99b5ba2f3d333066900d32dcfefaa1');
+define("WECHAT_APPID", 'wxcc0739e80478f18a');
+define("WECHAT_APPSECRET", '9cf1d93207db46aa61bde9ef47535186');
 
 
 ////-----引入系统所需类库-------------------

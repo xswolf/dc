@@ -8,10 +8,10 @@
 
 namespace Site\Controller;
 
-use Common\Controller\BaseController;
+use Site\Common\BasicController;
 use Site\Common\DomainController;
 use Site\Model\GoodsModel;
-class GoodsController extends BaseController {
+class GoodsController extends BasicController {
 	/**
 	 * @var int 店铺ID
 	 */

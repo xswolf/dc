@@ -17,7 +17,8 @@ class WechatRequest{
      * @return array|string
      */
     public static function switchType(&$request){
-        $data = array();
+        $data = "";
+        
         switch ($request['msgtype']) {
             //事件
             case 'event':
@@ -27,15 +28,19 @@ class WechatRequest{
                     case 'subscribe':
                         //二维码关注
                         if(isset($request['eventkey']) && isset($request['ticket'])){
-                            $data = self::eventQrsceneSubscribe($request);
+                            \Wx\Model\UserModel::instance()->subscribe($request['fromusername']);
+                            \Wx\Event\SendMessageEvent::instance($request)->scanTableQrcode();
+//                             $data = self::eventQrsceneSubscribe($request);
                         //普通关注
                         }else{
+                            \Wx\Model\UserModel::instance()->subscribe($request['fromusername']);
                             $data = self::eventSubscribe($request);
                         }
                         break;
                     //扫描二维码
                     case 'scan':
-                        $data = self::eventScan($request);
+                        \Wx\Event\SendMessageEvent::instance($request)->scanTableQrcode();
+                        //$data = self::eventScan($request);
                         break;
                     //地理位置
                     case 'location':
@@ -75,6 +80,7 @@ class WechatRequest{
                         break;
                     //取消关注
                     case 'unsubscribe':
+                        \Wx\Model\UserModel::instance()->unsubscribe($request['fromusername']);
                         $data = self::eventUnsubscribe($request);
                         break;
                     //群发接口完成后推送的结果
@@ -142,6 +148,7 @@ class WechatRequest{
      * @return array
      */
     public static function image(&$request){
+        file_put_contents('./wx-test/img.txt', json_encode($request));
         $content = '收到图片';
         return ResponsePassive::text($request['fromusername'], $request['tousername'], $content);
     }

@@ -34,7 +34,7 @@ class ResponseInitiative{
                 'content'=>$content,
             ),
         );
-        $template = json_encode($template);
+        $template = json_encode($template,JSON_UNESCAPED_UNICODE);
 
         return Curl::callWebServer(self::$queryUrl, $template, self::$action);
     }
@@ -58,7 +58,7 @@ class ResponseInitiative{
                 'media_id'=>$mediaId,
             ),
         );
-        $template = json_encode($template);
+        $template = json_encode($template,JSON_UNESCAPED_UNICODE);
         return Curl::callWebServer(self::$queryUrl, $template, self::$action);
     }
 
@@ -81,7 +81,7 @@ class ResponseInitiative{
                 'media_id'=>$mediaId,
             ),
         );
-        $template = json_encode($template);
+        $template = json_encode($template,JSON_UNESCAPED_UNICODE);
         return Curl::callWebServer(self::$queryUrl, $template, self::$action);
     }
 
@@ -108,7 +108,7 @@ class ResponseInitiative{
                 'description'=>$description,
             ),
         );
-        $template = json_encode($template);
+        $template = json_encode($template,JSON_UNESCAPED_UNICODE);
         return Curl::callWebServer(self::$queryUrl, $template, self::$action);
     }
 
@@ -139,7 +139,7 @@ class ResponseInitiative{
                 'thumb_media_id'=>$thumbMediaId,
             ),
         );
-        $template = json_encode($template);
+        $template = json_encode($template,JSON_UNESCAPED_UNICODE);
         return Curl::callWebServer(self::$queryUrl, $template, self::$action);
     }
 
@@ -180,7 +180,7 @@ class ResponseInitiative{
                 'articles'=>$item
             ),
         );
-        $template = json_encode($template);
+        $template = json_encode($template,JSON_UNESCAPED_UNICODE);//不转汉字
         return Curl::callWebServer(self::$queryUrl, $template, self::$action);
     }
 
