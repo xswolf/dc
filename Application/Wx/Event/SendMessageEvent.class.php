@@ -32,7 +32,7 @@ class SendMessageEvent extends BaseController{
                 $table = M("shop_table")->where(['qrcode_id' => $qrcode['id']])->find();
                 $mid = UserModel::instance()->getUserId($this->fromUsername);
                 if($table){
-                    $url = "http://www.qulianchn.com/index?mid={$mid}&time=".time()."&table={$table['id']}";
+                    $url = "http://{$table['shop_id']}.qulianchn.com/index?mid={$mid}&time=".time()."&table={$table['id']}";
                     $data[] = ResponseInitiative::newsItem('你已进入'.$table['name'].'桌', '请点击图片开始点餐', 'http://gypc2.nat123.net/public/uploads/2015-09-23/560218c410388.jpg', $url);
                     $result =ResponseInitiative::news($this->fromUsername, $data);
                 }
