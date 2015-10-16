@@ -1,255 +1,209 @@
-<div class="orderList">
-<div class="container-fluid">
+<!-----------------小票打印设置---------------->
+<script language="javascript" src="/Public/Lodop6.198/LodopFuncs.js"></script>
+<script language="javascript" src="/Public/js/print.js" ></script>
+<!-- 调用LODOP控件代码-->
+<object id="LODOP_OB" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0>
+    <embed id="LODOP_EM" type="application/x-print-lodop" width=0 height=0 pluginspage="install_lodop.exe"></embed>
+    <param name="CompanyName" value="重庆中恒科技有限公司">
+</object>
+<!-----------------小票打印设置---------------->
 
-<div class="wpBox">
-    <div class="hd">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="输入订单号查询">
-              <span class="input-group-btn">
-                <button class="btn btn-primary" type="button">查询</button>
-              </span>
+
+
+<div class="orderList" ng-app="app">
+    <div class="container-fluid">
+        <div class="wpBox" ng-controller="order.controller">
+            <div class="hd">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control" ng-trim="false" ng-model="data.orderSn" placeholder="输入订单号查询">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button" ng-click="searchOrder()">查询</button>
+                            </span>
+                        </div>
+                    </div>
                 </div>
+            </div>
+            <div class="bd">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                    <tr>
+                        <th>单号</th>
+                        <th>桌号</th>
+                        <th>消费金额</th>
+                        <th>下单时间</th>
+                        <th class="col-md-3">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-repeat="d in data.list">
+                        <tr>
+                            <td data-ng-bind="d.sn"></td>
+                            <td data-ng-bind="d.table_id"></td>
+                            <td data-ng-bind="d.price | currency:'￥'"></td>
+                            <td data-ng-bind="d.orderTime"></td>
+                            <td>
+                                <button class="btn btn-info" type="button" aria-expanded="false" aria-controls="collapseExample" ng-click="subOrderShow(d.id)">
+                                    详细 <span class="caret"></span>
+                                </button>
+                                <button class="btn btn-success j-confirmBtn" ng-click="sureOrder(d.id)">确认订单</button>
+                            </td>
+                        </tr>
+                        <tr style="background-color:transparent;" ng-show="data.showId == d.id">
+                            <td colspan="5">
+                                <div class="orderDetail">
+                                    <div class="well">
+                                        <table class="table table-condensed">
+                                            <thead>
+                                            <tr>
+                                                <th>菜品</th>
+                                                <th>单价</th>
+                                                <th>数量</th>
+                                                <th>小计</th>
+                                                <th>备注</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="o in d.orderGoodsList">
+                                                    <td ng-bind="o.name"></td>
+                                                    <td ng-bind="o.order_goods_price | currency:'￥'"></td>
+                                                    <td ng-bind="o.number"></td>
+                                                    <td ng-bind="o.order_goods_price * o.number | currency:'￥'"></td>
+                                                    <td ng-bind="o.mark"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-    <div class="bd">
-        <table class="table table-hover table-bordered">
-    <thead>
-    <tr>
-        <th>单号</th>
-        <th>桌号</th>
-        <th>消费金额</th>
-        <th>下单时间</th>
-        <th class="col-md-3">操作</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>001</td>
-        <td>A01</td>
-        <td>20.00</td>
-        <td>1分钟前</td>
-        <td>
-            <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample2"
-                    aria-expanded="false" aria-controls="collapseExample">
-                详细 <span class="caret"></span></button>
-            <button class="btn btn-success j-confirmBtn" data-id="1">确认订单</button>
-        </td>
-    </tr>
-    <tr class="collapse" id="collapseExample2" style="background-color: transparent">
-        <td colspan="5">
-            <div class="orderDetail">
-                <div class="well">
-                    <table class="table table-condensed">
-                        <thead>
-                        <tr>
-                            <th>菜品</th>
-                            <th>单价</th>
-                            <th>数量</th>
-                            <th>小计</th>
-                            <th>备注</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>双球冰激凌菜品名字最多显示14</td>
-                            <td>32.00</td>
-                            <td>x2</td>
-                            <td>64.00</td>
-                            <td>菜品备注信息最多只能显示20个字省略省略省</td>
-                        </tr>
-                        <tr>
-                            <td>双球冰激凌菜品名字最多显示14</td>
-                            <td>32.00</td>
-                            <td>x2</td>
-                            <td>64.00</td>
-                            <td>菜品备注信息最多只能显示20个字省略省略省</td>
-                        </tr>
-                        <tr>
-                            <td>双球冰激凌菜品名字最多显示14</td>
-                            <td>32.00</td>
-                            <td>x2</td>
-                            <td>64.00</td>
-                            <td>菜品备注信息最多只能显示20个字省略省略省</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>001</td>
-        <td>A01</td>
-        <td>20.00</td>
-        <td>1分钟前</td>
-        <td>
-            <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample3"
-                    aria-expanded="false" aria-controls="collapseExample">
-                详细 <span class="caret"></span></button>
-            <button class="btn btn-success j-confirmBtn" data-id="2">确认订单</button>
-        </td>
-    </tr>
-    <tr class="collapse" id="collapseExample3" style="background-color: transparent">
-        <td colspan="5">
-            <div class="orderDetail">
-                <div class="well">
-                    <table class="table table-condensed">
-                        <thead>
-                        <tr>
-                            <th>菜品</th>
-                            <th>单价</th>
-                            <th>数量</th>
-                            <th>小计</th>
-                            <th>备注</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>双球冰激凌菜品名字最多显示14</td>
-                            <td>32.00</td>
-                            <td>x2</td>
-                            <td>64.00</td>
-                            <td>菜品备注信息最多只能显示20个字省略省略省</td>
-                        </tr>
-                        <tr>
-                            <td>双球冰激凌菜品名字最多显示14</td>
-                            <td>32.00</td>
-                            <td>x2</td>
-                            <td>64.00</td>
-                            <td>菜品备注信息最多只能显示20个字省略省略省</td>
-                        </tr>
-                        <tr>
-                            <td>双球冰激凌菜品名字最多显示14</td>
-                            <td>32.00</td>
-                            <td>x2</td>
-                            <td>64.00</td>
-                            <td>菜品备注信息最多只能显示20个字省略省略省</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>001</td>
-        <td>A01</td>
-        <td>20.00</td>
-        <td>1分钟前</td>
-        <td>
-            <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample4"
-                    aria-expanded="false" aria-controls="collapseExample">
-                详细 <span class="caret"></span></button>
-            <button class="btn btn-success j-confirmBtn" data-id="3">确认订单</button>
-        </td>
-    </tr>
-    <tr class="collapse" id="collapseExample4" style="background-color: transparent">
-        <td colspan="5">
-            <div class="orderDetail">
-                <div class="well">
-                    <table class="table table-condensed">
-                        <thead>
-                        <tr>
-                            <th>菜品</th>
-                            <th>单价</th>
-                            <th>数量</th>
-                            <th>小计</th>
-                            <th>备注</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>双球冰激凌菜品名字最多显示14</td>
-                            <td>32.00</td>
-                            <td>x2</td>
-                            <td>64.00</td>
-                            <td>菜品备注信息最多只能显示20个字省略省略省</td>
-                        </tr>
-                        <tr>
-                            <td>双球冰激凌菜品名字最多显示14</td>
-                            <td>32.00</td>
-                            <td>x2</td>
-                            <td>64.00</td>
-                            <td>菜品备注信息最多只能显示20个字省略省略省</td>
-                        </tr>
-                        <tr>
-                            <td>双球冰激凌菜品名字最多显示14</td>
-                            <td>32.00</td>
-                            <td>x2</td>
-                            <td>64.00</td>
-                            <td>菜品备注信息最多只能显示20个字省略省略省</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>001</td>
-        <td>A01</td>
-        <td>20.00</td>
-        <td>1分钟前</td>
-        <td>
-            <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample5"
-                    aria-expanded="false" aria-controls="collapseExample">
-                详细 <span class="caret"></span></button>
-            <button class="btn btn-success j-confirmBtn" data-id="4">确认订单</button>
-        </td>
-    </tr>
-    <tr class="collapse" id="collapseExample5" style="background-color: transparent">
-        <td colspan="5">
-            <div class="orderDetail">
-                <div class="well">
-                    <table class="table table-condensed">
-                        <thead>
-                        <tr>
-                            <th>菜品</th>
-                            <th>单价</th>
-                            <th>数量</th>
-                            <th>小计</th>
-                            <th>备注</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>双球冰激凌菜品名字最多显示14</td>
-                            <td>32.00</td>
-                            <td>x2</td>
-                            <td>64.00</td>
-                            <td>菜品备注信息最多只能显示20个字省略省略省</td>
-                        </tr>
-                        <tr>
-                            <td>双球冰激凌菜品名字最多显示14</td>
-                            <td>32.00</td>
-                            <td>x2</td>
-                            <td>64.00</td>
-                            <td>菜品备注信息最多只能显示20个字省略省略省</td>
-                        </tr>
-                        <tr>
-                            <td>双球冰激凌菜品名字最多显示14</td>
-                            <td>32.00</td>
-                            <td>x2</td>
-                            <td>64.00</td>
-                            <td>菜品备注信息最多只能显示20个字省略省略省</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </td>
-    </tr>
-
-    </tbody>
-    </table>
-    </div>
 </div>
+<js href="/Public/verdor/angular-1.4.6/angular.js" />
+<js href="/Public/verdor/layer.m/layer.m.js" />
 
+<script type="text/javascript">
+    if(typeof(EventSource) !== 'undefined') {
+        var index;
+        angular.module('app',[]).config(['$httpProvider', function($httpProvider){
+            $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
+            $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+            $httpProvider.defaults.transformRequest = [function(data) {
+                return angular.isObject(data) && String(data) !== '[object File]' ? $.param(data) : data;//使用jQuery的param方法把JSON数据转换成字符串形式
+            }];
+        }]).controller('order.controller',['$scope', '$http', function($scope, $http) {
+            $scope.data = {
+                list: [],
+                showId: 0,
+                orderSn: ''
+            };
 
+            $scope.source = null;
+            /**
+             * 加载订单列表
+             */
+            $scope.loadOder = function(param) {
+                if(!param) {
+                    param = '';
+                }
 
+                index = layer.open({
+                    type: 2,
+                    content: ''
+                });
 
-</div>
-</div>
+                $scope.source = new EventSource("{:U('Order/GetOrder','',false)}"+param);
+                $scope.source.addEventListener("message", $scope.addData, false);
+            };
+
+            $scope.addData = function(event) {
+                $scope.$apply(function() {
+                    $scope.data.list = JSON.parse(event.data);
+                });
+                layer.close(index);
+            };
+
+            $scope.loadOder();
+
+            $scope.subOrderShow = function(id) {
+                if($scope.data.showId == id) {
+                    $scope.data.showId = 0;
+                } else {
+                    $scope.data.showId = id;
+                }
+            };
+
+            $scope.searchOrder = function() {
+                if($scope.data.orderSn.trim().length <= 0) {
+                    layer.open({
+                        content: '请输入订单号查询 ...',
+                        time: 2
+                    });
+                    return false;
+                }
+                $scope.source.removeEventListener("message", $scope.addData, false);
+                $scope.loadOder('?sn='+$scope.data.orderSn.trim());
+            };
+
+            /**
+             * 确认订单
+             */
+            $scope.sureOrder = function(oid) {
+                var sureIndex = layer.open({
+                    content: '是否需要确认当前订单吗？',
+                    btn: ['确认', '取消'],
+                    shadeClose: false,
+                    yes: function(){
+                        layer.close(sureIndex);
+                        layer.open({
+                            type: 2,
+                            content: ''
+                        });
+                        $http.post("{:U('Order/SureOrder','',false)}",{id: oid},{
+                            headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+                            transformRequest: function(){
+                                return $.param({id: oid});
+                            }
+                        }).then(function(res) {
+                            if(res.data.status) {
+
+                                var data = res.data.data;
+                                var json = {
+                                    "title":"订单信息",
+                                    "tableId":data.orderData.name,
+                                    "orderNo": data.orderData.sn, "orderTime":getLocalTime(data.orderData.created_at),
+                                    "goodsList":data.orderGoodsData
+                                };
+                                printOrder(json);
+                            }
+                        },function(err) {
+                            layer.open({
+                                content: err,
+                                style: 'background-color:#e9e2da; color:green; border:none;'
+                            });
+                        }).finally(function(){
+                            layer.closeAll();
+                        });
+                    }, no: function(){
+                        layer.closeAll();
+                    }
+                });
+            };
+
+            $scope.$watch('data.orderSn',function() {
+                if($scope.data.orderSn.trim().length <= 0) {
+                    $scope.source.removeEventListener("message", $scope.addData, false);
+                    $scope.source = new EventSource("{:U('Order/GetOrder','',false)}");
+                    $scope.source.addEventListener("message", $scope.addData, false);
+                }
+            }, true);
+
+        }]);
+    } else {
+        console.log('Sorry! No server-sent events support..');
+    }
+</script>
