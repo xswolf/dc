@@ -5,7 +5,7 @@ use Common\Controller\BaseController;
 use LaneWeChat\Core\Popularize;
 use Wx\Model\QrcodeModel;
 
-class Qrcode extends BaseController{
+class QrcodeEvent extends BaseController{
     
 
     /**
