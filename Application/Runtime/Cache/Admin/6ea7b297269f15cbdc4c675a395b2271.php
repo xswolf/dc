@@ -112,8 +112,8 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="selectbasic">所属菜单</label>
                         <div class="col-md-4">
-                            <select id="selectbasic" name="goods_type_id" class="form-control">
-                                <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i; if(($vo["id"]) == $data["goods_type_id"]): ?><option value="<?php echo ($vo["id"]); ?>" selected><?php echo ($vo["name"]); ?></option>
+                            <select id="selectbasic" name="category_id" class="form-control">
+                                <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i; if(($vo["id"]) == $data["category_id"]): ?><option value="<?php echo ($vo["id"]); ?>" selected><?php echo ($vo["name"]); ?></option>
                                         <?php else: ?>
                                         <option value="<?php echo ($vo["id"]); ?>"><?php echo ($vo["name"]); ?></option><?php endif; endforeach; endif; else: echo "" ;endif; ?>
                             </select>

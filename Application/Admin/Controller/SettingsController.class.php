@@ -118,7 +118,7 @@ class SettingsController extends VerifyController {
 
         }
 
-        $list = GoodsTypeModel::instance()->lists($this->user->getShopId());
+        $list = GoodsCategoryModel::instance()->lists($this->user->getShopId());
         $this->assign('list' , $list); //菜品分类
         $this->display();
     }
