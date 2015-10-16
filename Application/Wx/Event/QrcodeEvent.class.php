@@ -6,7 +6,6 @@ use LaneWeChat\Core\Popularize;
 use Wx\Model\QrcodeModel;
 
 class QrcodeEvent extends BaseController{
-    
 
     /**
      * 创建二维码
