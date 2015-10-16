@@ -11,4 +11,8 @@ class GoodsCategoryModel extends BaseModel  {
 
     protected $_table = "goods_category";
 
+    public function lists($shopId){
+        return M($this->_table)->where(["shop_id" => $shopId])
+            ->select();
+    }
 }

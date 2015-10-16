@@ -27,7 +27,7 @@ class SettingsController extends VerifyController {
     // 菜品分类管理
     public function goodsType(){
 
-        $list = GoodsTypeModel::instance()->lists($this->user->getShopId());
+        $list = GoodsCategoryModel::instance()->lists($this->user->getShopId());
         $this->assign('list' , $list);
         $this->display();
     }
@@ -35,16 +35,16 @@ class SettingsController extends VerifyController {
     // 添加修改菜品分类
     public function saveGoodsType(){
         if (I('id')){
-            $data = GoodsTypeModel::instance()->findById(I('id'));
+            $data = GoodsCategoryModel::instance()->findById(I('id'));
             $this->assign('data' , $data);
         }
         if($_POST){
             if (I("post.id")){ // 编辑
 
-                GoodsTypeModel::instance()->edit($_POST);
+                GoodsCategoryModel::instance()->edit($_POST);
             }else{ // 添加
                 $_POST['shop_id'] = $this->user->getShopId();
-                GoodsTypeModel::instance()->insert($_POST);
+                GoodsCategoryModel::instance()->insert($_POST);
             }
             $this->_success('添加成功' , U('goodsType'));
 
