@@ -6,7 +6,7 @@ define([
     './module.js',
     'ui.router',
     'ngAnimate',
-    './controller.js',
+    //'./controller.js',
     './ListController.js',
     './menu.js',
     './footer.js'
@@ -15,7 +15,7 @@ define([
         $urlRouterProvider.otherwise("/");
         $stateProvider.state('list', {
             url: "/",
-            controller: 'goods.Controller',
+            controller: 'goods.ListController',
             templateUrl: 'tpl-list.html'
         }).state('list-id', {
             url: "/list/{mid:int}",

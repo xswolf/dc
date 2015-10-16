@@ -357,6 +357,7 @@ td,
 th {
   padding: 0;
 }
+
 /* 样式重置 */
 /* function */
 .f-cb:after,
@@ -544,6 +545,7 @@ body {
   user-select: none;
   background-color: #ffffff;
 }
+html{font-size:62.5%;}
 h1,
 h2,
 h3,
@@ -1339,7 +1341,7 @@ i {
 .mod-bz {
   padding: 10px;
   background-color: #eee;
-  z-index: 21;
+  z-index: 9;
 }
 .mod-bz .hd {
   padding-bottom: 10px;
