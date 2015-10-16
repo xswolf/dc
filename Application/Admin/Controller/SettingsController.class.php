@@ -44,7 +44,7 @@ class SettingsController extends VerifyController {
                 GoodsCategoryModel::instance()->edit($_POST);
             }else{ // 添加
                 $_POST['shop_id'] = $this->user->getShopId();
-                GoodsCategoryModel::instance()->insert($_POST);
+                GoodsCategoryModel::instance()->insert($_POST) ;
             }
             $this->_success('添加成功' , U('goodsType'));
 
