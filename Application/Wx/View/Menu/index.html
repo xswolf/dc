@@ -1,0 +1,74 @@
+<extend name="./layout/main"/>
+<block name="content">
+	
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
+			<a href="#relative" data-toggle="modal" class="btn btn-primary">添加导航菜单</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
+			<table class="table table-bordered j-datatables">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>名字</th>
+						<th>创建时间</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>扫码送礼</td>
+						<td>1212</td>
+						<td>
+							<span class="glyphicon glyphicon-remove"></span>
+							<span class="glyphicon glyphicon-edit"></span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="relative" tabindex="-1" role="dialog" aria-labelledby="modelLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                	<h4 class="modal-title m-b">商品列表</h4>
+				</div>
+				<div class="modal-body">
+					<form action="" method="post">
+						<div class="input-group">
+				            <span class="input-group-addon">名字</span>
+				            <input class="form-control" placeholder="菜单名" aria-describedby="basic-addon1" type="text">
+				        </div>
+				        <br>
+						<div class="input-group">
+				            <span class="input-group-addon">类型</span>
+				            <span class="form-control" style="font-size:12px;font-weight: 400;">
+					            <label>导航菜单:<input name="level" type="radio" value="1"/></label>
+					            <label>链接跳转:<input name="level" type="radio" value="2"/></label>
+					            <label>功能绑定:<input name="level" type="radio" value="3"/></label>
+				            </span>
+				        </div>
+				        <br>
+				        <div class="input-group">
+				        	<span class="input-group-addon">跳转链接</span>
+				        	<input class="form-control" type="text"/>
+				        </div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</block>
+
+<block name="script">
+</block>
