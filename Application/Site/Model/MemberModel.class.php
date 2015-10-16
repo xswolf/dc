@@ -22,7 +22,7 @@ class MemberModel extends BaseModel {
 	/**
 	 * @var string 微信用户表
 	 */
-	protected $_table_wx_user = 'w_wx_user';
+	protected $_table_wx_user = 'wx_user';
 
 	/**
 	 * @param int $wx_uid 微信表用户ID
@@ -82,7 +82,6 @@ class MemberModel extends BaseModel {
 	 * @return array
 	 */
 	public function getWxUsrInfo($mid) {
-		$db = new Model();
-		return $db->table($this->_table_wx_user)->where(['id' => $mid])->find();
+		return M($this->_table_wx_user)->where(['id' => $mid])->find();
 	}
 }
