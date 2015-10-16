@@ -12,10 +12,11 @@ class Qrcode extends BaseController{
      * 创建二维码
      * @param number $type      1临时|2永久
      * @param number $expire    临时过期时间最大604800
+     * @param string $group     分组
      * @param string $sene_str  场景值 永久二维码才有
      * @return array|boolean
      */
-    public function create( $type = 1 , $expire=604800 , $sene_str=''){
+    public function create( $type = 1 , $expire=604800 , $group="table" , $sene_str=''){
         $sene_id = QrcodeModel::instance()->getSceneId($type);
         $data = Popularize::createTicket($type, 604800, $sene_id);
         if(empty($data['errcode'])){
@@ -32,7 +33,7 @@ class Qrcode extends BaseController{
                 'expire'     =>  $expire,
                 'url'        =>  ltrim( $qrcode_url , '.' ),
                 'shop_id'    =>  0,
-                'groups'      =>  'table',
+                'groups'      => $group,
                 'status'     =>  1,
                 'created_at' =>  NOW_TIME,
             ];

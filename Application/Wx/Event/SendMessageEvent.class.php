@@ -6,6 +6,7 @@ use LaneWeChat\Core\ResponseInitiative;
 use LaneWeChat\Core\AdvancedBroadcast;
 use LaneWeChat\Core\AccessToken;
 use LaneWeChat\Core\Curl;
+use Wx\Model\UserModel;
 class SendMessageEvent extends BaseController{
     
     private $request = [];
@@ -45,8 +46,10 @@ class SendMessageEvent extends BaseController{
             //判断是否是扫描的桌号
             if($qrcode['groups']=='table'){
                 $table = M("shop_table")->where(['qrcode_id' => $qrcode['id']])->find();
+                $mid = UserModel::instance()->getUserId($this->fromUsername);
                 if($table){
-                    $data[] = ResponseInitiative::newsItem('你已进入'.$table['name'].'桌', '请点击图片开始点餐', 'http://gypc2.nat123.net/public/uploads/2015-09-23/560218c410388.jpg', 'http://www.baidu.com');
+                    $url = "http://www.qulianchn.com/index?mid={$mid}&time=".time()."&table={$table['id']}";
+                    $data[] = ResponseInitiative::newsItem('你已进入'.$table['name'].'桌', '请点击图片开始点餐', 'http://gypc2.nat123.net/public/uploads/2015-09-23/560218c410388.jpg', $url);
                     $result =ResponseInitiative::news($this->fromUsername, $data);
                 }
             }else{
