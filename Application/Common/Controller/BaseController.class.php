@@ -10,7 +10,7 @@ namespace Common\Controller;
 class BaseController extends \Think\Controller{
 
 
-    public static function instance($args){
+    public static function instance($args=""){
 
         $class = get_called_class();
         static $instance;
