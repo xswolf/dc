@@ -83,8 +83,8 @@ class SettingsController extends VerifyController {
                 }
 
             }
-            exit(123);
-//            $this->_success('添加成功' , U('table'));
+//            exit(123);
+            $this->_success('添加成功' , U('table'));
 
         }
 
