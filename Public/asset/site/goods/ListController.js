@@ -11,16 +11,18 @@ define(['angular', './module.js'], function(angular, module) {
             goods: []
         };
 
-        if($scope.data.mid > 0) {
-            var dialog = Dialog.loading();
-            MenuService.getCategoryGoods($scope.data.mid).then(function (data) {
-                $scope.data.goods = data;
-            }, function (msg) {
-                Dialog.alert(msg);
-            }).finally(function() {
-                dialog.close();
-            });
+        if(!$scope.data.mid) {
+            $scope.data.mid = 0;
         }
+
+        var dialog = Dialog.loading();
+        MenuService.getCategoryGoods($scope.data.mid).then(function (data) {
+            $scope.data.goods = data;
+        }, function (msg) {
+            Dialog.alert(msg);
+        }).finally(function() {
+            dialog.close();
+        });
 
         /**
          * 购物车商品数量

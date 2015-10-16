@@ -1,6 +1,11 @@
 <div ng-controller="order.Controller">
-    <div autoscroll="true">
+    <!-- S 购物车空 -->
+    <div ng-if="cart.length == 0">
+        购物车里空空如也，赶紧点餐吧!
+    </div>
+    <!-- E 购物车空 -->
 
+    <div autoscroll="true" ng-if="cart.length > 0">
         <!--### 备注 ###-->
         <div class="scroll-content mod-bz page-remark" ng-if="ui.page.remark">
             <div class="hd">
@@ -11,7 +16,6 @@
                 <textarea class="iptText" placeholder="在这里填写特殊要求：加冰、少糖等" ng-model="ui.remark_value"></textarea>
             </div>
         </div>
-
         <!--#### 确认订单 ###-->
         <div class="scroll-content has-footer bg-2 page-list" ng-if="ui.page.list">
             <div class="mod-tipsBox">
@@ -31,7 +35,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-if="cart.length > 0" ng-repeat="c in cart">
+                        <tr ng-repeat="c in cart">
                             <td class="cpName" ng-bind="c.goods.name"></td>
                             <td>
                                 <div class="mod-goodsCount show">
@@ -42,7 +46,7 @@
                             </td>
                             <td ng-bind="c.number * c.price | currency:'￥'"></td>
                             <td>
-                                <a href="javascript:;" ng-click="writeRemark(c)" class="bz icon-bz active"></a>
+                                <a href="javascript:;" ng-click="writeRemark(c)" class="bz icon-bz" ng-class="{'active':c.remark}"></a>
                             </td>
                         </tr>
                     </tbody>
@@ -56,7 +60,6 @@
                 <a class="btn-cart button button-1" ng-click="submitWxOrder()">提交订单</a>
             </div>
         </div>
-
     </div>
 </div>
 <script type="text/javascript">

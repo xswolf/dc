@@ -36,7 +36,7 @@ class OrderController extends BaseController {
 	 */
 	public function submit() {
 		if (IS_AJAX and IS_POST) {
-			$this->ajaxSuccess();
+			$this->ajaxSuccess(['id' => 1]);
 		}
 	}
 
