@@ -11,13 +11,14 @@ class PayEvent extends BaseController{
     /**
      * jsapi支付
      * @param string  $user_id    用户id
+     * @param string  $order_sn   订单号
      * @param int     $total_fee  费用
      * @param string  $body       商品或支付单简要描述
      * @param string  $goods_tag  商品标记
      * @param string  $attach     自定义数据
      * @return array
      */
-    public function JsApiPay( $user_id , $total_fee , $body='' , $goods_tag='' , $attach='' ){
+    public function JsApiPay( $user_id , $order_sn ,$total_fee , $body='' , $goods_tag='' , $attach='' ){
         if(empty($user_id) || empty($total_fee)){
             return ['status'=> -1 , 'message'=>'数据错误'];
         }
@@ -32,7 +33,7 @@ class PayEvent extends BaseController{
         $input = new \WxPayUnifiedOrder();
         $input->SetBody( $body );
         $input->SetAttach( $attach );
-        $input->SetOut_trade_no( \WxPayConfig::MCHID.date("YmdHis") );
+        $input->SetOut_trade_no( $order_sn );//\WxPayConfig::MCHID.date("YmdHis")
         $input->SetTotal_fee( $total_fee );
         $input->SetTime_start(date("YmdHis"));
         $input->SetTime_expire(date("YmdHis", time() + 600));
