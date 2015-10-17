@@ -24,6 +24,11 @@ class OrderModel extends BaseModel {
 	protected $_table_order_goods = 'w_order_goods';
 
 	/**
+	 * @var string 用户表
+	 */
+	protected $_table_member = 'member';
+
+	/**
 	 * 生成订单
 	 * @param $order
 	 * @param $goods
@@ -60,5 +65,20 @@ class OrderModel extends BaseModel {
 	public function getOrder($order_id) {
 		$db = new Model();
 		return $db->table($this->_table)->where(['id' => $order_id, 'status' => 1])->find();
+	}
+
+	/**
+	 * 获取微信用户表ID
+	 * @param int $member_id
+	 * @return array
+	 */
+	public function getWxUser($member_id) {
+		if($member_id) {
+			$Model = M($this->_table_member)->alias('a');
+			return $Model->join('__WX_USER__ b on a.wx_user_id = b.id')
+				->field([
+					'b.id'
+				])->where(['a.id' => $member_id, 'b.subscribe' => 1])->find();
+		}
 	}
 }
