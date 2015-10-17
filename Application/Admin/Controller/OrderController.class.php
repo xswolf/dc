@@ -69,7 +69,7 @@ class OrderController extends VerifyController {
         $end = I('post.end');
         $s_time = !empty($start) ? strtotime($start) : NULL;
         $e_time = !empty($end) ? strtotime($end) : NULL;
-        $w['status'] = ['eq',2];
+        $w['status'] = ['eq',3];
         if(!is_null($s_time) && !is_null($e_time)) {
             $e_time = $e_time + 24*3600;
             $w['created_at'] = ['between', "{$s_time}, {$e_time}"];
