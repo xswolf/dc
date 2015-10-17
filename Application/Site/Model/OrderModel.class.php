@@ -81,4 +81,18 @@ class OrderModel extends BaseModel {
 				])->where(['a.id' => $member_id, 'b.subscribe' => 1])->find();
 		}
 	}
+
+	/**
+	 * 支付成功,改变订单状态
+	 * @param int $order_id
+	 * @return bool
+	 */
+	public function changeOrderStatus($order_id) {
+		$flag = false;
+		if($order_id) {
+			$db = new Model();
+			$flag = $db->table($this->_table)->where(['id' => $order_id])->save(['status' => 2]);
+		}
+		return $flag;
+	}
 }

@@ -125,8 +125,22 @@ class OrderController extends BaseController {
 					E('查无此微信账号');
 				}
 			}
-
+			$this->assign('order_id',$order_id);
 			$this->assign('price', $order['price']);
+		}
+		$this->display();
+	}
+
+	/**
+	 * 支付成功
+	 */
+	public function success() {
+		$order_id = intval(I('request.id'));
+		if(!empty($order_id) && is_numeric($order_id)) {
+			$flag = OrderModel::instance()->changeOrderStatus($order_id);
+			if(!$flag) {
+				E('订单状态设置失败');
+			}
 		}
 		$this->display();
 	}

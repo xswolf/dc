@@ -26,7 +26,7 @@ class OrderModel extends BaseModel {
         if(!empty($sn)) {
             $w['sn'] = $sn;
         }
-        $result = $M->where($w)->select();
+        $result = $M->where($w)->order('id DESC')->select();
         return $result;
     }
 
