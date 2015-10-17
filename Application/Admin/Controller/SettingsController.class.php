@@ -124,7 +124,7 @@ class SettingsController extends VerifyController {
         $this->display();
     }
 
-    public function printList($ajax = true){
+    public function printList($ajax = false){
 
         $list = PrintModel::instance()->lists($this->user->getShopId());
         if ($ajax){
