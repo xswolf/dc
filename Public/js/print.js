@@ -20,10 +20,16 @@ function printPreview(){
  */
 function printOrder(json) {
 
-    //创建小票打印页
-    CreatePrintPage(json);
-    //开始打印
-    LODOP.PRINT();
+    for (var i=0 ; i<1 ; i++) {
+        //创建小票打印页
+        CreatePrintPage(json);
+        //开始打印
+
+        LODOP.SET_PRINTER_INDEX(0);
+
+        LODOP.PRINT();
+    }
+
 
 };
 function CreatePrintPage(json) {
@@ -69,7 +75,7 @@ function CreatePrintPage(json) {
 
     for(var i=0;i<json.goodsList.length;i++){
 
-        if(json.goodsList[i].name.length<4){
+        if(json.goodsList[i].name.length<=8){
             LODOP.ADD_PRINT_TEXT(hPos,1,pageWidth,rowHeight,json.goodsList[i].name);
         }else {
             //商品名字过长,其他字段需要换行
