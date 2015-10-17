@@ -3,6 +3,7 @@ namespace Admin\Controller;
 use Admin\Model\GoodsCategoryModel;
 use Admin\Model\GoodsModel;
 use Admin\Model\GoodsTypeModel;
+use Admin\Model\PrintModel;
 use Admin\Model\ShopTableModel;
 use Common\Controller\VerifyController;
 use Wx\Event\QrcodeEvent;
@@ -120,6 +121,40 @@ class SettingsController extends VerifyController {
 
         $list = GoodsCategoryModel::instance()->lists($this->user->getShopId());
         $this->assign('list' , $list); //菜品分类
+        $this->display();
+    }
+
+    public function printList($ajax = false){
+
+        $list = PrintModel::instance()->lists($this->user->getShopId());
+        if ($ajax){
+            $this->ajaxSuccess($list);
+        }
+        $this->assign('list' , $list);
+        $this->display();
+    }
+
+    public function savePrint(){
+        if (I('id')){
+            $data = PrintModel::instance()->findById(I('id'));
+            $this->assign('data' , $data);
+        }
+        if($_POST){
+            if (I("post.id")){ // 编辑
+
+                PrintModel::instance()->edit($_POST);
+            }else{ // 添加
+
+                $_POST['qrcode_id'] = $data['qrcode_id'];
+                $_POST['url'] = $data['url'];
+                $_POST['shop_id'] = $this->user->getShopId();
+                PrintModel::instance()->insert($_POST);
+
+            }
+            $this->_success('添加成功' , U('printList'));
+
+        }
+
         $this->display();
     }
 

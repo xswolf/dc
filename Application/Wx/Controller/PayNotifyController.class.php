@@ -5,7 +5,8 @@ namespace Wx\Controller;
  */
 
 use Wx\WxPay\Notify;
-class PayNotifyController extends InitiativeController{
+use Common\Controller\BaseController;
+class PayNotifyController extends BaseController{
     
     public function index(){
 //         $notify = M("test")->field("test")->find();
@@ -32,7 +33,7 @@ class PayNotifyController extends InitiativeController{
             ];
             $M = M("wx_pay_log")->where(['openid'=>$result['openid'],'order_sn'=>$result['out_trade_no']]);
             if( $M->save($data) ){
-                //TODO 通知
+                //TODO 通知暂时放下
                 
                 //修改通知状态
                 $M->save( ['is_send'=>1] );

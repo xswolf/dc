@@ -68,8 +68,14 @@ class PayEvent extends BaseController{
             'is_send'   =>  0,
             'created_at'=>  time(),
         ];
+        $M = M("wx_pay_log");
+        $rel = $M->where([ "openid"=>$openid,'order_sn'=>$data['order_sn'] ])->select();
+        if(empty($rel)){
+            $M->add($data);
+        }else{
+            $M->where([ "openid"=>$openid,'order_sn'=>$data['order_sn']])->save($data);
+        }
         
-        M("wx_pay_log")->add($data);
     }
 }
 

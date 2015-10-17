@@ -102,6 +102,10 @@
                 orderSn: ''
             };
 
+            $http.get("{:U('Settings/printList')}?ajax=1").success( function(response) {
+                $scope.printList = response;
+            });
+
             $scope.source = null;
             /**
              * 加载订单列表
@@ -178,7 +182,10 @@
                                     "orderNo": data.orderData.sn, "orderTime":getLocalTime(data.orderData.created_at),
                                     "goodsList":data.orderGoodsData
                                 };
-                                printOrder(json);
+
+                                var printList = $scope.printList.data;
+                                console.log(printList)
+                                printOrder(json , printList);
                             }
                         },function(err) {
                             layer.open({
