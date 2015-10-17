@@ -18,14 +18,14 @@ function printPreview(){
 /**
  * 服务器确认订单后执行打印订单
  */
-function printOrder(json) {
+function printOrder(json , printList) {
 
-    for (var i=0 ; i<1 ; i++) {
+    for (i in printList){
         //创建小票打印页
         CreatePrintPage(json);
         //开始打印
 
-        LODOP.SET_PRINTER_INDEX(0);
+        LODOP.SET_PRINTER_INDEX(printList[i].name);
 
         LODOP.PRINT();
     }
