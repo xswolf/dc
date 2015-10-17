@@ -10,6 +10,7 @@ namespace Site\Controller;
 
 use Common\Controller\BaseController;
 use Site\Common\DomainController;
+use Wx\Event\PayEvent;
 use Site\Model\GoodsModel;
 use Site\Model\OrderModel;
 class OrderController extends BaseController {
@@ -24,7 +25,7 @@ class OrderController extends BaseController {
 		$username = cookie($this->cookie_prefix.'username');
 		$table_id = cookie($this->cookie_prefix.'table_id');
 		$mid = cookie($this->cookie_prefix.'mid');
-		if(!($username and ctype_digit($table_id) and ctype_digit($mid))) {
+		if(!($username and ctype_digit($mid))) {
 			E('获取信息失败!');
 		}
 		$this->assign('username', $username);
@@ -111,6 +112,20 @@ class OrderController extends BaseController {
 			if(!$order) {
 				E('无效订单');
 			}
+			if(ctype_digit($order['mid'])) {
+				$wx_usr = OrderModel::instance()->getWxUser($order['mid']);
+				if(!empty($wx_usr) && is_array($wx_usr)) {
+					$wx_pay = PayEvent::instance()->JsApiPay($wx_usr['id'],$order['sn'],$order['price']*100,'商品支付');
+					if($wx_pay['status'] == 1) {
+						$this->assign('jsApiParameters', $wx_pay['message']);
+					} else {
+						E("{$wx_pay['message']}");
+					}
+				} else {
+					E('查无此微信账号');
+				}
+			}
+
 			$this->assign('price', $order['price']);
 		}
 		$this->display();
