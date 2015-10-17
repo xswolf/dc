@@ -33,7 +33,7 @@ class PayNotifyController extends BaseController{
             ];
             $M = M("wx_pay_log")->where(['openid'=>$result['openid'],'order_sn'=>$result['out_trade_no']]);
             if( $M->save($data) ){
-                //TODO 通知
+                //TODO 通知暂时放下
                 
                 //修改通知状态
                 $M->save( ['is_send'=>1] );
