@@ -5,7 +5,8 @@ namespace Wx\Controller;
  */
 
 use Wx\WxPay\Notify;
-class PayNotifyController extends InitiativeController{
+use Common\Controller\BaseController;
+class PayNotifyController extends BaseController{
     
     public function index(){
 //         $notify = M("test")->field("test")->find();
