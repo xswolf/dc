@@ -25,7 +25,7 @@ class OrderController extends BaseController {
 		$username = cookie($this->cookie_prefix.'username');
 		$table_id = cookie($this->cookie_prefix.'table_id');
 		$mid = cookie($this->cookie_prefix.'mid');
-		if(!($username and ctype_digit($table_id) and ctype_digit($mid))) {
+		if(!($username and ctype_digit($mid))) {
 			E('获取信息失败!');
 		}
 		$this->assign('username', $username);
