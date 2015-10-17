@@ -10,6 +10,7 @@ namespace Site\Controller;
 
 use Common\Controller\BaseController;
 use Site\Common\DomainController;
+use Wx\Event\PayEvent;
 use Site\Model\GoodsModel;
 use Site\Model\OrderModel;
 class OrderController extends BaseController {
