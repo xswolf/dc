@@ -115,11 +115,11 @@ class OrderController extends BaseController {
 			if(ctype_digit($order['mid'])) {
 				$wx_usr = OrderModel::instance()->getWxUser($order['mid']);
 				if(!empty($wx_usr) && is_array($wx_usr)) {
-					$wx_pay = PayEvent::instance()->JsApiPay($wx_usr['id'],$order['sn'],$order['price']);
+					$wx_pay = PayEvent::instance()->JsApiPay($wx_usr['id'],$order['sn'],$order['price']*100);
 					if($wx_pay['status'] == 1) {
 						$this->assign('jsApiParameters', $wx_pay['message']);
 					} else {
-						E($wx_pay['message']);
+						E("{$wx_pay['message']}");
 					}
 				} else {
 					E('查无此微信账号');
