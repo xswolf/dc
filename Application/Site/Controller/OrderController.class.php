@@ -116,6 +116,8 @@ class OrderController extends BaseController {
 				$wx_usr = OrderModel::instance()->getWxUser($order['mid']);
 				if(!empty($wx_usr) && is_array($wx_usr)) {
 					$wx_pay = PayEvent::instance()->JsApiPay($wx_usr['id'],$order['sn'],$order['price']*100);
+					var_export($wx_pay);
+					exit;
 					if($wx_pay['status'] == 1) {
 						$this->assign('jsApiParameters', $wx_pay['message']);
 					} else {
