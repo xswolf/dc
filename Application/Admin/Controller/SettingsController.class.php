@@ -40,7 +40,7 @@ class SettingsController extends VerifyController {
         }
         if($_POST){
             if (I("post.id")){ // 编辑
-
+                $_POST['shop_id'] = $this->user->getShopId();
                 GoodsCategoryModel::instance()->edit($_POST);
             }else{ // 添加
                 $_POST['shop_id'] = $this->user->getShopId();
