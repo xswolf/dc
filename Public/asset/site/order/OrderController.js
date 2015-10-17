@@ -48,7 +48,7 @@ define(['./module.js'], function(module) {
          */
         $scope.submitWxOrder = function() {
             submitOrder().then(function(data) {
-                location.href = 'http://www.qulianchn.com/site/order/pay?id=' + data.id;
+                location.href = '/site/order/pay?id=' + data.id;
             });
         };
 
