@@ -15,6 +15,5 @@ class MenuModel extends BaseModel{
         return $this->where(['pid'=>$pid , 'status'=>1])->count();
     }
     
-    
 }
 
