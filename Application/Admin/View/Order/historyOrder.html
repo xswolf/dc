@@ -1,3 +1,14 @@
+<!-----------------小票打印设置---------------->
+<script language="javascript" src="/Public/Lodop6.198/LodopFuncs.js"></script>
+<script language="javascript" src="/Public/js/print.js" ></script>
+<!-- 调用LODOP控件代码-->
+<object id="LODOP_OB" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0>
+    <embed id="LODOP_EM" type="application/x-print-lodop" width=0 height=0 pluginspage="install_lodop.exe"></embed>
+    <param name="CompanyName" value="重庆中恒科技有限公司">
+</object>
+<!-----------------小票打印设置---------------->
+
+
 <div class="orderList">
     <div class="container-fluid">
         <div class="wpBox">
@@ -48,6 +59,9 @@
                                 <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample{$list.id}" aria-expanded="false" aria-controls="collapseExample">
                                     详细 <span class="caret"></span>
                                 </button>
+                                <button class="btn btn-success print" data-id='{$list.id}' type="button" >
+                                    打印
+                                </button>
                             </td>
                         </tr>
                         <tr class="collapse" id="collapseExample{$list.id}" style="background-color: transparent">
@@ -88,3 +102,45 @@
 
     </div>
 </div>
+
+<script>
+    window.onload = function() {
+        $(function () {
+
+
+            $.ajax({
+                "type": 'get',
+                "url": "{:U('Settings/printList')}?ajax=1&default=1",
+                "success": function (msg) {
+                    console.log(msg);
+                }
+
+            })
+
+            $(".print").click(function () {
+
+                var oid = $(this).data("id");
+                $.ajax({
+                    "type": 'post',
+                    "url": "{:U('Order/SureOrder','',false)}",
+                    "data": {id: oid,'history':1},
+                    "success": function (msg) {
+                        var data = msg.data;
+                        var json = {
+                            "title": "订单信息",
+                            "tableId": data.table_id,
+                            "orderNo": data.orderData.sn, "orderTime": getLocalTime(data.orderData.created_at),
+                            "goodsList": data.orderGoodsData
+                        };
+
+                        var printList = [1];
+                        printOrder(json, printList);
+                    }
+
+                })
+
+
+            })
+        })
+    }
+</script>

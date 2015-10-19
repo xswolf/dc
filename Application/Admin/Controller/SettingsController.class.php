@@ -124,9 +124,9 @@ class SettingsController extends VerifyController {
         $this->display();
     }
 
-    public function printList($ajax = false){
+    public function printList($ajax = false ,$default = false){
 
-        $list = PrintModel::instance()->lists($this->user->getShopId());
+        $list = PrintModel::instance()->lists($this->user->getShopId() , $default);
         if ($ajax){
             $this->ajaxSuccess($list);
         }
@@ -140,6 +140,8 @@ class SettingsController extends VerifyController {
             $this->assign('data' , $data);
         }
         if($_POST){
+            $_POST['default'] = isset($_POST['default']) ? $_POST['default'] : 0;
+
             if (I("post.id")){ // 编辑
 
                 PrintModel::instance()->edit($_POST);
