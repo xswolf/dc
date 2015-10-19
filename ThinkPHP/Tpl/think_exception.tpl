@@ -1,5 +1,4 @@
 <?php
-    exit(404);
     if(C('LAYOUT_ON')) {
         echo '{__NOLAYOUT__}';
     }
