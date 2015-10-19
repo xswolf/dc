@@ -12,7 +12,7 @@ class CashController extends \Think\Controller{
     public function cash(){
         $date = date('Ymd');
         $sql = "INSERT INTO w_cash(shop_id,create_date,cash_money,STATUS)
-                SELECT shop_id , FROM_UNIXTIME(created_at,'%Y%m%d') created_date,  SUM(price),0 FROM  w_order WHERE STATUS=2 AND id<=8 AND FROM_UNIXTIME(created_at,'%Y%m%d') = {$date} GROUP BY shop_id ,created_date";
+                SELECT shop_id , FROM_UNIXTIME(created_at,'%Y%m%d') created_date,  SUM(price),0 FROM  w_order WHERE STATUS=3 AND FROM_UNIXTIME(created_at,'%Y%m%d') = {$date} GROUP BY shop_id ,created_date";
 
         return M('')->query($sql);
     }

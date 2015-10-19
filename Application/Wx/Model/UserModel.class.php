@@ -13,7 +13,7 @@ class UserModel extends BaseModel{
     public function subscribe( $openId ){
         $userInfo = wx_get_user_info($openId);
         if($userInfo && empty($userInfo['errcode'])){
-            $userInfo['nickname'] = encode_emoji($userInfo['nickname']);
+            $userInfo['nickname'] = json_encode($userInfo['nickname']);
             
             //查询是以前否关注过
             if(M($this->_table)->where(['openid'=>$userInfo['openid']])->find()){
