@@ -22,7 +22,7 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="textinput1">原价</label>
                         <div class="col-md-4">
-                            <input id="textinput1" name="native_price" value="{$data['native_price']}" type="number" placeholder="原价" class="form-control input-md">
+                            <input id="textinput1"  onkeyup="if(isNaN(value))execCommand('undo')" onafterpaste="if(isNaN(value))execCommand('undo')" name="native_price" value="{$data['native_price']}" type="text" placeholder="原价" class="form-control input-md">
                         </div>
                     </div>
 
@@ -30,7 +30,7 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="textinput2">现价</label>
                         <div class="col-md-4">
-                            <input id="textinput2" name="price" value="{$data['price']}" type="number" placeholder="现价" class="form-control input-md">
+                            <input id="textinput2"  onkeyup="if(isNaN(value))execCommand('undo')" onafterpaste="if(isNaN(value))execCommand('undo')" name="price" value="{$data['price']}" type="text" placeholder="现价" class="form-control input-md">
                         </div>
                     </div>
 
@@ -143,4 +143,8 @@
             }
         });
     }
+
+
+
+
 </script>
