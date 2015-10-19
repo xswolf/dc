@@ -26,7 +26,7 @@ class OrderModel extends BaseModel {
         if(!empty($sn)) {
             $w['sn'] = $sn;
         }
-        $result = $M->where($w)->select();
+        $result = $M->where($w)->order('id DESC')->select();
         return $result;
     }
 
@@ -56,7 +56,7 @@ class OrderModel extends BaseModel {
      * @return bool
      */
     public function sureOrder($shop_id, $order_id) {
-        return $this->edit(['status' => 2],['shop_id' => $shop_id, 'id' => $order_id]);
+        return $this->edit(['status' => 3],['shop_id' => $shop_id, 'id' => $order_id]);
     }
 
     /**

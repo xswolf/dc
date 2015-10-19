@@ -31,7 +31,7 @@ class BaseController extends \Think\Controller{
         parent::ajaxReturn(['status'=>1 , 'message'=>'成功' , 'data' => $data]);
     }
 
-    public function ajaxError($data){
-        parent::ajaxReturn(['status'=>-1 , 'message'=>'失败' , 'data' => $data]);
+    public function ajaxError( $msg='失败', $data){
+        parent::ajaxReturn(['status'=>-1 , 'message'=> $msg, 'data' => $data]);
     }
 }

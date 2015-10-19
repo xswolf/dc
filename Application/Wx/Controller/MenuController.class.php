@@ -14,4 +14,8 @@ class MenuController extends BaseController{
         
         $this->display();
     }
+    
+    public function add(){
+        
+    }
 }

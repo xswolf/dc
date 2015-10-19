@@ -33,7 +33,7 @@ class OrderController extends VerifyController {
         header('Content-Type: text/event-stream');
         header('Cache-Control: no-cache');
         $request = I('get.sn');
-        $data = OrderModel::instance()->orderList($this->user->getShopId(), ['status' => 1], $request);
+        $data = OrderModel::instance()->orderList($this->user->getShopId(), ['status' => 2], $request);
         if(is_array($data)) {
             foreach($data as &$list) {
                 $list['orderTime'] = $this->time_tran($list['created_at']);
@@ -72,7 +72,7 @@ class OrderController extends VerifyController {
         $end = I('post.end');
         $s_time = !empty($start) ? strtotime($start) : NULL;
         $e_time = !empty($end) ? strtotime($end) : NULL;
-        $w['status'] = ['eq',2];
+        $w['status'] = ['eq',3];
         if(!is_null($s_time) && !is_null($e_time)) {
             $e_time = $e_time + 24*3600;
             $w['created_at'] = ['between', "{$s_time}, {$e_time}"];
