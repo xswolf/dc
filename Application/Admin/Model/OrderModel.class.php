@@ -21,12 +21,16 @@ class OrderModel extends BaseModel {
      * @return array
      */
     public function orderList($shop_id, $where, $sn) {
-        $M = M($this->_table);
-        $w = array_merge(['shop_id' => $shop_id], $where);
+        $M = M($this->_table)->alias('a');
+        $w = array_merge(['a.shop_id' => $shop_id], $where);
         if(!empty($sn)) {
-            $w['sn'] = $sn;
+            $w['a.sn'] = $sn;
         }
-        $result = $M->where($w)->order('id DESC')->select();
+        $result = $M->join('__SHOP_TABLE__ b on a.table_id = b.id')
+            ->field([
+                'a.*',
+                'b.name'
+            ])->where($w)->order('a.id DESC')->select();
         return $result;
     }
 
