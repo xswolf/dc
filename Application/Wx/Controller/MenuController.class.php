@@ -16,7 +16,6 @@ class MenuController extends BaseController{
     }
     
     public function add(){
-        
         if(IS_AJAX){
             empty($_POST['name']) && $this->ajaxError("请填写菜单名");
             empty($_POST['type']) && !intval($_POST['type']) && $this->ajaxError("菜单类型错误");

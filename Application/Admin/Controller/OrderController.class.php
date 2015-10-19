@@ -51,6 +51,9 @@ class OrderController extends VerifyController {
         $id = intval(I('post.id'));
         if(!empty($id) && is_numeric($id)) {
             $flag = OrderModel::instance()->sureOrder($this->user->getShopId(),$id);
+            if (I('history')){ // 设置历史打印订单
+                $flag = 1;
+            }
             if($flag) {
                 $orderGoodsData = OrderModel::instance()->orderGoodsList($id);
                 $orderData = OrderModel::instance()->getOrderById($id);

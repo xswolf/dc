@@ -21,7 +21,14 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="">设置默认</label>
                         <div class="col-md-4">
-                            <input name="default" value="{$data['name']}" type="checkbox"  class="form-control input-md" data-bv-notempty data-bv-notempty-message="">
+
+                            <if condition="$data['default'] ==1  ">
+                                <input name="default" value="1" type="checkbox" checked  class="form-control input-md" >
+
+                                <else />
+                                <input name="default" value="1" type="checkbox"  class="form-control input-md" >
+
+                            </if>
                         </div>
                     </div>
 
