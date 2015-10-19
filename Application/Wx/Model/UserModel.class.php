@@ -48,5 +48,6 @@ class UserModel extends BaseModel{
         return $data['id'];
     }
 
+    
 }
 
