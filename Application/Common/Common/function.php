@@ -78,3 +78,25 @@ function upload( $path='' , $type=[]){
         return $info;
     }
 }
+
+/**
+ * 转换字符串有emoji的问题
+ * @param string $string
+ * @return string
+ */
+function encode_emoji($string){
+    //     $string = "你好  hello 123";
+    $tmpStr = json_encode($string); //暴露出unicode
+    $tmpStr = preg_replace("#(\\\ue[0-9a-f]{3})#ie","addslashes('\\1')",$tmpStr); //将emoji的unicode留下，其他不动
+    $text = json_decode($tmpStr);
+    return $text;//你好 \ue415 hello 123
+}
+
+/**
+ * 字符串转换成emoji代码
+ */
+function decode_emoji($string){
+    //     $string = "你好 \ue415 hello 123"; //可以为将要发送的微信消息，包含emoji表情unicode字符串，需要转为utf8二进制字符串
+    $string = preg_replace("#\\\u([0-9a-f]+)#ie","iconv('UCS-2','UTF-8', pack('H4', '\\1'))",$string); //对emoji unicode进行二进制pack并转utf8
+    return $string;
+}
