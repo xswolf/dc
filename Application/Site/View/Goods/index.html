@@ -43,7 +43,8 @@
 <script type="text/ng-template" id="tpl-footer.html">
     <div class="mod-footer fixed">
         <span class="total">总计：￥<i ng-bind="totalPrice()"></i></span>
-        <a class="btn-cart button button-danger" ui-sref="order" ng-click="orderList()">选 好 了</a>
+        <a class="btn-cart button button-danger" ui-sref="order" ng-if="cart.length > 0" ng-click="orderList()">选 好 了</a>
+        <a class="btn-cart button button-danger" ui-sref="order" ng-if="cart.length <= 0">选 好 了</a>
     </div>
 </script>
 

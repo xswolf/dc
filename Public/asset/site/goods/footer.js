@@ -19,6 +19,7 @@ define(['./module.js'], function(module) {
                       return CartService.total();
                     };
 
+                    $scope.cart = CartService.data;
                     $scope.orderList = function() {
                         $window.location = '/site/order/index';
                     }

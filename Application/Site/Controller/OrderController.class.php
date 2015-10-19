@@ -28,7 +28,8 @@ class OrderController extends BaseController {
 		if(!($username and ctype_digit($mid))) {
 			E('获取信息失败!');
 		}
-		$this->assign('username', $username);
+
+		$this->assign('username', json_decode($username,true));
 		$this->assign('table_id', $table_id);
 		$this->assign('mid', $mid);
 		$this->display();
