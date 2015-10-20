@@ -139,8 +139,26 @@ class OrderController extends BaseController {
 	public function success() {
 		$order_id = intval(I('request.id'));
 		if(!empty($order_id) && is_numeric($order_id)) {
+			$order = OrderModel::instance()->getOrder($order_id,[]);
+			if(!$order) {
+				E('订单不存在');
+			}
 
+			switch($order['status']) {
+				case 1:
+					$message = '订单尚未支付!';
+					break;
+				case 2:
+					$message = '支付成功!';
+					break;
+				case 3:
+					$message = '订单已完成';
+					break;
+			}
+			$this->assign('message',$message);
+			$this->assign('status',$order['status']);
 		}
+
 		$this->display();
 	}
 
