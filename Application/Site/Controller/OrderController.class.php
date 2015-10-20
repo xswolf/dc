@@ -103,6 +103,20 @@ class OrderController extends BaseController {
 	}
 
 	/**
+	 * 订单详情
+	 */
+	public function order_view() {
+		$order_id = intval(I('request.id'));
+		$data = [];
+		if(!empty($order_id) && is_numeric($order_id)) {
+			$data = OrderModel::instance()->getOrderView($order_id);
+		}
+		$this->assign('data',$data);
+		$this->assign('order_id',$order_id);
+		$this->display();
+	}
+
+	/**
 	 * 支付
 	 * @return bool|string
 	 */
@@ -146,7 +160,7 @@ class OrderController extends BaseController {
 
 			switch($order['status']) {
 				case 1:
-					$message = '订单尚未支付!';
+					$message = '订单尚未支付!如果您已经付款,请联系商家.';
 					break;
 				case 2:
 					$message = '支付成功!';
@@ -158,7 +172,7 @@ class OrderController extends BaseController {
 			$this->assign('message',$message);
 			$this->assign('status',$order['status']);
 		}
-
+		$this->assign('order_id', $order_id);
 		$this->display();
 	}
 
@@ -178,7 +192,7 @@ class OrderController extends BaseController {
 			return ['message' => "{$order_id}无效订单",'success' => -1];
 		}
 
-		if ( ! floatcmp(floatval($pay_price), floatval($order['price']))) {
+		if ( ! $this->float_cmp(intval($pay_price), intval($order['price']*100))) {
 			return ['message' => "{$order_id}订单价格不对",'success' => -1];
 		}
 
@@ -192,6 +206,13 @@ class OrderController extends BaseController {
 		}
 
 		return ['message' => "通知失败",'success' => -1];
+	}
+
+	private function float_cmp($f1, $f2, $precision = 10) {
+		$e = pow(10, $precision);
+		$i1 = intval($f1 * $e);
+		$i2 = intval($f2 * $e);
+		return ($i1 == $i2);
 	}
 
 	protected function createSn() {
