@@ -116,7 +116,7 @@ class OrderController extends BaseController {
 			if(ctype_digit($order['mid'])) {
 				$wx_usr = OrderModel::instance()->getWxUser($order['mid']);
 				if(!empty($wx_usr) && is_array($wx_usr)) {
-					$wx_pay = PayEvent::instance()->JsApiPay($wx_usr['id'],$order['sn'],$order['price']*100,'商品支付');
+					$wx_pay = PayEvent::instance()->JsApiPay($wx_usr['id'],$order['id'],$order['sn'],$order['price']*100,'商品支付','',$order['shop_id']);
 					if($wx_pay['status'] == 1) {
 						$this->assign('jsApiParameters', $wx_pay['message']);
 					} else {
@@ -136,14 +136,46 @@ class OrderController extends BaseController {
 	 * 支付成功
 	 */
 	public function success() {
-		$order_id = intval(I('request.id'));
+		/*$order_id = intval(I('request.id'));
 		if(!empty($order_id) && is_numeric($order_id)) {
 			$flag = OrderModel::instance()->changeOrderStatus($order_id);
 			if(!$flag) {
 				E('订单状态设置失败');
 			}
-		}
+		}*/
 		$this->display();
+	}
+
+	/**
+	 * 订单支付成功,微信通知
+	 *
+	 * @param int $order_id 订单ID
+	 * @param float $pay_price
+	 * @param int $shop_id
+	 * @return array
+	 */
+	public function pay_notice($order_id, $pay_price, $shop_id) {
+		$message = 'Got paid info: ' . json_encode(func_get_args());
+		OrderModel::instance()->payLog($shop_id, $order_id, $message);
+		$order = OrderModel::instance()->getOrder($order_id);
+		if(!$order) {
+			return ['message' => "{$order_id}无效订单",'success' => -1];
+		}
+
+		if ( ! floatcmp(floatval($pay_price), floatval($order['price']))) {
+			return ['message' => "{$order_id}订单价格不对",'success' => -1];
+		}
+
+		if($order['status'] == 2) {
+			return ['message' => "订单已支付",'success' => 1];
+		}
+
+		$flag = OrderModel::instance()->changeOrderStatus($order_id);
+		if($flag) {
+			return ['message' => "通知成功",'success' => 1];
+		}
+
+		return ['message' => "通知失败",'success' => -1];
 	}
 
 	protected function createSn() {
