@@ -22,7 +22,7 @@
             {$jsApiParameters},
             function(res){
                 if(res.err_msg && res.err_msg.indexOf('ok') >= 0) {
-                    location.href = '/site/order/success?id={$order_id}';
+                    location.href = 'http://{$shop_id}.qulianchn.com/site/order/success?id={$order_id}';
                 }
                 //WeixinJSBridge.log(res.err_msg);
                 //alert(res.err_code+res.err_desc+res.err_msg);

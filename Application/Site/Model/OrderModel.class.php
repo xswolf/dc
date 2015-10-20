@@ -65,11 +65,13 @@ class OrderModel extends BaseModel {
 	/**
 	 * 获取订单
 	 * @param int $order_id
+	 * @param array $where
 	 * @return array
 	 */
-	public function getOrder($order_id) {
+	public function getOrder($order_id, $where = ['status' => 1]) {
 		$db = new Model();
-		return $db->table($this->_table)->where(['id' => $order_id, 'status' => 1])->find();
+		$w = array_merge(['id' => $order_id], $where);
+		return $db->table($this->_table)->where($w)->find();
 	}
 
 	/**
