@@ -40,9 +40,14 @@ class PayNotifyController extends BaseController{
                 if($res['success']==1){
                     //修改通知状态
                     M("wx_pay_log")->where(['openid'=>$result['openid'],'order_sn'=>$result['out_trade_no']])->save( ['is_send'=>1] );
+                }else{
+                    M("wx_pay_log")->where(['openid'=>$result['openid'],'order_sn'=>$result['out_trade_no']])->save( ['send_msg'=>$res['message']] );
                 }
+                
             }
+            
         }
+        
     }
 }
 
