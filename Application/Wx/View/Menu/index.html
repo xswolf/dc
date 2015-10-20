@@ -128,7 +128,7 @@
 <script src="/Public/libs/vue/vue.js"></script>
 <script>
 	var list = {$list|json_encode};
-	var model = new Vue({
+	var modal = new Vue({
 		el   : "#content",
 		data : {
 			list : list,
@@ -154,20 +154,20 @@
 				}
 				$.post("Menu/edit",this.data,function(rel){
 					if(rel.status==1){
-						if(typeof model.data.id != 'undefined'){
-							model.edit_data.name = model.data.name;
+						if(typeof modal.data.id != 'undefined'){
+							modal.edit_data.name = modal.data.name;
 						}else{
-							model.list.forEach(function(item){
-								if(item.id == model.data.pid){
+							modal.list.forEach(function(item){
+								if(item.id == modal.data.pid){
 									item.child.push({
 										id	 : rel.data,
-										name : model.data.name,
-										pid  : model.data.pid,
-										type : model.data.type,
+										name : modal.data.name,
+										pid  : modal.data.pid,
+										type : modal.data.type,
 										created_at : new Date().getTime(),
 										value : function(type){
-											return type=='view' ? model.data.url : model.data.material
-										}(model.data.type),
+											return type=='view' ? modal.data.url : modal.data.material
+										}(modal.data.type),
 									});
 								}
 							})
@@ -187,7 +187,7 @@
 			addChild : function(pid){
 				this.clear();
 				$('#relative').modal()
-				model.data.pid = pid;
+				modal.data.pid = pid;
 			},
 			
 			remove : function( item ){
@@ -203,8 +203,8 @@
 			},
 			
 			menu_data : function(item){
-				model.edit_data = item;
-				model.data = {
+				modal.edit_data = item;
+				modal.data = {
 					id   : item.id,
 					pid  : item.pid,
 					name : item.name,
