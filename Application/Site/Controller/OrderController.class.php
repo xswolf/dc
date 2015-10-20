@@ -146,7 +146,7 @@ class OrderController extends BaseController {
 
 			switch($order['status']) {
 				case 1:
-					$message = '订单尚未支付!';
+					$message = '订单尚未支付!如果您已经付款,请联系商家.';
 					break;
 				case 2:
 					$message = '支付成功!';
@@ -178,7 +178,7 @@ class OrderController extends BaseController {
 			return ['message' => "{$order_id}无效订单",'success' => -1];
 		}
 
-		if ( ! floatcmp(floatval($pay_price), floatval($order['price']))) {
+		if ( ! floatcmp(floatval($pay_price), floatval($order['price']*100))) {
 			return ['message' => "{$order_id}订单价格不对",'success' => -1];
 		}
 
