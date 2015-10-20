@@ -43,8 +43,11 @@ class PayNotifyController extends BaseController{
                 }else{
                     M("wx_pay_log")->where(['openid'=>$result['openid'],'order_sn'=>$result['out_trade_no']])->save( ['send_msg'=>$res['message']] );
                 }
+                
             }
+            
         }
+        
     }
 }
 

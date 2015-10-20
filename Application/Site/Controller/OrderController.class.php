@@ -126,6 +126,7 @@ class OrderController extends BaseController {
 					E('查无此微信账号');
 				}
 			}
+			$this->assign('shop_id',$order['shop_id']);
 			$this->assign('order_id',$order_id);
 			$this->assign('price', $order['price']);
 		}
@@ -136,13 +137,28 @@ class OrderController extends BaseController {
 	 * 支付成功
 	 */
 	public function success() {
-		/*$order_id = intval(I('request.id'));
+		$order_id = intval(I('request.id'));
 		if(!empty($order_id) && is_numeric($order_id)) {
-			$flag = OrderModel::instance()->changeOrderStatus($order_id);
-			if(!$flag) {
-				E('订单状态设置失败');
+			$order = OrderModel::instance()->getOrder($order_id,[]);
+			if(!$order) {
+				E('订单不存在');
 			}
-		}*/
+
+			switch($order['status']) {
+				case 1:
+					$message = '订单尚未支付!';
+					break;
+				case 2:
+					$message = '支付成功!';
+					break;
+				case 3:
+					$message = '订单已完成';
+					break;
+			}
+			$this->assign('message',$message);
+			$this->assign('status',$order['status']);
+		}
+
 		$this->display();
 	}
 
