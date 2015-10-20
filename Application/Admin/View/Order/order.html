@@ -99,7 +99,8 @@
             $scope.data = {
                 list: [],
                 showId: 0,
-                orderSn: ''
+                orderSn: '',
+                shopName: '{$shopName}'
             };
 
             $http.get("{:U('Settings/printList')}?ajax=1").success( function(response) {
@@ -177,7 +178,7 @@
 
                                 var data = res.data.data;
                                 var json = {
-                                    "title":"订单信息",
+                                    "title":$scope.data.shopName,
                                     "tableId":data.orderData.name,
                                     "orderNo": data.orderData.sn, "orderTime":getLocalTime(data.orderData.created_at),
                                     "goodsList":data.orderGoodsData

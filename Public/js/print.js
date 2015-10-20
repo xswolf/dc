@@ -48,12 +48,26 @@ function CreatePrintPage(json) {
     //初始化
     LODOP.PRINT_INIT("打印控件功能演示_Lodop功能_名片");
     //添加小票标题文本
-    LODOP.ADD_PRINT_TEXT(hPos,30,pageWidth,rowHeight,json.title);
+    LODOP.ADD_PRINT_TEXT(hPos,10,pageWidth,rowHeight,json.title);
+
+    LODOP.SET_PRINT_STYLEA(0,"FontName","隶书");
+    LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
     //上边距往下移
-    hPos+=rowHeight;
+    hPos+=rowHeight+10;
+
+
+
 
     LODOP.ADD_PRINT_TEXT(hPos,1,pageWidth,rowHeight,"桌号:");
-    LODOP.ADD_PRINT_TEXT(hPos,30,pageWidth,rowHeight,json.tableId);
+
+    LODOP.SET_PRINT_STYLEA(0,"FontName","隶书");
+    LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
+
+    LODOP.ADD_PRINT_TEXT(hPos,40,pageWidth,rowHeight,json.tableId);
+
+    LODOP.SET_PRINT_STYLEA(0,"FontName","隶书");
+    LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
+
     //hPos+=rowHeight; //电话不换行
     LODOP.ADD_PRINT_TEXT(hPos,70,pageWidth,rowHeight,"下单时间:");
     LODOP.ADD_PRINT_TEXT(hPos,130,pageWidth,rowHeight,json.orderTime);
@@ -65,11 +79,16 @@ function CreatePrintPage(json) {
     hPos+=5;
     LODOP.ADD_PRINT_TEXT(hPos,1,pageWidth,rowHeight,"商品名称");
     LODOP.ADD_PRINT_TEXT(hPos,70,pageWidth,rowHeight,"单价");
-    LODOP.ADD_PRINT_TEXT(hPos,110,pageWidth,rowHeight,"数量");
-    LODOP.ADD_PRINT_TEXT(hPos,140,pageWidth,rowHeight,"小计");
-    LODOP.ADD_PRINT_TEXT(hPos,170,pageWidth,rowHeight,"备注");
+    LODOP.ADD_PRINT_TEXT(hPos,120,pageWidth,rowHeight,"数量");
+    LODOP.ADD_PRINT_TEXT(hPos,150,pageWidth,rowHeight,"小计");
+    LODOP.ADD_PRINT_TEXT(hPos,190,pageWidth,rowHeight,"备注");
+
     hPos+=rowHeight;
     //遍历json的商品数组
+
+    LODOP.ADD_PRINT_LINE(hPos,2, hPos, pageWidth,2, 1);
+
+    hPos+=rowHeight;
 
     var sum = 0;
 
@@ -83,22 +102,21 @@ function CreatePrintPage(json) {
             hPos+=rowHeight;
         }
         LODOP.ADD_PRINT_TEXT(hPos,70,pageWidth,rowHeight,json.goodsList[i].order_goods_price);
-        LODOP.ADD_PRINT_TEXT(hPos,115,pageWidth,rowHeight,json.goodsList[i].number);
-        LODOP.ADD_PRINT_TEXT(hPos,140,pageWidth,rowHeight,json.goodsList[i].number * json.goodsList[i].order_goods_price);
-        LODOP.ADD_PRINT_TEXT(hPos,170,pageWidth,rowHeight,json.goodsList[i].mark);
+        LODOP.ADD_PRINT_TEXT(hPos,120,pageWidth,rowHeight,json.goodsList[i].number);
+        LODOP.ADD_PRINT_TEXT(hPos,150,pageWidth,rowHeight,json.goodsList[i].number * json.goodsList[i].order_goods_price);
+        LODOP.ADD_PRINT_TEXT(hPos,190,pageWidth,rowHeight,json.goodsList[i].mark);
         hPos+=rowHeight;
         sum += json.goodsList[i].number * json.goodsList[i].order_goods_price;
     }
     //商品遍历打印完毕,空一行
     hPos+=rowHeight;
     //合计
-    LODOP.ADD_PRINT_TEXT(hPos,80,pageWidth,rowHeight,"合计:"+sum);
-    //LODOP.ADD_PRINT_TEXT(hPos,130,pageWidth,rowHeight,"￥"+json.total);
+    LODOP.ADD_PRINT_TEXT(hPos,190,pageWidth,rowHeight,"合计:"+sum);
 
+    //hPos+=rowHeight;
+    //LODOP.ADD_PRINT_TEXT(hPos,2,pageWidth,rowHeight,(new Date()).toLocaleDateString()+" "+(new Date()).toLocaleTimeString())
     hPos+=rowHeight;
-    LODOP.ADD_PRINT_TEXT(hPos,2,pageWidth,rowHeight,(new Date()).toLocaleDateString()+" "+(new Date()).toLocaleTimeString())
-    hPos+=rowHeight;
-    LODOP.ADD_PRINT_TEXT(hPos,25,pageWidth,rowHeight,"谢谢惠顾,欢迎下次光临!");
+    LODOP.ADD_PRINT_TEXT(hPos,25,pageWidth,rowHeight,"——————中恒玖联技术支持——————");
     //初始化打印页的规格
     LODOP.SET_PRINT_PAGESIZE(3,pageWidth,45,"XXXXX订单信息");
 
