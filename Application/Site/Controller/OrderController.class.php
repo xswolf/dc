@@ -178,7 +178,7 @@ class OrderController extends BaseController {
 			return ['message' => "{$order_id}无效订单",'success' => -1];
 		}
 
-		if ( ! $this->float_cmp(floatval($pay_price), floatval($order['price']*100))) {
+		if ( ! $this->float_cmp(intval($pay_price), intval($order['price']*100))) {
 			return ['message' => "{$order_id}订单价格不对",'success' => -1];
 		}
 
