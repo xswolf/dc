@@ -18,6 +18,8 @@ class OrderModel extends BaseModel {
 	 */
 	protected $_table = 'w_order';
 
+	protected $_table_order = 'order';
+
 	/**
 	 * @var string 订单商品表
 	 */
@@ -72,6 +74,30 @@ class OrderModel extends BaseModel {
 		$db = new Model();
 		$w = array_merge(['id' => $order_id], $where);
 		return $db->table($this->_table)->where($w)->find();
+	}
+
+	/**
+	 * 获取订单详情
+	 * @param int $order_id
+	 * @return array
+	 */
+	public function getOrderView($order_id) {
+		$M = M($this->_table_order)->alias('a');
+		$data = $M->join('__ORDER_GOODS__ b on a.id = b.order_id')
+			->join('__GOODS__ c on b.goods_id = c.id')
+			->join('__PLATFORM_SHOP__ d on a.shop_id = d.id')
+			->field([
+				'a.price' => 'order_price',
+				'a.pay_type',
+				'a.status',
+				'a.created_at',
+				'b.price' => 'order_goods_price',
+				'b.mark',
+				'b.number',
+				'c.name' => 'goods_name',
+				'd.name' => 'shop_name'
+			])->where(['a.id' => $order_id])->select();
+		return $data;
 	}
 
 	/**

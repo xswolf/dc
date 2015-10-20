@@ -102,7 +102,17 @@ class OrderController extends BaseController {
 		return [$order, $goods];
 	}
 
+	/**
+	 * 订单详情
+	 */
 	public function order_view() {
+		$order_id = intval(I('request.id'));
+		$data = [];
+		if(!empty($order_id) && is_numeric($order_id)) {
+			$data = OrderModel::instance()->getOrderView($order_id);
+		}
+		$this->assign('data',$data);
+		$this->assign('order_id',$order_id);
 		$this->display();
 	}
 
@@ -162,7 +172,7 @@ class OrderController extends BaseController {
 			$this->assign('message',$message);
 			$this->assign('status',$order['status']);
 		}
-
+		$this->assign('order_id', $order_id);
 		$this->display();
 	}
 
