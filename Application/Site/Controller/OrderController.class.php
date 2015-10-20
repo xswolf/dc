@@ -102,6 +102,10 @@ class OrderController extends BaseController {
 		return [$order, $goods];
 	}
 
+	public function order_view() {
+		$this->display();
+	}
+
 	/**
 	 * 支付
 	 * @return bool|string

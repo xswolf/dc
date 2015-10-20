@@ -111,7 +111,7 @@ class OrderModel extends BaseModel {
 	 * @param int $order_id
 	 * @return bool
 	 */
-	protected function changeOrderStatus($order_id) {
+	public function changeOrderStatus($order_id) {
 		$flag = false;
 		if($order_id) {
 			$db = new Model();
