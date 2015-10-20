@@ -77,14 +77,14 @@ class OrderController extends VerifyController {
         $end = I('post.end');
         $s_time = !empty($start) ? strtotime($start) : NULL;
         $e_time = !empty($end) ? strtotime($end) : NULL;
-        $w['status'] = ['eq',3];
+        $w['a.status'] = ['eq',3];
         if(!is_null($s_time) && !is_null($e_time)) {
             $e_time = $e_time + 24*3600;
-            $w['created_at'] = ['between', "{$s_time}, {$e_time}"];
+            $w['a.created_at'] = ['between', "{$s_time}, {$e_time}"];
         } else if(!is_null($s_time)) {
-            $w['created_at'] = ['egt',$s_time];
+            $w['a.created_at'] = ['egt',$s_time];
         } else if(!is_null($e_time)) {
-            $w['created_at'] = ['elt',$e_time + 24*3600];
+            $w['a.created_at'] = ['elt',$e_time + 24*3600];
         }
         $data = OrderModel::instance()->orderList($this->user->getShopId(), $w, $request);
         if(is_array($data)) {
