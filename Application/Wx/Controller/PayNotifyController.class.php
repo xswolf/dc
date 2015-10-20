@@ -6,6 +6,7 @@ namespace Wx\Controller;
 
 use Wx\WxPay\Notify;
 use Common\Controller\BaseController;
+use Site\Controller\OrderController;
 class PayNotifyController extends BaseController{
     
     public function index(){
@@ -31,12 +32,13 @@ class PayNotifyController extends BaseController{
                 'status'    =>  1,
                 'wx_pay_sn' =>  $result['transaction_id'],
             ];
-            $M = M("wx_pay_log")->where(['openid'=>$result['openid'],'order_sn'=>$result['out_trade_no']]);
-            if( $M->save($data) ){
+            if( M("wx_pay_log")->where(['openid'=>$result['openid'],'order_sn'=>$result['out_trade_no']])->save($data) ){
                 //TODO 通知暂时放下
-                
-                //修改通知状态
-                $M->save( ['is_send'=>1] );
+                $res = OrderController::instance()->pay_notice($result['out_trade_no'], $result['total_fee'], $result['attach']);
+                if($res['success']==1){
+                    //修改通知状态
+                    M("wx_pay_log")->where(['openid'=>$result['openid'],'order_sn'=>$result['out_trade_no']])->save( ['is_send'=>1] );
+                }
             }
         }
     }
