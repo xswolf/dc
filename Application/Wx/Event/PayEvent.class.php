@@ -18,7 +18,7 @@ class PayEvent extends BaseController{
      * @param string  $attach     自定义数据
      * @return array
      */
-    public function JsApiPay( $user_id , $order_sn ,$total_fee , $body='' , $goods_tag='' , $attach='' ){
+    public function JsApiPay( $user_id , $order_id ,$order_sn ,$total_fee , $body='' , $goods_tag='' , $attach='' ){
         if(empty($user_id) || empty($total_fee)){
             return ['status'=> -1 , 'message'=>'数据错误'];
         }
@@ -46,16 +46,17 @@ class PayEvent extends BaseController{
             return ['status'=>-10 , 'message'=>$order['return_msg']];
         }
         $jsApiParameters = $tools->GetJsApiParameters($order);
-        $this->addPayLog($openId , $input);
+        $this->addPayLog($openId ,$order_id , $input);
         return ['status'=>1 , 'message'=>$jsApiParameters];
     }
     
     /**
      * 记录支付日志
      */
-    private function addPayLog( $openid , \WxPayUnifiedOrder $input ){
+    private function addPayLog( $openid , $order_id , \WxPayUnifiedOrder $input ){
         $data = [
             'openid'    =>  $openid,
+            'order_id'  =>  $order_id,
             'order_sn'  =>  $input->GetOut_trade_no(),
             'body'      =>  $input->GetBody(),
             'total_fee' =>  $input->GetTotal_fee(),
