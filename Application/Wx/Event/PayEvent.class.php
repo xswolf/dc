@@ -55,10 +55,9 @@ class PayEvent extends BaseController{
      * 记录支付日志
      */
     private function addPayLog( $openid , $order_id , \WxPayUnifiedOrder $input ){
-        dump($order_id);exit;
         $data = [
             'openid'    =>  $openid,
-            'order_id'  =>  $order_id,
+            'order_id'  =>  intval($order_id),
             'order_sn'  =>  $input->GetOut_trade_no(),
             'body'      =>  $input->GetBody(),
             'total_fee' =>  $input->GetTotal_fee(),
