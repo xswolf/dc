@@ -44,4 +44,9 @@ class UserModel extends BaseModel {
         return $this->userShop['id'];
     }
 
+    public function getShopName(){
+
+        return $this->userShop['name'];
+    }
+
 }

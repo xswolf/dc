@@ -107,6 +107,7 @@
     window.onload = function() {
         $(function () {
 
+            var shopNmae = '{$shopName}';
 
             $.ajax({
                 "type": 'get',
@@ -114,7 +115,6 @@
                 "success": function (msg) {
                     console.log(msg);
                 }
-
             })
 
             $(".print").click(function () {
@@ -127,8 +127,8 @@
                     "success": function (msg) {
                         var data = msg.data;
                         var json = {
-                            "title": "订单信息",
-                            "tableId": data.table_id,
+                            "title": shopNmae,
+                            "tableId": data.orderData.name,
                             "orderNo": data.orderData.sn, "orderTime": getLocalTime(data.orderData.created_at),
                             "goodsList": data.orderGoodsData
                         };

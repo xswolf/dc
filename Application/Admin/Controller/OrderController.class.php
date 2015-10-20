@@ -14,6 +14,11 @@ class OrderController extends VerifyController {
      */
     protected $shop_id;
 
+    public function _initialize(){
+        parent::_initialize();
+        $this->assign('shopName' , $this->user->getShopName());
+    }
+
     public function _before_order() {
         $this->shop_id = $this->user->getShopId();
     }
