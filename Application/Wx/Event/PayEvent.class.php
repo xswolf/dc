@@ -11,6 +11,7 @@ class PayEvent extends BaseController{
     /**
      * jsapi支付
      * @param string  $user_id    用户id
+     * @param int     $order_id
      * @param string  $order_sn   订单号
      * @param int     $total_fee  费用
      * @param string  $body       商品或支付单简要描述
