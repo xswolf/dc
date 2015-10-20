@@ -71,7 +71,7 @@ class OrderController extends VerifyController {
     /**
      * 历史订单
      */
-    public function historyOrder(){
+    public function historyOrder($toExcel = false){
         $request = I('post.sn');
         $start = I('post.start');
         $end = I('post.end');
@@ -98,6 +98,9 @@ class OrderController extends VerifyController {
         $this->assign('start', $start);
         $this->assign('end', $end);
         $this->assign('data', $data);
+        if ($toExcel){
+            $this->display('Order/HistoryOrderToExcel');exit;
+        }
         $this->display();
     }
 

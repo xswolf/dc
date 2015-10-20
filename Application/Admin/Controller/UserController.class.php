@@ -41,8 +41,8 @@ class UserController extends BaseController {
     public function loginOut(){
 
         if (session(C('LOGIN_SESSION'))){
-            session(C('LOGIN_SESSION') , '');
-            $this->success();
+            session(C('LOGIN_SESSION') , null);
+            $this->redirect('user/login');
         } else{
             $this->error('用户没有登录');
         }
