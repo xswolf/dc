@@ -29,6 +29,11 @@ class OrderModel extends BaseModel {
 	protected $_table_member = 'member';
 
 	/**
+	 * @var string 支付通知日志表
+	 */
+	protected $_table_pay_notice_log = 'pay_notice_log';
+
+	/**
 	 * 生成订单
 	 * @param $order
 	 * @param $goods
@@ -83,11 +88,28 @@ class OrderModel extends BaseModel {
 	}
 
 	/**
+	 * 支付日志
+	 * @param int $shop_id
+	 * @param int $order_id
+	 * @param string $message
+	 * @return bool
+	 */
+	public function payLog($shop_id, $order_id, $message) {
+		$M = M($this->_table_pay_notice_log);
+		return $M->add([
+			'shop_id' => $shop_id,
+			'order_id' => $order_id,
+			'message' => $message,
+			'created_at' => NOW_TIME
+		]);
+	}
+
+	/**
 	 * 支付成功,改变订单状态
 	 * @param int $order_id
 	 * @return bool
 	 */
-	public function changeOrderStatus($order_id) {
+	protected function changeOrderStatus($order_id) {
 		$flag = false;
 		if($order_id) {
 			$db = new Model();
