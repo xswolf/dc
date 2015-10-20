@@ -152,30 +152,30 @@ class OrderController extends BaseController {
 	 * @param int $order_id 订单ID
 	 * @param float $pay_price
 	 * @param int $shop_id
-	 * return array
+	 * @return array
 	 */
 	public function pay_notice($order_id, $pay_price, $shop_id) {
 		$message = 'Got paid info: ' . json_encode(func_get_args());
 		OrderModel::instance()->payLog($shop_id, $order_id, $message);
 		$order = OrderModel::instance()->getOrder($order_id);
 		if(!$order) {
-			$this->ajaxError($order_id.'无效订单','error');
+			return ['message' => "{$order_id}无效订单",'success' => -1];
 		}
 
 		if ( ! floatcmp(floatval($pay_price), floatval($order['price']))) {
-			$this->ajaxError($order_id.'订单价格不对','error');
+			return ['message' => "{$order_id}订单价格不对",'success' => -1];
 		}
 
 		if($order['status'] == 2) {
-			$this->ajaxSuccess('订单已支付');
+			return ['message' => "订单已支付",'success' => 1];
 		}
 
 		$flag = OrderModel::instance()->changeOrderStatus($order_id);
 		if($flag) {
-			$this->ajaxSuccess('通知成功',['sn' => $order['sn']]);
+			return ['message' => "通知成功",'success' => 1];
 		}
 
-		$this->ajaxError('通知失败', 'error');
+		return ['message' => "通知失败",'success' => -1];
 	}
 
 	protected function createSn() {
