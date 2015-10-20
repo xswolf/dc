@@ -178,7 +178,7 @@ class OrderController extends BaseController {
 			return ['message' => "{$order_id}无效订单",'success' => -1];
 		}
 
-		if ( ! floatcmp(floatval($pay_price), floatval($order['price']*100))) {
+		if ( ! $this->float_cmp(floatval($pay_price), floatval($order['price']*100))) {
 			return ['message' => "{$order_id}订单价格不对",'success' => -1];
 		}
 
@@ -192,6 +192,13 @@ class OrderController extends BaseController {
 		}
 
 		return ['message' => "通知失败",'success' => -1];
+	}
+
+	private function float_cmp($f1, $f2, $precision = 10) {
+		$e = pow(10, $precision);
+		$i1 = intval($f1 * $e);
+		$i2 = intval($f2 * $e);
+		return ($i1 == $i2);
 	}
 
 	protected function createSn() {
