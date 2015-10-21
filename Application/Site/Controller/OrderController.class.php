@@ -60,6 +60,9 @@ class OrderController extends BaseController {
 	protected function _handelOrder() {
 		$mid = cookie($this->cookie_prefix.'mid');
 		$table_id = cookie($this->cookie_prefix.'table_id');
+		/*if(empty($table_id)) {
+			$this->ajaxError(['msg' => '桌号失效,请重新扫描二维码']);
+		}*/
 		$shop_id = intval(DomainController::instance()->get('shop_id'));
 		$order = [
 			'mid' => $mid,
@@ -113,6 +116,24 @@ class OrderController extends BaseController {
 		}
 		$this->assign('data',$data);
 		$this->assign('order_id',$order_id);
+		$this->display();
+	}
+
+	/**
+	 * 订单列表
+	 */
+	public function order_list() {
+		$wx_user_id = intval(I('get.mid'));
+		$data = OrderModel::instance()->getOrderList($wx_user_id);
+		/*$order_list = [];
+		if(is_array($data)) {
+			foreach($data as $list) {
+				$order_list[$list['shop_id']]['header'] = ['shop_name' => $list['shop_name'], 'order_status' => $list['order_status']];
+				$order_list[$list['shop_id']][] = $list;
+			}
+		}*/
+
+		$this->assign('data', $data);
 		$this->display();
 	}
 

@@ -1,0 +1,38 @@
+<div class="scroll-content bg-2">
+    <div class="orderList">
+        <ul class="list list1">
+            <volist name="data" id="list">
+                <li class="item">
+                    <div class="hd">
+                        <h2>{$list['shop_name']}</h2>
+                        <if condition="$list['order_status'] eq 1">
+                            <span><a class="button button-danger button-small" href="javascript:;" onclick="pay({$list['order_id']})">付　款</a></span>
+                        <elseif condition="$list['order_status'] eq 2" />
+                            <span class="text-success">已支付</span>
+                        <elseif condition="$list['order_status'] eq 3" />
+                            <span class="text-muted">已完成</span>
+                        </if>
+                    </div>
+
+                    <div class="bd">
+                        <div class="row">
+                            <div class="col col-25"><a href="/site/order/order_view?id={$list['order_id']}"><img src="{$list['goods_img']}" alt=""/></a></div>
+                            <div class="col">
+                                <a href="javascript:;">
+                                    <p><span class="text-danger">￥{$list['order_price']}</span></p>
+                                    <p class="f-toe">{$list['goods_name']}</p>
+                                    <p class="text-muted">{$list['order_created_at']|date="Y-m-d H:i:s",###}</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </volist>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    function pay(id) {
+        location.href = 'http://www.qulianchn.com/site/order/pay?id='+id;
+    }
+</script>

@@ -101,6 +101,33 @@ class OrderModel extends BaseModel {
 	}
 
 	/**
+	 * 订单列表
+	 * @param int $wx_user_id
+	 * @return array
+	 */
+	public function getOrderList($wx_user_id) {
+		$Model = M($this->_table_member)->alias('a');
+		$list = $Model->join('__ORDER__ b on a.id = b.mid')
+			->join('__ORDER_GOODS__ c on b.id = c.order_id')
+			->join('__GOODS__ d on c.goods_id = d.id')
+			->join('__PLATFORM_SHOP__ e on b.shop_id = e.id')
+			->field([
+				'b.id' => 'order_id',
+				'b.shop_id',
+				'b.price' => 'order_price',
+				'b.created_at' => 'order_created_at',
+				'b.status' => 'order_status',
+				'd.name' => 'goods_name',
+				'd.pic1' => 'goods_img',
+				'e.name' => 'shop_name',
+				'e.logo'
+			])->where(['a.wx_user_id' => $wx_user_id])->order('b.id DESC')->select();
+		//echo $Model->getlastSql();
+		//exit;
+		return $list;
+	}
+
+	/**
 	 * 获取微信用户表ID
 	 * @param int $member_id
 	 * @return array
