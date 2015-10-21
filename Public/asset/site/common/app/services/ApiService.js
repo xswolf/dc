@@ -9,15 +9,6 @@ define(['angular', '../module.js'], function(angular, module) {
         var api = {};
 
         /**
-         * 获取商品列表
-         * @param int id 商品分类ID
-         */
-        api.getGoods =  function(id) {
-            return $http.get('/site/goods/goods_list?id='+id);
-        };
-
-
-        /**
          * 加载商品分类
          */
         api.getGoodsCategory = function() {

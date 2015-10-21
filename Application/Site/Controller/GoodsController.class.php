@@ -14,25 +14,25 @@ use Site\Common\DomainController;
 use Site\Model\GoodsModel;
 class GoodsController extends BaseController {
 	/**
+	 * @var string cookie前缀
+	 */
+	protected $cookie_prefix = 'qulian_';
+
+	/**
 	 * @var int 店铺ID
 	 */
 	protected $_shop_id;
+
+	public function _initialize() {
+		$shop_name = cookie($this->cookie_prefix.'shop_name');
+		$this->assign('shop_name',$shop_name);
+	}
 
 	/**
 	 * 首页
 	 */
 	public function index() {
 		$this->display();
-	}
-
-	/**
-	 * 商品列表
-	 */
-	public function goods_list() {
-		$id = I('get.id');
-		if(!empty($id) && ctype_digit($id)) {
-
-		}
 	}
 
 	/**

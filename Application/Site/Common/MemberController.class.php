@@ -67,6 +67,11 @@ class MemberController extends BaseController {
 			}
 		}
 
+		$shop_info = ShopTable::instance()->getShopName($this->_shop_id);
+		if(!empty($shop_info) && is_array($shop_info)) {
+			$shop_name = $shop_info['shop_name'];
+			cookie('shop_name', $shop_name, ['expire' => NOW_TIME + 31536000, 'prefix' => $this->_config['cookie_prefix']]);
+		}
 		return $hasHandled;
 	}
 

@@ -18,6 +18,12 @@ class OrderController extends BaseController {
 	 * @var string cookie前缀
 	 */
 	protected $cookie_prefix = 'qulian_';
+
+	public function _initialize() {
+		$shop_name = cookie($this->cookie_prefix.'shop_name');
+		$this->assign('shop_name',$shop_name);
+	}
+
 	/**
 	 * 订单列表首页
 	 */
