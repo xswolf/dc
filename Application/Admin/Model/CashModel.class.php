@@ -12,7 +12,7 @@ class CashModel extends BaseModel {
 
         $where = ["shop_id" => $shopId ];
 
-        if ($status){
+        if ($status != ''){
             $where['status'] = $status;
         }
 
