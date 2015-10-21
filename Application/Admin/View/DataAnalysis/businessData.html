@@ -1,0 +1,55 @@
+<div class="orderList">
+    <div class="container-fluid">
+        <div class="wpBox">
+            <div class="hd">
+                <div class="row">
+                    <form class="form-inline" method="post">
+                        <div class="form-group">
+                            <label>&nbsp;&nbsp;&nbsp;&nbsp;时间范围：</label>
+                        </div>
+                        <div class="input-group date j-date col-md-1">
+                            <input class="form-control" size="16" type="text" name="startTime" value="{$startTime}" readonly>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                        -
+                        <div class="input-group date j-date col-md-1">
+                            <input class="form-control" size="16" type="text" name="endTime" value="{$endTime}" readonly>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                        <button class="btn btn-primary" type="submit">查询</button>
+                        <a href="javascript:void(0)" class="btn btn-primary to-excel print">toexcel</a>
+                    </form>
+                </div>
+
+            </div>
+            <div class="bd">
+                <table class="table table-hover table-bordered" id="to-excel-table">
+                    <thead>
+                    <tr>
+                        <th>日期</th>
+                        <th>订单数</th>
+                        <th>营业额</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <volist name="list" id="vo">
+                        <tr>
+                            <td>{$vo.create_date}</td>
+                            <td>{$vo.ordercount}</td>
+                            <td>{$vo.cash_money}</td>
+
+                        </tr>
+
+                    </volist>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
