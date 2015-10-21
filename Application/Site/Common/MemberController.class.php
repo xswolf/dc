@@ -56,12 +56,11 @@ class MemberController extends BaseController {
 				if (!empty($table) and ctype_digit($table)) {
 					$hasHandled = true;
 					$tid = intval($table);
-
 					if ($tid) {
 						$table = ShopTable::instance()->get($tid,$this->_shop_id);
 						if ($table and $table['shop_id'] == $this->_shop_id) {
-							cookie('table_id', $table['id'], ['expire' => intval($time) + $this->_config['member_table_lifetime'], 'prefix' => $this->_config['cookie_prefix']]);
-							cookie('table_name', $table['name'], ['expire' => intval($time) + $this->_config['member_table_lifetime'], 'prefix' => $this->_config['cookie_prefix']]);
+							cookie('table_id', $table['id'], ['expire' => $this->_config['member_table_lifetime'], 'prefix' => $this->_config['cookie_prefix']]);
+							cookie('table_name', $table['name'], ['expire' => $this->_config['member_table_lifetime'], 'prefix' => $this->_config['cookie_prefix']]);
 						}
 					}
 				}

@@ -60,6 +60,9 @@ class OrderController extends BaseController {
 	protected function _handelOrder() {
 		$mid = cookie($this->cookie_prefix.'mid');
 		$table_id = cookie($this->cookie_prefix.'table_id');
+		/*if(empty($table_id)) {
+			$this->ajaxError(['msg' => '桌号失效,请重新扫描二维码']);
+		}*/
 		$shop_id = intval(DomainController::instance()->get('shop_id'));
 		$order = [
 			'mid' => $mid,

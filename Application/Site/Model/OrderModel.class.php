@@ -122,6 +122,8 @@ class OrderModel extends BaseModel {
 				'e.name' => 'shop_name',
 				'e.logo'
 			])->where(['a.wx_user_id' => $wx_user_id])->order('b.id DESC')->select();
+		//echo $Model->getlastSql();
+		//exit;
 		return $list;
 	}
 
