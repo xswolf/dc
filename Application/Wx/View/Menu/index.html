@@ -59,6 +59,13 @@
 						</template>
 					</template>
 				</tbody>
+				<tfoot v-if="list.length != 0">
+					<tr>
+						<td colspan="3">
+							<a href="javascript:;" class="btn btn-primary" >同步到微信</a>
+						</td>
+					</tr>
+				</tfoot>
 			</table>
 		</div>
 	</div>
@@ -164,13 +171,14 @@
 				}
 				$.post("Menu/edit",this.data,function(rel){
 					if(rel.status==1){
-						var repast = function(rel){
-							rel.name = model.data.name;
-							rel.type = model.data.type;
-							rel.pid  = model.data.pid;
-							rel.value  = model.data.type=='click' ? '' : (model.data.type=='view' ? model.data.url : model.data.material);
-						}
+						//编辑
 						if(typeof model.data.id != 'undefined'){
+							var repast = function(rel){
+								rel.name = model.data.name;
+								rel.type = model.data.type;
+								rel.pid  = model.data.pid;
+								rel.value  = model.data.type=='click' ? '' : (model.data.type=='view' ? model.data.url : model.data.material);
+							}
 							model.list.forEach(function(a_val,a_index){
 								if(model.data.pid==0 && model.data.id == a_val.id){
 									repast(a_val);
@@ -183,6 +191,7 @@
 								}
 							})
 						}else{
+							//新增
 							var news = {
 									id	 : rel.data,
 									name : model.data.name,
@@ -224,7 +233,24 @@
 			},
 			
 			remove : function( item ){
-				model.$log(item)
+				var del = confirm("确定删除?");
+				if(del){
+					$.post("Menu/del",{id : item.id},function(rel){
+						if(rel.status){
+							model.list.forEach(function(rel , index){
+								if(!item.pid && rel.id == item.id){
+									model.list.splice(index,1);
+								}else if( item.pid == rel.id){
+									rel.child.forEach(function(ch , ch_index){
+										if( ch.id == item.id){
+											rel.child.splice(ch_index,1);
+										}
+									});
+								}
+							});
+						}
+					});
+				}
 			},
 			
 			sorts : function( item , level ){
@@ -255,8 +281,9 @@
 					name : item.name,
 					type : item.type,
 					url  : item.type=='view' ? item.value : '',
-					material : item.type=='material' ? item.value : '',
+					material : item.type=='media_id' ? item.value : '',
 				};
+				model.$log(model.data);
 			},
 			add_nav_menu : function(){
 				this.clear();
