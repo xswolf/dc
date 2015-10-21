@@ -99,7 +99,7 @@ class OrderController extends VerifyController {
         $this->assign('end', $end);
         $this->assign('data', $data);
         if ($toExcel){
-            $this->display('Order/HistoryOrderToExcel');exit;
+            $this->display('Order/historyOrderToExcel');exit;
         }
         $this->display();
     }
