@@ -7,15 +7,33 @@ class CashModel extends BaseModel {
     protected $_table = "cash";
     protected $_cash_log_table = 'cash_log';
 
-    public function lists($shopId , $status = 0){
-        return M($this->_table)->where(["shop_id" => $shopId , "status"=>$status])
+
+    public function lists($shopId , $status = '' ,$startTime = '' ,$endTime = ''){
+
+        $where = ["shop_id" => $shopId ];
+
+        if ($status){
+            $where['status'] = $status;
+        }
+
+        if ($startTime  == ''){
+            $startTime = $date = date('Ymd',strtotime('-30 day',time()));
+        }
+
+        if ($endTime == ''){
+            $endTime = date('Ymd');
+        }
+
+        $where ['create_date'] = ['between' , "$startTime , $endTime"];
+
+        return M($this->_table)->where($where)
             ->select();
     }
 
     // 提现申请
     public function cash($shopId){
         $time = time();
-        $list = $this->lists($shopId);
+        $list = $this->lists($shopId , 0);
         $cashMoney = 0;
         $ids = [];
         foreach ($list as $v){

@@ -85,6 +85,10 @@ class OrderController extends VerifyController {
             $w['a.created_at'] = ['egt',$s_time];
         } else if(!is_null($e_time)) {
             $w['a.created_at'] = ['elt',$e_time + 24*3600];
+        } else if (is_null($s_time) && is_null($e_time) && !$request){
+            $etime = time();
+            $stime = strtotime(date('Y-m-d'));
+            $w['a.created_at'] = ['between', " $stime , $etime "];
         }
         $data = OrderModel::instance()->orderList($this->user->getShopId(), $w, $request);
         if(is_array($data)) {

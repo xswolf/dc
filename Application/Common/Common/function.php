@@ -100,3 +100,10 @@ function decode_emoji($string){
     $string = preg_replace("#\\\u([0-9a-f]+)#ie","iconv('UCS-2','UTF-8', pack('H4', '\\1'))",$string); //对emoji unicode进行二进制pack并转utf8
     return $string;
 }
+
+/**
+ *
+ */
+function date_to_int($date){
+    return str_replace("-","" , $date);
+}

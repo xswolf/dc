@@ -7,7 +7,7 @@ class CashController extends VerifyController {
 
     public function index(){
 
-        $list = CashModel::instance()->lists($this->user->getShopId());
+        $list = CashModel::instance()->lists($this->user->getShopId() , 0);
 
         $sumMoney = 0;
         foreach ($list as $v){

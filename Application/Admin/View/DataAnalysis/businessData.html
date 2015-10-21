@@ -5,18 +5,17 @@
                 <div class="row">
                     <form class="form-inline" method="post">
                         <div class="form-group">
-                            <label for="exampleInputName2">&nbsp;&nbsp;&nbsp;&nbsp;时间范围：</label>
-                            <input type="hidden" class="form-control" name="sn"  value="{$sn}" id="exampleInputName2" placeholder="输入订单号查询">
+                            <label>&nbsp;&nbsp;&nbsp;&nbsp;时间范围：</label>
                         </div>
                         <div class="input-group date j-date col-md-1">
-                            <input class="form-control" size="16" type="text" name="start" value="{$start}" readonly>
+                            <input class="form-control" size="16" type="text" name="startTime" value="{$startTime}" readonly>
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
                         </div>
                         -
                         <div class="input-group date j-date col-md-1">
-                            <input class="form-control" size="16" type="text" name="end" value="{$end}" readonly>
+                            <input class="form-control" size="16" type="text" name="endTime" value="{$endTime}" readonly>
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -31,19 +30,17 @@
                 <table class="table table-hover table-bordered" id="to-excel-table">
                     <thead>
                     <tr>
-                        <th>单号</th>
-                        <th>桌号</th>
-                        <th>消费金额</th>
-                        <th>下单时间</th>
+                        <th>日期</th>
+                        <th>订单数</th>
+                        <th>营业额</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <volist name="data" id="list">
+                    <volist name="list" id="vo">
                         <tr>
-                            <td>{$list.sn}</td>
-                            <td>{$list.table_id}</td>
-                            <td>{$list.price}</td>
-                            <td>{$list.orderTime}</td>
+                            <td>{$vo.create_date}</td>
+                            <td>{$vo.orderCount}</td>
+                            <td>{$vo.cash_money}</td>
 
                         </tr>
 
