@@ -1,10 +1,5 @@
 <div ng-controller="order.Controller">
-    <!-- S 购物车空 -->
-    <div ng-if="cart.length == 0">
-        购物车里空空如也，赶紧点餐吧!
-    </div>
-    <!-- E 购物车空 -->
-
+    <!-- S 选中商品列表 -->
     <div autoscroll="true" ng-if="cart.length > 0">
         <!--### 备注 ###-->
         <div class="scroll-content mod-bz page-remark" ng-if="ui.page.remark">
@@ -61,6 +56,12 @@
             </div>
         </div>
     </div>
+
+    <!-- S 购物车空 -->
+    <div ng-if="cart.length == 0 && ui.cart_empty">
+        购物车里空空如也，赶紧点餐吧!
+    </div>
+    <!-- E 购物车空 -->
 </div>
 <script type="text/javascript">
     require([

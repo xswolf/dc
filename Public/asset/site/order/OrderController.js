@@ -12,7 +12,8 @@ define(['./module.js'], function(module) {
                 remark: false
             },
             remark_value:'',
-            c:null
+            c:null,
+            cart_empty:true
         };
 
         /**
@@ -60,6 +61,7 @@ define(['./module.js'], function(module) {
                 .success(function(res) {
                     if (res.status) {
                         Dialog.toast('下单成功');
+                        $scope.ui.cart_empty = false;
                         $timeout(function() {
                             CartService.clean();
                         });
