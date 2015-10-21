@@ -19,7 +19,7 @@ class MenuModel extends BaseModel{
      * 获取菜单列表
      */
     public function getMenuList(){
-        $data = $this->where(["status"])->select();
+        $data = $this->where(["status"])->order("sort DESC")->select();
         $arr = [];
         foreach($data as $val){
             if($val['pid']==0){

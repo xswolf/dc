@@ -5,14 +5,14 @@
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-10">
-			<a href="#relative" data-toggle="modal" class="btn btn-primary" v-on="click:clear()">添加导航菜单</a>
+			<a href="#relative" data-toggle="modal" class="btn btn-primary" v-on="click:add_nav_menu()">添加导航菜单</a>
 		</div>
 	</div>
 	
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-10">
-			<table class="table table-bordered j-datatables table-condensed">
+			<table class="table table-bordered j-datatables table-condensed  table-hover">
 				<thead>
 					<tr>
 						<th>名字</th>
@@ -21,12 +21,12 @@
 					</tr>
 				</thead>
 				<tbody>
-					<template v-repeat="li in list | orderBy sort 1">
+					<template v-repeat="li in list ">
 						<tr class="warning">
 							<td>{{li.name}}</td>
-							<td>{{li.created_at|}}</td>
+							<td>{{li.created_at|time}}</td>
 							<td>
-								<button type="button" class="btn btn-default btn-xs " v-on="click:sort(li , 1)">
+								<button type="button" class="btn btn-default btn-xs " v-on="click:sorts(li , 1)">
 									<span class="glyphicon glyphicon-arrow-up"></span>
 								</button>
 								<button type="button" class="btn btn-default btn-xs" v-on="click:edit(li)">
@@ -40,12 +40,12 @@
 								</button>
 							</td>
 						</tr>
-						<template v-repeat="child in li.child | orderBy sort 1">
+						<template v-repeat="child in li.child">
 							<tr>
 								<td>{{child.name}}</td>
-								<td>{{child.created_at|}}</td>
+								<td>{{child.created_at|time}}</td>
 								<td>
-									<button type="button" class="btn btn-default btn-xs " v-on="click:sort(child , 2)">
+									<button type="button" class="btn btn-default btn-xs " v-on="click:sorts(child , 2)">
 										<span class="glyphicon glyphicon-arrow-up"></span>
 									</button>
 									<button type="button" class="btn btn-default btn-xs" v-on="click:edit(child)">
@@ -128,9 +128,19 @@
 <script src="/Public/libs/vue/vue.js"></script>
 <script>
 	var list = {$list|json_encode};
-	var modal = new Vue({
+	
+	Vue.filter("time",function(val){
+		if(val.length < 13) 
+			val += "000";
+		var time = new Date(Number(val));
+		var str =  time.getFullYear()+"-"+(time.getMonth()+1 < 10 ? 0+''+time.getMonth()+1 : time.getMonth()+1)+"-"+time.getDate();
+		return str += " "+(time.getHours() < 10 ? 0+''+time.getHours() : time.getHours())+":"+(time.getMinutes() < 10 ? 0+''+time.getMinutes() : time.getMinutes())+":"+(time.getSeconds() <10 ? 0+''+time.getSeconds() : time.getSeconds());	
+	});
+	
+	var model = new Vue({
 		el   : "#content",
 		data : {
+			is_nav : false,
 			list : list,
 			data : {
 				name : '',
@@ -154,27 +164,50 @@
 				}
 				$.post("Menu/edit",this.data,function(rel){
 					if(rel.status==1){
-						if(typeof modal.data.id != 'undefined'){
-							modal.edit_data.name = modal.data.name;
-						}else{
-							modal.list.forEach(function(item){
-								if(item.id == modal.data.pid){
-									item.child.push({
-										id	 : rel.data,
-										name : modal.data.name,
-										pid  : modal.data.pid,
-										type : modal.data.type,
-										created_at : new Date().getTime(),
-										value : function(type){
-											return type=='view' ? modal.data.url : modal.data.material
-										}(modal.data.type),
+						var repast = function(rel){
+							rel.name = model.data.name;
+							rel.type = model.data.type;
+							rel.pid  = model.data.pid;
+							rel.value  = model.data.type=='click' ? '' : (model.data.type=='view' ? model.data.url : model.data.material);
+						}
+						if(typeof model.data.id != 'undefined'){
+							model.list.forEach(function(a_val,a_index){
+								if(model.data.pid==0 && model.data.id == a_val.id){
+									repast(a_val);
+								}else if(a_val.id == model.data.pid){
+									a_val.child.forEach(function(b_val,b_index){
+										if(b_val.id == model.data.id){
+											repast(b_val);
+										}
 									});
 								}
 							})
+						}else{
+							var news = {
+									id	 : rel.data,
+									name : model.data.name,
+									pid  : model.data.pid,
+									type : model.data.type,
+									created_at : new Date().getTime(),
+									value : function(type){
+										return type=='view' ? model.data.url : model.data.material
+									}(model.data.type),
+									child : [],
+							};
+							if(model.is_nav){
+								model.list.push( news );
+							}else{
+								model.list.forEach(function(item){
+									if(item.id == model.data.pid){
+										item.child.push( news );
+									}
+								})
+							}
 						}
 					}else{
 						alert(rel.message);
 					}
+					model.is_nav = false;
 			    });
 				$("#relative").modal('hide');
 			},
@@ -187,24 +220,36 @@
 			addChild : function(pid){
 				this.clear();
 				$('#relative').modal()
-				modal.data.pid = pid;
+				model.data.pid = pid;
 			},
 			
 			remove : function( item ){
+				model.$log(item)
 			},
 			
-			sort : function( item , level ){
-				$.post("Menu/sort",{id:item.id , level:level},function(rel){
+			sorts : function( item , level ){
+				 $.post("Menu/sort",{id:item.id , level:level},function(rel){
 					if(rel.status){
-						item.sort = rel.data;
-						model.$log(item);
+						item.sort = String(rel.data);
+						if(level==1){
+							model.list.sort(function(a,b){
+								return a.sort===b.sort ? 0 : (a.sort > b.sort ? -1 : 1);
+							});
+						}else{
+							model.list.forEach(function(rel,index){
+								if(rel.id == item.pid){
+									rel.child.sort(function(a,b){
+										return a.sort===b.sort ? 0 : (a.sort > b.sort ? -1 : 1);
+									});
+								}
+							});
+						}
 					}
-				});
+				}); 
 			},
 			
 			menu_data : function(item){
-				modal.edit_data = item;
-				modal.data = {
+				model.data = {
 					id   : item.id,
 					pid  : item.pid,
 					name : item.name,
@@ -212,6 +257,10 @@
 					url  : item.type=='view' ? item.value : '',
 					material : item.type=='material' ? item.value : '',
 				};
+			},
+			add_nav_menu : function(){
+				this.clear();
+				this.is_nav = true;
 			},
 			clear : function(){
 				this.data = {

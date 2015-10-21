@@ -56,7 +56,7 @@ class MenuController extends BaseController{
                 $rel = MenuModel::instance()->where(['id'=>$id])->save($data);
             }
             
-            if($rel)
+            if($rel!==false)
                 $this->ajaxSuccess($rel);
         }
         $this->ajaxError("操作失败");
