@@ -12,18 +12,20 @@ use Wx\Model\MenuModel;
 class MenuController extends BaseController{
     
     public function index(){
-        
         $list = MenuModel::instance()->getMenuList();
+        
+        $this->assign( "list" , $list );
         $this->display();
     }
     
     /**
-     * 添加菜单
+     * 添加|编辑 菜单
      */
-    public function add(){
+    public function edit(){
         if(IS_AJAX){
             empty($_POST['name']) && $this->ajaxError("请填写菜单名");
             empty($_POST['type']) && $this->ajaxError("菜单类型错误");
+            $id = empty($_POST['id']) ? 0 : intval($_POST['id']);
             $data = [
                 'name'      => $_POST['name'],
                 'type'      => $_POST['type'],
@@ -41,17 +43,38 @@ class MenuController extends BaseController{
                 $data['value'] = $_POST['material'];
             }
             $num = MenuModel::instance()->getMenuSum($data['pid']);
-            if($data['pid'] && $num >= 5){
-                $this->ajaxError("二级菜单已达到数量上限");
-            }elseif ($data['pid']==0 && $num >= 3){
-                $this->ajaxError('一级菜单已达数量上限');
+            if(empty($id)){
+                if($data['pid'] && $num >= 5){
+                    $this->ajaxError("二级菜单已达到数量上限");
+                }elseif ($data['pid']==0 && $num >= 3){
+                    $this->ajaxError('一级菜单已达数量上限');
+                }
+                $rel = MenuModel::instance()->add($data);
+            }else{
+                unset($data['sort']);
+                unset($data['created_at']);
+                $rel = MenuModel::instance()->where(['id'=>$id])->save($data);
             }
             
-            $rel = MenuModel::instance()->add($data);
             if($rel)
-                $this->ajaxSuccess("");
+                $this->ajaxSuccess($rel);
         }
         $this->ajaxError("操作失败");
     }
     
+    /**
+     * 排序
+     */
+    public function sort(){
+        if(IS_AJAX){
+            $id = I('post.id' , 'intval');
+            $level = I('post.level' , 'intval');
+            if( $id && in_array($level, [1,2]) ){
+                $rel = MenuModel::instance()->sort($id, $level);
+                if($rel)
+                    $this->ajaxSuccess($rel);
+            }
+        }
+        $this->ajaxError('操作失败');
+    }   
 }

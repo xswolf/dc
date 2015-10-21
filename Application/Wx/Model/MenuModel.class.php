@@ -35,5 +35,26 @@ class MenuModel extends BaseModel{
         return $arr;
         
     }
+    
+    /**
+     * 排序
+     */
+    public function sort($id , $level){
+        if( $level == 1 ){
+            $where = ["pid"=>0];
+        }else{
+            $pid = $this->where(['id'=>$id])->field("pid")->find();
+            $where = ["pid"=>$pid['pid']];
+        }
+        $sort = $this->where($where)->field("sort")->order("sort DESC")->find();
+        if($sort){
+            $sort = $sort['sort'] + 1;
+            $rel = $this->where(['id'=>$id])->save( ['sort'=>$sort]);
+            if($rel !== false)
+                return $sort;
+        }
+        return false;
+    }
+    
 }
 

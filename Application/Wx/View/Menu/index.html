@@ -1,35 +1,63 @@
 <extend name="./layout/main"/>
 <block name="content">
-	
+
+<div id="content">	
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-10">
-			<a href="#relative" data-toggle="modal" class="btn btn-primary">添加导航菜单</a>
+			<a href="#relative" data-toggle="modal" class="btn btn-primary" v-on="click:clear()">添加导航菜单</a>
 		</div>
 	</div>
 	
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-10">
-			<table class="table table-bordered j-datatables">
+			<table class="table table-bordered j-datatables table-condensed">
 				<thead>
 					<tr>
-						<th>id</th>
 						<th>名字</th>
 						<th>创建时间</th>
 						<th>操作</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td>扫码送礼</td>
-						<td>1212</td>
-						<td>
-							<span class="glyphicon glyphicon-remove"></span>
-							<span class="glyphicon glyphicon-edit"></span>
-						</td>
-					</tr>
+					<template v-repeat="li in list | orderBy sort 1">
+						<tr class="warning">
+							<td>{{li.name}}</td>
+							<td>{{li.created_at|}}</td>
+							<td>
+								<button type="button" class="btn btn-default btn-xs " v-on="click:sort(li , 1)">
+									<span class="glyphicon glyphicon-arrow-up"></span>
+								</button>
+								<button type="button" class="btn btn-default btn-xs" v-on="click:edit(li)">
+									<span class="glyphicon glyphicon-edit"></span>
+								</button>
+								<button type="button" class="btn btn-default btn-xs" v-on="click:addChild(li.id)">
+									<span class="glyphicon glyphicon-plus"></span>
+								</button>
+								<button type="button" class="btn btn-default btn-xs" v-on="click:remove(li)">
+									<span class="glyphicon glyphicon-remove"></span>
+								</button>
+							</td>
+						</tr>
+						<template v-repeat="child in li.child | orderBy sort 1">
+							<tr>
+								<td>{{child.name}}</td>
+								<td>{{child.created_at|}}</td>
+								<td>
+									<button type="button" class="btn btn-default btn-xs " v-on="click:sort(child , 2)">
+										<span class="glyphicon glyphicon-arrow-up"></span>
+									</button>
+									<button type="button" class="btn btn-default btn-xs" v-on="click:edit(child)">
+										<span class="glyphicon glyphicon-edit"></span>
+									</button>
+									<button type="button" class="btn btn-default btn-xs" v-on="click:remove(child)">
+										<span class="glyphicon glyphicon-remove"></span>
+									</button>
+								</td>
+							</tr>
+						</template>
+					</template>
 				</tbody>
 			</table>
 		</div>
@@ -93,21 +121,24 @@
 			</div>
 		</div>
 	</div>
-
+</div>
 </block>
 
 <block name="script">
 <script src="/Public/libs/vue/vue.js"></script>
 <script>
+	var list = {$list|json_encode};
 	var modal = new Vue({
-		el   : "#relative",
+		el   : "#content",
 		data : {
+			list : list,
 			data : {
 				name : '',
 				type : '',
 				url  : '',
 				material : ''
 			},
+			edit_data : {},
 			material_option : [{text:'aaa',value:111},{text:'bbb',value:222}],
 		},
 		methods : {
@@ -121,20 +152,75 @@
 				if(this.data.type=="media_id" && this.data.material.length==0){
 					return false
 				}
-				$.post("Menu/add",this.data,function(rel){
+				$.post("Menu/edit",this.data,function(rel){
 					if(rel.status==1){
-						modal.data = {
-							name : '',
-							type : '',
-							url  : '',
-							material : '',
-						};
+						if(typeof modal.data.id != 'undefined'){
+							modal.edit_data.name = modal.data.name;
+						}else{
+							modal.list.forEach(function(item){
+								if(item.id == modal.data.pid){
+									item.child.push({
+										id	 : rel.data,
+										name : modal.data.name,
+										pid  : modal.data.pid,
+										type : modal.data.type,
+										created_at : new Date().getTime(),
+										value : function(type){
+											return type=='view' ? modal.data.url : modal.data.material
+										}(modal.data.type),
+									});
+								}
+							})
+						}
 					}else{
 						alert(rel.message);
-					}	
+					}
 			    });
 				$("#relative").modal('hide');
-			}
+			},
+			
+			edit : function( item ){
+				$('#relative').modal()
+				this.menu_data(item);
+			},
+			
+			addChild : function(pid){
+				this.clear();
+				$('#relative').modal()
+				modal.data.pid = pid;
+			},
+			
+			remove : function( item ){
+			},
+			
+			sort : function( item , level ){
+				$.post("Menu/sort",{id:item.id , level:level},function(rel){
+					if(rel.status){
+						item.sort = rel.data;
+						model.$log(item);
+					}
+				});
+			},
+			
+			menu_data : function(item){
+				modal.edit_data = item;
+				modal.data = {
+					id   : item.id,
+					pid  : item.pid,
+					name : item.name,
+					type : item.type,
+					url  : item.type=='view' ? item.value : '',
+					material : item.type=='material' ? item.value : '',
+				};
+			},
+			clear : function(){
+				this.data = {
+					name : '',
+					type : '',
+					url  : '',
+					material : ''
+				};
+			},
 		},
 	});
 	
