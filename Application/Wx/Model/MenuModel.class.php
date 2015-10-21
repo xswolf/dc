@@ -56,5 +56,16 @@ class MenuModel extends BaseModel{
         return false;
     }
     
+    /**
+     * 删除
+     */
+    public function del( $id ){
+        $pid = $this->where(['id'=>$id])->field("pid")->find();
+        if( empty($pid['pid']) ){
+            $this->where(['pid'=>$id])->delete();
+        }
+        return $this->where(['id'=>$id])->delete();
+    }
+    
 }
 

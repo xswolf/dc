@@ -77,4 +77,49 @@ class MenuController extends BaseController{
         }
         $this->ajaxError('操作失败');
     }   
+    
+    /**
+     *删除
+     */
+    public function del(){
+        if(IS_AJAX){
+            $id = I('post.id','intval');
+            if($id){
+                $rel = MenuModel::instance()->del($id);
+                if($rel !== false)
+                    $this->ajaxSuccess('');
+            }
+        }
+        $this->ajaxError('删除失败');
+    }
+    
+    /**
+     * 同步到微信
+     */
+    public function sync_wx(){
+        $list = MenuModel::instance()->getMenuList();
+        $data = $this->menu($list);
+         
+        $this->ajaxSuccess($data);
+    }
+    
+    private function menu( $data ){
+        $rel = [];
+        foreach($data as $val){
+            if(!empty($val['child'])){
+                $arr['sub_button'] = $this->menu($val['child']);
+            }
+            $arr['type']  =  $val['type'];
+            $arr['name']  =  $val['name'];
+            if($val['type'] == 'click'){
+                $arr['key'] =   $val['id'];
+            }elseif ($val['type'] == 'view'){
+                $arr['url'] =   $val['value'];
+            }elseif ($val['type'] == 'media_id'){
+                $arr['media_id'] == $val['value'];
+            }
+            $rel [] = $arr;
+        }
+        return $rel;
+    }
 }
