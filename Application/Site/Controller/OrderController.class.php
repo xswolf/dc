@@ -117,6 +117,24 @@ class OrderController extends BaseController {
 	}
 
 	/**
+	 * 订单列表
+	 */
+	public function order_list() {
+		$wx_user_id = intval(I('get.mid'));
+		$data = OrderModel::instance()->getOrderList($wx_user_id);
+		/*$order_list = [];
+		if(is_array($data)) {
+			foreach($data as $list) {
+				$order_list[$list['shop_id']]['header'] = ['shop_name' => $list['shop_name'], 'order_status' => $list['order_status']];
+				$order_list[$list['shop_id']][] = $list;
+			}
+		}*/
+
+		$this->assign('data', $data);
+		$this->display();
+	}
+
+	/**
 	 * 支付
 	 * @return bool|string
 	 */
