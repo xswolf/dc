@@ -147,4 +147,5 @@ class MenuController extends BaseController{
         }
         $this->ajaxError('删除失败');
     }
+    
 }
