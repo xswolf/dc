@@ -19,7 +19,7 @@ class MenuModel extends BaseModel{
      * 获取菜单列表
      */
     public function getMenuList(){
-        $data = $this->where(["status"])->select();
+        $data = $this->where(["status"])->order("sort DESC")->select();
         $arr = [];
         foreach($data as $val){
             if($val['pid']==0){
@@ -54,6 +54,17 @@ class MenuModel extends BaseModel{
                 return $sort;
         }
         return false;
+    }
+    
+    /**
+     * 删除
+     */
+    public function del( $id ){
+        $pid = $this->where(['id'=>$id])->field("pid")->find();
+        if( empty($pid['pid']) ){
+            $this->where(['pid'=>$id])->delete();
+        }
+        return $this->where(['id'=>$id])->delete();
     }
     
 }
