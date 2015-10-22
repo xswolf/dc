@@ -3,6 +3,7 @@ namespace Wx\Controller;
 
 use Common\Controller\BaseController;
 use Wx\Model\MenuModel;
+use LaneWeChat\Core\Menu;
 
 /**
  * 微信自定义菜单管理
@@ -98,28 +99,53 @@ class MenuController extends BaseController{
      */
     public function sync_wx(){
         $list = MenuModel::instance()->getMenuList();
-        $data = $this->menu($list);
-         
-        $this->ajaxSuccess($data);
+        if(count($list)){
+            $data = $this->menulist($list);
+            $rel = Menu::setMenu($data);
+            if($rel===true){
+                $this->ajaxSuccess('同步成功');
+            }else{
+                $this->ajaxError($rel['errmsg']);
+            }
+        }
+        $this->ajaxError('操作失败');
+        
     }
     
-    private function menu( $data ){
+    public function get_wx_menu(){
+        $data = Menu::getMenu();
+        dump($data);
+    }
+    
+    private function menulist( $data ){
         $rel = [];
         foreach($data as $val){
+            $rel[] = [
+                'id'    =>  $val['id'],
+                'pid'   =>  $val['pid'],
+                'name'  =>  $val['name'],
+                'type'  =>  $val['type'],
+                'code'  =>  $val['type']=='click' ? $val['id'] : $val['value'],
+            ];
             if(!empty($val['child'])){
-                $arr['sub_button'] = $this->menu($val['child']);
+                $arr = $this->menulist($val['child']);
+                $rel = array_merge($rel , $arr);
             }
-            $arr['type']  =  $val['type'];
-            $arr['name']  =  $val['name'];
-            if($val['type'] == 'click'){
-                $arr['key'] =   $val['id'];
-            }elseif ($val['type'] == 'view'){
-                $arr['url'] =   $val['value'];
-            }elseif ($val['type'] == 'media_id'){
-                $arr['media_id'] == $val['value'];
-            }
-            $rel [] = $arr;
         }
         return $rel;
     }
+    
+    /**
+     * 清除微信菜单
+     */
+    public function caear_menu(){
+        if(IS_AJAX){
+            $rel = Menu::delMenu();
+            if($rel['errcode']==0){
+                $this->ajaxSuccess('');
+            }
+        }
+        $this->ajaxError('删除失败');
+    }
+    
 }
