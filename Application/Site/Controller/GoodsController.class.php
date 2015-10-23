@@ -26,7 +26,7 @@ class GoodsController extends BaseController {
 		$browser = cookie($this->cookie_prefix.'browser');
 		if(!$browser) {
 			if(strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') === false) {
-				E('请使用微信浏览器访问');
+				E('请在微信客户端打开!');
 			}
 		}
 		$shop_name = cookie($this->cookie_prefix.'shop_name');
