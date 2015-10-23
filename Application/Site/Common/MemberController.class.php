@@ -77,7 +77,7 @@ class MemberController extends BaseController {
 
 		$browser = I('get.browser');
 		if(!empty($browser) && $browser == self::browser_key) {
-			cookie('browser', $browser, ['expire' => NOW_TIME + 31536000, 'prefix' => $this->_config['cookie_prefix']]);
+			cookie('browser', $browser, ['expire' => NOW_TIME + 31536000, 'prefix' => $this->_config['cookie_prefix'], 'domain' => 'qulianchn.com']);
 		}
 		return $hasHandled;
 	}
