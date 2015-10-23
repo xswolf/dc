@@ -13,6 +13,7 @@ use Site\Common\DomainController;
 use Wx\Event\PayEvent;
 use Site\Model\GoodsModel;
 use Site\Model\OrderModel;
+use Wx\WxPay\JsApiPay;
 class OrderController extends BaseController {
 	/**
 	 * @var string cookie前缀
@@ -20,6 +21,11 @@ class OrderController extends BaseController {
 	protected $cookie_prefix = 'qulian_';
 
 	public function _initialize() {
+		$browser = cookie($this->cookie_prefix.'browser');
+		if(!$browser) {
+			$tools = new JsApiPay();
+			$tools->GetOpenid ();
+		}
 		$shop_name = cookie($this->cookie_prefix.'shop_name');
 		$this->assign('shop_name',$shop_name);
 	}

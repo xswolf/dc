@@ -8,10 +8,10 @@
 
 namespace Site\Controller;
 
-//use Site\Common\BasicController;
 use Common\Controller\BaseController;
 use Site\Common\DomainController;
 use Site\Model\GoodsModel;
+use Wx\WxPay\JsApiPay;
 class GoodsController extends BaseController {
 	/**
 	 * @var string cookie前缀
@@ -24,6 +24,11 @@ class GoodsController extends BaseController {
 	protected $_shop_id;
 
 	public function _initialize() {
+		$browser = cookie($this->cookie_prefix.'browser');
+		if(!$browser) {
+			$tools = new JsApiPay();
+			$tools->GetOpenid ();
+		}
 		$shop_name = cookie($this->cookie_prefix.'shop_name');
 		$this->assign('shop_name',$shop_name);
 	}
