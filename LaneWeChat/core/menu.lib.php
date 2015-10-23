@@ -113,6 +113,7 @@ class Menu{
         $url = 'https://api.weixin.qq.com/cgi-bin/menu/get?access_token='.$accessToken;
 //         return Curl::callWebServer($url, '', 'GET');
         $data = Curl::callWebServer($url, '', 'GET');
+        return $data;
     }
 
     /**
