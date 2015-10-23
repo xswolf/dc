@@ -27,7 +27,7 @@ class GoodsController extends BaseController {
 		$browser = cookie($this->cookie_prefix.'browser');
 		if(!$browser) {
 			$tools = new JsApiPay();
-			$tools->GetOpenid ();
+			$tools->GetOpenid();
 		}
 		$shop_name = cookie($this->cookie_prefix.'shop_name');
 		$this->assign('shop_name',$shop_name);
