@@ -8,7 +8,6 @@
 
 namespace Site\Controller;
 
-//use Site\Common\BasicController;
 use Common\Controller\BaseController;
 use Site\Common\DomainController;
 use Site\Model\GoodsModel;
@@ -24,6 +23,12 @@ class GoodsController extends BaseController {
 	protected $_shop_id;
 
 	public function _initialize() {
+		$browser = cookie($this->cookie_prefix.'browser');
+		if(!$browser) {
+			if(strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') === false) {
+				E('请在微信客户端打开!');
+			}
+		}
 		$shop_name = cookie($this->cookie_prefix.'shop_name');
 		$this->assign('shop_name',$shop_name);
 	}
