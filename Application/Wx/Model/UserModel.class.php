@@ -25,6 +25,15 @@ class UserModel extends BaseModel{
     }
     
     /**
+     * 更新用户信息
+     */
+    public function updateInfo( $openId ){
+        $userInfo = wx_get_user_info($openId);
+        $userInfo['nickname'] = json_encode($userInfo['nickname']);
+        $this->edit($userInfo , ['openid'=>$userInfo['openid']]);
+    }
+    
+    /**
      * 取消关注
      */
     public function unsubscribe( $openId ){
