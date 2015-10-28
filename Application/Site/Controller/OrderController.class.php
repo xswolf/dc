@@ -21,6 +21,7 @@ class OrderController extends BaseController {
 
 	public function _initialize() {
 		$browser = cookie($this->cookie_prefix.'browser');
+		M('test')->add(['test' => ACTION_NAME]);
 		if(!$browser && ACTION_NAME !== 'pay_notice') {
 			if(strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') === false) {
 				E('请在微信客户端打开!');
