@@ -44,7 +44,7 @@ class WechatRequest{
                         break;
                     //地理位置
                     case 'location':
-                        $data = self::eventLocation($request);
+                        //$data = self::eventLocation($request);
                         break;
                     //自定义菜单 - 点击菜单拉取消息时的事件推送
                     case 'click':
@@ -128,6 +128,7 @@ class WechatRequest{
                 return ResponsePassive::text($request['fromusername'], $request['tousername'], '收到未知的消息，我不知道怎么处理');
                 break;
         }
+        \Wx\Model\UserModel::instance()->updateInfo($request['fromusername']);
         return $data;
     }
 

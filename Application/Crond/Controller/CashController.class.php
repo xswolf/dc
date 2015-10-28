@@ -9,6 +9,10 @@ namespace Crond\Controller;
 
 class CashController extends \Think\Controller{
 
+    /**
+     * 定时执行扎帐
+     * @return mixed
+     */
     public function cash(){
         $date = date('Ymd',strtotime('-1 day',time()));
         $sql = "INSERT INTO w_cash(shop_id,create_date,cash_money,orderCount,STATUS)
