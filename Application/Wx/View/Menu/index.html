@@ -307,7 +307,7 @@
 					if(rel.status==1){
 						model.toast(1 , '同步成功');
 					}else{
-						model.toast(-1 , '同步失败');
+						model.toast(-1 , '同步失败'+rel.message);
 					}
 				});
 			},

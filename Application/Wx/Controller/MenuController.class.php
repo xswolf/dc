@@ -105,7 +105,7 @@ class MenuController extends BaseController{
             if($rel===true){
                 $this->ajaxSuccess('同步成功');
             }else{
-                $this->ajaxError($rel['errmsg']);
+                $this->ajaxError($rel['errcode'].$rel['errmsg']);
             }
         }
         $this->ajaxError('操作失败');
