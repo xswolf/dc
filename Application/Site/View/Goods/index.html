@@ -24,13 +24,14 @@
                     <div class="info">
                         <div class="title"><h2>{{g.name}}</h2></div>
                         <div class="ft">
-                            <span class="price">{{g.price | currency:'￥'}}</span>
+                            <span class="price">{{g.price | currency:'￥'}}</span><br />
                             <span ng-if="g.price != g.native_price" class="price2">{{g.native_price | currency: '￥'}}</span>
-                            <div class="mod-goodsCount" ng-class="{'show':goodsSelectedNumber(g.id)}">
-                                <span class="minus"><a href="javascript:;" ng-click="minus(g)">-</a></span>
-                                <span class="num">{{getSpecNumber(g)|number}}</span>
-                                <span class="plus"><a href="javascript:;" ng-click="plus(g)">+</a></span>
-                            </div>
+
+                        </div>
+                        <div class="mod-goodsCount" ng-class="{'show':goodsSelectedNumber(g.id)}">
+                            <span class="minus"><a href="javascript:;" ng-click="minus(g)">-</a></span>
+                            <span class="num">{{getSpecNumber(g)|number}}</span>
+                            <span class="plus"><a href="javascript:;" ng-click="plus(g)">+</a></span>
                         </div>
                     </div>
                 </div>
