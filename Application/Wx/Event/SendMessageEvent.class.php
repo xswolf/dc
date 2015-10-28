@@ -41,7 +41,7 @@ class SendMessageEvent extends BaseController{
                 }
             }else{
                 //TODO
-                echo ResponseInitiative::text($this->fromUsername, "感谢你的关注");
+                ResponseInitiative::text($this->fromUsername, "感谢你的关注");
             }
         }
     }
@@ -51,7 +51,7 @@ class SendMessageEvent extends BaseController{
      */
     public function clickMenu(){
         $data = M("wx_menu")->where(['id'=>$this->request['eventkey']])->field("value")->find();
-        echo ResponseInitiative::text($this->formUsername, $data['value']);
+        ResponseInitiative::text($this->formUsername, $data['value']);
     }
     
 }

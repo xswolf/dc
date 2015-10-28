@@ -49,7 +49,8 @@ class WechatRequest{
                         break;
                     //自定义菜单 - 点击菜单拉取消息时的事件推送
                     case 'click':
-                        $data = self::eventClick($request);
+                        $send->clickMenu();
+//                         $data = self::eventClick($request);
                         break;
                     //自定义菜单 - 点击菜单跳转链接时的事件推送
                     case 'view':
