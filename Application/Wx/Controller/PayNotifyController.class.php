@@ -32,9 +32,11 @@ class PayNotifyController extends BaseController{
                 'status'    =>  1,
                 'wx_pay_sn' =>  $result['transaction_id'],
             ];
-            if( M("wx_pay_log")->where(['openid'=>$result['openid'],'order_sn'=>$result['out_trade_no']])->save($data) ){
+            if( M("wx_pay_log")->where(['openid'=>$result['openid'],'order_sn'=>$result['out_trade_no']])->save($data)!==false ){
+                
                 //TODO 通知
                 $order_id = M('wx_pay_log')->where(['openid'=>$result['openid'],'order_sn'=>$result['out_trade_no']])->field('order_id')->find();
+                M("test")->add(['test'=>json_encode($result)]);
                 $res = OrderController::instance()->pay_notice($order_id['order_id'], $result['total_fee'], $result['attach']);
                 
                 if($res['success']==1){
