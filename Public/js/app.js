@@ -18,7 +18,7 @@ $(function() {
 
     // 导出excel
     $(".to-excel").click(function(){
-        tableToExcel('to-excel-table')
+        tableToExcel('to-excel-table');
     });
 
 
@@ -62,7 +62,7 @@ $(function() {
                         }
                     }
 
-                })
+                });
 
             }
         });

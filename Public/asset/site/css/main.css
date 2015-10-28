@@ -1266,12 +1266,11 @@ i {
 }
 .mod-goodsItem .info .ft {
   position: relative;
-  height: 32px;
-  line-height: 32px;
 }
-.mod-goodsItem .info .ft .mod-goodsCount {
+.mod-goodsItem .info .mod-goodsCount {
   position: absolute;
   right: 0;
+  bottom: 0;
 }
 .mod-goodsItem .mod-card {
   box-shadow: 0 0 2px #000000;
