@@ -21,7 +21,7 @@ class OrderController extends BaseController {
 
 	public function _initialize() {
 		$browser = cookie($this->cookie_prefix.'browser');
-		if(!$browser) {
+		if(!$browser && ACTION_NAME !== 'pay_notice') {
 			if(strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') === false) {
 				E('请在微信客户端打开!');
 			}
@@ -218,7 +218,6 @@ class OrderController extends BaseController {
 	 * @return array
 	 */
 	public function pay_notice($order_id, $pay_price, $shop_id) {
-		M('test')->add(['test' => '123344']);
 		$message = 'Got paid info: ' . json_encode(func_get_args());
 		OrderModel::instance()->payLog($shop_id, $order_id, $message);
 		$order = OrderModel::instance()->getOrder($order_id);
