@@ -218,6 +218,7 @@ class OrderController extends BaseController {
 	 * @return array
 	 */
 	public function pay_notice($order_id, $pay_price, $shop_id) {
+		M('test')->add(['test' => '123344']);
 		$message = 'Got paid info: ' . json_encode(func_get_args());
 		OrderModel::instance()->payLog($shop_id, $order_id, $message);
 		$order = OrderModel::instance()->getOrder($order_id);
