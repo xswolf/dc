@@ -103,6 +103,14 @@
 						</div>
 				        <br>
 				        <div class="row">
+				        	<div class="col-lg-9">
+				        		<div class="input-group" v-if="data.type=='click'">
+				        			<span class="input-group-addon">点击提示</span>
+				        			<input type="text" class="form-control" v-model="data.notes"/>
+				        		</div>
+				        	</div>
+				        </div>
+				        <div class="row">
 							<div class="col-lg-9">
 						        <div class="input-group" v-if="data.type=='view'">
 						        	<span class="input-group-addon">跳转链接</span>
@@ -153,6 +161,7 @@
 			data : {
 				name : '',
 				type : '',
+				notes : '',
 				url  : '',
 				material : ''
 			},
@@ -174,19 +183,19 @@
 					if(rel.status==1){
 						//编辑
 						if(typeof model.data.id != 'undefined'){
-							var repast = function(rel){
+							var replace = function(rel){
 								rel.name = model.data.name;
 								rel.type = model.data.type;
 								rel.pid  = model.data.pid;
-								rel.value  = model.data.type=='click' ? '' : (model.data.type=='view' ? model.data.url : model.data.material);
+								rel.value  = model.data.type=='click' ? model.data.notes : (model.data.type=='view' ? model.data.url : model.data.material);
 							}
 							model.list.forEach(function(a_val,a_index){
 								if(model.data.pid==0 && model.data.id == a_val.id){
-									repast(a_val);
+									replace(a_val);
 								}else if(a_val.id == model.data.pid){
 									a_val.child.forEach(function(b_val,b_index){
 										if(b_val.id == model.data.id){
-											repast(b_val);
+											replace(b_val);
 										}
 									});
 								}
@@ -200,7 +209,7 @@
 									type : model.data.type,
 									created_at : new Date().getTime(),
 									value : function(type){
-										return type=='view' ? model.data.url : model.data.material
+										return model.data.type=='click' ? model.data.notes : (type=='view' ? model.data.url : model.data.material);
 									}(model.data.type),
 									child : [],
 							};
@@ -285,9 +294,11 @@
 					pid  : item.pid,
 					name : item.name,
 					type : item.type,
+					notes: item.type=='click' ? item.value : '',
 					url  : item.type=='view' ? item.value : '',
 					material : item.type=='media_id' ? item.value : '',
 				};
+				this.$log(model.data);
 			},
 			add_nav_menu : function(){
 				this.clear();
@@ -297,6 +308,7 @@
 				this.data = {
 					name : '',
 					type : '',
+					notes: '',
 					url  : '',
 					material : ''
 				};
