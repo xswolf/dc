@@ -1,6 +1,6 @@
 <div ng-controller="order.Controller">
     <!-- S 选中商品列表 -->
-    <div ng-if="cart.length > 0 || !ui.cart_empty">
+    <div autoscroll="true" ng-if="cart.length > 0 || !ui.cart_empty">
         <!--### 备注 ###-->
         <div class="scroll-content mod-bz page-remark" ng-if="ui.page.remark">
             <div class="hd">
@@ -12,7 +12,7 @@
             </div>
         </div>
         <!--#### 确认订单 ###-->
-        <div class="scroll-content has-footer bg-2 page-list" ng-if="ui.page.list" style="background-color: #000">
+        <div class="scroll-content has-footer bg-2 page-list" ng-if="ui.page.list">
             <div class="mod-tipsBox">
                 <div class="inner">
                     亲爱的 {$username} ，请核对您的菜品<br />
@@ -47,8 +47,12 @@
                     </tbody>
                 </table>
             </div>
-            <div class="mod-footer fixed" style="background-color: blue">
-                <a>提交订单</a>
+            <div class="mod-footer fixed" style="z-index: 99999">
+                <div class="total">
+                    <span class="badge" ng-bind="selectedNumber()"></span>
+                    <span style="margin-left: 15px;"><i ng-bind="totalPrice() | currency:'￥'"></i></span>
+                </div>
+                <a class="btn-cart button button-1" ng-click="submitWxOrder()">提交订单</a>
             </div>
         </div>
     </div>
