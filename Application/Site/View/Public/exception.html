@@ -45,8 +45,18 @@
 </style>
 <script>
     $(function(){
+
+        function getCookie(name)
+        {
+            var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+            if(arr=document.cookie.match(reg))
+                return unescape(arr[2]);
+            else
+                return null;
+        }
+
         $(".button-danger").click(function(){
-            var shopId = $.cookie("qulian_shop_id");
+            var shopId = getCookie("qulian_shop_id");
             location.href = "http://" + shopId + ".qulianchn.com/";
         })
     })
