@@ -73,11 +73,12 @@ class MemberController extends BaseController {
 		if(!empty($shop_info) && is_array($shop_info)) {
 			$shop_name = $shop_info['shop_name'];
 			cookie('shop_name', $shop_name, ['expire' => NOW_TIME + 31536000, 'prefix' => $this->_config['cookie_prefix']]);
+			cookie('shop_id', $this->_shop_id, ['expire' => NOW_TIME + 31536000, 'prefix' => $this->_config['cookie_prefix']]);
 		}
 
 		$browser = I('get.browser');
 		if(!empty($browser) && $browser == self::browser_key) {
-			cookie('browser', $browser, ['expire' => NOW_TIME + 31536000, 'prefix' => $this->_config['cookie_prefix'], 'domain' => 'dc.com']);
+			cookie('browser', $browser, ['expire' => NOW_TIME + 31536000, 'prefix' => $this->_config['cookie_prefix'], 'domain' => 'local.qulian.com']);
 		}
 		return $hasHandled;
 	}
