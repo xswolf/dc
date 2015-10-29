@@ -8,6 +8,7 @@ class MaterialController extends BaseController{
 
     public function index(){
         $data = MaterialModel::instance()->getList();
+        
         $this->assign("data",$data);
         $this->display();
     }
