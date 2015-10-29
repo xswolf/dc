@@ -11,6 +11,7 @@ namespace Site\Controller;
 use Common\Controller\BaseController;
 use Site\Common\DomainController;
 use Wx\Event\PayEvent;
+use Wx\WxPay\JsApiPay;
 use Site\Model\GoodsModel;
 use Site\Model\OrderModel;
 class OrderController extends BaseController {
@@ -135,6 +136,10 @@ class OrderController extends BaseController {
 	 * 订单列表
 	 */
 	public function order_list() {
+		$wx = new JsApiPay();
+		$openid = $wx->GetOpenid();
+		var_export($openid);
+		exit;
 		$wx_user_id = intval(I('get.mid'));
 		$data = OrderModel::instance()->getOrderList($wx_user_id);
 		/*$order_list = [];
