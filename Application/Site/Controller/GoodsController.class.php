@@ -58,13 +58,13 @@ class GoodsController extends BaseController {
 	public function get_category_goods() {
 		$id = I('get.id');
 		$goods = [];
+		$this->_shop_id = intval(DomainController::instance()->get('shop_id'));
 		if(!empty($id) && ctype_digit($id)) {
-			$goods = GoodsModel::instance()->goodsCategoryGoods($id);
+			$goods = GoodsModel::instance()->goodsCategoryGoods($id, $this->_shop_id);
 		} else {
-			$this->_shop_id = intval(DomainController::instance()->get('shop_id'));
 			$category = GoodsModel::instance()->getDefaultCategoryId($this->_shop_id);
 			if(!empty($category)) {
-				$goods = GoodsModel::instance()->goodsCategoryGoods($category['id']);
+				$goods = GoodsModel::instance()->goodsCategoryGoods($category['id'], $this->_shop_id);
 			}
 		}
 		$this->ajaxSuccess($goods);

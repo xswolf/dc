@@ -33,11 +33,12 @@ class GoodsModel extends BaseModel {
 	/**
 	 * 获取选中分类下的商品
 	 * @param int $category_id
+	 * @param int $shop_id
 	 * @return array
 	 */
-	public function goodsCategoryGoods($category_id) {
+	public function goodsCategoryGoods($category_id, $shop_id) {
 		$Model = M($this->_table_goods);
-		return $Model->where(['category_id' => $category_id, 'status' => 1])->select();
+		return $Model->where(['category_id' => $category_id, 'shop_id' => $shop_id, 'status' => 1])->select();
 	}
 
 	/**

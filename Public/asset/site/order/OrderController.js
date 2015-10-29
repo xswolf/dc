@@ -55,6 +55,9 @@ define(['./module.js'], function(module) {
 
         function submitOrder() {
             var data = prepareOrder();
+            if(data.goods.length <= 0) {
+                return false;
+            }
             var loading = Dialog.loading();
             var defer = $q.defer();
             Api.submitOrder(data.goods)
@@ -90,7 +93,11 @@ define(['./module.js'], function(module) {
             };
             // 商品
             angular.forEach($scope.cart, function (c) {
-                data.goods.push({gid: c.gid, number: c.number, remark: c.remark});
+                if(c.price >= 0.01) {
+                    data.goods.push({gid: c.gid, number: c.number, remark: c.remark});
+                } else {
+                    CartService.remove(c.gid);
+                }
             });
             return data;
         }
