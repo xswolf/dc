@@ -3,11 +3,7 @@ namespace Wx\Event;
 
 use Common\Controller\BaseController;
 use LaneWeChat\Core\ResponseInitiative;
-use LaneWeChat\Core\AdvancedBroadcast;
-use LaneWeChat\Core\AccessToken;
-use LaneWeChat\Core\Curl;
 use Wx\Model\UserModel;
-use LaneWeChat\Core\ResponsePassive;
 class SendMessageEvent extends BaseController{
     
     private $request = [];
@@ -47,11 +43,11 @@ class SendMessageEvent extends BaseController{
     }
     
     /**
-     * 点击菜单处理
+     * 菜单处理  click
      */
     public function clickMenu(){
         $data = M("wx_menu")->where(['id'=>$this->request['eventkey']])->field("value")->find();
-        ResponseInitiative::text($this->formUsername, $data['value']);
+        ResponseInitiative::text($this->fromUsername, $data['value']);
     }
     
 }
