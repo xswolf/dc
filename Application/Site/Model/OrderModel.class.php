@@ -36,6 +36,11 @@ class OrderModel extends BaseModel {
 	protected $_table_pay_notice_log = 'pay_notice_log';
 
 	/**
+	 * @var string 微信用户关注表
+	 */
+	protected $_table_wx_user = 'wx_user';
+
+	/**
 	 * 生成订单
 	 * @param $order
 	 * @param $goods
@@ -140,6 +145,15 @@ class OrderModel extends BaseModel {
 					'b.id'
 				])->where(['a.id' => $member_id, 'b.subscribe' => 1])->find();
 		}
+	}
+
+	/**
+	 * 通过openid,获取微信用户ID
+	 * @param string $openid
+	 * @return array
+	 */
+	public function getWxId($openid) {
+		return M($this->_table_wx_user)->field(['id'])->where(['openid' => $openid])->find();
 	}
 
 	/**
