@@ -146,10 +146,10 @@ define(['angular', '../module.js', './StorageService.js'], function(angular, mod
             total: function() {
                 var price = 0;
                 this.each(function(c) {
-                    price += c.number * c.price;
+                    price += c.number * (c.price*100);
                 });
 
-                return price;
+                return price / 100;
             }
         };
 
