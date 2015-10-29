@@ -1,0 +1,46 @@
+<extend name="./layout/main"/>
+<block name="content">
+
+<div id="content">
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
+			<a href="#modal" data-toggle="modal" class="btn btn-primary">添加素材</a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>名字</th>
+						<th>创建时间</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<foreach name="data" item="li">
+						<tr>
+							<td>{$li.name}</td>
+							<td>{$li.created_at|date="Y-m-d H:i:s",###}</td>
+							<td>
+								<button type="button" class="btn btn-default btn-xs" >
+									<span class="glyphicon glyphicon-edit"></span>
+								</button>
+								<button type="button" class="btn btn-default btn-xs" v-on="click:remove(li)">
+									<span class="glyphicon glyphicon-remove"></span>
+								</button>
+							</td>
+						</tr>
+					</foreach>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	
+</div>
+
+
+</block>
