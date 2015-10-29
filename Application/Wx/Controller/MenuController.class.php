@@ -42,6 +42,8 @@ class MenuController extends BaseController{
             }elseif($data['type'] == "media_id"){
                 empty($_POST['material']) && $this->ajaxError('请选择素材');
                 $data['value'] = $_POST['material'];
+            }else{
+                $data['value'] = $_POST['notes'];
             }
             $num = MenuModel::instance()->getMenuSum($data['pid']);
             if(empty($id)){
@@ -105,7 +107,7 @@ class MenuController extends BaseController{
             if($rel===true){
                 $this->ajaxSuccess('同步成功');
             }else{
-                $this->ajaxError($rel['errmsg']);
+                $this->ajaxError($rel['errcode'].$rel['errmsg']);
             }
         }
         $this->ajaxError('操作失败');

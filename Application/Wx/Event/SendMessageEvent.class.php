@@ -7,6 +7,7 @@ use LaneWeChat\Core\AdvancedBroadcast;
 use LaneWeChat\Core\AccessToken;
 use LaneWeChat\Core\Curl;
 use Wx\Model\UserModel;
+use LaneWeChat\Core\ResponsePassive;
 class SendMessageEvent extends BaseController{
     
     private $request = [];
@@ -23,7 +24,9 @@ class SendMessageEvent extends BaseController{
     
 
     
-    //扫描二维码处理
+    /**
+     * 扫描二维码处理
+     */
     public  function scanTableQrcode(){
         if(isset($this->request['ticket'])){
             $qrcode = M("wx_qrcode")->where(['ticket'=>$this->request['ticket']])->find();
@@ -42,5 +45,14 @@ class SendMessageEvent extends BaseController{
             }
         }
     }
+    
+    /**
+     * 点击菜单处理
+     */
+    public function clickMenu(){
+        $data = M("wx_menu")->where(['id'=>$this->request['eventkey']])->field("value")->find();
+        ResponseInitiative::text($this->formUsername, $data['value']);
+    }
+    
 }
 

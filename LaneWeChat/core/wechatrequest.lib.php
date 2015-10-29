@@ -19,6 +19,7 @@ class WechatRequest{
     public static function switchType(&$request){
         $data = "";
         
+        $send = \Wx\Event\SendMessageEvent::instance($request);
         switch ($request['msgtype']) {
             //事件
             case 'event':
@@ -29,7 +30,7 @@ class WechatRequest{
                         //二维码关注
                         if(isset($request['eventkey']) && isset($request['ticket'])){
                             \Wx\Model\UserModel::instance()->subscribe($request['fromusername']);
-                            \Wx\Event\SendMessageEvent::instance($request)->scanTableQrcode();
+                            $send->scanTableQrcode();
 //                             $data = self::eventQrsceneSubscribe($request);
                         //普通关注
                         }else{
@@ -39,7 +40,7 @@ class WechatRequest{
                         break;
                     //扫描二维码
                     case 'scan':
-                        \Wx\Event\SendMessageEvent::instance($request)->scanTableQrcode();
+                        $send->scanTableQrcode();
                         //$data = self::eventScan($request);
                         break;
                     //地理位置
@@ -48,7 +49,8 @@ class WechatRequest{
                         break;
                     //自定义菜单 - 点击菜单拉取消息时的事件推送
                     case 'click':
-                        $data = self::eventClick($request);
+                        $send->clickMenu();
+//                         $data = self::eventClick($request);
                         break;
                     //自定义菜单 - 点击菜单跳转链接时的事件推送
                     case 'view':
@@ -129,7 +131,7 @@ class WechatRequest{
                 break;
         }
         \Wx\Model\UserModel::instance()->updateInfo($request['fromusername']);
-        return $data;
+        echo $data;
     }
 
 

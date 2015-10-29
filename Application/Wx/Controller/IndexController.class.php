@@ -10,7 +10,7 @@ class IndexController extends BaseController{
 //         $this->verifyToken();
 
         $wechat = new Wechat(WECHAT_TOKEN, TRUE);
-        echo $wechat->run();
+        $wechat->run();
     }
     
     
