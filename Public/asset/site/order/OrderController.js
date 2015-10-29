@@ -56,6 +56,7 @@ define(['./module.js'], function(module) {
         function submitOrder() {
             var data = prepareOrder();
             if(data.goods.length <= 0) {
+                Dialog.toast('无效商品');
                 return false;
             }
             var loading = Dialog.loading();
