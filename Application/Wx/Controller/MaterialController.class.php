@@ -14,7 +14,11 @@ class MaterialController extends BaseController{
     }
     
     public function edit(){
-        
+        $id = I("get.id",'intval');
+        if($id){
+            $data = MaterialModel::instance()->getList(['id'=>$id]);
+            $this->assign("data" , json_encode(end($data)) );
+        }
         $this->display();
     }
 }
