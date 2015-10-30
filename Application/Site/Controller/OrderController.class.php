@@ -138,9 +138,14 @@ class OrderController extends BaseController {
 	public function order_list() {
 		$wx = new JsApiPay();
 		$openid = $wx->GetOpenid();
-		var_export($openid);
-		exit;
-		$wx_user_id = intval(I('get.mid'));
+		if(!empty($openid)) {
+			$wx_user = OrderModel::instance()->getWxId($openid);
+		} else {
+			E('获取openid失败');
+		}
+
+		$wx_user_id = intval($wx_user['id']);
+		//$wx_user_id = intval(I('get.mid'));
 		$data = OrderModel::instance()->getOrderList($wx_user_id);
 		/*$order_list = [];
 		if(is_array($data)) {
