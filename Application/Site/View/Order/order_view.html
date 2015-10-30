@@ -16,8 +16,10 @@
                                     <p>支付方式：微信支付</p>
 
                                     <p>支付状态：
-                                        <if condition="$data[0]['status'] eq 2 ">
+                                        <if condition="$data[0]['status'] eq 2">
                                             <span class="text-success">已支付</span>
+                                        <elseif condition="$data[0]['status'] eq 3">
+                                            <span class="text-muted">已完成</span>
                                         <else />
                                             <span class="text-danger">未支付</span>
                                         </if>
@@ -72,7 +74,7 @@
         </div>
         <div class="text-center">
             <!--<a class="button" href="javascript:;">取消订单</a>-->
-            <if condition="$data[0]['status'] neq 2 ">
+            <if condition="$data[0]['status'] eq 1 ">
                 <a class="button button-success" href="javascript:;" onclick="wxPay({$order_id})">微信支付</a>
             </if>
         </div>
