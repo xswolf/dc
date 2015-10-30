@@ -145,6 +145,7 @@ class OrderController extends BaseController {
 		}
 
 		$wx_user_id = intval($wx_user['id']);
+		//$wx_user_id = intval(I('get.mid'));
 		$data = OrderModel::instance()->getOrderList($wx_user_id);
 		/*$order_list = [];
 		if(is_array($data)) {
