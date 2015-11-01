@@ -131,7 +131,18 @@ var model = new Vue({
 		content : data.content[0],
 	},
 	methods : {
-		
+		add : function(){
+			var new_data = {
+				title : '',
+				img	  : '',
+				link  : '',
+				sort  : '',
+			}
+			model.data.content.push(new_data);
+		},
+		select : function(item){
+			model.content = item;
+		}
 	},
 });
 </script>
