@@ -14,15 +14,15 @@
                         <ul class="list-unstyled">
                             <li class="first">
                                 <div class="cnt">
-                                    <img width="640" height="320"  src="/public/wx/img/diancan.jpg"/>
-                                    <div class="text"><span>sfsafsd</span></div>
+                                    <img width="640" height="320"  v-attr="src:data.content[0].img"/>
+                                    <div class="text"><span>{{data.content[0].title}}</span></div>
                                 </div>
                             </li>
-                            <li>
-                                <div class="text-pic">
-                                    <div class="text"><span></span></div>
+                            <li v-repeat="item in data.content">
+                                <div v-if="$index!=0" class="text-pic">
+                                    <div class="text"><span>{{item.title}}</span></div>
                                     <div class="pic">
-                                        <img />
+                                        <img v-attr="src:item.img"/>
                                     </div>
                                 </div>
                             </li>
@@ -38,18 +38,23 @@
                     <form  name="editForm">
                         <div class="hide"><!--传递form实例到外部scope--></div>
                         <div class="form-group">
+                            <label>素材名</label>
+                            <input  type="text" placeholder="请输入素材名" class="form-control" required v-model="data.name">
+                            <span class="help-block m-b-none"></span>
+                        </div>
+                        <div class="form-group">
                             <label>标题</label>
-                            <input  type="text" placeholder="请输入标题" class="form-control" required>
+                            <input  type="text" placeholder="请输入标题" class="form-control" required v-model="content.title">
                             <span class="help-block m-b-none"></span>
                         </div>
                         <div class="form-group">
                             <label>图片</label>
                             <div class="imgInput">
-                                <input value="" type="text" placeholder="请上传图片" class="form-control" required>
+                                <input value="" type="text" placeholder="请上传图片" class="form-control" required v-model="content.url">
                                 <div class="imgInput-btn">
                                     <div class="j-imgUploadBox2">
                                         <input type="hidden" name="cover" class="j-imgUpload-input" data-url="/common/upload/" value="">
-                                        <a href="javascript:;" class="btn btn-w-m btn-primary j-imgUpload-btn"><i class="fa fa-cloud-upload"></i> 上传图片</a>
+                                        <a href="javascript:;" id="upload" class="btn btn-w-m btn-primary j-imgUpload-btn"><i class="fa fa-cloud-upload"></i> 上传图片</a>
                                     </div>
                                 </div>
                             </div>
@@ -74,4 +79,70 @@
 
 </div>
 
+</block>
+
+<block name="script">
+<script src="/Public/libs/upload/ajaxupload.js"></script>
+<script src="/Public/libs/vue/vue.js"></script>
+<script>
+function AjxUploadImg(btn , url, cb) {
+    var return_data;
+    var button = btn;
+    new AjaxUpload(button, {
+        action: url,
+        data: {},
+        name: 'file',
+        onSubmit: function(file, ext) {
+            if (!(ext && /^(jpg|JPG|png|PNG|gif|GIF)$/.test(ext))) {
+                alert("您上传的图片格式不对，请重新选择！");
+                return false;
+            }
+        },
+        onComplete: function(file, response) {
+            flagValue = response.replace("<pre>", "").replace("</pre>", "");
+            if (flagValue == "1") {
+                alert("您上传的图片格式不对，请重新选择！");
+            }
+            else if (flagValue == "50") {
+                alert("您上传的图片大于5000K，请重新选择！");
+            }
+            else if (flagValue == "3") {
+                alert("图片上传失败！");
+            }
+            else {
+                response = $.parseJSON(flagValue);
+                if(response['status']==true){
+                    if(cb) cb(response['data']);
+                }else{
+                    alert(response['msg']);
+                }
+            }
+        }
+    });
+
+}
+var data = {$data?$data:[]};
+
+var model = new Vue({
+	el 	:	".response",
+	data : {
+		data : data,
+		content : data.content[0],
+	},
+	methods : {
+		add : function(){
+			var new_data = {
+				title : '',
+				img	  : '',
+				link  : '',
+				sort  : '',
+			}
+			model.data.content.push(new_data);
+		},
+		select : function(item){
+			model.content = item;
+		}
+	},
+});
+</script>
 </block>

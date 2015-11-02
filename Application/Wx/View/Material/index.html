@@ -25,9 +25,9 @@
 							<td>{$li.name}</td>
 							<td>{$li.created_at|date="Y-m-d H:i:s",###}</td>
 							<td>
-								<button type="button" class="btn btn-default btn-xs" >
+								<a href="{:U('Material/edit',['id'=>$li['id']] )}" class="btn btn-default btn-xs" >
 									<span class="glyphicon glyphicon-edit"></span>
-								</button>
+								</a>
 								<button type="button" class="btn btn-default btn-xs" v-on="click:remove(li)">
 									<span class="glyphicon glyphicon-remove"></span>
 								</button>
@@ -41,6 +41,5 @@
 	
 	
 </div>
-
 
 </block>

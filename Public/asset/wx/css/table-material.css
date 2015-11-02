@@ -1,0 +1,106 @@
+/* 应答设置 */
+.response {
+    padding-top: 20px;
+    overflow: hidden;
+}
+
+.response-pre {
+    width: 400px;
+    float: left;
+    margin-right: 40px;
+}
+.response-pre-box{
+    position: relative;
+    width: 300px;
+    height: 636px;
+    margin: 0 auto;
+    background: url(../img/iphone5s.png) no-repeat;
+}
+.response-pre-inner{
+    position: absolute;
+    top: 91px;
+    left: 22px;
+    width: 259px;
+    height: 454px;
+    background-color: #f8f8f8;
+}
+.response-imgList{
+    padding: 8px;
+    margin-bottom: 20px;
+}
+.response-imgList ul{
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+}
+.response-imgList ul li {
+    position: relative;
+    padding: 8px;
+    border-top: 1px solid #ddd;
+    cursor: pointer;
+}
+.response-imgList ul li.selected{
+    box-shadow: 0 0 8px #555;
+}
+
+.response-imgList ul img{
+    max-width: 100%;
+}
+.response-imgList .first{
+    border-top: none;
+}
+.response-imgList .first img{
+    width: 100%;
+    max-height: 113px;
+}
+.response-imgList .first .text{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    padding: 5px;
+    text-align: left;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.5);
+}
+.response-imgList .cnt{
+    position: relative;
+}
+.response-imgList .text-pic {
+    overflow: hidden;
+    display: table;
+    vertical-align: middle;
+    width: 100%;
+}
+.response-imgList .text-pic .text{
+    overflow: hidden;
+    vertical-align: middle;
+    display: table-cell;
+}
+.response-imgList .text-pic .pic{
+    display: table-cell;
+    width: 53px;
+    text-align: right;
+}
+.response-imgList .text-pic .pic img{
+    width: 48px;
+    height: 48px;
+}
+
+
+
+
+.response-opts {
+    overflow: hidden;
+}
+
+.response-opts .imgInput {
+    position: relative;
+    padding-right: 130px;
+}
+.response-opts .imgInput-btn{
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 100;
+}
