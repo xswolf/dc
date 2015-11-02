@@ -12,22 +12,24 @@
 
                     <div class="response-imgList">
                         <ul class="list-unstyled">
-                            <li class="first">
+                            <li class="first" v-class="selected:selected==0" v-on="click:select(data.content[0],0)">
                                 <div class="cnt">
                                     <img width="640" height="320"  v-attr="src:data.content[0].img"/>
                                     <div class="text"><span>{{data.content[0].title}}</span></div>
                                 </div>
                             </li>
-                            <li v-repeat="item in data.content">
-                                <div v-if="$index!=0" class="text-pic">
-                                    <div class="text"><span>{{item.title}}</span></div>
-                                    <div class="pic">
-                                        <img v-attr="src:item.img"/>
-                                    </div>
-                                </div>
-                            </li>
+                            <template  v-repeat="item in data.content" >
+	                            <li v-class="selected:$index==selected" v-on="click:select(item,$index)" v-if="$index!=0">
+	                                <div class="text-pic">
+	                                    <div class="text"><span>{{item.title}}</span></div>
+	                                    <div class="pic">
+	                                        <img v-attr="src:item.img"/>
+	                                    </div>
+	                                </div>
+	                            </li>
+                            </template>
                         </ul>
-                        <a class="btn btn-primary btn-block" href="javascript:;">添加</a>
+                        <a class="btn btn-primary btn-block" href="javascript:;" v-on="click:add()">添加</a>
                     </div>
                 </div>
             </div>
@@ -50,10 +52,9 @@
                         <div class="form-group">
                             <label>图片</label>
                             <div class="imgInput">
-                                <input value="" type="text" placeholder="请上传图片" class="form-control" required v-model="content.url">
+                                <input type="text" placeholder="请上传图片" class="form-control" required v-model="content.img">
                                 <div class="imgInput-btn">
                                     <div class="j-imgUploadBox2">
-                                        <input type="hidden" name="cover" class="j-imgUpload-input" data-url="/common/upload/" value="">
                                         <a href="javascript:;" id="upload" class="btn btn-w-m btn-primary j-imgUpload-btn"><i class="fa fa-cloud-upload"></i> 上传图片</a>
                                     </div>
                                 </div>
@@ -61,15 +62,15 @@
                         </div>
                         <div class="form-group">
                             <label>链接地址</label>
-                            <input  type="url" placeholder="请输入链接地址" class="form-control" required>
+                            <input  type="url" placeholder="请输入链接地址" class="form-control" required v-model="content.link">
                         </div>
                         <div class="form-group">
                             <label>排序</label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" v-model="content.sort">
                         </div>
                         <div class="form-group text-right">
-                            <a  href="javascript:;" class="btn btn-w-m btn-danger"><i class="fa fa-times"></i> 删除</a>
-                            <button type="submit" class="btn btn-w-m btn-primary m-l-sm"><i class="fa fa-check"></i> 保存</button>
+                            <a  href="javascript:;" class="btn btn-w-m btn-danger" v-on="click:del()"><i class="fa fa-times"></i> 删除</a>
+                            <button type="button" class="btn btn-w-m btn-primary m-l-sm" v-on="click:submit()"><i class="fa fa-check"></i> 保存</button>
                         </div>
                     </form>
                 </div>
@@ -85,7 +86,16 @@
 <script src="/Public/libs/upload/ajaxupload.js"></script>
 <script src="/Public/libs/vue/vue.js"></script>
 <script>
-function AjxUploadImg(btn , url, cb) {
+
+var toast = function(type,msg){
+	window.app.toast({
+		message : msg,
+		type : type==1 ? 'success' : 'error',
+		positionClass : 'toast-top-center',
+	});
+}
+
+function AjaxUploadImg(btn , url, cb) {
     var return_data;
     var button = btn;
     new AjaxUpload(button, {
@@ -114,34 +124,97 @@ function AjxUploadImg(btn , url, cb) {
                 if(response['status']==true){
                     if(cb) cb(response['data']);
                 }else{
-                    alert(response['msg']);
+                	toast('error',response['message']);
                 }
             }
         }
     });
-
 }
-var data = {$data?$data:[]};
+AjaxUploadImg("upload",'{:U("Material/upload")}',function(rel){
+	model.content.img = rel;
+});
+var new_data = function(){
+	return {
+		title : '标题',
+		img	  : '/Public/asset/wx/img/grey.gif',
+		link  : 'http://',
+		sort  : '0',
+	};
+}
+var data = {$data};
+if(data.length==0){
+	data = {
+	    name : '',
+		content : [new_data()],
+	};
+}
 
 var model = new Vue({
 	el 	:	".response",
 	data : {
 		data : data,
 		content : data.content[0],
+		selected : 0,
 	},
 	methods : {
 		add : function(){
-			var new_data = {
-				title : '',
-				img	  : '',
-				link  : '',
-				sort  : '',
-			}
-			model.data.content.push(new_data);
+			model.data.content.push(new_data());
+			model.rest();
 		},
-		select : function(item){
+		select : function(item , index){
 			model.content = item;
-		}
+			model.selected = index;
+		},
+		del : function (){
+			if(model.data.content.length==1)
+				return;
+			model.data.content.splice(model.selected,1);
+			model.rest();
+		},
+		submit : function(){
+			var msg='';
+			if(model.data.name.length==0){
+				msg = '请填写素材名';
+			}
+			model.data.content.forEach(function(item){
+				if(item.title.length==0){
+					msg = '请填写标题';
+					return;
+				}
+				if(item.img.length==0){
+					msg = '请上传图片';
+					return;
+				}
+				if(item.link.length==0 || item.link=='http://'){
+					msg = '请填写跳转链接';
+					return;
+				}
+			});
+			if(msg){
+				toast('error',msg);
+				return;
+			}
+			$.post("{:U('Material/edit')}",model.data,function(rel){
+				if(rel.status!==1){
+					toast('error',rel['message']);
+				}else{
+					toast( 1 ,'操作成功');
+					//排序升序 小的在前
+					model.data.content.sort(function(a,b){
+						return a.sort===b.sort ? 0 : (a.sort < b.sort ? -1 : 1)
+					});
+					model.data.content.forEach(function(item , index){
+						if(item.title==model.content.title){
+							model.select(item,index);
+						}
+					})
+				}
+			});
+		},
+		rest : function(){
+			var index = model.data.content.length-1;
+			model.select(model.data.content[index] , index);
+		},
 	},
 });
 </script>

@@ -28,7 +28,7 @@
 								<a href="{:U('Material/edit',['id'=>$li['id']] )}" class="btn btn-default btn-xs" >
 									<span class="glyphicon glyphicon-edit"></span>
 								</a>
-								<button type="button" class="btn btn-default btn-xs" v-on="click:remove(li)">
+								<button type="button" data-id="{$li['id']}" class="btn btn-default btn-xs del">
 									<span class="glyphicon glyphicon-remove"></span>
 								</button>
 							</td>
@@ -42,4 +42,20 @@
 	
 </div>
 
+</block>
+<block name="script">
+<script>
+$(function(){
+	$(".del").click(function(){
+		var _this = $(this);
+		if(confirm("确定删除?")){
+			$.post("{:U('Material/del')}",{id:_this.data("id")},function(rel){
+				if(rel.status==1){
+					_this.parents("tr").remove();
+				}
+			})
+		}
+	});
+})
+</script>
 </block>
