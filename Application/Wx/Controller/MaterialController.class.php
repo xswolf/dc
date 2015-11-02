@@ -3,12 +3,16 @@ namespace Wx\Controller;
 
 use Common\Controller\BaseController;
 use Wx\Model\MaterialModel;
+use Think\Page;
 
 class MaterialController extends BaseController{
 
     public function index(){
-        $data = MaterialModel::instance()->getList();
+        $count = MaterialModel::instance()->getCount();
+        $page = new Page($count , 1 );
+        $data = MaterialModel::instance()->getList([],$page->firstRow.','.$page->listRows);
        
+        $this->assign("page",$page->show());
         $this->assign("data",$data);
         $this->display();
     }

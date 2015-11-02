@@ -7,11 +7,17 @@ class MaterialModel extends BaseModel{
     
     protected  $tableName = "wx_material";
     
-    public function getList($where=[]){
+    public function getCount($where=[]){
+        $_where = ['status'=>1];
+        $where = array_merge($_where,$where);
+        return $this->where($_where)->count();
+    }
+    
+    public function getList($where=[],$limit="0,20"){
         $_where = ['status'=>1];
         $where = array_merge($_where,$where);
         
-        $data = $this->where( $where )->select();
+        $data = $this->where( $where )->limit($limit)->select();
         
         foreach ($data as &$val){
             $val['content'] = unserialize($val['content']);
