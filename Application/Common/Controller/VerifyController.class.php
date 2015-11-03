@@ -34,7 +34,7 @@ class VerifyController extends BaseController{
 
             }else{  // 店铺用户
                 if ($this->user->getShopStatus() == 0){
-                    $this->redirect("user/login");
+                    $this->redirect("user/login" , ['error'=>1]);
                 }
             }
         }
