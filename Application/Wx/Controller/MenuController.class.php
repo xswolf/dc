@@ -30,8 +30,8 @@ class MenuController extends BaseController{
             empty($_POST['type']) && $this->ajaxError("菜单类型错误");
             $id = empty($_POST['id']) ? 0 : intval($_POST['id']);
             $data = [
-                'name'      => $_POST['name'],
-                'type'      => $_POST['type'],
+                'name'      => I("post.name"),
+                'type'      => I("post.type"),
                 'pid'       => empty($_POST['pid']) ? 0 : intval($_POST['pid']),
                 'value'     => "",
                 'status'    => 1,
@@ -40,12 +40,17 @@ class MenuController extends BaseController{
             ];
             if($data['type'] == "view"){
                 empty($_POST['url']) && $this->ajaxError('请填写url');
-                $data['value'] = $_POST['url'];
+                $data['value'] = I("post.url");
             }elseif($data['type'] == "media_id"){
                 empty($_POST['material']) && $this->ajaxError('请选择素材');
-                $data['value'] = $_POST['material'];
+                $data['type'] = "click";
+                $data['group'] = "img";
+                $data['value'] = I("post.material");
             }else{
-                $data['value'] = $_POST['notes'];
+                if(!empty($_POST['notes'])){
+                   $data['value'] = I('post.notes');
+                   $data['group'] = "text";
+                }
             }
             $num = MenuModel::instance()->getMenuSum($data['pid']);
             if(empty($id)){
