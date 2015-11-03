@@ -33,6 +33,13 @@ class MaterialModel extends BaseModel{
             }
             return $a['sort'] < $b['sort'] ? -1 : 1;
         });
+        foreach($data['content'] as &$val){
+            foreach($val as $k=>$v){
+                if(!in_array($k, ['picurl','url','title','description'])){
+                   unset($val[$k]);
+                }
+            }
+        }
         $data['content'] = serialize($data['content']);
         if( !empty($data['id']) ){
             $id = $data['id'];

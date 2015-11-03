@@ -35,6 +35,9 @@ class UserController extends BaseController {
             $this->assign("username" , $username);
             $this->assign("password" , $password);
         }
+        if (I("error")){
+            $this->assign("error" , "抱歉，您的账号已被禁用~");
+     }
         $this->display();
     }
 
