@@ -15,6 +15,8 @@ class MenuController extends BaseController{
     public function index(){
         $list = MenuModel::instance()->getMenuList();
         
+        $material = M("wx_material")->where(['status'=>1])->field("id,name")->select();
+        $this->assign("material",json_encode($material));
         $this->assign( "list" , $list );
         $this->display();
     }

@@ -122,7 +122,7 @@
 							<div class="col-lg-9">
 						        <div class="input-group" v-if="data.type=='media_id'">
 						        	<span class="input-group-addon">素材</span>
-						        	<select class="form-control" v-model="data.material" options="material_option">
+						        	<select class="form-control" v-model="data.material" options="material_option|option 'id' 'name'">
 						        	</select>
 						        </div>
 					        </div>
@@ -153,6 +153,11 @@
 		return str += " "+(time.getHours() < 10 ? 0+''+time.getHours() : time.getHours())+":"+(time.getMinutes() < 10 ? 0+''+time.getMinutes() : time.getMinutes())+":"+(time.getSeconds() <10 ? 0+''+time.getSeconds() : time.getSeconds());	
 	});
 	
+	Vue.filter("option",function(val,k,v){
+		return val.map(function(item){
+			return {value : item[k],text : item[v]} 
+		})
+	});
 	var model = new Vue({
 		el   : "#content",
 		data : {
@@ -166,7 +171,7 @@
 				material : ''
 			},
 			edit_data : {},
-			material_option : [{text:'aaa',value:111},{text:'bbb',value:222}],
+			material_option : {$material},
 		},
 		methods : {
 			commit : function(){
