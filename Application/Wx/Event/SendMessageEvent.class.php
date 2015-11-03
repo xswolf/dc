@@ -30,10 +30,20 @@ class SendMessageEvent extends BaseController{
             if($qrcode['groups']=='table'){
                 $table = M("shop_table")->where(['qrcode_id' => $qrcode['id']])->find();
                 $mid = UserModel::instance()->getUserId($this->fromUsername);
-                if($table){
-                    $url = "http://{$table['shop_id']}.qulianchn.com/index?mid={$mid}&time=".time()."&table={$table['id']}";
-                    $data[] = ResponseInitiative::newsItem('你已进入'.$table['name'].'桌', '请点击图片开始点餐', 'http://www.qulianchn.com/Public/Wx/img/diancan.jpg', $url);
-                    $result =ResponseInitiative::news($this->fromUsername, $data);
+                $material = M("wx_material")->where(['key'=>'table'])->find();
+                if($table && $material){
+//                     $url = "http://{$table['shop_id']}.qulianchn.com/index?mid={$mid}&time=".time()."&table={$table['id']}";
+//                     $data[] = ResponseInitiative::newsItem('你已进入'.$table['name'].'桌', '请点击图片开始点餐', 'http://www.qulianchn.com/Public/Wx/img/diancan.jpg', $url);
+//                     $result =ResponseInitiative::news($this->fromUsername, $data);
+                    $material['content'] = unserialize($material['content']);
+                    foreach($material['content'] as &$val){
+                        $val['title']    =   str_replace('__桌号__', $table['name']."桌", $val['title']);
+                        $val['url']    =   str_replace("__shop_id__" , $table['shop_id'] , $val['url']);
+                        $val['url']    =   str_replace("__mid__" , $mid , $val['url']);
+                        $val['url']    =   str_replace("__table_id__" , $table['id'] , $val['url']);
+                        $val['url']    =   str_replace("__time__" , time() , $val['url']);
+                    }
+                    $relult = ResponseInitiative::news($this->fromUsername , $material['content']);
                 }
             }else{
                 //TODO
