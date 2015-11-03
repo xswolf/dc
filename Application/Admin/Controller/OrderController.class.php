@@ -12,7 +12,7 @@ class OrderController extends VerifyController {
     /**
      * @var int 店铺ID
      */
-    protected $shop_id ;
+    protected $shop_id;
 
     public function _initialize(){
         parent::_initialize();
