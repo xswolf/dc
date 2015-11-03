@@ -53,7 +53,7 @@ class MemberController extends BaseController {
 
 		$time = I('get.time');
 		if(!empty($time) && ctype_digit($time)) {
-			if(NOW_TIME - $time < $this->_config['member_table_lifetime']) {
+			//if(NOW_TIME - $time < $this->_config['member_table_lifetime']) {
 				$table = I('get.table');
 				if (!empty($table) and ctype_digit($table)) {
 					$hasHandled = true;
@@ -61,12 +61,12 @@ class MemberController extends BaseController {
 					if ($tid) {
 						$table = ShopTable::instance()->get($tid,$this->_shop_id);
 						if ($table and $table['shop_id'] == $this->_shop_id) {
-							cookie('table_id', $table['id'], ['expire' => $this->_config['member_table_lifetime'], 'prefix' => $this->_config['cookie_prefix']]);
-							cookie('table_name', $table['name'], ['expire' => $this->_config['member_table_lifetime'], 'prefix' => $this->_config['cookie_prefix']]);
+							cookie('table_id', $table['id'], ['expire' => NOW_TIME + 31536000, 'prefix' => $this->_config['cookie_prefix']]);
+							cookie('table_name', $table['name'], ['expire' => NOW_TIME + 31536000, 'prefix' => $this->_config['cookie_prefix']]);
 						}
 					}
 				}
-			}
+			//}
 		}
 
 		$shop_info = ShopTable::instance()->getShopName($this->_shop_id);
