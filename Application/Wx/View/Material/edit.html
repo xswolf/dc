@@ -14,7 +14,7 @@
                         <ul class="list-unstyled">
                             <li class="first" v-class="selected:selected==0" v-on="click:select(data.content[0],0)">
                                 <div class="cnt">
-                                    <img width="640" height="320"  v-attr="src:data.content[0].img"/>
+                                    <img width="640" height="320"  v-attr="src:data.content[0].picurl"/>
                                     <div class="text"><span>{{data.content[0].title}}</span></div>
                                 </div>
                             </li>
@@ -23,7 +23,7 @@
 	                                <div class="text-pic">
 	                                    <div class="text"><span>{{item.title}}</span></div>
 	                                    <div class="pic">
-	                                        <img v-attr="src:item.img"/>
+	                                        <img v-attr="src:item.picurl"/>
 	                                    </div>
 	                                </div>
 	                            </li>
@@ -49,10 +49,15 @@
                             <input  type="text" placeholder="请输入标题" class="form-control" required v-model="content.title">
                             <span class="help-block m-b-none"></span>
                         </div>
+                        <div class="form-group" v-if="data.content.length==1">
+                            <label>描述</label>
+                            <input  type="text" placeholder="请输描述" class="form-control" required v-model="content.description">
+                            <span class="help-block m-b-none"></span>
+                        </div>
                         <div class="form-group">
                             <label>图片</label>
                             <div class="imgInput">
-                                <input type="text" placeholder="请上传图片" class="form-control" required v-model="content.img">
+                                <input type="text" placeholder="请上传图片" class="form-control" required v-model="content.picurl">
                                 <div class="imgInput-btn">
                                     <div class="j-imgUploadBox2">
                                         <a href="javascript:;" id="upload" class="btn btn-w-m btn-primary j-imgUpload-btn"><i class="fa fa-cloud-upload"></i> 上传图片</a>
@@ -62,7 +67,7 @@
                         </div>
                         <div class="form-group">
                             <label>链接地址</label>
-                            <input  type="url" placeholder="请输入链接地址" class="form-control" required v-model="content.link">
+                            <input  type="url" placeholder="请输入链接地址" class="form-control" required v-model="content.url">
                         </div>
                         <div class="form-group">
                             <label>排序</label>
@@ -131,13 +136,14 @@ function AjaxUploadImg(btn , url, cb) {
     });
 }
 AjaxUploadImg("upload",'{:U("Material/upload")}',function(rel){
-	model.content.img = rel;
+	model.content.picurl = rel;
 });
 var new_data = function(){
 	return {
 		title : '标题',
-		img	  : '/Public/asset/wx/img/grey.gif',
-		link  : 'http://',
+		description : '描述',
+		picurl	  : '/Public/asset/wx/img/grey.gif',
+		url  : 'http://',
 		sort  : '0',
 	};
 }
@@ -181,11 +187,11 @@ var model = new Vue({
 					msg = '请填写标题';
 					return;
 				}
-				if(item.img.length==0){
+				if(item.picurl.length==0){
 					msg = '请上传图片';
 					return;
 				}
-				if(item.link.length==0 || item.link=='http://'){
+				if(item.url.length==0 || item.url=='http://'){
 					msg = '请填写跳转链接';
 					return;
 				}
