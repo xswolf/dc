@@ -32,7 +32,7 @@ class SendMessageEvent extends BaseController{
                 $mid = UserModel::instance()->getUserId($this->fromUsername);
                 if($table){
                     $url = "http://{$table['shop_id']}.qulianchn.com/index?mid={$mid}&time=".time()."&table={$table['id']}";
-                    $data[] = ResponseInitiative::newsItem('你已进入'.$table['name'].'桌', '请点击图片开始点餐', 'http://www.qulianchn.com/Public/Wx/img/diancan.jpg/Public/Wx/img/diancan.jpg', $url);
+                    $data[] = ResponseInitiative::newsItem('你已进入'.$table['name'].'桌', '请点击图片开始点餐', 'http://www.qulianchn.com/Public/Wx/img/diancan.jpg', $url);
                     $result =ResponseInitiative::news($this->fromUsername, $data);
                 }
             }else{
