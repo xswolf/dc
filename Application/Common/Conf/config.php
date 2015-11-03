@@ -9,4 +9,5 @@ return array(
     'MODULE_ALLOW_LIST'  => ['Home', 'Admin', 'Site','Wx'],
     'SHOW_PAGE_TRACE'    => false,
     'DEFAULT_MODULE'     => 'Site',
+    'ERROR_PAGE'         => ''
 );
