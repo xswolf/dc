@@ -22,7 +22,7 @@ class UserModel extends BaseModel {
     public function findByName($name){
 
         $m = M($this->_table);
-        return $m->where(["name"=>$name])->find();
+        return $m->where(["name"=>$name , "status"=>1])->find();
     }
 
     public function isLogin(){
@@ -33,6 +33,7 @@ class UserModel extends BaseModel {
     public function setUser($user){
         $this->user = $user;
         $this->userShop = M($this->_shop_table)->where(['uid' => $this->user['id']])->find();
+
     }
 
     public function getId(){
@@ -47,6 +48,11 @@ class UserModel extends BaseModel {
     public function getShopName(){
 
         return $this->userShop['name'];
+    }
+
+    public function getShopStatus(){
+
+        return $this->userShop['status'];
     }
 
 }

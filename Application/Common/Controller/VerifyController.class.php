@@ -26,7 +26,9 @@ class VerifyController extends BaseController{
 
             $this->user = UserModel::instance();
             $this->user->setUser(session(C("LOGIN_SESSION")));
-
+            if ($this->user->getShopStatus() == 0){
+                $this->redirect("user/login");
+            }
             if ($this->user->getId() == 1){  // 管理员
                 layout(false);
                 $list = PlatformShopModel::instance()->getList();
