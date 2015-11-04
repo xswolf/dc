@@ -26,6 +26,7 @@ class SendMessageEvent extends BaseController{
     public  function scanTableQrcode(){
         if(isset($this->request['ticket'])){
             $qrcode = M("wx_qrcode")->where(['ticket'=>$this->request['ticket']])->find();
+            
             //判断是否是扫描的桌号
             if($qrcode['groups']=='table'){
                 $table = M("shop_table")->where(['qrcode_id' => $qrcode['id']])->find();
