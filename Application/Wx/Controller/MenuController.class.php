@@ -133,8 +133,8 @@ class MenuController extends BaseController{
                 'id'    =>  $val['id'],
                 'pid'   =>  $val['pid'],
                 'name'  =>  $val['name'],
-                'type'  =>  $val['type'],
-                'code'  =>  $val['type']=='click' ? $val['id'] : $val['value'],
+                'type'  =>  $val['type']=='media_id' ? 'click' : $val['type'],
+                'code'  =>  $val['type']=='click'||$val['type']=='media_id' ? $val['id'] : $val['value'],
             ];
             if(!empty($val['child'])){
                 $arr = $this->menulist($val['child']);

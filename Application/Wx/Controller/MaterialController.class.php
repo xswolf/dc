@@ -9,7 +9,7 @@ class MaterialController extends BaseController{
 
     public function index(){
         $count = MaterialModel::instance()->getCount();
-        $page = new Page($count , 1 );
+        $page = new Page($count , 20);
         $data = MaterialModel::instance()->getList([],$page->firstRow.','.$page->listRows);
        
         $this->assign("page",$page->show());
