@@ -29,44 +29,18 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">商家管理平台</a>
+            <a class="navbar-brand" href="#">趣联微信管理平台</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="/admin/order/order">当前订单<span class="sr-only">(current)</span></a></li>
-                <li><a href="/admin/order/historyOrder">历史订单</a></li>
-                <li id="fat-menu" class="dropdown active">
-                    <a id="drop3" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        系统设置
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="drop3">
-                        <li><a href="/admin/settings/table">桌号管理</a></li>
-                        <li><a href="{:U('settings/goodsType')}">菜单管理</a></li>
-                        <li><a href="{:U('settings/goods')}">菜品管理</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="{:U('Order/historyOrder')}">流水明细</a></li>
-                        <li><a href="#">营业数据</a></li>
-                    </ul>
-                </li>
+                <li><a href="/wx/menu/index">微信菜单<span class="sr-only">(current)</span></a></li>
+                <li><a href="/wx/material/index">素材管理</a></li>
                 <li><a href="/admin/user/component">component</a></li>
                 <li><a href="/admin/user/common">common</a></li>
             </ul>
 
-            <!--<ul class="nav navbar-nav navbar-right">-->
-                <!--<li class="dropdown">-->
-                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">系统设置 <span class="caret"></span></a>-->
-                    <!--<ul class="dropdown-menu">-->
-                        <!--<li><a href="#">Action</a></li>-->
-                        <!--<li><a href="#">Another action</a></li>-->
-                        <!--<li><a href="#">Something else here</a></li>-->
-                        <!--<li role="separator" class="divider"></li>-->
-                        <!--<li><a href="#">Separated link</a></li>-->
-                    <!--</ul>-->
-                <!--</li>-->
-            <!--</ul>-->
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+    </div>
 </nav>
