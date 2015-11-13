@@ -74,7 +74,7 @@ class SettingsController extends VerifyController {
             }else{ // 添加
 
                 $qrCode = new QrcodeEvent();
-                $data = $qrCode->create($this->user->getShopId());
+                $data = $qrCode->create($this->user->getShopId() , "table" , "2");
 
                 if ($data){
                     $_POST['qrcode_id'] = $data['qrcode_id'];
