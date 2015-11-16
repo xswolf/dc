@@ -30,6 +30,10 @@ class MemberController extends BaseController {
 	public function _init() {
 		self::_assert($this->_shop_id and true);
 		$hasHandled = false;
+		foreach($_GET as $key => $value) {
+			$rep = str_replace('amp;','',$key);
+			$_GET[$rep] = $value;
+		}
 		$mid = I('get.mid');
 		if(!empty($mid) && ctype_digit($mid)) {
 			$wx_user = MemberModel::instance()->getWxUsrInfo($mid);
@@ -51,8 +55,8 @@ class MemberController extends BaseController {
 			}
 		}
 
-		$time = I('time');
-		echo $time.'-------1';
+		$time = I('get.time');
+		echo $time.'----1113';
 		var_export($_GET);
 		exit;
 		if(!empty($time) && ctype_digit($time)) {
