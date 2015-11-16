@@ -59,10 +59,10 @@ class MemberController extends BaseController {
 					$hasHandled = true;
 					$tid = intval($table);
 					if ($tid) {
-						$table = ShopTable::instance()->get($tid,$this->_shop_id);
-						if ($table and $table['shop_id'] == $this->_shop_id) {
-							cookie('table_id', $table['id'], ['expire' => NOW_TIME + 31536000, 'prefix' => $this->_config['cookie_prefix']]);
-							cookie('table_name', $table['name'], ['expire' => NOW_TIME + 31536000, 'prefix' => $this->_config['cookie_prefix']]);
+						$shop_table = ShopTable::instance()->get($tid,$this->_shop_id);
+						if (!empty($shop_table) && ($shop_table['shop_id'] == $this->_shop_id)) {
+							cookie('table_id', $shop_table['id'], ['expire' => NOW_TIME + 31536000, 'prefix' => $this->_config['cookie_prefix']]);
+							cookie('table_name', $shop_table['name'], ['expire' => NOW_TIME + 31536000, 'prefix' => $this->_config['cookie_prefix']]);
 						}
 					}
 				}
