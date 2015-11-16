@@ -56,9 +56,6 @@ class MemberController extends BaseController {
 		}
 
 		$time = I('get.time');
-		echo $time.'----1113';
-		var_export($_GET);
-		exit;
 		if(!empty($time) && ctype_digit($time)) {
 			//if(NOW_TIME - $time < $this->_config['member_table_lifetime']) {
 				$table = I('get.table');
