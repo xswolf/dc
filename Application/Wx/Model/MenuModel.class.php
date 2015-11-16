@@ -20,20 +20,21 @@ class MenuModel extends BaseModel{
      */
     public function getMenuList(){
         $data = $this->where(["status"])->order("sort DESC")->select();
+        return $this->menu($data);
+    }
+    
+    private function menu($data , $pid=0){
         $arr = [];
         foreach($data as $val){
-            if($val['pid']==0){
-                $val['child'] = [];
-                foreach($data as $v){
-                    if($v['pid'] == $val['id']){
-                        array_push($val['child'], $v);
-                    }
-                }
+            if($val['type']=='click' && $val['group']=='img'){
+                $val['type'] = 'media_id';
+            }
+            if($val['pid']==$pid){
+                $val['child'] = $this->menu($data , $val['id']);
                 $arr[] = $val;
             }
         }
         return $arr;
-        
     }
     
     /**

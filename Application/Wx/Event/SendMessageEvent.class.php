@@ -26,6 +26,7 @@ class SendMessageEvent extends BaseController{
     public  function scanTableQrcode(){
         if(isset($this->request['ticket'])){
             $qrcode = M("wx_qrcode")->where(['ticket'=>$this->request['ticket']])->find();
+            
             //判断是否是扫描的桌号
             if($qrcode['groups']=='table'){
                 $table = M("shop_table")->where(['qrcode_id' => $qrcode['id']])->find();
@@ -56,8 +57,17 @@ class SendMessageEvent extends BaseController{
      * 菜单处理  click
      */
     public function clickMenu(){
-        $data = M("wx_menu")->where(['id'=>$this->request['eventkey']])->field("value")->find();
-        ResponseInitiative::text($this->fromUsername, $data['value']);
+        $data = M("wx_menu")->where(['id'=>$this->request['eventkey']])->field("value,group")->find();
+        if($data['group'] == 'text'){
+            ResponseInitiative::text($this->fromUsername, $data['value']);
+        }elseif($data['group']=='img'){
+            $material = M("wx_material")->where(['id'=>$data['value']])->find();
+            if($material){
+                $material['content'] = unserialize($material['content']);
+                ResponseInitiative::news($this->fromUsername, $material['content']);
+            }else
+                ResponseInitiative::text($this->fromUsername, '抱歉没找到对应的资源');
+        }
     }
     
 }
