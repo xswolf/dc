@@ -61,9 +61,9 @@ class MemberController extends BaseController {
 					echo $tid.'--1';
 					if ($tid) {
 						$shop_table = ShopTable::instance()->get($tid,$this->_shop_id);
+						var_export($shop_table);
+						exit;
 						if (!empty($shop_table) && ($shop_table['shop_id'] == $this->_shop_id)) {
-							var_export($shop_table);
-							exit;
 							cookie('table_id', $shop_table['id'], ['expire' => NOW_TIME + 31536000, 'prefix' => $this->_config['cookie_prefix']]);
 							cookie('table_name', $shop_table['name'], ['expire' => NOW_TIME + 31536000, 'prefix' => $this->_config['cookie_prefix']]);
 						}
